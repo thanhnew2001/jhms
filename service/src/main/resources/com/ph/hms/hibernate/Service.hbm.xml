@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+	<class name='com.ph.hms.Service' table='service'>
+		<id name='id' column='id' unsaved-value='0'>
+			<generator class='native' />
+		</id>
+
+		<property name='node' />
+
+		<many-to-one name='servicegroup' class='com.ph.hms.Servicegroup'
+			column='servicegroup' />
+
+		<property name='price' />
+
+		<property name='insuranceprice' />
+
+		<property name='min' />
+
+		<property name='max' />
+
+		<many-to-one name='department' class='com.ph.hms.Department'
+			column='department' />
+
+		<many-to-one name='bodyPart' class='com.ph.hms.BodyPart'
+			column='bodypart' />
+
+		<property name='unit' />
+
+		<set name='serviceParams'>
+			<key column='service' />
+			<one-to-many class='com.ph.hms.ServiceParam' />
+		</set>
+
+	</class>
+</hibernate-mapping>
+
+

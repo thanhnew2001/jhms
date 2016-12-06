@@ -1,0 +1,124 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Encounter' table='encounter'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			<many-to-one name='client' class='com.ph.hms.Client' column='client'/>		
+		
+			<property name='date'/>			
+		
+			<property name='node'/>			
+		
+			<property name='initialdiagnosis'/>			
+		
+			 <many-to-one name='icd' class='com.ph.hms.Icd' column='icd'/>		
+		
+			 <many-to-one name='solving' class='com.ph.hms.Solving' column='solving'/>		
+		
+			 <many-to-one name='hospital' class='com.ph.hms.Hospital' column='hospital'/>		
+		
+			 <many-to-one name='prescriptiontemplate' class='com.ph.hms.Prescriptiontemplate' column='prescriptiontemplate'/>		
+		
+			<property name='code'/>			
+		
+			 <many-to-one name='room' class='com.ph.hms.Room' column='room'/>		
+		
+			<property name='advise'/>			
+		
+			<property name='revisit'/>			
+		
+			<property name='revisitdate'/>			
+		
+			<property name='paid'/>			
+		
+			 <many-to-one name='user' class='com.ph.hms.User' column='user'/>		
+		
+			<property name='insurancenumber'/>			
+		
+			<property name='joineddate'/>			
+		
+			<property name='expireddate'/>			
+		
+			<property name='totalamount'/>			
+		
+			<property name='insurancepay'/>			
+		
+			<property name='paidamount'/>			
+		
+			<property name='leftamount'/>			
+		
+			<property name='time'/>			
+		
+			<property name='reference'/>			
+		<!-- list will return null values 
+		<list name='prescriptiondetails'>
+			<key column='encounter'/>
+			<index column="id"/>
+			<one-to-many class='com.ph.hms.Prescriptiondetail'/>
+		</list>
+	 	-->
+	 	<set name='prescriptiondetails'>
+			<key column='encounter'/>
+			<one-to-many class='com.ph.hms.Prescriptiondetail'/>
+		</set>
+		
+		<set name='indicationdetails'>
+			<key column='encounter'/>
+			<one-to-many class='com.ph.hms.Indicationdetail'/>
+		</set>
+		
+		<set name='receipts'>
+			<key column='encounter'/>
+			<one-to-many class='com.ph.hms.Receipt'/>
+		</set>
+		
+		<set name='druginvoices'>
+			<key column='encounter'/>
+			<one-to-many class='com.ph.hms.Druginvoice'/>
+		</set>
+		
+		<set name='vitalsigns'>
+			<key column='encounter'/>
+			<one-to-many class='com.ph.hms.Vitalsign'/>
+		</set>
+		
+		<property name='file1'/>
+		
+		<property name='timedone'/>
+		
+		<property name='promotionCode'/>
+		
+		<property name='problem'/>
+		
+		<property name='encounterType'/>
+		
+		<property name='history'/>
+		
+		<property name='observation'/>
+		
+		<property name="revisitdateCLS"/>
+		
+		<property name="note"/>
+		
+		<property name="prepaidCard"/>
+		
+	    <many-to-one name='card' class='com.ph.hms.cardmanagement.Card' column='card'/>		
+		
+		<property name="fmPage1"/>
+		
+		<property name="fmPage2"/>
+		
+		<property name="fmPage3"/>
+		
+		<property name="fmPage4"/>
+		
+		     
+        </class>
+</hibernate-mapping>
+
+

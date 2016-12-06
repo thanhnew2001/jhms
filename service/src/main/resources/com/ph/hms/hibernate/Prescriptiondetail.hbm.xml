@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Prescriptiondetail' table='prescriptiondetail'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			 <many-to-one name='encounter' class='com.ph.hms.Encounter' column='encounter'/>		
+		
+			 <many-to-one name='drug' class='com.ph.hms.Drug' column='drug'/>		
+		
+			<property name='quantity'/>			
+		
+			<property name='unit'/>			
+		
+			<property name='timeuse'/>			
+		
+			<property name='quantityuse'/>			
+		
+			<property name='note'/>			
+		
+			<property name='price'/>			
+		
+			<property name='paid'/>			
+			
+			<many-to-one name='indDoctor' class='com.ph.hms.User' column='inddoctor'/>
+			
+			<property name='usageDescription'/>
+			
+			<property name='howtouse'/>
+			
+			<!-- this is created on 20.03.09 -->
+			<property name='morning'/>
+			<property name='afternoon'/>
+			<property name='evening'/>
+			<property name='night'/>
+			
+						          
+        </class>
+</hibernate-mapping>
+
+

@@ -1,0 +1,453 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN'
+    'http://www.springframework.org/dtd/spring-beans.dtd'>
+<beans>
+
+
+<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="location">
+	<value>file:///C://hms.properties</value>
+	</property>
+</bean>
+<!-- 
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName"><value>${driver}</value></property>
+	<property name="url"><value>${url}</value></property>
+	<property name="username"><value>${user}</value></property>
+	<property name="password"><value>${password}</value></property>
+</bean>
+ -->
+
+    <bean id='dataSource' class='org.springframework.jdbc.datasource.DriverManagerDataSource'>          
+    <property name = 'driverClassName'>            
+        <value>com.mysql.jdbc.Driver</value>
+    </property>            
+    <property name = 'url'>            
+        <value>jdbc:mysql://localhost:3306/mytrung2?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8</value>
+    </property>            
+    <property name = 'username'>            
+        <value>root</value>
+    </property>            
+    <property name = 'password'>            
+        <value>root</value>
+    </property>                
+    </bean>
+
+    <bean id='sessionFactory' class='org.springframework.orm.hibernate.LocalSessionFactoryBean'>
+        <property name='dataSource'>
+            <ref local='dataSource'/>
+        </property>
+        <property name='mappingResources'>
+            <list>
+                
+ 	<value>com/ph/hms/hibernate/Paymenttype.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Client.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Service.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Encounter.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Icd.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Drug.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Prescriptiondetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Vitalsign.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/User.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Userrole.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Role.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Roleform.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Servicegroup.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Indicationdetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Receipt.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Receiptdetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Prescriptiontemplate.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Prescriptiontemplatedetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Department.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Room.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Doctor.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Importinvoice.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Serpackage.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Occupation.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Packagedetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Cashadvance.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Report.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Province.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/District.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Ward.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Ethnic.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Importinvoicedetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Druginvoice.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Druginvoicedetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Provider.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Warehouse.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/History.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Solving.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Hospital.hbm.xml</value>
+ 	
+	<value>com/ph/hms/hibernate/Register.hbm.xml</value>
+	<value>com/ph/hms/hibernate/NoiSoiTMH.hbm.xml</value>
+	<value>com/ph/hms/hibernate/BodyPart.hbm.xml</value>	
+	<value>com/ph/hms/hibernate/DrugGroup.hbm.xml</value>	
+	<value>com/ph/hms/hibernate/FamilyMember.hbm.xml</value>
+    <value>com/ph/hms/hibernate/Promotion.hbm.xml</value>
+	
+	<value>com/ph/hms/hibernate/ServiceParam.hbm.xml</value>
+	<value>com/ph/hms/hibernate/ServiceParamValue.hbm.xml</value>
+	
+	<value>com/ph/hms/cardmanagement/hibernate/Card.hbm.xml</value>
+	<value>com/ph/hms/cardmanagement/hibernate/CardType.hbm.xml</value>
+	<value>com/ph/hms/cardmanagement/hibernate/Privilege.hbm.xml</value>
+	<value>com/ph/hms/cardmanagement/hibernate/PrivilegeDetail.hbm.xml</value>
+		
+		
+            </list>
+        </property>
+        <property name='hibernateProperties'>
+        <props>
+            <prop key='hibernate.dialect'>
+                 net.sf.hibernate.dialect.MySQLDialect
+            </prop>
+            <prop key='hibernate.hbm2ddl.auto'>update</prop>
+            <prop key='hibernate.show_sql'>false</prop>
+        </props>
+        </property>
+    </bean>
+	
+	<bean id='registerManager'
+		class='com.ph.hms.hibernate.HibernateRegisterManager'>
+		<property name='sessionFactory'>
+			<ref local='sessionFactory' />
+		</property>
+	</bean>
+	
+	<bean id='bodyPartManager'
+		class='com.ph.hms.hibernate.HibernateBodyPartManager'>
+		<property name='sessionFactory'>
+			<ref local='sessionFactory' />
+		</property>
+	</bean>
+	 
+	<bean id='hmsDataManager'
+		class='com.ph.hms.hibernate.HibernateHMSDataManager'>
+		<property name='sessionFactory'>
+			<ref local='sessionFactory' />
+		</property>
+	</bean>
+	 
+ <bean id='paymenttypeManager' class='com.ph.hms.hibernate.HibernatePaymenttypeManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='clientManager' class='com.ph.hms.hibernate.HibernateClientManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='serviceManager' class='com.ph.hms.hibernate.HibernateServiceManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='encounterManager' class='com.ph.hms.hibernate.HibernateEncounterManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+       
+    </bean>
+
+ 
+ <bean id='icdManager' class='com.ph.hms.hibernate.HibernateIcdManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='drugManager' class='com.ph.hms.hibernate.HibernateDrugManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='prescriptiondetailManager' class='com.ph.hms.hibernate.HibernatePrescriptiondetailManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='vitalsignManager' class='com.ph.hms.hibernate.HibernateVitalsignManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='userManager' class='com.ph.hms.hibernate.HibernateUserManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='userroleManager' class='com.ph.hms.hibernate.HibernateUserroleManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='roleManager' class='com.ph.hms.hibernate.HibernateRoleManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='roleformManager' class='com.ph.hms.hibernate.HibernateRoleformManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='servicegroupManager' class='com.ph.hms.hibernate.HibernateServicegroupManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='indicationdetailManager' class='com.ph.hms.hibernate.HibernateIndicationdetailManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='receiptManager' class='com.ph.hms.hibernate.HibernateReceiptManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='receiptdetailManager' class='com.ph.hms.hibernate.HibernateReceiptdetailManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='prescriptiontemplateManager' class='com.ph.hms.hibernate.HibernatePrescriptiontemplateManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='prescriptiontemplatedetailManager' class='com.ph.hms.hibernate.HibernatePrescriptiontemplatedetailManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='departmentManager' class='com.ph.hms.hibernate.HibernateDepartmentManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='roomManager' class='com.ph.hms.hibernate.HibernateRoomManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='doctorManager' class='com.ph.hms.hibernate.HibernateDoctorManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='importinvoiceManager' class='com.ph.hms.hibernate.HibernateImportinvoiceManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='serpackageManager' class='com.ph.hms.hibernate.HibernateSerpackageManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='occupationManager' class='com.ph.hms.hibernate.HibernateOccupationManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='packagedetailManager' class='com.ph.hms.hibernate.HibernatePackagedetailManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='cashadvanceManager' class='com.ph.hms.hibernate.HibernateCashadvanceManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='reportManager' class='com.ph.hms.hibernate.HibernateReportManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='provinceManager' class='com.ph.hms.hibernate.HibernateProvinceManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='districtManager' class='com.ph.hms.hibernate.HibernateDistrictManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='wardManager' class='com.ph.hms.hibernate.HibernateWardManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='ethnicManager' class='com.ph.hms.hibernate.HibernateEthnicManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='importinvoicedetailManager' class='com.ph.hms.hibernate.HibernateImportinvoicedetailManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='druginvoiceManager' class='com.ph.hms.hibernate.HibernateDruginvoiceManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+        <property name='hmsDataManager'>
+            <ref local='hmsDataManager'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='druginvoicedetailManager' class='com.ph.hms.hibernate.HibernateDruginvoicedetailManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='providerManager' class='com.ph.hms.hibernate.HibernateProviderManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='warehouseManager' class='com.ph.hms.hibernate.HibernateWarehouseManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='historyManager' class='com.ph.hms.hibernate.HibernateHistoryManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='solvingManager' class='com.ph.hms.hibernate.HibernateSolvingManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='hospitalManager' class='com.ph.hms.hibernate.HibernateHospitalManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+    <bean id='cardManager' class='com.ph.hms.cardmanagement.hibernate.HibernateCardManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>  
+	
+</beans>

@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Exportproposaldetail' table='exportproposaldetail'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			 <many-to-one name='exportproposal' class='com.ph.hms.Exportproposal' column='exportproposal'/>		
+		
+			 <many-to-one name='drug' class='com.ph.hms.Drug' column='drug'/>		
+		
+			<property name='quantity'/>			
+						          
+        </class>
+</hibernate-mapping>
+
+

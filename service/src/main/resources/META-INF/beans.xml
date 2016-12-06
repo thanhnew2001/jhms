@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="
+   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+  
+  <tx:annotation-driven transaction-manager="transactionManager"/>
+  
+  <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory"/>
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+  
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="mappingDirectoryLocations" ref="mappingProvider"/>
+    <property name="hibernateProperties" ref="propertiesProvider"/>
+  </bean>
+  
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="org.h2.Driver"/>
+    <property name="url" value="jdbc:h2:mem:inf5750"/>
+  </bean>
+  
+  <bean id="mappingProvider" class="com.ph.hms.config.HibernateMappingProvider"/>
+  
+  <bean id="propertiesProvider" class="com.ph.hms.config.HibernatePropertiesProvider"/>
+  
+
+	<bean id='hmsDataManager'
+		class='com.ph.hms.hibernate.HibernateHMSDataManager'>
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+ 
+ <bean id='clientManager' class='com.ph.hms.hibernate.HibernateClientManager'>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+ 
+ <bean id='serviceManager' class='com.ph.hms.hibernate.HibernateServiceManager'>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+ 
+ <bean id='encounterManager' class='com.ph.hms.hibernate.HibernateEncounterManager'>
+       <property name="sessionFactory" ref="sessionFactory"/>
+       
+    </bean>
+
+ 
+ <bean id='userManager' class='com.ph.hms.hibernate.HibernateUserManager'>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+ <bean id='receiptManager' class='com.ph.hms.hibernate.HibernateReceiptManager'>
+     <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+ 
+ <bean id='importinvoiceManager' class='com.ph.hms.hibernate.HibernateImportinvoiceManager'>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+ 
+ 
+ <bean id='druginvoiceManager' class='com.ph.hms.hibernate.HibernateDruginvoiceManager'>
+       <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+ 
+ <bean id='druginvoicedetailManager' class='com.ph.hms.hibernate.HibernateDruginvoicedetailManager'>
+       <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+ 
+ <bean id='providerManager' class='com.ph.hms.hibernate.HibernateProviderManager'>
+       <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+ 
+     <bean id='genericDao' class='com.ph.hms.smarthealth.hibernate.HibernateGenericDao'>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>  
+   
+   <!--   
+   <bean id="personService" class="com.unitedcoders.demo.PersonServiceImpl" 
+      factory-bean="personFactory" factory-method="create"/>
+    
+	<bean id="personFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+	  <property name="serviceClass" value="com.unitedcoders.demo.PersonServiceImpl"/>
+	  <property name="address" value="http://localhost:8080/CXFExampleService/personService?wsdl"/>
+	</bean>
+	-->
+	
+	<!-- Aegis data binding -->
+	<bean id="aegisBean"
+		class="org.apache.cxf.aegis.databinding.AegisDatabinding"
+		scope="prototype" />
+
+
+    <bean id="jaxwsAndAegisServiceFactory"
+          class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean"
+          scope="prototype"> 
+        <property name="dataBinding" ref="aegisBean"/>
+        <property name="serviceConfigurations">
+          <list>
+            <bean class="org.apache.cxf.jaxws.support.JaxWsServiceConfiguration"/>
+            <bean class="org.apache.cxf.aegis.databinding.AegisServiceConfiguration"/>
+            <bean class="org.apache.cxf.service.factory.DefaultServiceConfiguration"/> 
+          </list>
+        </property>
+    </bean>
+
+	<!-- Client code for unit test (or for injecting in webapp as done in the article) -->
+	
+	<!-- Factory to create the dynamic proxy for client -->
+	<bean id="contactUsFactory"
+		class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass"
+			value="contactus.ContactUsService" />
+		<property name="address"
+			value="http://localhost:8080/cxf-webservices-1.0/webservices/contactus" />
+		<property name="serviceFactory"
+			ref="jaxwsAndAegisServiceFactory" />
+	</bean>
+
+	<!--  Web service dynamic proxy -->
+	<bean id="contactUsServiceClient" class="contactus.ContactUsService"
+		factory-bean="contactUsFactory" factory-method="create" />
+
+</beans>

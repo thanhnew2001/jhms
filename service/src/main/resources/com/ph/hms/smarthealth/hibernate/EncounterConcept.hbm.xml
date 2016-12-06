@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.smarthealth.EncounterConcept' table='encounterconcept'>
+		<id name='id' column='id' unsaved-value='0'>
+			<generator class='native'/>
+		</id>
+		
+			<many-to-one name="concept" class="com.ph.hms.smarthealth.Concept" column="concept" />
+			<many-to-one name="encounter" class="com.ph.hms.Encounter" column="encounter" />
+			
+							       
+        </class>
+</hibernate-mapping>
+
+

@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.User' table='user'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			<property name='password'/>			
+		
+			<property name='node'/>			
+		
+			<property name='position'/>			
+		
+			<property name='fullname'/>			
+		
+			<property name='phone'/>			
+		
+			<property name='cellphone'/>			
+		
+			<property name='email'/>		
+			
+			<many-to-one name='room' class='com.ph.hms.Room' column='room'/>
+			 		
+			<many-to-one name='department' class='com.ph.hms.Department' column='department'/>
+			
+			<many-to-one name='warehouse' class='com.ph.hms.Warehouse' column='warehouse'/>
+		
+		<set name='userroles'>
+			<key column='user'/>
+			<one-to-many class='com.ph.hms.Userrole'/>
+		</set>
+						          
+        </class>
+</hibernate-mapping>
+
+

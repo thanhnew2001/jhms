@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Vitalsign' table='vitalsign'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			 <many-to-one name='encounter' class='com.ph.hms.Encounter' column='encounter'/>		
+		
+			<property name='time'/>			
+		
+			<property name='pulse'/>			
+		
+			<property name='pressureh'/>			
+		
+			<property name='pressurel'/>			
+		
+			<property name='temparature'/>			
+		
+			<property name='breath'/>			
+			
+			<property name='weight'/>
+			
+			<property name='height'/>
+			
+			<property name='sbo2'/>
+			
+			<property name='bmi'/>
+			<property name='head'/>		
+						          
+        </class>
+</hibernate-mapping>
+
+

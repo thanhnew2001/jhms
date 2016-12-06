@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Receiptdetail' table='receiptdetail'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			 <many-to-one name='receipt' class='com.ph.hms.Receipt' column='receipt'/>		
+		
+			 <many-to-one name='service' class='com.ph.hms.Service' column='service'/>		
+		
+			<property name='quantity'/>			
+		
+			<property name='price'/>			
+		
+			<property name='cancel'/>			
+		
+			 <many-to-one name='drug' class='com.ph.hms.Drug' column='drug'/>		
+		
+			<property name='percentdiscount'/>			
+		
+			 <many-to-one name='inddoctor' class='com.ph.hms.Doctor' column='inddoctor'/>		
+		
+			<property name='childunder6'/>			
+		
+			<property name='actualpay'/>			
+		
+			 <many-to-one name='exedoctor' class='com.ph.hms.Doctor' column='exedoctor'/>		
+		
+			<property name='subtotal'/>			
+		
+			<property name='discount'/>			
+		
+			<property name='insurancepay'/>			
+			
+			<property name="note"/>
+						          
+        </class>
+</hibernate-mapping>
+
+

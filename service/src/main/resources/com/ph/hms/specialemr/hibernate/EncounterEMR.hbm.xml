@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.specialemr.EncounterEMR' table='encounteremr'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			<many-to-one name='encounter' class="com.ph.hms.Encounter" column="encounter"/>
+			<many-to-one name='specialEMR' class="com.ph.hms.specialemr.SpecialEMR" column="specialemr"/>
+						
+			<property name='content'/>	
+			
+			<many-to-one name='user' class="com.ph.hms.User" column="user"/>
+				       
+        </class>
+</hibernate-mapping>
+
+

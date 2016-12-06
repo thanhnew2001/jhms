@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.FamilyMember' table='familymember'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			<property name='relationship'/>	
+			
+			 <many-to-one name='client' class='com.ph.hms.Client' column='client'/>
+			 <many-to-one name='clientMember' class='com.ph.hms.Client' column='clientmember'/>
+	
+						          
+        </class>
+</hibernate-mapping>
+
+

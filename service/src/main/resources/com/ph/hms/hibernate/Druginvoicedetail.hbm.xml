@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Druginvoicedetail' table='druginvoicedetail'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			 <many-to-one name='druginvoice' class='com.ph.hms.Druginvoice' column='druginvoice'/>		
+		
+			 <many-to-one name='drug' class='com.ph.hms.Drug' column='drug'/>		
+		
+			<property name='quantity'/>			
+		
+			<property name='price'/>			
+		
+			<property name='subtotal'/>			
+		
+			<property name='batchnumber'/>			
+		
+			<property name='expireddate'/>		
+			
+			<property name='expiredmonth'/>
+			
+			<property name='visaNo'/>
+						          
+        </class>
+</hibernate-mapping>
+
+

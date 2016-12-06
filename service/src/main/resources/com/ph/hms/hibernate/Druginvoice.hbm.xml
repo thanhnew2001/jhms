@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Druginvoice' table='druginvoice'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			<property name='node'/>			
+		
+			<property name='totalaftertax'/>			
+		
+			<property name='vat'/>			
+		
+			 <many-to-one name='warehouse' class='com.ph.hms.Warehouse' column='warehouse'/>		
+		
+			<property name='identity'/>			
+		
+			<property name='date'/>			
+		
+			 <many-to-one name='user' class='com.ph.hms.User' column='user'/>		
+		
+			 <many-to-one name='paymenttype' class='com.ph.hms.Paymenttype' column='paymenttype'/>		
+		
+			<property name='total'/>			
+		
+			<property name='insurancenumber'/>			
+		
+			<property name='expireddate'/>			
+		
+			<property name='inpatient'/>			
+		
+			<property name='code'/>			
+		
+			<property name='doctor'/>			
+		
+			<property name='address'/>			
+		
+			 <many-to-one name='encounter' class='com.ph.hms.Encounter' column='encounter'/>		
+		
+			<property name='type'/>			
+		
+			 <many-to-one name='towarehouse' class='com.ph.hms.Warehouse' column='towarehouse'/>	
+			 
+			 <many-to-one name='provider' class='com.ph.hms.Provider' column='provider'/>
+		
+		<set name='druginvoicedetails'>
+			<key column='druginvoice'/>
+			<one-to-many class='com.ph.hms.Druginvoicedetail'/>
+		</set>
+		
+		<property name="prepaidCard"/>
+		<property name="paymentMethod"/>
+		
+		<property name='tax'/>						          
+						          
+        </class>
+</hibernate-mapping>
+
+

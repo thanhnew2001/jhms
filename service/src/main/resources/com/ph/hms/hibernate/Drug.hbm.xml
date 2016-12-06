@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Drug' table='drug'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			<property name='node'/>			
+		
+			<property name='unit'/>			
+		
+			<property name='ingredient'/>			
+		
+			<property name='indication'/>			
+		
+			<property name='price'/>			
+		
+			<property name='insurance'/>	
+			
+					<property name='forprescription'/>
+					<property name='companyprice'/>
+				
+					
+			 <many-to-one name='drugGroup' class='com.ph.hms.DrugGroup' column='druggroup'/>
+			 <property name='genericName'/>		
+			 
+			 <property name='methodUse'/>
+						          
+        </class>
+</hibernate-mapping>
+
+

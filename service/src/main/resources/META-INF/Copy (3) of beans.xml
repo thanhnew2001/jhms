@@ -1,0 +1,288 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://cxf.apache.org/jaxws http://cxf.apache.org/schema/jaxws.xsd">
+
+
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>file:///C://hms.properties</value>
+		</property>
+	</bean>
+	<!--
+		<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"><value>${driver}</value></property>
+		<property name="url"><value>${url}</value></property> <property
+		name="username"><value>${user}</value></property> <property
+		name="password"><value>${password}</value></property> </bean>
+	-->
+
+	<bean id='dataSource'
+		class='org.springframework.jdbc.datasource.DriverManagerDataSource'>
+		<property name='driverClassName'>
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name='url'>
+			<value>jdbc:mysql://localhost:3306/mytrung2?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8</value>
+    </property>            
+    <property name = 'username'>            
+        <value>root</value>
+    </property>            
+    <property name = 'password'>            
+        <value>root</value>
+    </property>                
+    </bean>
+
+    <bean id='sessionFactory' class='org.springframework.orm.hibernate.LocalSessionFactoryBean'>
+        <property name='dataSource'>
+            <ref local='dataSource'/>
+        </property>
+        <property name='mappingResources'>
+            <list>
+                
+ 	<value>com/ph/hms/hibernate/Paymenttype.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Client.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Service.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Encounter.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Icd.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Drug.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Prescriptiondetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Vitalsign.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/User.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Userrole.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Role.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Roleform.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Servicegroup.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Indicationdetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Receipt.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Receiptdetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Prescriptiontemplate.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Prescriptiontemplatedetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Department.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Room.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Doctor.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Importinvoice.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Serpackage.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Occupation.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Packagedetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Cashadvance.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Report.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Province.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/District.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Ward.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Ethnic.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Importinvoicedetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Druginvoice.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Druginvoicedetail.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Provider.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Warehouse.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/History.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Solving.hbm.xml</value>
+
+ 	<value>com/ph/hms/hibernate/Hospital.hbm.xml</value>
+ 	
+	<value>com/ph/hms/hibernate/Register.hbm.xml</value>
+	<value>com/ph/hms/hibernate/NoiSoiTMH.hbm.xml</value>
+	<value>com/ph/hms/hibernate/BodyPart.hbm.xml</value>	
+	<value>com/ph/hms/hibernate/DrugGroup.hbm.xml</value>	
+	<value>com/ph/hms/hibernate/FamilyMember.hbm.xml</value>
+    <value>com/ph/hms/hibernate/Promotion.hbm.xml</value>
+	
+	<value>com/ph/hms/hibernate/ServiceParam.hbm.xml</value>
+	<value>com/ph/hms/hibernate/ServiceParamValue.hbm.xml</value>
+	
+	<value>com/ph/hms/cardmanagement/hibernate/Card.hbm.xml</value>
+	<value>com/ph/hms/cardmanagement/hibernate/CardType.hbm.xml</value>
+	<value>com/ph/hms/cardmanagement/hibernate/Privilege.hbm.xml</value>
+	<value>com/ph/hms/cardmanagement/hibernate/PrivilegeDetail.hbm.xml</value>
+	
+	<value>com/ph/hms/smarthealth/hibernate/Concept.hbm.xml</value>
+	<value>com/ph/hms/smarthealth/hibernate/ConceptClass.hbm.xml</value>
+	<value>com/ph/hms/smarthealth/hibernate/ConceptName.hbm.xml</value>
+	<value>com/ph/hms/smarthealth/hibernate/EncounterConcept.hbm.xml</value>
+	<value>com/ph/hms/specialemr/hibernate/SpecialEMR.hbm.xml</value>
+		
+		
+            </list>
+        </property>
+        <property name='hibernateProperties'>
+        <props>
+            <prop key='hibernate.dialect'>
+                 net.sf.hibernate.dialect.MySQLDialect
+            </prop>
+            <prop key='hibernate.hbm2ddl.auto'>update</prop>
+            <prop key='hibernate.show_sql'>false</prop>
+        </props>
+        </property>
+    </bean>
+
+	 
+	<bean id='hmsDataManager'
+		class='com.ph.hms.hibernate.HibernateHMSDataManager'>
+		<property name='sessionFactory'>
+			<ref local='sessionFactory' />
+		</property>
+	</bean>
+ 
+ <bean id='clientManager' class='com.ph.hms.hibernate.HibernateClientManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='serviceManager' class='com.ph.hms.hibernate.HibernateServiceManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='encounterManager' class='com.ph.hms.hibernate.HibernateEncounterManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+       
+    </bean>
+
+ 
+ <bean id='userManager' class='com.ph.hms.hibernate.HibernateUserManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+
+ <bean id='receiptManager' class='com.ph.hms.hibernate.HibernateReceiptManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='importinvoiceManager' class='com.ph.hms.hibernate.HibernateImportinvoiceManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ 
+ <bean id='druginvoiceManager' class='com.ph.hms.hibernate.HibernateDruginvoiceManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+        <property name='hmsDataManager'>
+            <ref local='hmsDataManager'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='druginvoicedetailManager' class='com.ph.hms.hibernate.HibernateDruginvoicedetailManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+ <bean id='providerManager' class='com.ph.hms.hibernate.HibernateProviderManager'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>
+
+ 
+     <bean id='genericDao' class='com.ph.hms.smarthealth.hibernate.HibernateGenericDao'>
+        <property name='sessionFactory'>
+            <ref local='sessionFactory'/>
+        </property>
+    </bean>  
+   
+   <!--   
+   <bean id="personService" class="com.unitedcoders.demo.PersonServiceImpl" 
+      factory-bean="personFactory" factory-method="create"/>
+    
+	<bean id="personFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+	  <property name="serviceClass" value="com.unitedcoders.demo.PersonServiceImpl"/>
+	  <property name="address" value="http://localhost:8080/CXFExampleService/personService?wsdl"/>
+	</bean>
+	-->
+	
+	<!-- Aegis data binding -->
+	<bean id="aegisBean"
+		class="org.apache.cxf.aegis.databinding.AegisDatabinding"
+		scope="prototype" />
+
+
+    <bean id="jaxwsAndAegisServiceFactory"
+          class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean"
+          scope="prototype"> 
+        <property name="dataBinding" ref="aegisBean"/>
+        <property name="serviceConfigurations">
+          <list>
+            <bean class="org.apache.cxf.jaxws.support.JaxWsServiceConfiguration"/>
+            <bean class="org.apache.cxf.aegis.databinding.AegisServiceConfiguration"/>
+            <bean class="org.apache.cxf.service.factory.DefaultServiceConfiguration"/> 
+          </list>
+        </property>
+    </bean>
+
+	<!-- Client code for unit test (or for injecting in webapp as done in the article) -->
+	
+	<!-- Factory to create the dynamic proxy for client -->
+	<bean id="contactUsFactory"
+		class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass"
+			value="contactus.ContactUsService" />
+		<property name="address"
+			value="http://localhost:8080/cxf-webservices-1.0/webservices/contactus" />
+		<property name="serviceFactory"
+			ref="jaxwsAndAegisServiceFactory" />
+	</bean>
+
+	<!--  Web service dynamic proxy -->
+	<bean id="contactUsServiceClient" class="contactus.ContactUsService"
+		factory-bean="contactUsFactory" factory-method="create" />
+
+</beans>

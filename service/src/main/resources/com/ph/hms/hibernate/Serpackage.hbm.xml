@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Serpackage' table='serpackage'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+		<property name='node'/>			
+			
+		<set name='packagedetails'>
+			<key column='serpackage'/>
+			<one-to-many class='com.ph.hms.Packagedetail'/>
+		</set>
+						          
+        </class>
+</hibernate-mapping>
+
+

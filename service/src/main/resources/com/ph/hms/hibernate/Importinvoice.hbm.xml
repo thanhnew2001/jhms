@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Importinvoice' table='importinvoice'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			<property name='type'/>			
+		
+			<property name='totalaftertax'/>			
+		
+			<property name='vat'/>			
+		
+			 <many-to-one name='provider' class='com.ph.hms.Provider' column='provider'/>		
+		
+			<property name='remain'/>			
+		
+			<property name='totalexport'/>			
+		
+			 <many-to-one name='fromwarehouse' class='com.ph.hms.Warehouse' column='fromwarehouse'/>		
+		
+			<property name='node'/>			
+		
+			 <many-to-one name='user' class='com.ph.hms.User' column='user'/>		
+		
+			<property name='total'/>			
+		
+			 <many-to-one name='warehouse' class='com.ph.hms.Warehouse' column='warehouse'/>		
+		
+			<property name='code'/>			
+		
+			<property name='date'/>			
+		
+		<set name='importinvoicedetails'>
+			<key column='importinvoice'/>
+			<one-to-many class='com.ph.hms.Importinvoicedetail'/>
+		</set>
+		
+			<many-to-one name='druginvoice' class='com.ph.hms.Druginvoice' column='druginvoice'/>	
+					
+		<property name='tax'/>		          
+        </class>
+</hibernate-mapping>
+
+

@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Indicationdetail' table='indicationdetail'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			 <many-to-one name='encounter' class='com.ph.hms.Encounter' column='encounter'/>		
+		
+			 <many-to-one name='service' class='com.ph.hms.Service' column='service'/>	
+			 
+			 <many-to-one name='user' class='com.ph.hms.User' column='user'/>
+			 
+			 <many-to-one name='indDoctor' class='com.ph.hms.User' column='inddoctor'/>
+		
+			<property name='quantity'/>			
+		
+			<property name='price'/>			
+		
+			<property name='node'/>			
+		
+			<property name='note'/>			
+		
+			<property name='status'/>			
+		
+			<property name='paid'/>		
+			
+			<property name='timedone'/>
+			<property name='request'/>
+			<property name='result'/>
+			<property name='file1'/>
+			<property name='file2'/>
+			<property name='file3'/>
+			<property name='file4'/>
+			
+			<property name='file5'/>
+			<property name='file6'/>
+			<property name='file7'/>
+			<property name='file8'/>		
+			
+			<property name='shortResult'/>	
+			
+			<property name='note1'/>
+			<property name='note2'/>
+			<property name='note3'/>
+			<property name='note4'/>
+			
+			<property name='note5'/>
+			<property name='note6'/>
+			<property name='note7'/>
+			<property name='note8'/>	
+			
+				<set name='serviceParamValues'>
+			<key column='indicationdetail'/>
+			<one-to-many class='com.ph.hms.ServiceParamValue'/>
+		</set>
+						          
+        </class>
+</hibernate-mapping>
+
+

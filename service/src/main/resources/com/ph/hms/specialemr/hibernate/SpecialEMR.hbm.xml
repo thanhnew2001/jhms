@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.specialemr.SpecialEMR' table='specialemr'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			<property name='name'/>			
+				
+			<many-to-one name='bodyPart' class="com.ph.hms.BodyPart" column="bodypart"/>
+			
+			<property name='type'/>	
+				       
+        </class>
+</hibernate-mapping>
+
+

@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.ServiceParamValue' table='serviceparamvalue'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+
+			<many-to-one name='serviceParam' class='com.ph.hms.ServiceParam' column='serviceparam'/>	
+			
+			<many-to-one name='indicationdetail' class='com.ph.hms.Indicationdetail' column='indicationdetail'/>			
+			
+			<property name='value'/>
+		
+						          
+        </class>
+</hibernate-mapping>
+
+

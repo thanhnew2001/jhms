@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Exportcard' table='exportcard'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			<property name='date'/>			
+		
+			 <many-to-one name='user' class='com.ph.hms.User' column='user'/>		
+		
+			 <many-to-one name='warehouse' class='com.ph.hms.Warehouse' column='warehouse'/>		
+		
+			<property name='node'/>			
+		
+			<property name='code'/>			
+		
+			 <many-to-one name='towarehouse' class='com.ph.hms.Warehouse' column='towarehouse'/>		
+		
+		<set name='importcards'>
+			<key column='exportcard'/>
+			<one-to-many class='com.ph.hms.Importcard'/>
+		</set>
+		
+		<set name='exportdetails'>
+			<key column='exportcard'/>
+			<one-to-many class='com.ph.hms.Exportdetail'/>
+		</set>
+						          
+        </class>
+</hibernate-mapping>
+
+

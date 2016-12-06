@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.History' table='history'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			 <many-to-one name='client' class='com.ph.hms.Client' column='client'/>		
+		
+			<property name='father'/>			
+		
+			<property name='mother'/>			
+		
+			<property name='sibling'/>			
+		
+			<property name='partner'/>			
+		
+			<property name='offspring'/>			
+		
+			<property name='cancer'/>			
+		
+			<property name='tuberculosis'/>			
+		
+			<property name='diabetes'/>			
+		
+			<property name='highbloodpressure'/>			
+		
+			<property name='heartproblem'/>			
+		
+			<property name='stroke'/>			
+		
+			<property name='epilepsi'/>			
+		
+			<property name='mentalillness'/>			
+		
+			<property name='sucide'/>			
+		
+			<property name='breastexamdate'/>			
+		
+			<property name='breastexamresult'/>			
+		
+			<property name='cadiacechodate'/>			
+		
+			<property name='cadiacechoresult'/>			
+		
+			<property name='gynexamdate'/>			
+		
+			<property name='gynexamresult'/>			
+		
+			<property name='prostateexamdate'/>			
+		
+			<property name='prostateexamresult'/>			
+		
+			<property name='rectalexamdate'/>			
+		
+			<property name='rectalexamresult'/>			
+		
+			<property name='sigmoiddate'/>			
+		
+			<property name='sigmoidresult'/>			
+						          
+        </class>
+</hibernate-mapping>
+
+

@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Receipt' table='receipt'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			 <many-to-one name='encounter' class='com.ph.hms.Encounter' column='encounter'/>		
+		
+			<property name='code'/>			
+		
+			<property name='node'/>			
+		
+			<property name='total'/>			
+		
+			<property name='paymentmethod'/>			
+		
+			<property name='discount'/>			
+		
+			 <many-to-one name='user' class='com.ph.hms.User' column='user'/>		
+		
+			<property name='date'/>			
+		
+			<property name='payfor'/>			
+		
+			<property name='actualpay'/>			
+		
+			<property name='insurancepay'/>			
+		
+			 <many-to-one name='paymenttype' class='com.ph.hms.Paymenttype' column='paymenttype'/>		
+		
+			<property name='birthday'/>			
+		
+			<property name='address'/>			
+		
+			<property name='age'/>			
+		
+			<property name='phone'/>			
+		
+		<set name='receiptdetails'>
+			<key column='receipt'/>
+			<one-to-many class='com.ph.hms.Receiptdetail'/>
+		</set>
+		
+		<property name="note"/>
+		
+		<property name="prepaidCard"/>
+						          
+        </class>
+</hibernate-mapping>
+
+

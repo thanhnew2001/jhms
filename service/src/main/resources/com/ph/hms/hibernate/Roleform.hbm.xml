@@ -1,0 +1,26 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Roleform' table='roleform'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			 <many-to-one name='role' class='com.ph.hms.Role' column='role'/>		
+		
+			<property name='form'/>			
+		
+			<property name='listable'/>			
+		
+			<property name='addable'/>			
+		
+			<property name='updatable'/>			
+		
+			<property name='deletable'/>			
+						          
+        </class>
+</hibernate-mapping>
+
+

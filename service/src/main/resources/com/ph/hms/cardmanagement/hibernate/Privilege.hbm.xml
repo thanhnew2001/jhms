@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.cardmanagement.Privilege' table='privilege'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		<many-to-one name='cardType' class="com.ph.hms.cardmanagement.CardType" column="cardtype"/>
+				
+		<property name="name"/>
+		
+		<property name="percentDiscount"/>		
+		
+		<set name='privilegeDetails'>
+			<key column='privilege'/>
+			<one-to-many class='com.ph.hms.cardmanagement.PrivilegeDetail'/>
+		</set>				       
+						          
+        </class>
+</hibernate-mapping>
+
+

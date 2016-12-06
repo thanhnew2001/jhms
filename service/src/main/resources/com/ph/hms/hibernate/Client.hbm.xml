@@ -1,0 +1,87 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC '-//Hibernate/Hibernate Mapping DTD 2.0//EN'
+        'http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd'>
+<hibernate-mapping>
+        <class name='com.ph.hms.Client' table='client'>
+		<id name='id' column='id' unsaved-value='0'>
+				    <generator class='native'/>
+		</id>
+		
+			 <many-to-one name='paymenttype' class='com.ph.hms.Paymenttype' column='paymenttype'/>		
+		
+			<property name='maritalstatus'/>			
+		
+			<property name='age'/>			
+		
+			<property name='birthday'/>			
+		
+			<property name='sex'/>			
+		
+			<property name='node'/>			
+		
+			<property name='createddate'/>			
+		
+			<property name='code'/>			
+		
+			<property name='insurancenumber'/>			
+		
+			<property name='expireddate'/>			
+		
+			<property name='joineddate'/>			
+		
+			<property name='oversea'/>			
+		
+			<property name='address'/>			
+		
+			 <many-to-one name='ward' class='com.ph.hms.Ward' column='ward'/>		
+		
+			<property name='motherfather'/>			
+		
+			 <many-to-one name='ethnic' class='com.ph.hms.Ethnic' column='ethnic'/>		
+		
+			 <many-to-one name='occupation' class='com.ph.hms.Occupation' column='occupation'/>		
+		
+			<property name='password'/>			
+		
+			<property name='education'/>			
+		
+			<property name='company'/>			
+		
+			<property name='phone'/>					
+			
+			<property name='email'/>
+		<!-- 
+		<set name='encounters'>
+			<key column='client'/>
+			<one-to-many class='com.ph.hms.Encounter'/>
+		</set>
+		 -->
+		<set name='druginvoices'>
+			<key column='client'/>
+			<one-to-many class='com.ph.hms.Druginvoice'/>
+		</set>
+		
+		 <many-to-one name='history' class='com.ph.hms.History' column='history'/>	
+		 
+		 <set name='familyMembers'>
+			<key column='client'/>
+			<one-to-many class='com.ph.hms.FamilyMember'/>
+		</set>
+		
+		<property name='photo'/>
+		
+		<property name='lon'/>
+		
+		<property name='lat'/>
+
+		<property name='mayhgd'/>
+		
+		<property name='fmPage1'/>
+		
+		<property name='fmPage2'/>
+		
+        </class>
+</hibernate-mapping>
+
+
