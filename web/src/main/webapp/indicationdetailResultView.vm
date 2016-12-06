@@ -1,0 +1,246 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+
+<style type="text/css">
+<!--
+.style4 {
+	font-size: 36px;
+	font-weight: bold;
+}
+.style5 {font-size: 24px}
+.style9 {
+	font-size: 16px;
+	font-family: "Times New Roman", Times, serif;
+}
+.style10 {
+	font-size: 18px;
+	font-weight: bold;
+}
+-->
+</style>
+<div id='header'> <table width="478" border="0">
+  <tr>
+    <td><input name="button" type="button" onClick=" document.getElementById('header').style.display='block'; document.getElementById('container_tq').style.display='block';document.getElementById('container_tim').style.display='none';document.getElementById('footer').style.display='none';document.getElementById('container_tmh').style.display='none';document.getElementById('image4').style.display='none';document.getElementById('image6').style.display='none';document.getElementById('image8').style.display='none';" value="Si&ecirc;u &Acirc;m TQ" >
+      <input name="button" type="button" onClick="document.getElementById('header').style.display='block'; document.getElementById('container_tq').style.display='none';document.getElementById('container_tim').style.display='block';document.getElementById('container_tmh').style.display='none';document.getElementById('footer').style.display='block';document.getElementById('image4').style.display='none';document.getElementById('image6').style.display='none';document.getElementById('image8').style.display='none';" value="Si&ecirc;u &Acirc;m Tim">
+      <input name="button2" type="button" onClick="document.getElementById('header').style.display='block'; document.getElementById('container_tq').style.display='none';document.getElementById('container_tim').style.display='none';document.getElementById('footer').style.display='block';document.getElementById('container_tmh').style.display='block';document.getElementById('image4').style.display='none';document.getElementById('image6').style.display='none';document.getElementById('image8').style.display='none';" value="N&#7897;i Soi TMH">
+      <input name="button" type="button" onClick="document.getElementById('header').style.display='none';window.print();self.close();" value="In"></td>
+    </tr>
+  <tr>
+    <td><input name="button3" type="button" onClick=" document.getElementById('header').style.display='block'; document.getElementById('container_tq').style.display='none';document.getElementById('container_tim').style.display='none';document.getElementById('footer').style.display='none';document.getElementById('container_tmh').style.display='none';document.getElementById('image4').style.display='block';document.getElementById('image6').style.display='none';document.getElementById('image8').style.display='none';" value="4 H&igrave;nh" > 
+	<input name="button32" type="button" onClick="document.getElementById('header').style.display='block'; document.getElementById('container_tq').style.display='none';document.getElementById('container_tim').style.display='none';document.getElementById('footer').style.display='none';document.getElementById('container_tmh').style.display='none';document.getElementById('image4').style.display='none';document.getElementById('image6').style.display='block';document.getElementById('image8').style.display='none';" value="6 H&igrave;nh" >
+      <input name="button322" type="button" onClick=" document.getElementById('header').style.display='block'; document.getElementById('container_tq').style.display='none';document.getElementById('container_tim').style.display='none';document.getElementById('footer').style.display='none';document.getElementById('container_tmh').style.display='none';document.getElementById('image4').style.display='none';document.getElementById('image6').style.display='none';document.getElementById('image8').style.display='block';" value="8 H&igrave;nh" ></td>
+    </tr>
+</table>
+</div>
+<div id='container_tq' style="display:block">
+
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+    
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td width="50%"><div align="center" class="style4 style5">K&#7870;T QU&#7842; C&#7852;N L&Acirc;M S&Agrave;NG</div></td>
+      <td width="50%"><div align="center" class="style10">$i18n.get('image')</div></td>
+    </tr>
+    <tr>
+      <td rowspan="2" valign="top"><p><span class="style9"><strong>$i18n.get('client'):</strong>$!indicationdetail.encounter.client.node ($!indicationdetail.encounter.client.sex,$!indicationdetail.encounter.client.age)  <br>
+            <strong>$i18n.get('address'): </strong>$!indicationdetail.encounter.client.address<br>
+            <strong>$i18n.get('servicename'):</strong>$!indicationdetail.service.node<br>
+            <strong>$i18n.get('initialdiagnosis'):</strong>$!indicationdetail.encounter.initialdiagnosis<br>
+            <strong>$i18n.get('doctorindicated') </strong>$!indicationdetail.encounter.user.fullname</span><br>
+         <br><br>      
+         <span class="style10">K&#7870;T QU&#7842; </span></p>
+        <form name="form1" method="post" action="">
+        <textarea name="textarea"  cols="70" rows="25" readonly="readonly" style="font-size:14px">$!indicationdetail.result</textarea>
+      </form></td>
+      <td><div align="center"><img src='../jhmsdata/$!indicationdetail.file1' width="350" height="250"></div></td>
+    </tr>
+    
+    <tr >
+      <td valign="top"><div align="center"><img src='../jhmsdata/$!indicationdetail.file2' width="350" height="250"></div>
+        <p align="center"><strong>B&aacute;c S&#297; Si&ecirc;u &Acirc;m </strong></p>
+        <p align="center">&nbsp;</p>
+        <br>
+        <p align="center"><strong>$!indicationdetail.user.fullname</strong></p></td>
+    </tr>
+  </table>
+  
+  
+</div>
+
+
+<div id='container_tim' style="display:none">
+
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+    
+    <tr>
+      <td></td>
+    </tr>
+    <tr>
+      <td><div align="center" class="style4 style5">K&#7870;T QU&#7842; C&#7852;N L&Acirc;M S&Agrave;NG</div></td>
+    </tr>
+    <tr>
+      <td width="50%" valign="top"><p><span class="style9"><strong>$i18n.get('client'):</strong>$!indicationdetail.encounter.client.node  ($!indicationdetail.encounter.client.sex,$!indicationdetail.encounter.client.age)  <br>
+            <strong>$i18n.get('address'): </strong>$!indicationdetail.encounter.client.address<br>
+            <strong>$i18n.get('servicename'):</strong>$!indicationdetail.service.node<br>
+            <strong>$i18n.get('initialdiagnosis'):</strong>$!indicationdetail.encounter.initialdiagnosis<br>
+            <strong>$i18n.get('doctorindicated') </strong> $!indicationdetail.encounter.user.fullname</span><br>
+         <br><br>      
+         <span class="style10">K&#7870;T QU&#7842;</span></p>
+        <form name="form1" method="post" action="">
+          <p>
+            <textarea name="textarea3"  cols="140" rows="45" readonly="readonly" style="font-size:14px">$!indicationdetail.result</textarea>
+          </p>
+        </form>        </td>
+    </tr>
+  </table>
+  
+  
+</div>
+
+<div id='image4' style="display:none">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td colspan="3"><div align="center" class="style4 style5">H&Igrave;NH &#7842;NH </div></td>
+    </tr>
+    
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td align="center"  ><img src='../jhmsdata/$!indicationdetail.file1' width="450" height="300"></td>
+      <td  align="center" ><img src='../jhmsdata/$!indicationdetail.file2' width="450" height="300"></td>
+    </tr>
+    <tr>
+      <td align="center"  ><img src='../jhmsdata/$!indicationdetail.file3' width="450" height="300"></td>
+      <td  align="center" ><img src='../jhmsdata/$!indicationdetail.file4' width="450" height="300"></td>
+    </tr>
+  </table>
+</div>
+
+<div id='image6' style="display:none">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+    <tr>
+      <td colspan="3"></td>
+    </tr>
+    <tr>
+      <td colspan="4"><div align="center" class="style4 style5">H&Igrave;NH &#7842;NH </div></td>
+    </tr>
+    
+    <tr>
+      <td colspan="3"></td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+    </tr>
+    <tr>
+      <td align="center"  ><img src='../jhmsdata/$!indicationdetail.file1' width="350" height="300">&nbsp;</td>
+      <td  align="center" ><img src='../jhmsdata/$!indicationdetail.file2' width="350" height="300">&nbsp;</td>
+      <td  align="center" ><img src='../jhmsdata/$!indicationdetail.file3' width="350" height="300">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center"  ><img src='../jhmsdata/$!indicationdetail.file4' width="350" height="300">&nbsp; </td>
+      <td  align="center" ><img src='../jhmsdata/$!indicationdetail.file5' width="350" height="300">&nbsp; </td>
+      <td  align="center" ><img src='../jhmsdata/$!indicationdetail.file6' width="350" height="300">&nbsp;</td>
+    </tr>
+    <tr>
+	
+      <td colspan="4" valign="top">&nbsp;</td>
+    </tr>
+  </table>
+</div>
+
+<div id='image8' style="display:none">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+    <tr>
+      <td colspan="4"></td>
+    </tr>
+    <tr>
+      <td colspan="5"><div align="center" class="style4 style5">H&Igrave;NH &#7842;NH </div></td>
+    </tr>
+    
+    <tr>
+      <td colspan="4"></td>
+    </tr>
+    <tr>
+      <td colspan="4"></td>
+    </tr>
+    <tr valign="middle">
+      <td align="center"  ><img src='../jhmsdata/$!indicationdetail.file1' width="250" height="200">&nbsp;</td>
+      <td  align="center" ><img src='../jhmsdata/$!indicationdetail.file2' width="250" height="200">&nbsp;</td>
+      <td  align="center" ><img src='../jhmsdata/$!indicationdetail.file3' width="250" height="200">&nbsp;</td>
+      <td  align="center" ><img src='../jhmsdata/$!indicationdetail.file4' width="250" height="200">&nbsp;</td>
+    </tr>
+    <tr valign="middle">
+      <td align="center"  ><img src='../jhmsdata/$!indicationdetail.file5' width="250" height="200">&nbsp; </td>
+      <td  align="center" ><img src='../jhmsdata/$!indicationdetail.file6' width="250" height="200">&nbsp; </td>
+      <td  align="center" ><img src='../jhmsdata/$!indicationdetail.file7' width="250" height="200">&nbsp;</td>
+      <td  align="center" ><img src='../jhmsdata/$!indicationdetail.file8' width="250" height="200">&nbsp;</td>
+    </tr>
+    <tr>
+	
+      <td colspan="5" valign="top">&nbsp;</td>
+    </tr>
+  </table>
+</div>
+
+
+<div id='container_tmh' style="display:none">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td colspan="3"><div align="center" class="style4 style5">K&#7870;T QU&#7842; N&#7896;I SOI </div></td>
+    </tr>
+    <tr>
+      <td colspan="2" valign="top"><p><span class="style9"><strong>$i18n.get('client'):</strong>$!indicationdetail.encounter.client.node ($!indicationdetail.encounter.client.sex,$!indicationdetail.encounter.client.age) <br>
+                <strong>$i18n.get('address'): </strong>$!indicationdetail.encounter.client.address<br>
+      </span><span class="style9"><strong>$i18n.get('initialdiagnosis'):</strong>$!indicationdetail.encounter.initialdiagnosis</span><br>
+                <br>
+                <span class="style5"><strong>H&Igrave;NH &#7842;NH </strong></span></p></td>
+      <td valign="top"><span class="style9"><strong>$i18n.get('servicename'):</strong>$!indicationdetail.service.node<br>
+          <strong>$i18n.get('doctorindicated') </strong> $!indicationdetail.encounter.user.fullname</span></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td align="center"  ><p><img src='../jhmsdata/$!indicationdetail.file1' width="350" height="250"></p>
+      <p><strong>$!indicationdetail.note1</strong></p></td>
+      <td  align="center" ><p><img src='../jhmsdata/$!indicationdetail.file2' width="350" height="250"></p>
+      <p><strong>$!indicationdetail.note2</strong></p></td>
+      <td align="center" ><p><img src='../jhmsdata/$!indicationdetail.file3' width="350" height="250"></p>
+      <p><strong>$!indicationdetail.note3</strong></p></td>
+    </tr>
+    <tr>
+	
+      <td colspan="3" valign="top"><form name="form1" method="post" action="">
+          <p>
+            <textarea name="textarea2"  cols="140" rows="14" readonly="readonly" style="font-size:14px">$!indicationdetail.result</textarea>
+          </p>
+          </form></td>
+    </tr>
+  </table>
+</div>
+<div id='footer' style="display:none">
+	<table width="100%" style="bottom:600">
+	<tr> <td width="72%"></td >
+	<td width="28%"><p align="center"><strong>B&aacute;c S&#297; Si&ecirc;u &Acirc;m </strong></p>
+	    <p align="center">&nbsp;</p>
+	    <br>
+      <p align="center"><strong>$!indicationdetail.user.fullname</strong></p></td> 
+	</tr>
+	</table>
+</div>

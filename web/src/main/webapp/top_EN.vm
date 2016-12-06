@@ -1,0 +1,125 @@
+
+
+<div id='menu' class='menu'> 
+
+<ul id="maintab" class="basictab">
+<li><a href="index.vm" >Home</a></li>
+<li rel="tiepnhan"><a href="clientList.action" >Reception </a></li>
+<li rel="phongkham"><a href="encounterList.action" >Clinic </a></li>
+<li rel="cls"><a href="indicationdetailList.action" ">Subclinical </a></li>
+<li rel="duoc"><a href="druginvoiceList.action" >Drugs </a></li>
+<li rel="vienphi"><a href="receiptList.action" >Payment </a></li>
+<li rel="nguoidung"><a href="userList.action" >Users </a></li>
+<li rel="thongso"><a href="selectSetting.action" >Parameters </a></li>
+<li rel="help"><a href="http://mytung.blogdns.net:8081/hms/HelpHMS/HelpTiepNhan.html" target="_new" >Help HMS</a></li>
+
+</ul>
+
+<div id="tiepnhan" class="submenustyle">
+	<a href='clientList.action' >Client </a> &nbsp; 
+		
+		<a href='provinceList.action' >Province </a> &nbsp; 
+		
+		<a href='districtList.action' >District </a> &nbsp; 
+		
+		<a href='wardList.action' >Ward </a> &nbsp; 
+		
+		<a href='ethnicList.action' >Ethnic </a> &nbsp; 
+		
+		<a href='occupationList.action' >Occupation </a> &nbsp; 
+		
+		<a href='paymenttypeList.action' >Payment type </a> &nbsp; 
+
+
+	
+</div>
+
+<div id="phongkham" class="submenustyle">
+	<a href='encounterList.action' >Exam </a> &nbsp; 
+		<a href='hospitalList.action' >Hospital </a> &nbsp; 
+		
+		<a href='roomList.action' >Clinic </a> &nbsp; 
+		
+		<a href='doctorList.action' >Dr </a> &nbsp; 
+		<a href='historyList.action' >Med history </a> &nbsp; 
+		
+		<a href='solvingList.action' >Encounter </a> &nbsp; 
+		
+		<a href='serviceList.action' >Serv </a> &nbsp; 
+		
+		<a href='vitalsignList.action' >Survival sign </a> &nbsp; 
+		
+		<a href='prescriptiontemplateList.action' >Presc template </a> &nbsp; 
+		
+		<a href='serpackageList.action' >Serv pack </a> &nbsp; 
+		
+		<a href='departmentList.action' >Department</a> &nbsp; 				
+		
+		<a href='servicegroupList.action' >Serv group </a> &nbsp; 
+		
+		<a href='icdList.action' >ICD</a> &nbsp; 
+		
+ 
+
+
+</div>
+
+<div id="cls" class="submenustyle">
+	<a href='indicationdetailList.action' >Indication list </a>
+	<a href='bodypartList.action' >Scanning/Testing template </a>
+	</div>
+
+<div id="vienphi" class="submenustyle">
+	<a href='encounterList.action?con=paid&typehead=N' >Examination	 </a> &nbsp; 
+	<a href='receiptList.action' >Receipt </a> &nbsp; 
+	<a href='cashadvanceList.action' >Advance </a>&nbsp;</div>
+
+<div id="nguoidung" class="submenustyle">
+	<a href='userList.action' >User </a> &nbsp; 
+	<a href='roleList.action' >User group </a> &nbsp; 
+</div>
+
+<div id="ngoaitru" class="submenustyle">
+	<a href='clientList.action' >Client </a> &nbsp; 
+		
+	<a href='receiptList.action' >Invoice </a> &nbsp; 
+		
+	<a href='cashadvanceList.action' >Advance </a> &nbsp; 
+		
+	<a href='encounterList.action' >Examination  </a> &nbsp; 
+	
+	<a href='indicationdetailList.action' >Subclinical  </a> &nbsp; 		
+</div>
+
+<div id="duoc" class="submenustyle">
+		<a href='importinvoiceList.action' >Import invoice </a>&nbsp;
+		<a href='druginvoiceList.action' >Drug invoice </a> 
+		<a href='providerList.action' >Provider </a>&nbsp;	
+		<a href='warehouseList.action' >Warehouse</a>&nbsp;
+		<a href='reportList.action' >Report </a>&nbsp;	
+		<a href='drugList.action' >Drug </a>&nbsp;	
+		<a href='drugGroupList.action' >Drug group</a>&nbsp;	
+		
+</div>
+<div id="help" class="submenustyle">
+	<a href='HelpHMS/HelpTiepNhan.html' target="_new">Reception </a> &nbsp; 
+		
+	<a href='HelpHMS/HelpPhongKham.html' target="_new">Clinic </a> &nbsp; 
+		
+	<a href='HelpHMS/HelpCLS.html' target="_new">Subclinical </a> &nbsp; 
+		
+	<a href='HelpHMS/HelpKho.html' target="_new">Warehouse   </a> &nbsp; 
+	
+	<a href='HelpHMS/HelpVienPhi.html' target="_new">Payment </a>&nbsp;
+</div>
+
+
+<div id="thongso" class="submenustyle">
+	#set ($ses = $req.getSession())					
+	#set ($user = $ses.getAttribute('user'))
+	#set ($room = $ses.getAttribute('selectedroom'))
+	#set ($department = $ses.getAttribute('selecteddepartment'))
+	#set ($warehouse = $ses.getAttribute('selectedwarehouse'))
+	
+	User: $user.node - $!room.node - $!department.node - $!warehouse.node
+</div>

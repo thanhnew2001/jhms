@@ -1,0 +1,7 @@
+
+<select name='cbo' id='cbo' multiple='multiple' onkeypress="typehead = ''; nextfield='save';">
+#foreach($ in $s)
+<option value='$.id'>$.node</option>
+#end						
+</select>
+

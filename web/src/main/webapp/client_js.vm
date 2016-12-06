@@ -1,0 +1,418 @@
+<!-- referencing .vm files: 
+clientAddForm.vm
+clientEditForm.vm
+clientList.vm
+-->
+<script>
+	
+	function selectward( id, text)
+		{
+			document.getElementById('ward').value = id;
+			document.getElementById('textward').value = text;
+			document.getElementById('divward').style.display = 'none';
+			document.getElementById('company').focus();
+		}	
+
+
+	function makeGetRequestWardByTypeHead() 
+	{
+		if (document.getElementById('divward') != null)
+		{
+			document.getElementById('divward').style.display = 'block';
+		}
+		wordId = document.getElementById('textward').value;
+		http.open('get', 'getWardByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponseWardByTypeHead;
+		http.send(null);
+	}
+	
+	function processResponseWardByTypeHead() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divward').innerHTML = response;
+		}
+	}
+		
+		//for search client by code
+	function makeGetRequestClientByCode(field) 
+	{
+			wordId = document.getElementById(field).value;
+			if (wordId != '')
+			{
+				document.getElementById('notice').innerHTML = 'Searching client with '+field+' is ' + wordId;
+				http.open('get', 'getClientByCode.action?con='+field+'&typehead=' + wordId);
+				http.onreadystatechange = processResponseClientByCode;
+				http.send(null);
+			}
+	}
+		
+	function processResponseClientByCode() 
+	{
+			if(http.readyState == 4)
+			{
+				var response = trim(http.responseText);
+				//alert(response);
+				if (response !=0)
+					makeGetRequestAddClient(response, 'edit');
+				else
+					//document.getElementById('searchclient').innerHTML="i18n.get('notfound')";
+					document.getElementById('notice').innerHTML = 'Not found any patients';
+			}
+	}		
+		
+	function validateClient( action, f )
+	{
+		var strmessage = '';
+		
+			if (f.node.value=='') 
+			{
+				f.node.focus();
+				strmessage += "node can not be null. ";
+			}	
+		
+			if ( (f.birthday.value!='') && isDate(java2mysql(f.birthday.value)) == false) 
+			{
+				f.birthday.focus();
+				strmessage += "birthday must be a valid date. ";
+			}	
+		
+			if (isNaN(f.occupation.value)) 
+			{
+				f.occupation.focus();
+				strmessage += "occupation must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.ethnic.value)) 
+			{
+				f.ethnic.focus();
+				strmessage += "ethnic must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.ward.value)) 
+			{
+				f.ward.focus();
+				strmessage += "ward must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.paymenttype.value)) 
+			{
+				f.paymenttype.focus();
+				strmessage += "paymenttype must be a number. ";
+			}							
+			
+			
+			if ( (f.joineddate.value!='') && isDate(java2mysql(f.joineddate.value)) == false) 
+			{
+				f.joineddate.focus();
+				strmessage += "joineddate must be a valid date. ";
+			}	
+		
+			if ( (f.expireddate.value!='') && isDate(java2mysql(f.expireddate.value)) == false) 
+			{
+				f.expireddate.focus();
+				strmessage += "expireddate must be a valid date. ";
+			}	
+
+			if ( (f.createddate.value!='') && isDate(java2mysql(f.createddate.value)) == false) 
+			{
+				f.createddate.focus();
+				strmessage += "createddate must be a valid date. ";
+			}	
+			
+			
+			
+			if (f.room.value > 0 && f.service.value == '' && f.serpackage.value == '')
+			{
+				f.service.focus();
+				strmessage += "Please select either service or service package ";
+			}
+			
+		
+		if (strmessage!='') {
+			alert(strmessage); 
+			document.getElementById('saveclient').disabled = false;
+			return false;
+		}
+		else
+		{
+			
+			if (paymenttype > 0 )
+			{	
+				makeGetRequestSaveClientByPaymenttype (action, f);				
+			}
+			else if (occupation > 0 )
+			{	
+				makeGetRequestSaveClientByOccupation (action, f);				
+			}
+			else if (ward > 0 )
+			{	
+				makeGetRequestSaveClientByWard (action, f);				
+			}
+			else if (ethnic > 0 )
+			{	
+				makeGetRequestSaveClientByEthnic (action, f);				
+			}
+			else 
+					
+				makeGetRequestSaveClient ( action, f );
+					
+				
+		}
+	}
+	
+	
+	function makeGetRequestSaveClient ( action, f ) 
+	{
+				
+			var url = '';
+			var value = '';
+			for (var i = 0; i<f.elements.length; i++) 
+			{
+				value = f.elements[i].value;
+				if (value.indexOf('/')==2) 
+				{
+				  da = value.split('/'); //ngay thang nam
+				  if(da[2]==null)
+				  {
+				  	value = da[0] + '/' + da[1];
+				  }
+				  else
+				  {
+				  	//value = da[0] + '/' + da[1];
+				  	value = da[1] + '/' + da[0] + '/' + da[2] ;
+				  }
+
+				  
+				}
+				url=url+f.elements[i].name + '=' + value + '&';
+			}
+			
+			if (action == 'add')
+			{
+					http.open('get', 'clientAdd.action?'+url);
+					http.onreadystatechange = processResponseSaveAddClient ; // no () here please, not know the reason
+					for (var i = 0; i<f.elements.length; i++) 
+					{
+						if (f.elements[i].name.type == 'text')	f.elements[i].value = '';
+					}
+			}
+			else
+			{
+					http.open('get', 'clientUpdate.action?'+url);
+					http.onreadystatechange = processResponseSaveUpdateClient ; // no () here please, not know the reason
+					
+			}
+			http.send(null);
+			document.getElementById('msg').innerHTML ='Saving...';
+	}
+	
+	function processResponseSaveAddClient () 
+	{
+			if(http.readyState == 4)
+			{
+				var response = http.responseText;
+		
+				//alert(response);
+				var xmlDoc = loadXMLString(response);
+			
+				if (xmlDoc.getElementsByTagName('clientid') == null)
+				{
+					alert(response);
+					return;
+				}	
+				
+				clientid = xmlDoc.getElementsByTagName('clientid')[0].childNodes[0].nodeValue;
+				encounterid = xmlDoc.getElementsByTagName('encounterid')[0].childNodes[0].nodeValue;
+
+				if (clientid>0)
+				{
+				//window.open('clientView.action?id=' + clientid, 'View', 'width=500; height=500');
+				}
+				
+				if (encounterid>0)
+				{
+					window.open('encounterView.action?id=' + encounterid, 'View', 'width=500; height=500');			
+				}
+				
+				makeGetRequestClientByFilter();
+			
+			}
+	}	
+	
+	function processResponseSaveUpdateClient () 
+	{
+			if(http.readyState == 4)
+			{			
+			
+				var response = http.responseText;
+				
+				var xmlDoc = loadXMLString(response);
+				
+				if (xmlDoc.getElementsByTagName('clientid') == null)
+				{
+					alert(response);
+					return;
+				}	
+			
+				clientid = xmlDoc.getElementsByTagName('clientid')[0].childNodes[0].nodeValue;
+				encounterid = xmlDoc.getElementsByTagName('encounterid')[0].childNodes[0].nodeValue;
+
+				if (clientid>0)
+				{
+				//window.open('clientView.action?id=' + clientid, 'View', 'width=500; height=500');
+				}
+				
+				if (encounterid>0)
+				{
+				window.open('encounterView.action?id=' + encounterid, 'View', 'width=500; height=500');			
+				}
+				
+				makeGetRequestClientByFilter();
+			}
+	}	
+	
+	
+	function makeGetRequestClientByFilter() 
+	{
+		createddate = document.getElementById('filtercreateddate').value; 
+		http.open('get', 'getClientBySearch.action?flag=filter&createddate='+ createddate);
+		http.onreadystatechange = processResponseClientByFilter;
+		http.send(null);
+	}
+		
+	function processResponseClientByFilter() 
+	{
+			if(http.readyState == 4)
+			{
+				var response = http.responseText;
+				document.getElementById('tableclient').innerHTML = response;
+				
+				makeGetRequestAddClient(0, 'add');
+			}
+	}	
+
+	function makeGetRequestAddClient(wordId, action) 
+	{
+		if (action == 'add')
+		{
+			url = 'clientAddForm.action?id=' + wordId;
+			clientaction = 'add';
+		}
+		else
+		{
+			url = 'clientEditForm.action?id=' + wordId;	
+			clientaction = 'edit';
+		}
+		http.open('get', url);
+		http.onreadystatechange = processResponseAddClient;
+		http.send(null);
+	}
+	
+	function processResponseAddClient() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;			
+			document.getElementById('addclient').innerHTML = response;
+			if ((document.clientForm.code) != null)
+				document.clientForm.code.focus(); //can kiem tra focusfield truoc
+		}
+	}
+	
+	function makeGetRequestClientBySearch() 
+	{
+		wordId = document.getElementById('searchclient').value;
+		con = document.getElementById('comboclient').value;
+		http.open('get', 'getClientBySearch.action?con=' + con + '&typehead=' + wordId);
+		http.onreadystatechange = processResponseClientBySearch;
+		http.send(null);
+	}
+	
+	function processResponseClientBySearch() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('tableclient').innerHTML = response;
+		}
+	}
+	
+	function clearSearchBox() 
+	{
+		document.getElementById('searchclient').value='';
+	}
+	
+	function makeGetRequestClientByTypeHead() 
+	{
+		if (document.getElementById('divclient') != null)
+		{
+			document.getElementById('divclient').style.display = 'block';
+		}
+		wordId = document.getElementById('textclient').value;
+		http.open('get', 'getClientByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponseClientByTypeHead;
+		http.send(null);
+	}
+		
+	function processResponseClientByTypeHead() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divclient').innerHTML = response;
+		}
+	}
+	
+	function selectclient( id, text)
+	{
+		document.getElementById('client').value = id;
+		document.getElementById('textclient').value = text;
+		document.getElementById('divclient').style.display = 'none';
+	}
+	
+	
+	function makeGetRequestClient() 
+	{
+		http.open('get', 'clientList.action');
+		http.onreadystatechange = processResponseClient;
+		http.send(null);
+		document.getElementById('addclient').innerHTML = '';
+	}
+	
+	function processResponseClient() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divClient').innerHTML = response;
+
+			//either keep the edit form or replace by the add form		
+			makeGetRequestAddClient(0, 'add');	
+		}
+	}
+	
+	client = 0;
+	
+	function makeGetRequestEncounterByClient(wordId) 
+	{
+		client = wordId;
+		http.open('get', 'getEncounterByClient.action?id=' + wordId);
+		http.onreadystatechange = processResponseEncounterByClient;
+		http.send(null);
+	}
+	
+	function processResponseEncounterByClient() 
+	{
+		if(http.readyState == 4){
+			var response = http.responseText;
+			document.getElementById('divEncounter').innerHTML = response;
+			//makeGetRequestAddEncounter(client, 'add');
+		}
+	}		
+			
+</script>

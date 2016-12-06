@@ -1,0 +1,5301 @@
+	<!DOCTYPE xwork PUBLIC '-//OpenSymphony Group//XWork 1.0//EN'
+    'http://www.opensymphony.com/xwork/xwork-1.0.dtd'>
+
+<xwork>
+
+	<include file='webwork-default.xml' />
+
+	<package name='default' extends='webwork-default'>
+		<default-interceptor-ref name='defaultStack' />
+
+		<action name='prepaidCardTransactionDetail'
+			class='com.ph.hms.action.util.PrepaidCardTransactionDetailAction'>
+			<result name='success' type='velocity'>
+				prepaidCardTransationDetail.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+
+		<action name='sendMail'
+			class='com.ph.hms.action.util.SendMailAction'>
+			<result name='success' type='velocity'>
+				sendMailResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		<action name='warehouseCard'
+			class='com.ph.hms.action.WarehouseCardAction'>
+			<result name='success' type='velocity'>
+				warehouseCard.vm
+			</result>
+			<result name='search' type='velocity'>
+				warehouseCardSearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>		
+		
+		<action name='familyMemberList'
+			class='com.ph.hms.action.FamilyMemberListAction'>
+			<result name='success' type='velocity'>
+				familyMemberList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		<action name='drugGroupList'
+			class='com.ph.hms.action.DrugGroupListAction'>
+			<result name='success' type='velocity'>
+				drugGroupList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>	
+		<action name='getBodypartBySearch'
+			class='com.ph.hms.action.BodypartListAction'>
+			<result name='success' type='velocity'>
+				responseBodypartBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		<action name='bodypartList'
+			class='com.ph.hms.action.BodypartListAction'>
+			<result name='success' type='velocity'>
+				bodypartList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>	
+		<action name='noiSoiTMHSave'
+			class='com.ph.hms.action.NoiSoiTMHSaveAction'>
+			<result name='success' type='velocity'>
+				noiSoiTMHEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		<action name='ketQuaCLSSave'
+			class='com.ph.hms.action.KetQuaCLSSaveAction'>
+			<result name='success' type='velocity'>
+				ketQuaCLSEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		<action name='getBodyPart'
+			class='com.ph.hms.action.KetQuaCLSSaveAction'>
+			<result name='success' type='velocity'>
+				getBodyPart.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		<action name='xetNghiemEditForm'
+			class='com.ph.hms.action.EncounterFormAction'>
+			<result name='success' type='velocity'>
+				xetNghiemEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		<action name='xetNghiemView'
+			class='com.ph.hms.action.EncounterFormAction'>
+			<result name='success' type='velocity'>
+				xetNghiemView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+			
+		<action name='xetNghiemSave'
+			class='com.ph.hms.action.XetNghiemSaveAction'>
+			<result name='success' type='redirect'>
+				xetNghiemEditForm.action
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+
+		<action name='upload'
+			class='com.ph.hms.action.util.UploadFileAction'>
+			<result name='success' type='velocity'>upload.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getBatchnumber'
+			class='com.ph.hms.action.util.GetBatchnumberAction'>
+			<result name='success' type='velocity'>
+				batchnumberList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='index' class='com.ph.hms.action.util.NoAction'>
+			<result name='success' type='velocity'>login.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='encounterNotPaidServiceList'
+			class='com.ph.hms.action.EncounterNotPaidServiceListAction'>
+			<result name='popup' type='velocity'>
+				encounterNotPaidServiceList.vm
+			</result>
+			<result name='inline' type='velocity'>
+				encounterNotPaidServiceInlineList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='encounterNotPaidDrugList'
+			class='com.ph.hms.action.EncounterNotPaidDrugListAction'>
+			<result name='success' type='velocity'>
+				encounterNotPaidDrugList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='clientChangePassword'
+			class='com.ph.hms.action.ClientChangePasswordAction'>
+			<result name='success' type='velocity'>
+				clientChangePasswordSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='register'
+			class='com.ph.hms.action.RegisterFormAction'>
+			<result name='success' type='velocity'>
+				registerForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='registerAdd'
+			class='com.ph.hms.action.RegisterAddAction'>
+			<result name='success' type='velocity'>
+				registerSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='viewRecord'
+			class='com.ph.hms.action.ViewRecordAction'>
+			<result name='success' type='velocity'>
+				viewRecord.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='login'
+			class='com.ph.hms.action.util.LoginAction'>
+			<result name='success' type='redirect'>
+				clientList.action
+			</result>
+			<result name='room' type='redirect'>
+				encounterList.action
+			</result>
+			<result name='department' type='redirect'>
+				indicationdetailList.action
+			</result>
+			
+			<result name='warehouse' type='redirect'>
+				druginvoiceList.action
+			</result>
+			
+			
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='selectSetting'
+			class='com.ph.hms.action.util.SelectSettingAction'>
+			<result name='success' type='velocity'>
+				selectSetting.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='paymenttypeList'
+			class='com.ph.hms.action.PaymenttypeListAction'>
+			<result name='success' type='velocity'>
+				paymenttypeList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='paymenttypeAddForm'
+			class='com.ph.hms.action.PaymenttypeFormAction'>
+			<result name='success' type='velocity'>
+				paymenttypeAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='paymenttypeEditForm'
+			class='com.ph.hms.action.PaymenttypeFormAction'>
+			<result name='success' type='velocity'>
+				paymenttypeEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='paymenttypeView'
+			class='com.ph.hms.action.PaymenttypeFormAction'>
+			<result name='success' type='velocity'>
+				paymenttypeView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='paymenttypeAdd'
+			class='com.ph.hms.action.PaymenttypeAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='paymenttypeUpdate'
+			class='com.ph.hms.action.PaymenttypeUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='paymenttypeDelete'
+			class='com.ph.hms.action.PaymenttypeDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPaymenttypeByTypeHead'
+			class='com.ph.hms.action.GetPaymenttypeByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePaymenttypeByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPaymenttypeBySearch'
+			class='com.ph.hms.action.GetPaymenttypeByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePaymenttypeBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPaymenttypeByCode'
+			class='com.ph.hms.action.GetPaymenttypeByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePaymenttypeByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='clientList'
+			class='com.ph.hms.action.ClientListAction'>
+			<result name='success' type='velocity'>
+				clientList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='clientAddForm'
+			class='com.ph.hms.action.ClientFormAction'>
+			<result name='success' type='velocity'>
+				clientAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='clientEditForm'
+			class='com.ph.hms.action.ClientFormAction'>
+			<result name='success' type='velocity'>
+				clientEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='clientView'
+			class='com.ph.hms.action.ClientFormAction'>
+			<result name='success' type='velocity'>
+				clientView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='clientAdd'
+			class='com.ph.hms.action.ClientAddUpdateAction'>
+			<result name='success' type='velocity'>
+				clientSaveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='clientUpdate'
+			class='com.ph.hms.action.ClientAddUpdateAction'>
+			<result name='success' type='velocity'>
+				clientSaveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='clientDelete'
+			class='com.ph.hms.action.ClientDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getClientByTypeHead'
+			class='com.ph.hms.action.GetClientByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseClientByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getClientBySearch'
+			class='com.ph.hms.action.GetClientByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseClientBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getClientByCode'
+			class='com.ph.hms.action.GetClientByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseClientByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='serviceList'
+			class='com.ph.hms.action.ServiceListAction'>
+			<result name='success' type='velocity'>
+				serviceList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='serviceAddForm'
+			class='com.ph.hms.action.ServiceAddFormAction'>
+			<result name='success' type='velocity'>
+				serviceAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='serviceEditForm'
+			class='com.ph.hms.action.ServiceEditFormAction'>
+			<result name='success' type='velocity'>
+				serviceEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='serviceView'
+			class='com.ph.hms.action.ServiceEditFormAction'>
+			<result name='success' type='velocity'>
+				serviceView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='serviceAdd'
+			class='com.ph.hms.action.ServiceAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='serviceUpdate'
+			class='com.ph.hms.action.ServiceUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='serviceDelete'
+			class='com.ph.hms.action.ServiceDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getServiceByTypeHead'
+			class='com.ph.hms.action.GetServiceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseServiceByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getServiceBySearch'
+			class='com.ph.hms.action.GetServiceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseServiceBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getServiceByCode'
+			class='com.ph.hms.action.GetServiceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseServiceByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='encounterList'
+			class='com.ph.hms.action.EncounterListAction'>
+			<result name='success' type='velocity'>
+				encounterList.vm
+			</result>
+			<result name='promotion' type='velocity'>
+				encounterByPromotionCode.vm
+			</result>
+			
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		
+		<action name='encounterNotPaidList'
+			class='com.ph.hms.action.EncounterNotPaidListAction'>
+			<result name='success' type='velocity'>
+				encounterNotPaidList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		
+		<action name='getEncounterNotPaidBySearch'
+			class='com.ph.hms.action.EncounterNotPaidListAction'>
+			<result name='success' type='velocity'>
+				responseEncounterNotPaidList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		
+		
+		<action name='encounterAddForm'
+			class='com.ph.hms.action.EncounterFormAction'>
+			<result name='success' type='velocity'>
+				encounterAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='encounterEditForm'
+			class='com.ph.hms.action.EncounterFormAction'>
+			<result name='success' type='velocity'>
+				encounterEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='encounterView'
+			class='com.ph.hms.action.EncounterFormAction'>
+			<result name='success' type='velocity'>
+				encounterView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='encounterAdd'
+			class='com.ph.hms.action.EncounterAddUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='encounterUpdate'
+			class='com.ph.hms.action.EncounterAddUpdateAction'>
+			<result name='success' type='chain'>
+				encounterList.action
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='encounterDelete'
+			class='com.ph.hms.action.EncounterDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getEncounterByTypeHead'
+			class='com.ph.hms.action.GetEncounterByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseEncounterByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getEncounterBySearch'
+			class='com.ph.hms.action.GetEncounterByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseEncounterBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getEncounterByCode'
+			class='com.ph.hms.action.GetEncounterByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseEncounterByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='icdList'
+			class='com.ph.hms.action.IcdListAction'>
+			<result name='success' type='velocity'>icdList.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='icdAddForm'
+			class='com.ph.hms.action.IcdFormAction'>
+			<result name='success' type='velocity'>
+				icdAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='icdEditForm'
+			class='com.ph.hms.action.IcdFormAction'>
+			<result name='success' type='velocity'>
+				icdEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='icdView'
+			class='com.ph.hms.action.IcdFormAction'>
+			<result name='success' type='velocity'>icdView.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='icdAdd' class='com.ph.hms.action.IcdAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='icdUpdate'
+			class='com.ph.hms.action.IcdUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='icdDelete'
+			class='com.ph.hms.action.IcdDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getIcdByTypeHead'
+			class='com.ph.hms.action.GetIcdByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseIcdByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getIcdBySearch'
+			class='com.ph.hms.action.GetIcdByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseIcdBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getIcdByCode'
+			class='com.ph.hms.action.GetIcdByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseIcdByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='drugList'
+			class='com.ph.hms.action.DrugListAction'>
+			<result name='success' type='velocity'>drugList.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='drugAddForm'
+			class='com.ph.hms.action.DrugFormAction'>
+			<result name='success' type='velocity'>
+				drugAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='drugEditForm'
+			class='com.ph.hms.action.DrugFormAction'>
+			<result name='success' type='velocity'>
+				drugEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='drugView'
+			class='com.ph.hms.action.DrugFormAction'>
+			<result name='success' type='velocity'>drugView.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='drugAdd'
+			class='com.ph.hms.action.DrugAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='drugUpdate'
+			class='com.ph.hms.action.DrugUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='drugDelete'
+			class='com.ph.hms.action.DrugDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDrugByTypeHead'
+			class='com.ph.hms.action.GetDrugByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDrugByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDrugBySearch'
+			class='com.ph.hms.action.GetDrugByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDrugBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDrugByCode'
+			class='com.ph.hms.action.GetDrugByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDrugByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='prescriptiondetailList'
+			class='com.ph.hms.action.PrescriptiondetailListAction'>
+			<result name='success' type='velocity'>
+				prescriptiondetailList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='prescriptiondetailAddForm'
+			class='com.ph.hms.action.PrescriptiondetailFormAction'>
+			<result name='success' type='velocity'>
+				prescriptiondetailAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='prescriptiondetailEditForm'
+			class='com.ph.hms.action.PrescriptiondetailFormAction'>
+			<result name='success' type='velocity'>
+				prescriptiondetailEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='prescriptiondetailView'
+			class='com.ph.hms.action.PrescriptiondetailFormAction'>
+			<result name='success' type='velocity'>
+				prescriptiondetailView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='prescriptiondetailAdd'
+			class='com.ph.hms.action.PrescriptiondetailAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='prescriptiondetailUpdate'
+			class='com.ph.hms.action.PrescriptiondetailUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='prescriptiondetailDelete'
+			class='com.ph.hms.action.PrescriptiondetailDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPrescriptiondetailByTypeHead'
+			class='com.ph.hms.action.GetPrescriptiondetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePrescriptiondetailByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPrescriptiondetailBySearch'
+			class='com.ph.hms.action.GetPrescriptiondetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePrescriptiondetailBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPrescriptiondetailByCode'
+			class='com.ph.hms.action.GetPrescriptiondetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePrescriptiondetailByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='vitalsignList'
+			class='com.ph.hms.action.VitalsignListAction'>
+			<result name='success' type='velocity'>
+				vitalsignList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='vitalsignAddForm'
+			class='com.ph.hms.action.VitalsignAddFormAction'>
+			<result name='success' type='velocity'>
+				vitalsignAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='vitalsignEditForm'
+			class='com.ph.hms.action.VitalsignEditFormAction'>
+			<result name='success' type='velocity'>
+				vitalsignEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='vitalsignView'
+			class='com.ph.hms.action.VitalsignEditFormAction'>
+			<result name='success' type='velocity'>
+				vitalsignView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='vitalsignAdd'
+			class='com.ph.hms.action.VitalsignAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='vitalsignUpdate'
+			class='com.ph.hms.action.VitalsignUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='vitalsignDelete'
+			class='com.ph.hms.action.VitalsignDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getVitalsignByTypeHead'
+			class='com.ph.hms.action.GetVitalsignByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseVitalsignByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getVitalsignBySearch'
+			class='com.ph.hms.action.GetVitalsignByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseVitalsignBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getVitalsignByCode'
+			class='com.ph.hms.action.GetVitalsignByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseVitalsignByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='userList'
+			class='com.ph.hms.action.UserListAction'>
+			<result name='success' type='velocity'>userList.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='userAddForm'
+			class='com.ph.hms.action.UserFormAction'>
+			<result name='success' type='velocity'>
+				userAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='userEditForm'
+			class='com.ph.hms.action.UserFormAction'>
+			<result name='success' type='velocity'>
+				userEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='userView'
+			class='com.ph.hms.action.UserFormAction'>
+			<result name='success' type='velocity'>userView.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='userAdd'
+			class='com.ph.hms.action.UserAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='userUpdate'
+			class='com.ph.hms.action.UserUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='userDelete'
+			class='com.ph.hms.action.UserDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getUserByTypeHead'
+			class='com.ph.hms.action.GetUserByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseUserByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getUserBySearch'
+			class='com.ph.hms.action.GetUserByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseUserBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getUserByCode'
+			class='com.ph.hms.action.GetUserByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseUserByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='userroleList'
+			class='com.ph.hms.action.UserroleListAction'>
+			<result name='success' type='velocity'>
+				userroleList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='userroleAddForm'
+			class='com.ph.hms.action.UserroleAddFormAction'>
+			<result name='success' type='velocity'>
+				userroleAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='userroleEditForm'
+			class='com.ph.hms.action.UserroleEditFormAction'>
+			<result name='success' type='velocity'>
+				userroleEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='userroleView'
+			class='com.ph.hms.action.UserroleEditFormAction'>
+			<result name='success' type='velocity'>
+				userroleView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='userroleAdd'
+			class='com.ph.hms.action.UserroleAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='userroleUpdate'
+			class='com.ph.hms.action.UserroleUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='userroleDelete'
+			class='com.ph.hms.action.UserroleDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getUserroleByTypeHead'
+			class='com.ph.hms.action.GetUserroleByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseUserroleByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getUserroleBySearch'
+			class='com.ph.hms.action.GetUserroleByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseUserroleBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getUserroleByCode'
+			class='com.ph.hms.action.GetUserroleByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseUserroleByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='roleList'
+			class='com.ph.hms.action.RoleListAction'>
+			<result name='success' type='velocity'>roleList.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='roleAddForm'
+			class='com.ph.hms.action.RoleAddFormAction'>
+			<result name='success' type='velocity'>
+				roleAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='roleEditForm'
+			class='com.ph.hms.action.RoleEditFormAction'>
+			<result name='success' type='velocity'>
+				roleEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='roleView'
+			class='com.ph.hms.action.RoleEditFormAction'>
+			<result name='success' type='velocity'>roleView.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='roleAdd'
+			class='com.ph.hms.action.RoleAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='roleUpdate'
+			class='com.ph.hms.action.RoleUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='roleDelete'
+			class='com.ph.hms.action.RoleDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getRoleByTypeHead'
+			class='com.ph.hms.action.GetRoleByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseRoleByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getRoleBySearch'
+			class='com.ph.hms.action.GetRoleByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseRoleBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getRoleByCode'
+			class='com.ph.hms.action.GetRoleByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseRoleByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='roleformList'
+			class='com.ph.hms.action.RoleformListAction'>
+			<result name='success' type='velocity'>
+				roleformList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='roleformAddForm'
+			class='com.ph.hms.action.RoleformAddFormAction'>
+			<result name='success' type='velocity'>
+				roleformAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='roleformEditForm'
+			class='com.ph.hms.action.RoleformEditFormAction'>
+			<result name='success' type='velocity'>
+				roleformEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='roleformView'
+			class='com.ph.hms.action.RoleformEditFormAction'>
+			<result name='success' type='velocity'>
+				roleformView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='roleformAdd'
+			class='com.ph.hms.action.RoleformAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='roleformUpdate'
+			class='com.ph.hms.action.RoleformUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='roleformDelete'
+			class='com.ph.hms.action.RoleformDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getRoleformByTypeHead'
+			class='com.ph.hms.action.GetRoleformByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseRoleformByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getRoleformBySearch'
+			class='com.ph.hms.action.GetRoleformByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseRoleformBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getRoleformByCode'
+			class='com.ph.hms.action.GetRoleformByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseRoleformByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+
+		<action name='servicegroupList'
+			class='com.ph.hms.action.ServicegroupListAction'>
+			<result name='success' type='velocity'>
+				servicegroupList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='servicegroupAddForm'
+			class='com.ph.hms.action.ServicegroupAddFormAction'>
+			<result name='success' type='velocity'>
+				servicegroupAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='servicegroupEditForm'
+			class='com.ph.hms.action.ServicegroupEditFormAction'>
+			<result name='success' type='velocity'>
+				servicegroupEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='servicegroupView'
+			class='com.ph.hms.action.ServicegroupEditFormAction'>
+			<result name='success' type='velocity'>
+				servicegroupView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='servicegroupAdd'
+			class='com.ph.hms.action.ServicegroupAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='servicegroupUpdate'
+			class='com.ph.hms.action.ServicegroupUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='servicegroupDelete'
+			class='com.ph.hms.action.ServicegroupDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getServicegroupByTypeHead'
+			class='com.ph.hms.action.GetServicegroupByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseServicegroupByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getServicegroupBySearch'
+			class='com.ph.hms.action.GetServicegroupByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseServicegroupBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getServicegroupByCode'
+			class='com.ph.hms.action.GetServicegroupByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseServicegroupByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='indicationdetailList'
+			class='com.ph.hms.action.IndicationdetailListAction'>
+			<result name='success' type='velocity'>
+				indicationdetailList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='indicationdetailAddForm'
+			class='com.ph.hms.action.IndicationdetailFormAction'>
+			<result name='success' type='velocity'>
+				indicationdetailAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='indicationdetailEditForm'
+			class='com.ph.hms.action.IndicationdetailFormAction'>
+			<result name='success' type='velocity'>
+				indicationdetailEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='indicationdetailView'
+			class='com.ph.hms.action.IndicationdetailFormAction'>
+			<result name='success' type='velocity'>
+				indicationdetailView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='indicationdetailResultView'
+			class='com.ph.hms.action.IndicationdetailEditFormAction'>
+			<result name='success' type='velocity'>
+				indicationdetailResultView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		
+		<action name='indicationdetailAdd'
+			class='com.ph.hms.action.IndicationdetailAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='indicationdetailUpdate'
+			class='com.ph.hms.action.IndicationdetailUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='indicationdetailDelete'
+			class='com.ph.hms.action.IndicationdetailDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getIndicationdetailByTypeHead'
+			class='com.ph.hms.action.GetIndicationdetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseIndicationdetailByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getIndicationdetailBySearch'
+			class='com.ph.hms.action.GetIndicationdetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseIndicationdetailBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getIndicationdetailByCode'
+			class='com.ph.hms.action.GetIndicationdetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseIndicationdetailByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='receiptList'
+			class='com.ph.hms.action.ReceiptListAction'>
+			<result name='success' type='velocity'>
+				receiptList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='receiptAddForm'
+			class='com.ph.hms.action.ReceiptAddFormAction'>
+			<result name='success' type='velocity'>
+				receiptAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='receiptEditForm'
+			class='com.ph.hms.action.ReceiptEditFormAction'>
+			<result name='success' type='velocity'>
+				receiptEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='receiptView'
+			class='com.ph.hms.action.ReceiptEditFormAction'>
+			<result name='success' type='velocity'>
+				receiptView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='receiptAdd'
+			class='com.ph.hms.action.ReceiptAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='receiptUpdate'
+			class='com.ph.hms.action.ReceiptUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='receiptDelete'
+			class='com.ph.hms.action.ReceiptDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getReceiptByTypeHead'
+			class='com.ph.hms.action.GetReceiptByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseReceiptByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getReceiptBySearch'
+			class='com.ph.hms.action.GetReceiptByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseReceiptBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getReceiptByCode'
+			class='com.ph.hms.action.GetReceiptByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseReceiptByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='receiptdetailList'
+			class='com.ph.hms.action.ReceiptdetailListAction'>
+			<result name='success' type='velocity'>
+				receiptdetailList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='receiptdetailAddForm'
+			class='com.ph.hms.action.ReceiptdetailAddFormAction'>
+			<result name='success' type='velocity'>
+				receiptdetailAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='receiptdetailEditForm'
+			class='com.ph.hms.action.ReceiptdetailEditFormAction'>
+			<result name='success' type='velocity'>
+				receiptdetailEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='receiptdetailView'
+			class='com.ph.hms.action.ReceiptdetailEditFormAction'>
+			<result name='success' type='velocity'>
+				receiptdetailView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='receiptdetailAdd'
+			class='com.ph.hms.action.ReceiptdetailAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='receiptdetailUpdate'
+			class='com.ph.hms.action.ReceiptdetailUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='receiptdetailDelete'
+			class='com.ph.hms.action.ReceiptdetailDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getReceiptdetailByTypeHead'
+			class='com.ph.hms.action.GetReceiptdetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseReceiptdetailByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getReceiptdetailBySearch'
+			class='com.ph.hms.action.GetReceiptdetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseReceiptdetailBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getReceiptdetailByCode'
+			class='com.ph.hms.action.GetReceiptdetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseReceiptdetailByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='prescriptiontemplateList'
+			class='com.ph.hms.action.PrescriptiontemplateListAction'>
+			<result name='success' type='velocity'>
+				prescriptiontemplateList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='prescriptiontemplateAddForm'
+			class='com.ph.hms.action.PrescriptiontemplateAddFormAction'>
+			<result name='success' type='velocity'>
+				prescriptiontemplateAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='prescriptiontemplateEditForm'
+			class='com.ph.hms.action.PrescriptiontemplateEditFormAction'>
+			<result name='success' type='velocity'>
+				prescriptiontemplateEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='prescriptiontemplateView'
+			class='com.ph.hms.action.PrescriptiontemplateEditFormAction'>
+			<result name='success' type='velocity'>
+				prescriptiontemplateView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='prescriptiontemplateAdd'
+			class='com.ph.hms.action.PrescriptiontemplateAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='prescriptiontemplateUpdate'
+			class='com.ph.hms.action.PrescriptiontemplateUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='prescriptiontemplateDelete'
+			class='com.ph.hms.action.PrescriptiontemplateDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPrescriptiontemplateByTypeHead'
+			class='com.ph.hms.action.GetPrescriptiontemplateByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePrescriptiontemplateByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPrescriptiontemplateBySearch'
+			class='com.ph.hms.action.GetPrescriptiontemplateByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePrescriptiontemplateBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPrescriptiontemplateByCode'
+			class='com.ph.hms.action.GetPrescriptiontemplateByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePrescriptiontemplateByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='prescriptiontemplatedetailList'
+			class='com.ph.hms.action.PrescriptiontemplatedetailListAction'>
+			<result name='success' type='velocity'>
+				prescriptiontemplatedetailList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='prescriptiontemplatedetailAddForm'
+			class='com.ph.hms.action.PrescriptiontemplatedetailAddFormAction'>
+			<result name='success' type='velocity'>
+				prescriptiontemplatedetailAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='prescriptiontemplatedetailEditForm'
+			class='com.ph.hms.action.PrescriptiontemplatedetailEditFormAction'>
+			<result name='success' type='velocity'>
+				prescriptiontemplatedetailEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='prescriptiontemplatedetailView'
+			class='com.ph.hms.action.PrescriptiontemplatedetailEditFormAction'>
+			<result name='success' type='velocity'>
+				prescriptiontemplatedetailView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='prescriptiontemplatedetailAdd'
+			class='com.ph.hms.action.PrescriptiontemplatedetailAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='prescriptiontemplatedetailUpdate'
+			class='com.ph.hms.action.PrescriptiontemplatedetailUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='prescriptiontemplatedetailDelete'
+			class='com.ph.hms.action.PrescriptiontemplatedetailDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPrescriptiontemplatedetailByTypeHead'
+			class='com.ph.hms.action.GetPrescriptiontemplatedetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePrescriptiontemplatedetailByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPrescriptiontemplatedetailBySearch'
+			class='com.ph.hms.action.GetPrescriptiontemplatedetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePrescriptiontemplatedetailBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPrescriptiontemplatedetailByCode'
+			class='com.ph.hms.action.GetPrescriptiontemplatedetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePrescriptiontemplatedetailByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='departmentList'
+			class='com.ph.hms.action.DepartmentListAction'>
+			<result name='success' type='velocity'>
+				departmentList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='departmentAddForm'
+			class='com.ph.hms.action.DepartmentFormAction'>
+			<result name='success' type='velocity'>
+				departmentAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Form action -->
+		
+		<action name='departmentEditForm'
+			class='com.ph.hms.action.DepartmentFormAction'>
+			<result name='success' type='velocity'>
+				departmentEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Form action -->
+		<action name='departmentView'
+			class='com.ph.hms.action.DepartmentFormAction'>
+			<result name='success' type='velocity'>
+				departmentView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='departmentAdd'
+			class='com.ph.hms.action.DepartmentAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='departmentUpdate'
+			class='com.ph.hms.action.DepartmentUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='departmentDelete'
+			class='com.ph.hms.action.DepartmentDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDepartmentByTypeHead'
+			class='com.ph.hms.action.GetDepartmentByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDepartmentByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDepartmentBySearch'
+			class='com.ph.hms.action.GetDepartmentByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDepartmentBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDepartmentByCode'
+			class='com.ph.hms.action.GetDepartmentByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDepartmentByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='roomList'
+			class='com.ph.hms.action.RoomListAction'>
+			<result name='success' type='velocity'>roomList.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='roomAddForm'
+			class='com.ph.hms.action.RoomAddFormAction'>
+			<result name='success' type='velocity'>
+				roomAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='roomEditForm'
+			class='com.ph.hms.action.RoomEditFormAction'>
+			<result name='success' type='velocity'>
+				roomEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='roomView'
+			class='com.ph.hms.action.RoomEditFormAction'>
+			<result name='success' type='velocity'>roomView.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='roomAdd'
+			class='com.ph.hms.action.RoomAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='roomUpdate'
+			class='com.ph.hms.action.RoomUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='roomDelete'
+			class='com.ph.hms.action.RoomDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getRoomByTypeHead'
+			class='com.ph.hms.action.GetRoomByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseRoomByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getRoomBySearch'
+			class='com.ph.hms.action.GetRoomByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseRoomBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getRoomByCode'
+			class='com.ph.hms.action.GetRoomByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseRoomByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='doctorList'
+			class='com.ph.hms.action.DoctorListAction'>
+			<result name='success' type='velocity'>
+				doctorList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='doctorAddForm'
+			class='com.ph.hms.action.DoctorFormAction'>
+			<result name='success' type='velocity'>
+				doctorAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='doctorEditForm'
+			class='com.ph.hms.action.DoctorFormAction'>
+			<result name='success' type='velocity'>
+				doctorEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='doctorView'
+			class='com.ph.hms.action.DoctorFormAction'>
+			<result name='success' type='velocity'>
+				doctorView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='doctorAdd'
+			class='com.ph.hms.action.DoctorAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='doctorUpdate'
+			class='com.ph.hms.action.DoctorUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='doctorDelete'
+			class='com.ph.hms.action.DoctorDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDoctorByTypeHead'
+			class='com.ph.hms.action.GetDoctorByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDoctorByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDoctorBySearch'
+			class='com.ph.hms.action.GetDoctorByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDoctorBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDoctorByCode'
+			class='com.ph.hms.action.GetDoctorByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDoctorByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='importinvoiceList'
+			class='com.ph.hms.action.ImportinvoiceListAction'>
+			<result name='success' type='velocity'>
+				importinvoiceList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='importinvoiceAddForm'
+			class='com.ph.hms.action.ImportinvoiceFormAction'>
+			<result name='success' type='velocity'>
+				importinvoiceAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='importinvoiceEditForm'
+			class='com.ph.hms.action.ImportinvoiceFormAction'>
+			<result name='success' type='velocity'>
+				importinvoiceEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='importinvoiceView'
+			class='com.ph.hms.action.ImportinvoiceFormAction'>
+			<result name='success' type='velocity'>
+				importinvoiceView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='importinvoiceAdd'
+			class='com.ph.hms.action.ImportinvoiceAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='importinvoiceUpdate'
+			class='com.ph.hms.action.ImportinvoiceUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='importinvoiceDelete'
+			class='com.ph.hms.action.ImportinvoiceDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getImportinvoiceByTypeHead'
+			class='com.ph.hms.action.GetImportinvoiceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseImportinvoiceByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getImportinvoiceBySearch'
+			class='com.ph.hms.action.GetImportinvoiceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseImportinvoiceBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		
+		<action name='importinvoiceFilterByMonth'
+			class='com.ph.hms.action.ImportinvoiceFilterByMonthAction'>
+			<result name='success' type='velocity'>
+				responseImportinvoiceBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getImportinvoiceByCode'
+			class='com.ph.hms.action.GetImportinvoiceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseImportinvoiceByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='getPackagedetailBySerpackage'
+			class='com.ph.hms.action.GetPackagedetailBySerpackageAction'>
+			<result name='success' type='velocity'>
+				responsePackagedetailBySerpackage.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		
+		
+		<action name='serpackageList'
+			class='com.ph.hms.action.SerpackageListAction'>
+			<result name='success' type='velocity'>
+				serpackageList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='serpackageAddForm'
+			class='com.ph.hms.action.SerpackageAddFormAction'>
+			<result name='success' type='velocity'>
+				serpackageAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='serpackageEditForm'
+			class='com.ph.hms.action.SerpackageEditFormAction'>
+			<result name='success' type='velocity'>
+				serpackageEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='serpackageView'
+			class='com.ph.hms.action.SerpackageEditFormAction'>
+			<result name='success' type='velocity'>
+				serpackageView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='serpackageAdd'
+			class='com.ph.hms.action.SerpackageAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='serpackageUpdate'
+			class='com.ph.hms.action.SerpackageUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='serpackageDelete'
+			class='com.ph.hms.action.SerpackageDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getSerpackageByTypeHead'
+			class='com.ph.hms.action.GetSerpackageByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseSerpackageByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getSerpackageBySearch'
+			class='com.ph.hms.action.GetSerpackageByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseSerpackageBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getSerpackageByCode'
+			class='com.ph.hms.action.GetSerpackageByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseSerpackageByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='occupationList'
+			class='com.ph.hms.action.OccupationListAction'>
+			<result name='success' type='velocity'>
+				occupationList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='occupationAddForm'
+			class='com.ph.hms.action.OccupationFormAction'>
+			<result name='success' type='velocity'>
+				occupationAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='occupationEditForm'
+			class='com.ph.hms.action.OccupationFormAction'>
+			<result name='success' type='velocity'>
+				occupationEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='occupationView'
+			class='com.ph.hms.action.OccupationFormAction'>
+			<result name='success' type='velocity'>
+				occupationView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='occupationAdd'
+			class='com.ph.hms.action.OccupationAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='occupationUpdate'
+			class='com.ph.hms.action.OccupationUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='occupationDelete'
+			class='com.ph.hms.action.OccupationDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getOccupationByTypeHead'
+			class='com.ph.hms.action.GetOccupationByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseOccupationByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getOccupationBySearch'
+			class='com.ph.hms.action.GetOccupationByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseOccupationBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getOccupationByCode'
+			class='com.ph.hms.action.GetOccupationByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseOccupationByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='packagedetailList'
+			class='com.ph.hms.action.PackagedetailListAction'>
+			<result name='success' type='velocity'>
+				packagedetailList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='packagedetailAddForm'
+			class='com.ph.hms.action.PackagedetailFormAction'>
+			<result name='success' type='velocity'>
+				packagedetailAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='packagedetailEditForm'
+			class='com.ph.hms.action.PackagedetailFormAction'>
+			<result name='success' type='velocity'>
+				packagedetailEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='packagedetailView'
+			class='com.ph.hms.action.PackagedetailFormAction'>
+			<result name='success' type='velocity'>
+				packagedetailView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='packagedetailAdd'
+			class='com.ph.hms.action.PackagedetailAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='packagedetailUpdate'
+			class='com.ph.hms.action.PackagedetailUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='packagedetailDelete'
+			class='com.ph.hms.action.PackagedetailDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPackagedetailByTypeHead'
+			class='com.ph.hms.action.GetPackagedetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePackagedetailByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPackagedetailBySearch'
+			class='com.ph.hms.action.GetPackagedetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePackagedetailBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPackagedetailByCode'
+			class='com.ph.hms.action.GetPackagedetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responsePackagedetailByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='cashadvanceList'
+			class='com.ph.hms.action.CashadvanceListAction'>
+			<result name='success' type='velocity'>
+				cashadvanceList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='cashadvanceAddForm'
+			class='com.ph.hms.action.CashadvanceAddFormAction'>
+			<result name='success' type='velocity'>
+				cashadvanceAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='cashadvanceEditForm'
+			class='com.ph.hms.action.CashadvanceEditFormAction'>
+			<result name='success' type='velocity'>
+				cashadvanceEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='cashadvanceView'
+			class='com.ph.hms.action.CashadvanceEditFormAction'>
+			<result name='success' type='velocity'>
+				cashadvanceView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='cashadvanceAdd'
+			class='com.ph.hms.action.CashadvanceAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='cashadvanceUpdate'
+			class='com.ph.hms.action.CashadvanceUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='cashadvanceDelete'
+			class='com.ph.hms.action.CashadvanceDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getCashadvanceByTypeHead'
+			class='com.ph.hms.action.GetCashadvanceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseCashadvanceByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getCashadvanceBySearch'
+			class='com.ph.hms.action.GetCashadvanceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseCashadvanceBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getCashadvanceByCode'
+			class='com.ph.hms.action.GetCashadvanceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseCashadvanceByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='reportList'
+			class='com.ph.hms.action.ReportListAction'>
+			<result name='success' type='velocity'>
+				reportList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='reportAddForm'
+			class='com.ph.hms.action.ReportAddFormAction'>
+			<result name='success' type='velocity'>
+				reportAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='reportEditForm'
+			class='com.ph.hms.action.ReportEditFormAction'>
+			<result name='success' type='velocity'>
+				reportEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='reportView'
+			class='com.ph.hms.action.ReportEditFormAction'>
+			<result name='success' type='velocity'>
+				reportView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='reportAdd'
+			class='com.ph.hms.action.ReportAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='reportUpdate'
+			class='com.ph.hms.action.ReportUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='reportDelete'
+			class='com.ph.hms.action.ReportDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getReportByTypeHead'
+			class='com.ph.hms.action.GetReportByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseReportByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getReportBySearch'
+			class='com.ph.hms.action.GetReportByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseReportBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getReportByCode'
+			class='com.ph.hms.action.GetReportByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseReportByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='provinceList'
+			class='com.ph.hms.action.ProvinceListAction'>
+			<result name='success' type='velocity'>
+				provinceList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='provinceAddForm'
+			class='com.ph.hms.action.ProvinceAddFormAction'>
+			<result name='success' type='velocity'>
+				provinceAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='provinceEditForm'
+			class='com.ph.hms.action.ProvinceEditFormAction'>
+			<result name='success' type='velocity'>
+				provinceEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='provinceView'
+			class='com.ph.hms.action.ProvinceEditFormAction'>
+			<result name='success' type='velocity'>
+				provinceView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='provinceAdd'
+			class='com.ph.hms.action.ProvinceAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='provinceUpdate'
+			class='com.ph.hms.action.ProvinceUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='provinceDelete'
+			class='com.ph.hms.action.ProvinceDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getProvinceByTypeHead'
+			class='com.ph.hms.action.GetProvinceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseProvinceByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getProvinceBySearch'
+			class='com.ph.hms.action.GetProvinceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseProvinceBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getProvinceByCode'
+			class='com.ph.hms.action.GetProvinceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseProvinceByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='districtList'
+			class='com.ph.hms.action.DistrictListAction'>
+			<result name='success' type='velocity'>
+				districtList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='districtAddForm'
+			class='com.ph.hms.action.DistrictFormAction'>
+			<result name='success' type='velocity'>
+				districtAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='districtEditForm'
+			class='com.ph.hms.action.DistrictFormAction'>
+			<result name='success' type='velocity'>
+				districtEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='districtView'
+			class='com.ph.hms.action.DistrictFormAction'>
+			<result name='success' type='velocity'>
+				districtView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='districtAdd'
+			class='com.ph.hms.action.DistrictAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='districtUpdate'
+			class='com.ph.hms.action.DistrictUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='districtDelete'
+			class='com.ph.hms.action.DistrictDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDistrictByTypeHead'
+			class='com.ph.hms.action.GetDistrictByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDistrictByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDistrictBySearch'
+			class='com.ph.hms.action.GetDistrictByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDistrictBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDistrictByCode'
+			class='com.ph.hms.action.GetDistrictByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDistrictByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='wardList'
+			class='com.ph.hms.action.WardListAction'>
+			<result name='success' type='velocity'>wardList.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='wardAddForm'
+			class='com.ph.hms.action.WardAddFormAction'>
+			<result name='success' type='velocity'>
+				wardAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='wardEditForm'
+			class='com.ph.hms.action.WardEditFormAction'>
+			<result name='success' type='velocity'>
+				wardEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='wardView'
+			class='com.ph.hms.action.WardEditFormAction'>
+			<result name='success' type='velocity'>wardView.vm</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='wardAdd'
+			class='com.ph.hms.action.WardAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='wardUpdate'
+			class='com.ph.hms.action.WardUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='wardDelete'
+			class='com.ph.hms.action.WardDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getWardByTypeHead'
+			class='com.ph.hms.action.GetWardByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseWardByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getWardBySearch'
+			class='com.ph.hms.action.GetWardByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseWardBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getWardByCode'
+			class='com.ph.hms.action.GetWardByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseWardByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='ethnicList'
+			class='com.ph.hms.action.EthnicListAction'>
+			<result name='success' type='velocity'>
+				ethnicList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='ethnicAddForm'
+			class='com.ph.hms.action.EthnicFormAction'>
+			<result name='success' type='velocity'>
+				ethnicAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='ethnicEditForm'
+			class='com.ph.hms.action.EthnicFormAction'>
+			<result name='success' type='velocity'>
+				ethnicEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='ethnicView'
+			class='com.ph.hms.action.EthnicFormAction'>
+			<result name='success' type='velocity'>
+				ethnicView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='ethnicAdd'
+			class='com.ph.hms.action.EthnicAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='ethnicUpdate'
+			class='com.ph.hms.action.EthnicUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='ethnicDelete'
+			class='com.ph.hms.action.EthnicDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getEthnicByTypeHead'
+			class='com.ph.hms.action.GetEthnicByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseEthnicByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getEthnicBySearch'
+			class='com.ph.hms.action.GetEthnicByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseEthnicBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getEthnicByCode'
+			class='com.ph.hms.action.GetEthnicByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseEthnicByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='importinvoicedetailList'
+			class='com.ph.hms.action.ImportinvoicedetailListAction'>
+			<result name='success' type='velocity'>
+				importinvoicedetailList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='importinvoicedetailAddForm'
+			class='com.ph.hms.action.ImportinvoicedetailFormAction'>
+			<result name='success' type='velocity'>
+				importinvoicedetailAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='importinvoicedetailEditForm'
+			class='com.ph.hms.action.ImportinvoicedetailFormAction'>
+			<result name='success' type='velocity'>
+				importinvoicedetailEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='importinvoicedetailView'
+			class='com.ph.hms.action.ImportinvoicedetailFormAction'>
+			<result name='success' type='velocity'>
+				importinvoicedetailView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='importinvoicedetailAdd'
+			class='com.ph.hms.action.ImportinvoicedetailAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='importinvoicedetailUpdate'
+			class='com.ph.hms.action.ImportinvoicedetailUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='importinvoicedetailDelete'
+			class='com.ph.hms.action.ImportinvoicedetailDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getImportinvoicedetailByTypeHead'
+			class='com.ph.hms.action.GetImportinvoicedetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseImportinvoicedetailByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getImportinvoicedetailBySearch'
+			class='com.ph.hms.action.GetImportinvoicedetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseImportinvoicedetailBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getImportinvoicedetailByCode'
+			class='com.ph.hms.action.GetImportinvoicedetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseImportinvoicedetailByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='druginvoiceList'
+			class='com.ph.hms.action.DruginvoiceListAction'>
+			<result name='success' type='velocity'>
+				druginvoiceList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='druginvoiceAddForm'
+			class='com.ph.hms.action.DruginvoiceFormAction'>
+			<result name='success' type='velocity'>
+				druginvoiceAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='druginvoiceEditForm'
+			class='com.ph.hms.action.DruginvoiceFormAction'>
+			<result name='success' type='velocity'>
+				druginvoiceEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='druginvoiceView'
+			class='com.ph.hms.action.DruginvoiceFormAction'>
+			<result name='success' type='velocity'>
+				druginvoiceView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='druginvoiceAdd'
+			class='com.ph.hms.action.DruginvoiceAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='nodrug' type='velocity'>nodrug.vm</result>
+
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='druginvoiceUpdate'
+			class='com.ph.hms.action.DruginvoiceUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='druginvoiceDelete'
+			class='com.ph.hms.action.DruginvoiceDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDruginvoiceByTypeHead'
+			class='com.ph.hms.action.GetDruginvoiceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDruginvoiceByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDruginvoiceBySearch'
+			class='com.ph.hms.action.GetDruginvoiceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDruginvoiceBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		
+		<action name='getDruginvoiceBySearchViet'
+			class='com.ph.hms.action.GetDruginvoiceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDruginvoiceList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		
+		<action name='druginvoiceFilterByMonth'
+			class='com.ph.hms.action.DruginvoiceFilterByMonthAction'>
+			<result name='success' type='velocity'>
+				responseDruginvoiceBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		
+		<action name='druginvoiceFilterByMonthViet'
+			class='com.ph.hms.action.DruginvoiceFilterByMonthAction'>
+			<result name='success' type='velocity'>
+				responseDruginvoiceList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDruginvoiceByCode'
+			class='com.ph.hms.action.GetDruginvoiceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDruginvoiceByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- FOR not imported-->
+		<action name='getNotImportedDruginvoice'
+			class='com.ph.hms.action.GetDruginvoiceByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseNotImportedDruginvoice.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		<action name='getDruginvoiceList'
+			class='com.ph.hms.action.DruginvoiceListAction'>
+			<result name='success' type='velocity'>
+				HDthuoc.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		<action name='druginvoicedetailList'
+			class='com.ph.hms.action.DruginvoicedetailListAction'>
+			<result name='success' type='velocity'>
+				druginvoicedetailList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='druginvoicedetailAddForm'
+			class='com.ph.hms.action. DruginvoicedetailFormAction'>
+			<result name='success' type='velocity'>
+				druginvoicedetailAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='druginvoicedetailEditForm'
+			class='com.ph.hms.action.DruginvoicedetailFormAction'>
+			<result name='success' type='velocity'>
+				druginvoicedetailEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='druginvoicedetailView'
+			class='com.ph.hms.action.DruginvoicedetailFormAction'>
+			<result name='success' type='velocity'>
+				druginvoicedetailView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='druginvoicedetailAdd'
+			class='com.ph.hms.action.DruginvoicedetailAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='druginvoicedetailUpdate'
+			class='com.ph.hms.action.DruginvoicedetailUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='druginvoicedetailDelete'
+			class='com.ph.hms.action.DruginvoicedetailDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDruginvoicedetailByTypeHead'
+			class='com.ph.hms.action.GetDruginvoicedetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDruginvoicedetailByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDruginvoicedetailBySearch'
+			class='com.ph.hms.action.GetDruginvoicedetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDruginvoicedetailBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDruginvoicedetailByCode'
+			class='com.ph.hms.action.GetDruginvoicedetailByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseDruginvoicedetailByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='providerList'
+			class='com.ph.hms.action.ProviderListAction'>
+			<result name='success' type='velocity'>
+				providerList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='providerAddForm'
+			class='com.ph.hms.action.ProviderAddFormAction'>
+			<result name='success' type='velocity'>
+				providerAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='providerEditForm'
+			class='com.ph.hms.action.ProviderEditFormAction'>
+			<result name='success' type='velocity'>
+				providerEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='providerView'
+			class='com.ph.hms.action.ProviderEditFormAction'>
+			<result name='success' type='velocity'>
+				providerView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='providerAdd'
+			class='com.ph.hms.action.ProviderAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='providerUpdate'
+			class='com.ph.hms.action.ProviderUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='providerDelete'
+			class='com.ph.hms.action.ProviderDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getProviderByTypeHead'
+			class='com.ph.hms.action.GetProviderByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseProviderByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getProviderBySearch'
+			class='com.ph.hms.action.GetProviderByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseProviderBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getProviderByCode'
+			class='com.ph.hms.action.GetProviderByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseProviderByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='warehouseList'
+			class='com.ph.hms.action.WarehouseListAction'>
+			<result name='success' type='velocity'>
+				warehouseList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='warehouseAddForm'
+			class='com.ph.hms.action.WarehouseAddFormAction'>
+			<result name='success' type='velocity'>
+				warehouseAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='warehouseEditForm'
+			class='com.ph.hms.action.WarehouseEditFormAction'>
+			<result name='success' type='velocity'>
+				warehouseEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='warehouseView'
+			class='com.ph.hms.action.WarehouseEditFormAction'>
+			<result name='success' type='velocity'>
+				warehouseView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='warehouseAdd'
+			class='com.ph.hms.action.WarehouseAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='warehouseUpdate'
+			class='com.ph.hms.action.WarehouseUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='warehouseDelete'
+			class='com.ph.hms.action.WarehouseDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getWarehouseByTypeHead'
+			class='com.ph.hms.action.GetWarehouseByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseWarehouseByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getWarehouseBySearch'
+			class='com.ph.hms.action.GetWarehouseByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseWarehouseBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getWarehouseByCode'
+			class='com.ph.hms.action.GetWarehouseByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseWarehouseByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='historyList'
+			class='com.ph.hms.action.HistoryListAction'>
+			<result name='success' type='velocity'>
+				historyList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='historyAddForm'
+			class='com.ph.hms.action.HistoryFormAction'>
+			<result name='success' type='velocity'>
+				historyAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='historyEditForm'
+			class='com.ph.hms.action.HistoryFormAction'>
+			<result name='success' type='velocity'>
+				historyEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='historyView'
+			class='com.ph.hms.action.HistoryFormAction'>
+			<result name='success' type='velocity'>
+				historyView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='historyAdd'
+			class='com.ph.hms.action.HistoryAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='historyUpdate'
+			class='com.ph.hms.action.HistoryUpdateAction'>
+			<result name='success' type="velocity">
+				saveHistorySuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='historyDelete'
+			class='com.ph.hms.action.HistoryDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getHistoryByTypeHead'
+			class='com.ph.hms.action.GetHistoryByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseHistoryByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getHistoryBySearch'
+			class='com.ph.hms.action.GetHistoryByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseHistoryBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getHistoryByCode'
+			class='com.ph.hms.action.GetHistoryByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseHistoryByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='solvingList'
+			class='com.ph.hms.action.SolvingListAction'>
+			<result name='success' type='velocity'>
+				solvingList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='solvingAddForm'
+			class='com.ph.hms.action.SolvingAddFormAction'>
+			<result name='success' type='velocity'>
+				solvingAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='solvingEditForm'
+			class='com.ph.hms.action.SolvingEditFormAction'>
+			<result name='success' type='velocity'>
+				solvingEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='solvingView'
+			class='com.ph.hms.action.SolvingEditFormAction'>
+			<result name='success' type='velocity'>
+				solvingView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='solvingAdd'
+			class='com.ph.hms.action.SolvingAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='solvingUpdate'
+			class='com.ph.hms.action.SolvingUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='solvingDelete'
+			class='com.ph.hms.action.SolvingDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getSolvingByTypeHead'
+			class='com.ph.hms.action.GetSolvingByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseSolvingByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getSolvingBySearch'
+			class='com.ph.hms.action.GetSolvingByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseSolvingBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getSolvingByCode'
+			class='com.ph.hms.action.GetSolvingByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseSolvingByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='hospitalList'
+			class='com.ph.hms.action.HospitalListAction'>
+			<result name='success' type='velocity'>
+				hospitalList.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='hospitalAddForm'
+			class='com.ph.hms.action.HospitalFormAction'>
+			<result name='success' type='velocity'>
+				hospitalAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='hospitalEditForm'
+			class='com.ph.hms.action.HospitalFormAction'>
+			<result name='success' type='velocity'>
+				hospitalEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<!-- for printing or viewing, reuse Edit action -->
+		<action name='hospitalView'
+			class='com.ph.hms.action.HospitalFormAction'>
+			<result name='success' type='velocity'>
+				hospitalView.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='hospitalAdd'
+			class='com.ph.hms.action.HospitalAddAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='hospitalUpdate'
+			class='com.ph.hms.action.HospitalUpdateAction'>
+			<result name='success' type='velocity'>
+				saveSuccess.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='hospitalDelete'
+			class='com.ph.hms.action.HospitalDeleteAction'>
+			<result name='success' type='velocity'>
+				deleteResult.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getHospitalByTypeHead'
+			class='com.ph.hms.action.GetHospitalByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseHospitalByTypeHead.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getHospitalBySearch'
+			class='com.ph.hms.action.GetHospitalByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseHospitalBySearch.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getHospitalByCode'
+			class='com.ph.hms.action.GetHospitalByTypeHeadAction'>
+			<result name='success' type='velocity'>
+				responseHospitalByCode.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+
+		<action name='getEncounterByClient'
+			class='com.ph.hms.action.GetEncounterByClientAction'>
+			<result name='success' type='velocity'>
+				responseEncounterByClient.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getPrescriptiondetailByEncounter'
+			class='com.ph.hms.action.GetPrescriptiondetailByEncounterAction'>
+			<result name='success' type='velocity'>
+				responsePrescriptiondetailByEncounter.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getIndicationdetailByEncounter'
+			class='com.ph.hms.action.GetIndicationdetailByEncounterAction'>
+			<result name='success' type='velocity'>
+				responseIndicationdetailByEncounter.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getReceiptByEncounter'
+			class='com.ph.hms.action.GetReceiptByEncounterAction'>
+			<result name='success' type='velocity'>
+				responseReceiptByEncounter.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDruginvoiceByEncounter'
+			class='com.ph.hms.action.GetDruginvoiceByEncounterAction'>
+			<result name='success' type='velocity'>
+				responseDruginvoiceByEncounter.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getUserroleByUser'
+			class='com.ph.hms.action.GetUserroleByUserAction'>
+			<result name='success' type='velocity'>
+				responseUserroleByUser.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getUserroleByRole'
+			class='com.ph.hms.action.GetUserroleByRoleAction'>
+			<result name='success' type='velocity'>
+				responseUserroleByRole.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getRoleformByRole'
+			class='com.ph.hms.action.GetRoleformByRoleAction'>
+			<result name='success' type='velocity'>
+				responseRoleformByRole.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getReceiptdetailByReceipt'
+			class='com.ph.hms.action.GetReceiptdetailByReceiptAction'>
+			<result name='success' type='velocity'>
+				responseReceiptdetailByReceipt.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getImportinvoicedetailByImportinvoice'
+			class='com.ph.hms.action.GetImportinvoicedetailByImportinvoiceAction'>
+			<result name='success' type='velocity'>
+				responseImportinvoicedetailByImportinvoice.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getDruginvoicedetailByDruginvoice'
+			class='com.ph.hms.action.GetDruginvoicedetailByDruginvoiceAction'>
+			<result name='success' type='velocity'>
+				responseDruginvoicedetailByDruginvoice.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+		<action name='getImportinvoiceByWarehouse'
+			class='com.ph.hms.action.GetImportinvoiceByWarehouseAction'>
+			<result name='success' type='velocity'>
+				responseImportinvoiceByWarehouse.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		<action name='CardTypeAddForm'
+			class='com.ph.hms.action.CardType'>
+			<result name='success' type='velocity'>
+				cardtypeAddForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+
+
+		<action name='fmMaster'
+			class='com.ph.hms.fm.action.FMMasterAction'>
+			<result name='success' type='velocity'>
+				fmMaster.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		<action name='serviceParam'
+			class='com.ph.hms.action.ServiceParamAction'>
+			<result name='success' type='velocity'>
+				serviceParam.vm
+			</result>			
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		<action name='labSave'
+			class='com.ph.hms.action.LabSaveAction'>
+			<result name='success' type='velocity'>
+				labSave.vm
+			</result>			
+			<result name='error' type='velocity'>labSave.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+
+		</action>
+		
+		<action name='labEditForm'
+			class='com.ph.hms.action.EncounterFormAction'>
+			<result name='success' type='velocity'>
+				labEditForm.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		<action name='cardType'
+			class='com.ph.hms.cardmanagement.action.CardTypeAction'>
+			<result name='success' type='velocity'>
+				cardType.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		
+		<action name='privilege'
+			class='com.ph.hms.cardmanagement.action.PrivilegeAction'>
+			<result name='success' type='velocity'>
+				privilege.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		<action name='concept'
+			class='com.ph.hms.smarthealth.action.ConceptAction'>
+			<result name='success' type='velocity'>
+				smarthealth/concept.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		<action name='conceptClass'
+			class='com.ph.hms.smarthealth.action.ConceptClassAction'>
+			<result name='success' type='velocity'>
+				smarthealth/conceptClass.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+		<action name='generic'
+			class='com.ph.hms.smarthealth.action.GenericAction'>
+			<result name='success' type='velocity'>
+				smarthealth/generic.vm
+			</result>
+			<result name='error' type='velocity'>error.vm</result>
+			<result name='noprivilege' type='velocity'>
+				noprivilege.vm
+			</result>
+		</action>
+		
+	</package>
+
+</xwork>

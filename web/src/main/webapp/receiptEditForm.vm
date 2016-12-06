@@ -1,0 +1,93 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addreceipt').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('receipt')
+</div>
+<br>
+<div id='msg'></div>
+<br>
+<form id='receiptForm'  name='receiptForm' action='receiptUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!receipt.id' size='15'>
+<table width="100%">
+<tr class='formlabel'>
+			<td><label>$i18n.get('code'):</label></td> <td><input type='text'  id='code' name='code' value='$!receipt.code' size='15' onkeypress="formname='receiptForm'; nextfield='date';" disabled="disabled"> </td>
+			
+				#if($!receipt.date)
+					#set($ngay = "$receipt.date")
+					#set($ngay = "$ngay.substring(8,10)/$ngay.substring(5,7)/$ngay.substring(0,4)")
+				#end
+			<td><label>$i18n.get('date'):</label></td> 
+			<td>
+			<input type='text'  id='date' name='date' value='$!ngay' size='15' onblur='getSmartDate(this)' onkeypress="formname='receiptForm'; nextfield='textencounter';" >
+			<img src='images/calendar_icon.gif' id='triggerdate'>			</td>
+			
+			<td><label>$i18n.get('encounter'):</label> </td>
+			<td>		
+			<input type='hidden' id='encounter' name='encounter'  size='1' value='$!receipt.encounter.id' onchange='makeGetRequestEncounterByTypeHead()' onkeypress="formname='receiptForm'; nextfield='textencounter';"> 	
+			$!receipt.encounter.node		
+	
+			<a href='javascript:void(0)' onclick="window.open('encounterList.action', 'Add encounter', 'width=400, height=300')"></a>			</td>
+	  </tr><tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text' id='node' name='node' value='$!receipt.node' size='30' onkeypress="formname='receiptForm'; nextfield='birthday';"> </td>
+			
+				#if($!receipt.birthday)
+					#set($ngay2 = "$receipt.birthday")
+					#set($ngay2 = "$ngay2.substring(8,10)/$ngay2.substring(5,7)/$ngay2.substring(0,4)")
+				#end
+			<td><label>$i18n.get('birthday'):</label></td> 
+			<td>
+			<input type='text'  id='birthday' name='birthday' value='$!ngay2' size='15' onblur='getSmartDate(this)' onkeypress="formname='receiptForm'; nextfield='age';">
+			<img src='images/calendar_icon.gif' id='triggerbirthday'>			</td>
+			
+			<td><label>$i18n.get('age'):</label></td> <td><input type='text' id='age' name='age' value='$!receipt.age' size='15' onkeypress="formname='receiptForm'; nextfield='address';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('address'):</label></td> <td><input type='text' id='address' name='address' value='$!receipt.address' size='30' onkeypress="formname='receiptForm'; nextfield='phone';"> </td>
+			
+			<td><label>$i18n.get('phone'):</label></td> <td><input type='text' id='phone' name='phone' value='$!receipt.phone' size='15'  onkeypress="formname='receiptForm'; nextfield='paymenttype';"> </td>
+			
+			<td><label>$i18n.get('paymenttype'):</label> </td>
+			<td>
+			<select id='paymenttype' name='paymenttype' onkeypress="formname='receiptForm'; nextfield='paymentmethod';">
+						
+			#foreach($paymenttype in $paymenttypes)
+				<option value='$!paymenttype.id'>$!paymenttype.node</option>
+			#end
+			</select>			</td>
+		</tr><tr class='formlabel'>
+			<td><label>$i18n.get('paymentmethod'):</label></td> <td>
+			#if($receipt.paymentmethod=="TU") selected #end
+			<select id='paymentmethod' name='paymentmethod' style='width:90px;max-width:90px' onkeypress="formname='receiptForm'; nextfield='payfor';"> 
+			
+			<option value='$!receipt.paymentmethod' selected>$!receipt.paymentmethod</option>
+			<option value="TT">Thanh to&aacute;n</option>
+			<option value="TU">Th&#7867; Vip</option> 
+			</select></td>
+			
+			<td><label>$i18n.get('payfor'):</label></td> <td>
+			<select id='payfor' name='payfor' style='width:90px;max-width:90px' onkeypress="formname='receiptForm'; nextfield='savereceipt';">
+			<option value= DV> DV</option>
+			<option value=TH>TH</option>
+			 </select></td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		</tr><tr class='formlabel'>
+			
+
+<tr><td colspan='6'>
+<input id='updatereceipt' type='button' value="  $i18n.get('save')  " onkeydown="javascript: validateReceipt('edit', document.getElementById('receiptForm') )" onclick="document.getElementById('divReceiptdetail').innerHTML=''; validateReceipt('edit', document.getElementById('receiptForm') )" >
+
+&nbsp;&nbsp;
+
+		 <input type='button' onclick="makeGetRequestReceiptdetailByReceipt($receipt.id);" value="$i18n.get('receiptdetail')"></td>
+</tr>
+</table>
+</form>
+</div>
+</body>

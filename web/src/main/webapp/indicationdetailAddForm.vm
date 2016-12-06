@@ -1,0 +1,74 @@
+
+<div id='addindicationdetail'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addindicationdetail').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('indicationdetail')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='indicationdetailForm' name='indicationdetailForm' action='indicationdetailAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('encounter'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($encounter_id = $ses.getAttribute('encounter_id'))
+			#set ($encounter_node = $ses.getAttribute('encounter_node'))
+			
+			<input type='hidden' id='encounter' name='encounter'  size='1' value='$!encounter_id' onchange='makeGetRequestEncounterByTypeHead()' onkeypress="formname='indicationdetailForm'; nextfield='textencounter';"> 
+			
+			<input type='text' id='textencounter' name='textencounter' size='18' value='$!encounter_node' onkeypress="formname='indicationdetailForm'; nextfield='cboencounter'; isSelect=true;"  onkeyup='makeGetRequestEncounterByTypeHead()' onclick='makeGetRequestEncounterByTypeHead()'>	
+			
+			<div id='divencounter' style='display:none;position:absolute'  onkeypress="formname='indicationdetailForm'; nextfield='textservice';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('encounterList.action', 'Add encounter', 'width=400, height=300')"> ... </a>
+		
+			<td><label>$i18n.get('service'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($service_id = $ses.getAttribute('service_id'))
+			#set ($service_node = $ses.getAttribute('service_node'))
+			
+			<input type='hidden' id='service' name='service'  size='1' value='$!service_id' onchange='makeGetRequestServiceByTypeHead()' onkeypress="formname='indicationdetailForm'; nextfield='textservice';"> 
+			
+			<input type='text' id='textservice' name='textservice' size='18' value='$!service_node' onkeypress="formname='indicationdetailForm'; nextfield='cboservice'; isSelect=true;"  onkeyup='makeGetRequestServiceByTypeHead()' onclick='makeGetRequestServiceByTypeHead()'>	
+			
+			<div id='divservice' style='display:none;position:absolute'  onkeypress="formname='indicationdetailForm'; nextfield='quantity';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('serviceList.action', 'Add service', 'width=400, height=300')"> ... </a>
+		
+			<td><label>$i18n.get('quantity'):</label></td> <td><input type='text'  id='quantity' name='quantity' size='15' value='10' onkeypress="formname='indicationdetailForm'; nextfield='price';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('price'):</label></td> <td><input type='text'  id='price' name='price' size='15' value='' onkeypress="formname='indicationdetailForm'; nextfield='status';"> </td>
+			
+			<td><label>$i18n.get('status'):</label></td> 
+			<td>
+			<select id='status' name='status' onkeypress="formname='indicationdetailForm'; nextfield='node';"> 
+			<option value=NEW>NEW</option><option value=DONE>DONE</option> 
+			</select></td>
+			
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text'  id='node' name='node' size='15' value='' onkeypress="formname='indicationdetailForm'; nextfield='note';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('note'):</label></td> <td><textarea  id='note' name='note' size='15' onkeypress="formname='indicationdetailForm'; nextfield='paid';">  </textarea></td>
+			
+			<td><label>$i18n.get('paid'):</label></td> <td><select id='paid' name='paid' onkeypress="formname='indicationdetailForm'; nextfield='saveindicationdetail';"> <option value=N>N</option><option value= Y> Y</option> </select></td>
+
+			
+<tr><td>
+<input type='button' id='saveindicationdetail' value="  $i18n.get('save')  " onkeydown="javascript:validateIndicationdetail('add', document.getElementById('indicationdetailForm') )"  onclick="javascript:validateIndicationdetail('add', document.getElementById('indicationdetailForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

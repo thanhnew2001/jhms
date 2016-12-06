@@ -1,0 +1,7 @@
+
+<select name='cboprescriptiontemplate' id='cboprescriptiontemplate' multiple='multiple' onclick="selectprescriptiontemplate(this.value, this.options[selectedIndex].text)" onkeypress="typehead = 'prescriptiontemplate'; nextfield='saveencounter';">
+#foreach($prescriptiontemplate in $prescriptiontemplates)
+<option value='$prescriptiontemplate.id'>$prescriptiontemplate.node</option>
+#end						
+</select>
+

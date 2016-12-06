@@ -1,0 +1,7 @@
+
+<select name='cboclient' id='cboclient' multiple='multiple' onkeypress="typehead = 'client'; nextfield='saveclient';"onclick = "selectclient(this.value, this.options[this.selectedIndex].text)";>
+#foreach($client in $clients)
+<option value='$client.id'>$client.node</option>
+#end						
+</select>
+

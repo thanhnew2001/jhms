@@ -1,0 +1,119 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+<style type="text/css">
+<!--
+.style4 {font-size: xx-small; font-style: italic; }
+-->
+</style>
+
+<body id='wrap'>
+<br>
+
+<div class='pageheader'>L&#7920;A CH&#7884;N C&Aacute;C TH&Ocirc;NG S&#7888; L&Agrave;M VI&#7878;C </div>
+#set ($ses = $req.getSession())
+#set ($selectwarehouse = $ses.getAttribute('selectedwarehouse'))
+#set ($selectroom = $ses.getAttribute('selectedroom'))
+#set ($selectdepartment = $ses.getAttribute('selectedepartment'))
+#set ($selectedlang = $ses.getAttribute('selectedlang'))
+
+
+<form name='selectsetting' action='selectSetting.action'>
+<table width="100%" border="0">
+  <tr>
+    <td width="36%"><div align="right">Vui l&ograve;ng ch&#7885;n ph&ograve;ng kh&aacute;m n&#7871;u b&#7841;n l&agrave; b&aacute;c s&#297; : </div></td>
+    <td width="64%" ><select id='roomid' name='roomid'>
+      <option value='$!selectedroom.id'>$!selectedroom.node</option>      
+      <option value='0'>All</option>
+	#foreach ($room in $rooms)
+		  <option value='$room.id'>$room.node</option>      
+	#end
+
+    </select>    </td>
+  </tr>
+  <tr>
+    <td><div align="right">Vui l&ograve;ng ch&#7885;n khoa CLS n&#7871;u b&#7841;n l&agrave; KTV ph&#7909; tr&aacute;ch :</div></td>
+    <td>
+	
+	<select id='departmentid' name='departmentid'>
+      <option value='$!selecteddepartment.id'>$!selecteddepartment.node</option>     
+      <option value='0'>All</option>
+	#foreach ($department in $departments)
+		  <option value='$department.id'>$department.node</option>      
+	#end
+    </select>    </td>
+  </tr>
+  
+   <tr>
+    <td><div align="right">Vui l&ograve;ng ch&#7885;n kho d&#432;&#7907;c b&#7841;n &#273;ang ph&#7909; tr&aacute;ch :</div></td>
+    <td>
+	
+	<select id='warehouseid' name='warehouseid'>
+	   <option value='$!selectedwarehouse.id'>$!selectedwarehouse.node</option>     
+      <option value='0'>All</option>
+	#foreach ($warehouse in $warehouses)
+		  <option value='$warehouse.id'>$warehouse.node</option>      
+	#end
+    </select>    </td>
+  </tr>
+  <tr>
+    <td><div align="right">Ch&#7885;n ng&ocirc;n ng&#7919; : </div></td>
+    <td><select id='lang' name='lang'>
+      <option value='vi'>Tieng Viet</option>
+      <option value='en'>English</option>
+    </select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input name="submit" type=submit value=Chon></td>
+  </tr>
+</table>
+</form>
+<div class='pageheader'><strong>B&#7840;N &#272;&Atilde; CH&#7884;N </strong></div>
+<table width="100%"  border="0">
+
+  <tr>
+    <td  >B&#7841;n &#273;&atilde; ch&#7885;n ph&ograve;ng kh&aacute;m: <strong>$!selectedroom.node </strong></td>
+    <td >&nbsp;</td>
+    <td  colspan="2" rowspan="7"><br>
+    <br></td>
+  </tr>
+  <tr>
+    <td>B&#7841;n &#273;&atilde; ch&#7885;n khoa CLS: <strong>$!selecteddepartment.node </strong></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>B&#7841;n &#273;&atilde; ch&#7885;n kho d&#432;&#7907;c: <strong>$!selectedwarehouse.node </strong></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>B&#7841;n &#273;&atilde; ch&#7885;n ng&ocirc;n ng&#7919;: <strong>$!selectedlang.node </strong></td>
+    <td>&nbsp;</td>
+  </tr>
+  
+  <tr>
+    <td colspan="2"><div class='pageheader'>B&#7840;N MU&#7888;N &#272;I &#272;&Acirc;U? </div></td>
+  </tr>
+  <tr>
+    <td width="44%"><a href="clientList.action">&#272;&#259;ng k&yacute; kh&aacute;ch h&agrave;ng m&#7899;i t&#7899;i kh&aacute;m</a> <br>
+        <span class="style4">N&#7871;u b&#7841;n l&agrave; nh&acirc;n vi&ecirc;n ti&#7871;p nh&#7853;n </span></td>
+    <td width="56%"><a href="encounterList.action">Xem danh s&aacute;ch kh&aacute;ch h&agrave;ng &#273;ang ch&#7901; kh&aacute;m</a> <br>
+        <span class="style4">D&agrave;nh cho BS kh&aacute;m </span></td>
+  </tr>
+  <tr>
+    <td height="35"><a href="indicationList.action">Xem danh s&aacute;ch ch&#7901; l&agrave;m x&eacute;t nghi&#7879;m/ch&#7849;n &#273;o&aacute;n h&igrave;nh &#7843;nh </a><br>
+        <span class="style4">N&#7871;u b&#7841;n l&agrave; b&aacute;c s&#297;/KTV ph&#7909; tr&aacute;ch </span></td>
+    <td><a href="encounterList.action">Xem danh s&aacute;ch ch&#7901; &#273;&oacute;ng vi&#7879;n ph&iacute; </a><br>
+        <span class="style4">N&#7871;u b&#7841;n ph&#7909; tr&aacute;ch thu ng&acirc;n</span></td>
+  </tr>
+  <tr>
+    <td><a href="encounterList.action">Xem danh s&aacute;ch ch&#7901; mua thu&#7889;c</a><br>
+        <span class="style4">N&#7871;u b&#7841;n l&agrave; d&#432;&#7907;c s&#297;/nh&acirc;n vi&ecirc;n b&aacute;c thu&#7889;c </span></td>
+    <td>&nbsp;</td>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+</table>
+
+<p><br>
+</p>
+</body>

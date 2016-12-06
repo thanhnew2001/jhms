@@ -1,0 +1,89 @@
+
+<div id='addclient'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+
+<style type="text/css">
+<!--
+.style2 {font-size: x-small}
+-->
+</style>
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addclient').innerHTML=''" value=' X '>
+&#272;&#259;ng k&yacute; kh&aacute;m t&#7841;i PK&#272;K M&#7929; T&ugrave;ng
+<div id='msg' align='right'></div>
+</div>
+
+<form id='clientForm' name='clientForm' action='clientAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+			<tr class='formlabel'>
+			  <td colspan="2"><strong>K&#7871;t qu&#7843; &#273;&#259;ng k&yacute;</strong> </td>
+			  <td>&nbsp;</td>
+			  <td> </td>
+			  <td><span class="style2"></span></td>
+			  <td>&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="6"><hr></td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="6">Xin vui ki&#7875;m tra email ho&#7863;c s&#7889; &#272;T b&#7841;n &#273;&#259;ng k&yacute; &#273;&#7875; l&#7845;y m&atilde; &#273;&#259;ng nh&#7853;p </td>
+	  </tr>
+	 
+			<tr class='formlabel'>
+			  <td colspan="2">Nh&#7853;p m&atilde; &#273;&#259;ng nh&#7853;p &#7903; &#273;&acirc;y </td>
+			  <td>
+			  <input name="password" type="text">
+			  <input type="hidden" value="$register.id" name="registerId">
+			  <input type="hidden" value="yes" name="confirm">
+			  &nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="2">
+			  <input type="submit" value="Xac nhan" onClick="">
+			  &nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+
+	  
+	  #if($!msg)
+			<tr class='formlabel'>
+			  <td colspan="2">$!msg</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="2">Th&ocirc;ng tin b&#7841;n &#273;&#259;ng k&yacute; </td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="6">$register.name kh&aacute;m ng&agrave;y $register.date, l&uacute;c $register.time </td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="6">Ph&ograve;ng kh&aacute;m: $register.room.node </td>
+	  </tr>
+	#end		 
+
+</table>
+
+</form>
+</div>
+</body>
+</div>
+ 

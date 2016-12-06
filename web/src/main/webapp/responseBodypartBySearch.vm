@@ -1,0 +1,28 @@
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>
+	<th>$i18n.get('description')</th>
+	</tr>
+</theader>
+<tbody>
+		#foreach($bodypart in $bodyparts)
+		
+	#if($bodypart.id)
+		<tr class='tableitem' id='tr$bodypart.id'>
+		
+	<td id='td$bodypart.id'><a href="bodypartList.action?action=editbodypart&id=$bodypart.id"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a>
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ deleteBodyPart($bodypart.id) } ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>	</td>	
+		
+		<td>$!bodypart.node</td>
+		<td>$!bodypart.description</td>
+		</tr>
+		
+	#end
+</tbody>
+#end
+</table>

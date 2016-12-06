@@ -1,0 +1,8 @@
+
+<select name='cboencounter' id='cboencounter' multiple='multiple' onclick="selectencounter(this.value, (this.options[this.selectedIndex].text).split('-')[0] )"onclick = "selectencounter(this.value, this.options[this.selectedIndex].text)";>
+#foreach($encounter in $encounters)
+<option value='$encounter.id'>$encounter.node - $encounter.client.node ($encounter.client.age, $encounter.client.sex) </option>
+#end						
+<option value=''></option>
+</select>
+

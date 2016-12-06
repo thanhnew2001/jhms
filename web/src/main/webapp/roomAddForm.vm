@@ -1,0 +1,47 @@
+
+<div id='addroom'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addroom').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('room')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='roomForm' name='roomForm' action='roomAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text'  id='node' name='node' size='15' value='' onkeypress="formname='roomForm'; nextfield='textdepartment';"> </td>
+			
+			<td><label>$i18n.get('department'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($department_id = $ses.getAttribute('department_id'))
+			#set ($department_node = $ses.getAttribute('department_node'))
+			
+			<input type='hidden' id='department' name='department'  size='1' value='$!department_id' onchange='makeGetRequestDepartmentByTypeHead()' onkeypress="formname='roomForm'; nextfield='textdepartment';"> 
+			
+			<input type='text' id='textdepartment' name='textdepartment' size='18' value='$!department_node' onkeypress="formname='roomForm'; nextfield='cbodepartment'; isSelect=true;"  onkeyup='makeGetRequestDepartmentByTypeHead()' onclick='makeGetRequestDepartmentByTypeHead()'>	
+			
+			<div id='divdepartment' style='display:none;position:absolute'  onkeypress="formname='roomForm'; nextfield='doctor';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('departmentList.action', 'Add department', 'width=400, height=300')"> ... </a>
+		
+			<td><label>$i18n.get('doctor'):</label></td> <td><input type='text'  id='doctor' name='doctor' size='15' value='' onkeypress="formname='roomForm'; nextfield='saveroom';"> </td>
+			</tr>
+<tr><td>
+<input type='button' id='saveroom' value="  $i18n.get('save')  " onkeydown="javascript:validateRoom('add', document.getElementById('roomForm') )"  onclick="javascript:validateRoom('add', document.getElementById('roomForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

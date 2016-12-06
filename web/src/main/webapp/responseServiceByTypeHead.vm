@@ -1,0 +1,8 @@
+
+<select name='cboservice' id='cboservice' multiple='multiple' onclick="selectservice(this.value, this.options[selectedIndex].text)" onkeypress="typehead = 'service'; nextfield='saveservice';">
+#foreach($service in $services)
+<option value='$service.id'>$service.node</option>
+#end						
+<option value=''></option>
+</select>
+

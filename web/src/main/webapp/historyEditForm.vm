@@ -1,0 +1,205 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse("myjs.vm")
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addhistory').innerHTML=''" value=' X '>  
+Edit Medical History </div>
+<br>
+<div id='msg'><input type='hidden' name='id' value='$!history.id' size='15'></div>
+<form id='historyForm'  name='historyForm' action='historyUpdate.action'  method='POST'>
+<table>
+<tr class='formlabel'>
+  <td colspan="6"><strong>$i18n.get('client'):</strong></td>
+  </tr>
+<tr class='formlabel'>
+  <td colspan="6"><hr></td>
+  </tr>
+<tr class='formlabel'>
+			<td width="129">$i18n.get('name'):</td>
+			<td colspan="5">$history.client.node ($history.client.sex, $history.client.age)		    </td>
+	  </tr>
+<tr class='formlabel'>
+  <td>$i18n.get('address'):</td>
+  <td colspan="3">$history.client.address $history.client.ward.node, $history.client.ward.district.node</td>
+  <td width="131">&nbsp;</td>
+  <td width="91">&nbsp;</td>
+</tr>
+<tr class='formlabel'>
+  <td><strong>$i18n.get('family'): </strong></td>
+  <td width="110">&nbsp;</td>
+  <td width="160">&nbsp;</td>
+  <td width="97">&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class='formlabel'>
+  <td colspan="6"><hr></td>
+  </tr>
+<tr class='formlabel'>
+  <td>$i18n.get('father'):</td>
+  <td><input type='text' id='father' name='father' value='$!history.father' size='15'  onKeyPress="formname='historyForm'; nextfield='mother';"></td>
+  <td>$i18n.get('mother'):</td>
+  <td><input type='text' id='mother' name='mother' value='$!history.mother' size='15'  onKeyPress="formname='historyForm'; nextfield='sibling';"></td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class='formlabel'>
+		<td>$i18n.get('sibling'): </td> 
+		<td><input type='text' id='sibling' name='sibling' value='$!history.sibling' size='15'  onkeypress="formname='historyForm'; nextfield='partner';"> </td>
+			
+		<td>$i18n.get('partner'): </td> 
+		<td><input type='text' id='partner' name='partner' value='$!history.partner' size='15'  onkeypress="formname='historyForm'; nextfield='offspring';"> </td>
+			
+		<td>$i18n.get('offspring'): </td> 
+		<td><input type='text' id='offspring' name='offspring' value='$!history.offspring' size='15'  onkeypress="formname='historyForm'; nextfield='cancer';"> </td>
+	  </tr>
+<tr class='formlabel'>
+  <td colspan="2"><strong>$i18n.get('history'):</strong></td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class='formlabel'>
+  <td colspan="6"><hr></td>
+  </tr>
+<tr class='formlabel'>
+		<td>$i18n.get('cancer'): </td> <td><input type='text' id='cancer' name='cancer' value='$!history.cancer' size='15'  onkeypress="formname='historyForm'; nextfield='tuberculosis';"> </td>
+			
+		<td>$i18n.get('tuberculosis'): </td> <td><input type='text' id='tuberculosis' name='tuberculosis' value='$!history.tuberculosis' size='15'  onkeypress="formname='historyForm'; nextfield='diabetes';"> </td>
+			
+		<td>$i18n.get('diabetes'): </td> <td><input type='text' id='diabetes' name='diabetes' value='$!history.diabetes' size='15'  onkeypress="formname='historyForm'; nextfield='highbloodpressure';"> </td>
+			</tr><tr class='formlabel'>
+			<td>$i18n.get('highbloodpressure'): </td> <td><input type='text' id='highbloodpressure' name='highbloodpressure' value='$!history.highbloodpressure' size='15'  onkeypress="formname='historyForm'; nextfield='heartproblem';"> </td>
+			
+			<td>$i18n.get('heartproblem'):</td> <td><input type='text' id='heartproblem' name='heartproblem' value='$!history.heartproblem' size='15'  onkeypress="formname='historyForm'; nextfield='stroke';"> </td>
+			
+			<td>$i18n.get('stroke'): </td> <td><input type='text' id='stroke' name='stroke' value='$!history.stroke' size='15'  onkeypress="formname='historyForm'; nextfield='epilepsi';"> </td>
+			</tr><tr class='formlabel'>
+			<td>$i18n.get('epilepsi'): </td> <td><input type='text' id='epilepsi' name='epilepsi' value='$!history.epilepsi' size='15'  onkeypress="formname='historyForm'; nextfield='mentalillness';"> </td>
+			
+			<td>$i18n.get('mentalillness'):</td> <td><input type='text' id='mentalillness' name='mentalillness' value='$!history.mentalillness' size='15'  onkeypress="formname='historyForm'; nextfield='sucide';"> </td>
+			
+			<td>$i18n.get('sucide'): </td> <td><input type='text' id='sucide' name='sucide' value='$!history.sucide' size='15'  onkeypress="formname='historyForm'; nextfield='breastexamdate';"> </td>
+			</tr>
+			<tr class='formlabel'>
+			  <td><strong>$i18n.get('exam'): </strong></td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="6"><hr></td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td>$i18n.get('gyn')</td>
+			  <td>$i18n.get('date') </td>
+			  <td>$i18n.get('result')</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+				#if($!history.breastexamdate)
+					#set($ngay = "$history.breastexamdate")
+					#set($ngay = "$ngay.substring(8,10)/$ngay.substring(5,7)/$ngay.substring(0,4)")
+				#end
+			<td>$i18n.get('breast')</td> 
+			<td>
+			<input type='text'  id='breastexamdate' name='breastexamdate' value="#if($!history.breastexamdate)$dateTool.format('dd/MM/yyyy',$!history.breastexamdate)#end" size='15' onblur='getSmartDate(this)' onKeyPress="formname='historyForm'; nextfield='breastexamresult';" >
+			<img src='images/calendar_icon.gif' id='triggerbreastexamdate'>			</td>
+			
+			<td>
+			<input type='text' id='breastexamresult' name='breastexamresult' value='$!history.breastexamresult' size='15' onKeyPress="formname='historyForm'; nextfield='cadiacechodate';">			</td> 
+			<td>&nbsp;</td>
+			
+				#if($!history.cadiacechodate)
+					#set($ngay = "$history.cadiacechodate")
+					#set($ngay = "$ngay.substring(8,10)/$ngay.substring(5,7)/$ngay.substring(0,4)")
+				#end
+			<td></td> 
+			<td>&nbsp;</td>
+			</tr>
+			<tr class='formlabel'>
+			  <td>$i18n.get('cadiacecho')</td>
+			  <td><input type='text'  id='cadiacechodate' name='cadiacechodate' value="#if($!history.cadiacechodate)$dateTool.format('dd/MM/yyyy',$!history.cadiacechodate)#end" size='15' onBlur='getSmartDate(this)' onKeyPress="formname='historyForm'; nextfield='cadiacechoresult';" >
+                <img src='images/calendar_icon.gif' id='triggercadiacechodate'> </td>
+			  <td><input type='text' id='cadiacechoresult' name='cadiacechoresult' value='$!history.cadiacechoresult' size='15' onKeyPress="formname='historyForm'; nextfield='gynexamdate';"></td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			<td>$i18n.get('gyn')</td> 
+			<td><input type='text'  id='gynexamdate' name='gynexamdate' value="#if($!history.gynexamdate)$dateTool.format('dd/MM/yyyy',$!history.gynexamdate)#end" size='15' onBlur='getSmartDate(this)' onKeyPress="formname='historyForm'; nextfield='gynexamresult';" >
+              <img src='images/calendar_icon.gif' id='triggergynexamdate'> </td>
+			
+				#if($!history.gynexamdate)
+					#set($ngay = "$history.gynexamdate")
+					#set($ngay = "$ngay.substring(8,10)/$ngay.substring(5,7)/$ngay.substring(0,4)")
+				#end
+			<td>
+			  <input type='text' id='gynexamresult' name='gynexamresult' value='$!history.gynexamresult' size='15' onKeyPress="formname='historyForm'; nextfield='prostateexamdate';">			</td> 
+			<td>&nbsp;</td>
+			
+			<td></td> <td>&nbsp;</td>
+			</tr><tr class='formlabel'>
+				#if($!history.prostateexamdate)
+					#set($ngay = "$history.prostateexamdate")
+					#set($ngay = "$ngay.substring(8,10)/$ngay.substring(5,7)/$ngay.substring(0,4)")
+				#end
+			<td>$i18n.get('prostate')</td> 
+			<td>
+			<input type='text'  id='prostateexamdate' name='prostateexamdate' value="#if($!history.prostateexamdate)$dateTool.format('dd/MM/yyyy',$!history.prostateexamdate)#end" size='15' onblur='getSmartDate(this)' onKeyPress="formname='historyForm'; nextfield='prostateexamresult';" >
+			<img src='images/calendar_icon.gif' id='triggerprostateexamdate'>			</td>
+			
+			<td>
+			  <input type='text' id='prostateexamresult' name='prostateexamresult' value='$!history.prostateexamresult' size='15' onKeyPress="formname='historyForm'; nextfield='rectalexamdate';">			</td> <td>&nbsp;</td>
+			
+				#if($!history.rectalexamdate)
+					#set($ngay = "$history.rectalexamdate")
+					#set($ngay = "$ngay.substring(8,10)/$ngay.substring(5,7)/$ngay.substring(0,4)")
+				#end
+			<td></td> 
+			<td>&nbsp;</td>
+			</tr>
+			<tr class='formlabel'>
+			  <td>$i18n.get('rectal')</td>
+			  <td><input type='text'  id='rectalexamdate' name='rectalexamdate' value="#if($history.rectalexamdate)$dateTool.format('dd/MM/yyyy',$!history.rectalexamdate)#end" size='15' onBlur='getSmartDate(this)' onKeyPress="formname='historyForm'; nextfield='rectalexamresult';" >
+                <img src='images/calendar_icon.gif' id='triggerrectalexamdate'> </td>
+			  <td><input type='text' id='rectalexamresult' name='rectalexamresult' value='$!history.rectalexamresult' size='15' onKeyPress="formname='historyForm'; nextfield='sigmoiddate';"></td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			<td>$i18n.get('sigmoid')</td> 
+			<td><input type='text'  id='sigmoiddate' name='sigmoiddate' value="#if($!history.sigmoiddate)$dateTool.format('dd/MM/yyyy',$!history.sigmoiddate)#end" size='15' onBlur='getSmartDate(this)' onKeyPress="formname='historyForm'; nextfield='sigmoidresult';" >
+              <img src='images/calendar_icon.gif' id='triggersigmoiddate'> </td>
+
+			<td>
+			  <input type='text' id='sigmoidresult' name='sigmoidresult' value='$!history.sigmoidresult' size='15' onKeyPress="formname='historyForm'; nextfield='updatehistory';">			</td> 
+			<td>&nbsp;</td>
+			
+			<td></td> <td>&nbsp;</td>
+			</tr>
+
+<tr><td colspan='6'>
+<input id='updatehistory' type='button' value="  Save  " onKeyDown="javascript: validateHistory('edit', document.getElementById('historyForm') )" onClick="javascript: validateHistory('edit', document.getElementById('historyForm') )" onKeyPress="formname='historyForm'; nextfield = '';">
+
+
+&nbsp;
+
+</td></tr>
+</table>
+</form>
+</div>
+</body>

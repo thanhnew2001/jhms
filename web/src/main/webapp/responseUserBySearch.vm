@@ -1,0 +1,71 @@
+
+<form name='userForm' action='userAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('password')</th>	
+	
+	<th>$i18n.get('position')</th>	
+	
+	<th>$i18n.get('fullname')</th>	
+	
+	<th>$i18n.get('phone')</th>	
+	
+	<th>$i18n.get('cellphone')</th>	
+	
+	<th>$i18n.get('email')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineadduser' style='display:none;'>
+<th><input type='button' id='saveuser' value="  $i18n.get('save')  " onclick="javascript:validateUser('add')" onkeypress="nextfield='';"></th>
+<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlineuserForm'; nextfield='password';"> </th><th> <input type='text'  id='password' name='password' size='8' value='' onkeypress="formname='inlineuserForm'; nextfield='position';"> </th><th> <select id='position' name='position' onkeypress=" formname='inlineuserForm';nextfield='fullname';"> <option value=BS>BS</option><option value= GD> GD</option><option value= NV> NV</option> </select> </th><th> <input type='text'  id='fullname' name='fullname' size='8' value='' onkeypress="formname='inlineuserForm'; nextfield='phone';"> </th><th> <input type='text'  id='phone' name='phone' size='8' value='' onkeypress="formname='inlineuserForm'; nextfield='cellphone';"> </th><th> <input type='text'  id='cellphone' name='cellphone' size='8' value='' onkeypress="formname='inlineuserForm'; nextfield='email';"> </th><th> <input type='text'  id='email' name='email' size='8' value='' onkeypress="formname='inlineuserForm'; nextfield='saveuser';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($user in $users)
+	#if($user.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddUser($user.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddUser($user.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='userDelete.action?id=$user.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('userView.action?id=$user.id', 'View user', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuuser$user.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuuser$user.id').style.display='none'"  value='>>' >  
+	
+	<div id='menuuser$user.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+		 <a href='javascript:makeGetRequestUserroleByUser($user.id)'> userrole </a> &nbsp;
+		 <br>
+		
+	</div>
+	</td>
+	
+		
+		<td>$!user.node</td>
+		
+		<td>$!user.password</td>
+		
+		<td>$!user.position</td>
+		
+		<td>$!user.fullname</td>
+		
+		<td>$!user.phone</td>
+		
+		<td>$!user.cellphone</td>
+		
+		<td>$!user.email</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

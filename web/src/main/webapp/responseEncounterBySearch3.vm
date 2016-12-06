@@ -1,0 +1,241 @@
+
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addencounter'></div>
+<div id='divPrescriptiondetail'> </div><div id='divIndicationdetail'> </div>
+<br>
+<div id='divEncounter'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divEncounter').innerHTML=''" value=' X '>  
+$i18n.get('encounterlist')  
+</div>
+<br>
+<div>
+<select id='comboencounter' name='comboencounter'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='client'>$i18n.get('client')</option>
+	
+	<option value='insurancenumber'>$i18n.get('insurancenumber')</option>
+	
+	<option value='joineddate'>$i18n.get('joineddate')</option>
+	
+	<option value='expireddate'>$i18n.get('expireddate')</option>
+	
+	<option value='code'>$i18n.get('code')</option>
+	
+	<option value='date'>$i18n.get('date')</option>
+	
+	<option value='time'>$i18n.get('time')</option>
+	
+	<option value='reference'>$i18n.get('reference')</option>
+	
+	<option value='room'>$i18n.get('room')</option>
+	
+	<option value='hospital'>$i18n.get('hospital')</option>
+	
+	<option value='initialdiagnosis'>$i18n.get('initialdiagnosis')</option>
+	
+	<option value='icd'>$i18n.get('icd')</option>
+	
+	<option value='solving'>$i18n.get('solving')</option>
+	
+	<option value='advise'>$i18n.get('advise')</option>
+	
+	<option value='revisit'>$i18n.get('revisit')</option>
+	
+	<option value='revisitdate'>$i18n.get('revisitdate')</option>
+	
+	<option value='prescriptiontemplate'>$i18n.get('prescriptiontemplate')</option>
+	
+	<option value='totalamount'>$i18n.get('totalamount')</option>
+	
+	<option value='insurancepay'>$i18n.get('insurancepay')</option>
+	
+	<option value='paidamount'>$i18n.get('paidamount')</option>
+	
+	<option value='leftamount'>$i18n.get('leftamount')</option>
+	
+	<option value='paid'>$i18n.get('paid')</option>
+	
+	<option value='user'>$i18n.get('user')</option>
+	
+	<option value='node'>$i18n.get('note')</option>
+	
+</select>
+<input name='searchencounter' id='searchencounter' onkeyup='makeGetRequestEncounterBySearch()' value='' onclick='clearSearchBox(searchencounter)'>
+Search  or Filter
+
+
+				<input type='text' id='filterdate' name='filterdate' value='$today'>				
+				
+		<select id='filtersolving' name='filtersolving'>
+			#foreach($solving in $solvings)
+				<option value='$solving.id'>$solving.node</option>
+			#end
+		</select>	
+		
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestEncounterByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddEncounter(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tableencounter' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineencounterForm' name='inlineencounterForm' action='encounterAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('client')</th>	
+	
+	<th>$i18n.get('insurancenumber')</th>	
+	
+	<th>$i18n.get('joineddate')</th>	
+	
+	<th>$i18n.get('expireddate')</th>	
+	
+	<th>$i18n.get('code')</th>	
+	
+	<th>$i18n.get('date')</th>	
+	
+	<th>$i18n.get('time')</th>	
+	
+	<th>$i18n.get('reference')</th>	
+	
+	<th>$i18n.get('room')</th>	
+	
+	<th>$i18n.get('hospital')</th>	
+	
+	<th>$i18n.get('initialdiagnosis')</th>	
+	
+	<th>$i18n.get('icd')</th>	
+	
+	<th>$i18n.get('solving')</th>	
+	
+	<th>$i18n.get('advise')</th>	
+	
+	<th>$i18n.get('revisit')</th>	
+	
+	<th>$i18n.get('revisitdate')</th>	
+	
+	<th>$i18n.get('prescriptiontemplate')</th>	
+	
+	<th>$i18n.get('totalamount')</th>	
+	
+	<th>$i18n.get('insurancepay')</th>	
+	
+	<th>$i18n.get('paidamount')</th>	
+	
+	<th>$i18n.get('leftamount')</th>	
+	
+	<th>$i18n.get('paid')</th>	
+	
+	<th>$i18n.get('user')</th>	
+	
+	<th>$i18n.get('note')</th>	
+	
+</tr>
+
+
+
+</theader>
+<tbody>
+#foreach($encounter in $encounters)
+	#if($encounter.id)
+	<tr class='tableitem' id='tr$encounter.id' onDblClick="javascript:makeGetRequestAddEncounter($encounter.id, 'edit')">
+	<td id='td$encounter.id'>
+	<a href="javascript:makeGetRequestAddEncounter($encounter.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('encounterDelete.action?id=$encounter.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$encounter.id').style.background ='#CCCCCC'; document.getElementById('td$encounter.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('encounterView.action?id=$encounter.id', 'View encounter', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuencounter$encounter.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuencounter$encounter.id').style.display='none'"  value='>>' >  	
+
+	<div id='menuencounter$encounter.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+		 <a href='javascript:makeGetRequestPrescriptiondetailByEncounter($encounter.id)'> prescriptiondetail </a> &nbsp;
+		 <br>
+		
+		 <a href='javascript:makeGetRequestIndicationdetailByEncounter($encounter.id)'> indicationdetail </a> &nbsp;
+		 <br>
+		
+		 <a href='javascript:makeGetRequestReceiptByEncounter($encounter.id)'> receipt </a> &nbsp;
+		 <br>
+		
+		 <a href='javascript:makeGetRequestDruginvoiceByEncounter($encounter.id)'> druginvoice </a> &nbsp;
+		 <br>
+		
+	</div>
+	
+	</td>	
+		
+		<td>$!encounter.client.node</td>
+		
+		<td>$!encounter.insurancenumber</td>
+		
+		<td>$!encounter.joineddate</td>
+		
+		<td>$!encounter.expireddate</td>
+		
+		<td>$!encounter.code</td>
+		
+		<td>$!encounter.date</td>
+		
+		<td>$!encounter.time</td>
+		
+		<td>$!encounter.reference</td>
+		
+		<td>$!encounter.room.node</td>
+		
+		<td>$!encounter.hospital.node</td>
+		
+		<td>$!encounter.initialdiagnosis</td>
+		
+		<td>$!encounter.icd.node</td>
+		
+		<td>$!encounter.solving.node</td>
+		
+		<td>$!encounter.advise</td>
+		
+		<td>$!encounter.revisit</td>
+		
+		<td>$!encounter.revisitdate</td>
+		
+		<td>$!encounter.prescriptiontemplate.node</td>
+		
+		<td>$!encounter.totalamount</td>
+		
+		<td>$!encounter.insurancepay</td>
+		
+		<td>$!encounter.paidamount</td>
+		
+		<td>$!encounter.leftamount</td>
+		
+		<td>$!encounter.paid</td>
+		
+		<td>$!encounter.user.node</td>
+		
+		<td>$!encounter.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddEncounter(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

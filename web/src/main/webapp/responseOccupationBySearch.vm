@@ -1,0 +1,44 @@
+
+<form name='occupationForm' action='occupationAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddoccupation' style='display:none;'>
+<th><input type='button' id='saveoccupation' value="  $i18n.get('save')  " onclick="javascript:validateOccupation('add')" onkeypress="nextfield='';"></th>
+<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlineoccupationForm'; nextfield='saveoccupation';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($occupation in $occupations)
+	#if($occupation.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddOccupation($occupation.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddOccupation($occupation.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='occupationDelete.action?id=$occupation.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('occupationView.action?id=$occupation.id', 'View occupation', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuoccupation$occupation.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuoccupation$occupation.id').style.display='none'"  value='>>' >  
+	
+	<div id='menuoccupation$occupation.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!occupation.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

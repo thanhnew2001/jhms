@@ -1,0 +1,4 @@
+
+#foreach($history in $historys)
+	$history.id
+#end

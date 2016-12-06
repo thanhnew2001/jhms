@@ -1,0 +1,7 @@
+
+<select name='cbouser' id='cbouser' multiple='multiple' onkeypress="typehead = 'user'; nextfield='saveuser';" onclick="selectuser(this.value, this.options[selectedIndex].text)">
+#foreach($user in $users)
+<option value='$user.id'>$user.node</option>
+#end						
+</select>
+

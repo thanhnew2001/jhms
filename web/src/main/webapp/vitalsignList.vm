@@ -1,0 +1,132 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addvitalsign'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divVitalsign'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divVitalsign').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('vitalsign')  
+</div>
+<br>
+<div>
+<select id='combovitalsign' name='combovitalsign'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='encounter'>$i18n.get('encounter')</option>
+	
+	<option value='time'>$i18n.get('time')</option>
+	
+	<option value='pulse'>$i18n.get('pulse')</option>
+	
+	<option value='pressureh'>$i18n.get('pressureh')</option>
+	
+	<option value='pressurel'>$i18n.get('pressurel')</option>
+	
+	<option value='temparature'>$i18n.get('temparature')</option>
+	
+	<option value='breath'>$i18n.get('breath')</option>
+	
+</select>
+<input name='searchvitalsign' id='searchvitalsign' onkeyup='makeGetRequestVitalsignBySearch()' value='' onclick='clearSearchBox(searchvitalsign)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestVitalsignByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddVitalsign(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tablevitalsign' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlinevitalsignForm' name='inlinevitalsignForm' action='vitalsignAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('encounter')</th>	
+	
+	<th>$i18n.get('time')</th>	
+	
+	<th>$i18n.get('pulse')</th>	
+	
+	<th>$i18n.get('pressureh')</th>	
+	
+	<th>$i18n.get('pressurel')</th>	
+	
+	<th>$i18n.get('temparature')</th>	
+	
+	<th>$i18n.get('breath')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddvitalsign' style='display:none;'>
+<th><input type='button' id='savevitalsign' value="  $i18n.get('save')  " onkeydown="javascript:validateVitalsign('add', document.getElementById('inlinevitalsignForm') )"  onclick="javascript:validateVitalsign('add', document.getElementById('inlinevitalsignForm') )" onkeypress="nextfield='';">
+</th>
+
+
+			#set ($ses = $req.getSession())					
+			#set ($encounter_id = $ses.getAttribute('encounter_id'))
+			#set ($encounter_node = $ses.getAttribute('encounter_node'))
+		<th>
+			<input type='hidden' id='encounter' name='encounter'  size='1' value='$!encounter_id' onchange='makeGetRequestEncounterByTypeHead()' onkeypress="formname='inlinevitalsignForm'; nextfield='textencounter';"> 
+			
+			<input type='text' id='textencounter' name='textencounter' size='18' value='$!encounter_node' onkeypress="formname='inlinevitalsignForm'; nextfield='cboencounter';"  onkeyup='makeGetRequestEncounterByTypeHead()' onclick='makeGetRequestEncounterByTypeHead()'>	
+			
+			<div id='divencounter' style='display:none;position:absolute'  onkeypress="formname='inlinevitalsignForm'; nextfield='time';"></div>				
+		 </th>		
+		<th> <input type='text'  id='time' name='time' size='8' value='' onkeypress="formname='inlinevitalsignForm'; nextfield='pulse';"> </th><th> <input type='text'  id='pulse' name='pulse' size='8' value='' onkeypress="formname='inlinevitalsignForm'; nextfield='pressureh';"> </th><th> <input type='text'  id='pressureh' name='pressureh' size='8' value='' onkeypress="formname='inlinevitalsignForm'; nextfield='pressurel';"> </th><th> <input type='text'  id='pressurel' name='pressurel' size='8' value='' onkeypress="formname='inlinevitalsignForm'; nextfield='temparature';"> </th><th> <input type='text'  id='temparature' name='temparature' size='8' value='' onkeypress="formname='inlinevitalsignForm'; nextfield='breath';"> </th><th> <input type='text'  id='breath' name='breath' size='8' value='' onkeypress="formname='inlinevitalsignForm'; nextfield='savevitalsign';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($vitalsign in $vitalsigns)
+	#if($vitalsign.id)
+	<tr class='tableitem' id='tr$vitalsign.id' onDblClick="javascript:makeGetRequestAddVitalsign($vitalsign.id, 'edit')">
+	<td id='td$vitalsign.id'>
+	<a href="javascript:makeGetRequestAddVitalsign($vitalsign.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('vitalsignDelete.action?id=$vitalsign.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$vitalsign.id').style.background ='#CCCCCC'; document.getElementById('td$vitalsign.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('vitalsignView.action?id=$vitalsign.id', 'View vitalsign', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+		
+	</td>	
+		
+		<td>$!vitalsign.encounter.node</td>
+		
+		<td>$!vitalsign.time</td>
+		
+		<td>$!vitalsign.pulse</td>
+		
+		<td>$!vitalsign.pressureh</td>
+		
+		<td>$!vitalsign.pressurel</td>
+		
+		<td>$!vitalsign.temparature</td>
+		
+		<td>$!vitalsign.breath</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddVitalsign(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

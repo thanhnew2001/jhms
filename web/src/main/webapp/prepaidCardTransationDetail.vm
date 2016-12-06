@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+
+<p>#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+</p>
+<p>#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') ) </p>
+<h2>M&atilde; s&#7889; th&#7867;: $!prepaidCard </h2>
+<p><strong>- C&aacute;c d&#7883;ch v&#7909; &#273;&atilde; s&#7917; d&#7909;ng:</strong></p>
+<table border="1">
+<tr class='tableheader'>
+<td>STT</td>
+<td>MS phi&#7871;u </td>
+<td>Kh&aacute;ch h&agrave;ng </td>
+<td>Ng&agrave;y</td>
+<td>T&ecirc;n d&#7883;ch v&#7909; </td>
+
+<td>&#272;&#417;n gi&aacute; </td>
+
+<td>%Gi&#7843;m gi&aacute; </td>
+<td>Th&agrave;nh ti&#7873;n </td>
+#set($i=0)
+#foreach($receipt in $receipts)
+#foreach($rd in $receipt.receiptdetails)
+#set($i=$i+1)
+<tr>
+  <td>$i</td>
+  <td>$!receipt.code</td>
+  <td>$!receipt.encounter.client.node</td>
+  <td>$!dateTool.format('dd/MM/yyyy',$!receipt.date)</td>
+  <td>$!rd.service.node</td>
+  <td>$!rd.price</td>
+  <td>$!rd.percentdiscount</td>
+  <td>$numberTool.format('integer' , $!rd.subtotal)</td>
+<tr>
+#end
+#end
+</table>
+<p><strong>- C&aacute;c &#273;&#417;n thu&#7889;c &#273;&atilde; tr&#7843;:</strong></p>
+<table border="1">
+<tr class='tableheader'>
+<td>STT</td>
+<td>MS phi&#7871;u </td>
+<td>Kh&aacute;ch h&agrave;ng </td>
+<td>Ng&agrave;y</td>
+<td>T&ecirc;n thu&#7889;c </td>
+
+<td>S&#7889; l&#432;&#7907;ng </td>
+<td>&#272;&#417;n gi&aacute; </td>
+
+<td>Th&agrave;nh ti&#7873;n </td>
+#set($i=0)
+#foreach($druginvoice in $druginvoices)
+#foreach($dd in $druginvoice.druginvoicedetails)
+#set($i=$i+1)
+<tr>
+  <td>$i</td>
+  <td>$!druginvoice.code</td>
+  <td>$!druginvoice.encounter.client.node</td>
+  <td>$!dateTool.format('dd/MM/yyyy',$!druginvoice.date)</td>
+  <td>$!dd.drug.node</td>
+  <td>$!dd.quantity</td>
+  <td>$!dd.price</td>
+  <td>$numberTool.format('integer' , $!dd.subtotal)</td>
+<tr>
+#end
+#end
+</table>
+
+<p><strong>Gi&aacute; tr&#7883; th&#7867;:&nbsp; 500,000 VND</strong></p>
+<p><strong>T&#7893;ng c&#7897;ng chi: $numberTool.format('integer' ,  $totalPaid)  </strong></p>
+<p><strong>C&ograve;n l&#7841;i: $numberTool.format('integer' ,  $remain)  </strong></p>
+#if($remain<0)
+<h2>TH&#7866; H&#7870;T GI&Aacute; TR&#7882; S&#7916; D&#7908;NG </h2>
+#end
+<p><em>(S&#7889; &acirc;m ngh&#297;a l&agrave; ti&#7873;n kh&aacute;ch h&agrave;ng ph&#7843;i tr&#7843; th&ecirc;m)</em></p>

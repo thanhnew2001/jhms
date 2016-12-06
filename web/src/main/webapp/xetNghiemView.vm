@@ -1,0 +1,191 @@
+<style type="text/css">
+<!--
+.style1 {
+	font-family: Tahoma;
+	font-weight: bold;
+}
+.style2 {font-family: Tahoma}
+.style13 {font-size: 14px}
+-->
+</style>
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+var http = createRequestObject();
+
+var d = new Date();
+var dstring = d.getMonth()+1 +'/'+ d.getDate()+'/'+d.getFullYear();
+function createRequestObject() {
+    var tmpXmlHttpObject;
+    if (window.XMLHttpRequest) { 
+        tmpXmlHttpObject = new XMLHttpRequest();
+    } else if (window.ActiveXObject) { 
+        tmpXmlHttpObject = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+ 
+    return tmpXmlHttpObject;
+}
+
+var g_indicationdetail;
+	
+function saveValue(id, value, ctl)
+{
+	//g_indicationdetail = id;
+	
+	g_indicationdetail = ctl;
+
+	var url = 'id='+ id +'&result='+ value ;
+	http.open('get', 'xetNghiemSave.action?'+url);
+	http.onreadystatechange = processSaveValue; 
+
+	http.send(null);
+}
+
+function processSaveValue()
+{
+	if (http.readyState == 4)
+	{
+		var response = http.responseText;
+		if (response=='1')
+		{			
+			g_indicationdetail.style.background = '#0099FF';
+		}
+		else
+		{
+			g_indicationdetail.style.background = 'red';
+		}	
+	}
+}
+
+</script>
+<script>
+
+function saveValue2(id, value)
+{
+
+	var url = 'id='+ id +'&result='+ value ;
+	
+	document.forms[0].action = 'xetNghiemSave.action?'+url;
+	document.forms[0].submit();
+	
+}
+
+</script>
+<div id='header'>
+  
+  
+</div>
+<form id='form1' action='xetNghiemSave.action' method='POST'>
+<h2 align="center">PHI&#7870;U K&#7870;T QU&#7842; X&Eacute;T NGHI&#7878;M </h2>
+<div class='pageheader'><strong> $i18n.get('clientEncounter')</strong></div>
+<table width="100%" border="0">
+  <tr>
+    <td width="15%"><strong>$i18n.get('node'): </strong></td>
+    <td width="35%">$!encounter.client.node</td>
+    <td width="10%"><strong>$i18n.get('age'):</strong></td>
+    <td width="10%">$encounter.client.age</td>
+    <td width="10%"><strong>$i18n.get('sex'):</strong></td>
+    <td width="20%">$!encounter.client.sex</td>
+  </tr>
+  <tr>
+    <td><strong>$i18n.get('address'): </strong></td>
+    <td>$!encounter.client.address,$!encounter.client.ward.node</td>
+    <td><strong>$i18n.get('subclinical'):</strong></td>
+    <td colspan="3">$!encounter.initialdiagnosis</td>
+    </tr>
+  <tr>
+    <td><strong>$i18n.get('doctorindicated')</strong> </td>
+    <td>$!encounter.user.fullname</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><strong>M&aacute;y X&eacute;t Nghi&#7879;m:</strong></td>
+    <td>&nbsp;</td>
+    <td colspan="3">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td colspan="3">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bordercolor="#000000">
+
+	<tr>
+	<td style="border-bottom:double;border-bottom-color:#000000">&nbsp;</td>
+	  
+	  <td style="border-bottom:double;border-bottom-color:#000000"><span class="style1">$i18n.get('servicename')</span></td>
+	  <td colspan="2" style="border-bottom:double;border-bottom-color:#000000"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+      K&#7871;t qu&#7843;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Tr&#7883; s&#7889;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &#272;&#417;n v&#7883;</strong></td>
+	</tr>
+
+#set ($ses = $req.getSession())					
+#set ($department = $ses.getAttribute('selecteddepartment'))
+
+#set($flag = 0)
+#foreach($indicationdetail in $encounter.indicationdetails)
+#if($indicationdetail.service.servicegroup.id == $group.id && $indicationdetail.service.department.id == $department.id)
+	#set($flag = $flag + 1)
+#end
+#end
+
+#foreach($group in $serviceGroups)
+#if($indicationdetai.service.servicegroup.id==$group.id)
+<tr>
+  <td>&nbsp;</td>
+  <td colspan="3"><span class="style2"><strong>$group.node</strong></span></td>
+</tr>
+<tr>
+	<td><span class="style2"></span></td>
+	<td colspan="3"><span class="style2"><strong>$indicationdetai.service.servicegroup.node</strong></span></td>
+</tr>
+#end
+#foreach($indicationdetail in $encounter.indicationdetails)
+#if($indicationdetail.service.servicegroup.id == $group.id && $indicationdetail.service.department.id == $department.id)
+
+	
+	<tr valign="top">
+	<td width="11%">&nbsp;</td>
+
+	<td width="35%"><span class="style2">- <strong>$!indicationdetail.service.node</strong></span></td>
+	<td width="45%" ><span class="style2">$!indicationdetail.result</span></td>
+	<td width="9%" >&nbsp;</td>
+	</tr>
+	
+#end
+#end
+#end
+
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><div align="center">
+  <p><span class="style13">  #set($ses = $req.getSession())
+			#set($user = $ses.getAttribute('user'))<br>
+  Ng&agrave;y ...$!dateTool.format('dd/MM/yyyy',$!encounter.date)...</span><br>
+    <em><strong>Ng&#432;&#7901;i X&eacute;t Nghi&#7879;m </strong></em>  </p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p><span class="style13"><strong>$!indicationdetail.user.fullname</strong></span></p>
+</div></td>
+<td>&nbsp;</td>
+</tr>
+</table>
+<br>
+<br>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+</form>

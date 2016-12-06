@@ -1,0 +1,108 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addroom'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divRoom'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divRoom').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('room')  
+</div>
+<br>
+<div>
+<select id='comboroom' name='comboroom'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='node'>$i18n.get('node')</option>
+	
+	<option value='department'>$i18n.get('department')</option>
+	
+	<option value='doctor'>$i18n.get('doctor')</option>
+	
+</select>
+<input name='searchroom' id='searchroom' onkeyup='makeGetRequestRoomBySearch()' value='' onclick='clearSearchBox(searchroom)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestRoomByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddRoom(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tableroom' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineroomForm' name='inlineroomForm' action='roomAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('department')</th>	
+	
+	<th>$i18n.get('doctor')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddroom' style='display:none;'>
+<th><input type='button' id='saveroom' value="  $i18n.get('save')  " onkeydown="javascript:validateRoom('add', document.getElementById('inlineroomForm') )"  onclick="javascript:validateRoom('add', document.getElementById('inlineroomForm') )" onkeypress="nextfield='';">
+</th>
+
+<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlineroomForm'; nextfield='textdepartment';"> </th>
+			#set ($ses = $req.getSession())					
+			#set ($department_id = $ses.getAttribute('department_id'))
+			#set ($department_node = $ses.getAttribute('department_node'))
+		<th>
+			<input type='hidden' id='department' name='department'  size='1' value='$!department_id' onchange='makeGetRequestDepartmentByTypeHead()' onkeypress="formname='inlineroomForm'; nextfield='textdepartment';"> 
+			
+			<input type='text' id='textdepartment' name='textdepartment' size='18' value='$!department_node' onkeypress="formname='inlineroomForm'; nextfield='cbodepartment';"  onkeyup='makeGetRequestDepartmentByTypeHead()' onclick='makeGetRequestDepartmentByTypeHead()'>	
+			
+			<div id='divdepartment' style='display:none;position:absolute'  onkeypress="formname='inlineroomForm'; nextfield='doctor';"></div>				
+		 </th>		
+		<th> <input type='text'  id='doctor' name='doctor' size='8' value='' onkeypress="formname='inlineroomForm'; nextfield='saveroom';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($room in $rooms)
+	#if($room.id)
+	<tr class='tableitem' id='tr$room.id' onDblClick="javascript:makeGetRequestAddRoom($room.id, 'edit')">
+	<td id='td$room.id'>
+	<a href="javascript:makeGetRequestAddRoom($room.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('roomDelete.action?id=$room.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$room.id').style.background ='#CCCCCC'; document.getElementById('td$room.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('roomView.action?id=$room.id', 'View room', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+		
+	</td>	
+		
+		<td>$!room.node</td>
+		
+		<td>$!room.department.node</td>
+		
+		<td>$!room.doctor</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddRoom(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

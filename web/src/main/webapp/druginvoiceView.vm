@@ -1,0 +1,199 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<div id='header'>
+
+  <p>
+    <input name="button" type="button" onClick=" document.getElementById('header').style.display='block'; document.getElementById('encounter').style.display='block';document.getElementById('container').style.display='none';document.getElementById('printpk').style.display='block';document.getElementById('printcty').style.display='none';document.getElementById('footer').style.display='block';" value="H&oacute;a &#273;&#417;n b&aacute;n l&#7867;" >
+    
+    <input type="button" value="H&oacute;a &#273;&#417;n Cty" onClick="document.getElementById('header').style.display='block'; document.getElementById('encounter').style.display='none';document.getElementById('container').style.display='block';document.getElementById('printcty').style.display='block';document.getElementById('printpk').style.display='none';document.getElementById('footer').style.display='block';">
+    
+    <input type="button" value="In" onClick="document.getElementById('header').style.display='none';window.print();self.close();">
+</p>
+  <p><img src="../barbecue/barcode?data=$!druginvoice.code" width="150" height="50"/> </p>
+  
+  <p>&nbsp;</p>
+</div>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<style type="text/css">
+<!--
+.style4 {
+	font-size: 24px;
+	font-weight: bold;
+}
+-->
+</style>
+
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+<br>
+<div id="encounter" style="display:none">
+	<table width="100%">
+    
+    <tr>
+      <td width="150">C&ocirc;ng ty TNHH M&#7929; T&ugrave;ng <br></td >
+      <td >Ng&agrave;y:$!dateTool.format('dd/MM/yyyy',$!druginvoice.date)</td>
+    </tr>
+    <tr>
+      <td>142 L&ecirc; H&#7891;ng Phong</td >
+      <td>M&atilde; phi&#7871;u: $!druginvoice.code</td>
+    </tr>
+    <tr>
+      <td>Tel: (+84) 08.39240888 </td >
+      <td></td>
+    </tr>
+    <tr>
+      <td >www.pkmytung.com </td >
+      <td></td>
+    </tr>
+    <tr>
+      <td colspan="2" ><hr></td >
+    </tr>
+  </table>
+</div>
+<div id='container' style="display:block">
+	<table width='100%'>
+	<tr> 
+	<td width="50%" >Ph&ograve;ng kh&aacute;m M&#7929; T&ugrave;ng</td >
+	<td width="50%" ><div align="left">Ng&agrave;y:$!dateTool.format('dd/MM/yyyy',$!druginvoice.date)</div></td> 
+	</tr>
+	<tr>
+	  <td>142 L&ecirc; H&#7891;ng Phong</td >
+	  <td><div align="left">S&#7889; H&#272;: $!druginvoice.identity</div></td>
+	  </tr>
+	<tr>
+	  <td>Tel: (+84) 08.39240888</td >
+	  <td><div align="left">M&atilde; phi&#7871;u: $!druginvoice.code</div></td>
+	  </tr>
+	<tr>
+	  <td>www.pkmytung.com</td >
+	  <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+      <td colspan="2" ><hr></td >
+    </tr>
+  </table>
+</div>
+<div id='printpk' style="display:block">
+  <table border="0" width='100%'>
+  <tr>
+    <td></td>
+    </tr>
+  <tr>
+    <td><div align="center"><strong>H&Oacute;A &#272;&#416;N B&Aacute;N L&#7866; </strong></div></td>
+  </tr>
+  <tr>
+    <td><strong>T&ecirc;n kh&aacute;ch h&agrave;ng</strong>: $!druginvoice.node</td>
+    </tr>
+  <tr>
+    <td><strong>&#272;&#7883;a ch&#7881;</strong>: $!druginvoice.address</td>
+    </tr>
+</table>
+<br>
+<table border="1" cellpadding="0" cellspacing="0" width="240">
+  <tr>
+    <td width="15"><strong>STT</strong></td>
+    <td width="100"><strong>T&ecirc;n thu&#7889;c</strong></td>
+    <td width="30"><strong>&#272;V</strong></td>
+    <td width="25"><strong>SL</strong></td>
+    <td width="70"><strong>&#272;G</strong></td>
+    <td ><strong>Th&agrave;nh ti&#7873;n</strong></td>
+  </tr>
+  #set($i=0)
+	#set($total=0)
+	#foreach($druginvoicedetail in $druginvoicedetails)
+	#set($i=$i+1)
+  <tr>
+    <td valign="top">$i / </td>
+    <td valign="top">$!druginvoicedetail.drug.node<strong> L&ocirc;:$!druginvoicedetail.batchnumber</strong> <strong>/ HD:</strong> $!dateTool.format('dd/MM/yyyy',$!druginvoicedetail.expireddate)$!druginvoicedetail.expiredmonth</td>
+    <td valign="top">$!druginvoicedetail.drug.unit</td>
+    <td valign="top">$!druginvoicedetail.quantity</td>
+    <td valign="top">$numberTool.format('integer',$!druginvoicedetail.price)</td>
+    <td valign="top">$numberTool.format('integer',$!druginvoicedetail.subtotal)</td>
+  </tr>
+  
+  #end
+  <tr>
+    <td colspan="5"><div align="center"><strong>T&#7893;ng</strong></div></td>
+    <td><strong>$numberTool.format('integer', $druginvoice.total)</strong></td>
+  </tr>
+  <tr>
+    <td colspan="5"><div align="center"><strong>VAT</strong> (<strong>$numberTool.format('integer', $druginvoice.vat)</strong>%) </div></td>
+    <td><strong>$numberTool.format('integer', $!totalvat)</strong></td>
+  </tr>
+  <tr>
+    <td colspan="5"><div align="center"><strong>T&#7893;ng + VAT </strong>(<strong>$numberTool.format('integer', $druginvoice.vat)</strong>%) </div></td>
+    <td><strong>$numberTool.format('integer', $druginvoice.totalaftertax)</strong></td>
+  </tr>
+</table>
+<br>
+</div>
+<div id='printcty' style="display:none">
+  <table border="0" width='100%'>
+  <tr>
+    <td colspan="2"><div align="center"><strong>PHI&#7870;U GIAO H&Agrave;NG / XU&#7844;T KHO </strong></div></td>
+    </tr>
+  <tr>
+    <td width="100">T&ecirc;n kh&aacute;ch h&agrave;ng: </td>
+    <td width="150">$!druginvoice.node</td>
+  </tr>
+  <tr>
+    <td width="100">&#272;&#7883;a ch&#7881;:</td>
+    <td> $!druginvoice.address</td>
+  </tr>
+</table>
+<br>
+<table border="1" cellpadding="0" cellspacing="0" width='100%'>
+  <tr>
+    <td width="29"><strong>STT</strong></td>
+    <td width="179"><strong>T&ecirc;n thu&#7889;c</strong></td>
+    <td width="170"><strong>Th&agrave;nh ph&#7847;n</strong> </td>
+    <td width="170"><strong>&#272;&#417;n v&#7883; </strong></td>
+    <td width="165"><strong>S&#7889; l&#432;&#7907;ng </strong></td>
+    <td width="54"><strong>H&#7841;n d&ugrave;ng </strong></td>
+    <td width="226"><strong>S&#7889; l&ocirc; </strong></td>
+    <td width="209"><strong>VISA No</strong> </td>
+    <td width="209"><strong>&#272;&#417;n gi&aacute; </strong></td>
+    <td width="245"><strong>T&#7893;ng</strong></td>
+  </tr>
+  #set($i=0)
+	#set($total=0)
+	#foreach($druginvoicedetail in $druginvoice.druginvoicedetails)
+	#set($i=$i+1)
+  <tr>
+    <td valign="top">$i / </td>
+    <td valign="top">$!druginvoicedetail.drug.node</td>
+    <td valign="top">$!druginvoicedetail.drug.ingredient</td>
+    <td valign="top">$!druginvoicedetail.drug.unit</td>
+    <td valign="top">$!druginvoicedetail.quantity</td>
+    <td valign="top"> $!dateTool.format('dd/MM/yyyy',$!druginvoicedetail.expireddate)$!druginvoicedetail.expiredmonth</td>
+    <td valign="top">$!druginvoicedetail.batchnumber</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top">$numberTool.format('integer',$!druginvoicedetail.price)</td>
+    <td valign="top">$numberTool.format('integer',$!druginvoicedetail.subtotal)</td>
+  </tr>
+  
+  #end
+  <tr>
+    <td colspan="9"><div align="center"><strong>Th&agrave;nh ti&#7873;n </strong></div></td>
+    <td><strong>$numberTool.format('integer', $druginvoice.total)</strong></td>
+  </tr>
+  <tr>
+    <td colspan="9"><div align="center"><strong>VAT</strong> (<strong>$numberTool.format('integer', $druginvoice.vat)</strong>%) </div></td>
+    <td><strong>$numberTool.format('integer', $!totalvat)</strong></td>
+  </tr>
+  <tr>
+    <td colspan="9"><div align="center"><strong>Th&agrave;nh ti&#7873;n + VAT </strong>(<strong>$numberTool.format('integer', $druginvoice.vat)</strong>%) </div></td>
+    <td><strong>$numberTool.format('integer', $druginvoice.totalaftertax)</strong></td>
+  </tr>
+</table>
+<br>
+</div>
+<div id='footer'>
+	<table width='100%'> 
+	<tr> <td width="291">K&#7871; to&aacute;n d&#432;&#7907;c </td >
+	<td width="353">D&#432;&#7907;c s&#297; </td> 
+	<td width="341">Th&#7911; kho </td>
+	<td width="290">Ng&#432;&#7901;i nh&#7853;n </td> 
+	</tr>
+  </table>
+</div>

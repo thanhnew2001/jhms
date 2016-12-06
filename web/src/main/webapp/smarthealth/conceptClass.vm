@@ -1,0 +1,86 @@
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+
+<script language='javascript' type='text/javascript' src='common.js'></script>
+<script type="text/javascript">
+
+
+function beforeDelete(conceptClassId)
+{
+	document.getElementById('conceptClassForm').action = "conceptClass.action?action=delete&id="+conceptClassId;
+	document.getElementById('conceptClassForm').submit();
+}	
+
+function beforeSave(conceptClassId)
+{
+	document.getElementById('conceptClassForm').action = "conceptClass.action?action=save&id="+conceptClassId;
+	document.getElementById('conceptClassForm').submit();
+}	
+
+
+</script>
+<body>
+<form id='conceptClassForm' name='conceptClassForm' action='conceptClass.action' class='niceform' method='POST'>
+<br>
+<input type='hidden'  id='id' name='id' value="$conceptClass.id" size='15'>
+
+<div id='container' >
+  <div class='pageheader'>
+    <p>
+      <input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('saveconceptClass').innerHTML=''" value=' X '>
+      C&#7853;p nh&#7853;t conceptClass class </p>
+    </div>
+	<table width="100%" border="1">
+  <tr>
+    <td width="50%" valign="top"><p><br>
+      T&ecirc;n g&#7885;i
+      <input type='text'  id='name' name='name' size='50' value='$!conceptClass.name' >
+	  <br>
+       M&ocirc; t&#7843; 
+        <input type='text'  id='description' name='description' size='50' value='$!conceptClass.description' >
+<br>
+          <input name="button2" type="button" onClick="beforeSave($conceptClass.id)" value="  Save ">
+          <input name="button2" type="button" onClick="document.location = 'conceptClass.action?id=0'" value="Add new">
+        </p></td>
+    </tr>
+</table>
+ 
+<br>
+<div class="pageheader">Danh s&aacute;ch conceptClass class:	   </div>
+<br>
+
+<table border='0' width='100%' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>T&ecirc;n g&#7885;i </th>
+	<th>M&ocirc; t&#7843; </th>
+    </tr>
+</theader>
+<tbody>
+	#foreach($conceptClass in $conceptClasss)
+		
+	#if($conceptClass.id)
+	<tr class='tableitem' id='tr$conceptClass.id'>
+		
+	<td id='td$sp.id'><a href="conceptClass.action?action=edit&id=$conceptClass.id">
+	<img src='images/edit.png' width='15' height='15' alt='Edit' /></a>
+	
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ beforeDelete( $conceptClass.id) } ">	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>	</td>	
+		
+		<td>$!conceptClassClass.name</td>
+		<td>
+		$!conceptClassClass.description</td>
+	  </tr>
+		
+	#end
+</tbody>
+#end
+</table>
+
+</div>
+</div>
+    <br>
+</form>
+</body>

@@ -1,0 +1,95 @@
+
+<div id='adduser'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('adduser').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('user')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='userForm' name='userForm' action='userAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text'  id='node' name='node' size='15' value='' onkeypress="formname='userForm'; nextfield='password';"> </td>
+			
+			<td><label>$i18n.get('password'):</label></td> <td><input type='text'  id='password' name='password' size='15' value='' onkeypress="formname='userForm'; nextfield='position';"> </td>
+			
+			<td><label>$i18n.get('position'):</label></td> <td><select id='position' name='position' onkeypress="formname='userForm'; nextfield='fullname';"> <option value=BS>BS</option><option value= GD> GD</option><option value= NV> NV</option> </select></td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('fullname'):</label></td> <td><input type='text'  id='fullname' name='fullname' size='15' value='' onkeypress="formname='userForm'; nextfield='phone';"> </td>
+			
+			<td><label>$i18n.get('phone'):</label></td> <td><input type='text'  id='phone' name='phone' size='15' value='' onkeypress="formname='userForm'; nextfield='cellphone';"> </td>
+			
+			<td><label>$i18n.get('cellphone'):</label></td> <td><input type='text'  id='cellphone' name='cellphone' size='15' value='' onkeypress="formname='userForm'; nextfield='email';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('email'):</label></td> <td><input type='text'  id='email' name='email' size='15' value='' onkeypress="formname='userForm'; nextfield='saveuser';"> </td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			
+						<tr><td colspan=6><hr></td></tr>
+			
+            <tr class='formlabel'>
+              <td>Ph&ograve;ng kh&aacute;m</td>
+              <td>
+			 
+			 <select id='room' name='room' style='width:90px;max-width:90px'>
+			 <option value=''></option>
+			#foreach($room in $rooms)
+				<option value='$room.id'>$room.id - $room.node</option>
+			#end
+			</select>
+			  </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            <tr class='formlabel'>
+              <td>Khoa c&#7853;n l&acirc;m s&agrave;ng </td>
+              <td>
+			   <select id='department' name='department' style='width:90px;max-width:90px'>
+			    <option value=''></option>
+			#foreach($department in $departments)
+				<option value='$department.id'>$department.id - $department.node</option>
+			#end
+			</select>
+			  </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            <tr class='formlabel'>
+              <td>Kho d&#432;&#7907;c </td>
+              <td><select id='warehouse' name='warehouse' style='width:90px;max-width:90px'>
+			   <option value=''></option>                
+			#foreach($warehouse in $warehouses)
+				
+                <option value='$warehouse.id'>$warehouse.id - $warehouse.node</option>
+                
+			#end
+			
+              </select>			  </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+      <tr><td>
+	  <br>
+<input type='button' id='saveuser' value="  $i18n.get('save')  " onkeydown="javascript:validateUser('add', document.getElementById('userForm') )"  onclick="javascript:validateUser('add', document.getElementById('userForm') )" onkeypress="nextfield='';">
+</td></tr>
+
+</table>
+</form>
+</div>
+</body>
+</div>

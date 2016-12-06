@@ -1,0 +1,72 @@
+
+<form name='cashadvanceForm' action='cashadvanceAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('encounter')</th>	
+	
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('amount')</th>	
+	
+	<th>$i18n.get('code')</th>	
+	
+	<th>$i18n.get('type')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddcashadvance' style='display:none;'>
+<th><input type='button' id='savecashadvance' value="  $i18n.get('save')  " onclick="javascript:validateCashadvance('add')" onkeypress="nextfield='';"></th>
+
+			#set ($ses = $req.getSession())					
+			#set ($encounter_id = $ses.getAttribute('encounter_id'))
+			#set ($encounter_node = $ses.getAttribute('encounter_node'))
+		<th>
+			<input type='hidden' id='encounter' name='encounter'  size='1' value='$!encounter_id' onchange='makeGetRequestEncounterByTypeHead()' onkeypress="formname='inlinecashadvanceForm'; nextfield='textencounter';"> 
+			
+			<input type='text' id='textencounter' name='textencounter' size='18' value='$!encounter_node' onkeypress="formname='inlinecashadvanceForm'; nextfield='cboencounter';"  onkeyup='makeGetRequestEncounterByTypeHead()' onclick='makeGetRequestEncounterByTypeHead()'>	
+			
+			<div id='divencounter' style='display:none;position:absolute'  onkeypress="formname='inlinecashadvanceForm'; nextfield='node';"></div>				
+		 </th>		
+		<th><input type='text'  id='node' name='node' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinecashadvanceForm'; nextfield='amount';" value=$!novalue >
+			<th> <input type='text'  id='amount' name='amount' size='8' value='' onkeypress="formname='inlinecashadvanceForm'; nextfield='code';"> </th><th> <input type='text'  id='code' name='code' size='8' value='TU' onkeypress="formname='inlinecashadvanceForm'; nextfield='type';"> </th><th> <input type='text'  id='type' name='type' size='8' value='TAMUNG, HOANUNG' onkeypress="formname='inlinecashadvanceForm'; nextfield='savecashadvance';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($cashadvance in $cashadvances)
+	#if($cashadvance.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddCashadvance($cashadvance.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddCashadvance($cashadvance.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='cashadvanceDelete.action?id=$cashadvance.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('cashadvanceView.action?id=$cashadvance.id', 'View cashadvance', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menucashadvance$cashadvance.id').style.display='block'; " ondblclick="javascript:document.getElementById('menucashadvance$cashadvance.id').style.display='none'"  value='>>' >  
+	
+	<div id='menucashadvance$cashadvance.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!cashadvance.encounter.node</td>
+		
+		<td>$!cashadvance.node</td>
+		
+		<td>$!cashadvance.amount</td>
+		
+		<td>$!cashadvance.code</td>
+		
+		<td>$!cashadvance.type</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

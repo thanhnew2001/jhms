@@ -1,0 +1,4 @@
+
+#foreach($service in $services)
+	$service.id
+#end

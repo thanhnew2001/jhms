@@ -1,0 +1,91 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addicd'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divIcd'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divIcd').innerHTML=''" value=' X '>  
+$i18n.get('icdlist')  
+</div>
+<br>
+<div>
+<select id='comboicd' name='comboicd'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='maso'>$i18n.get('maso')</option>
+	
+	<option value='node'>$i18n.get('node')</option>
+	
+</select>
+<input name='searchicd' id='searchicd' onkeyup='makeGetRequestIcdBySearch()' value='' onclick='clearSearchBox(searchicd)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestIcdByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddIcd(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tableicd' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineicdForm' name='inlineicdForm' action='icdAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('maso')</th>	
+	
+	<th>$i18n.get('node')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddicd' style='display:none;'>
+<th><input type='button' id='saveicd' value="  $i18n.get('save')  " onkeydown="javascript:validateIcd('add', document.getElementById('inlineicdForm') )"  onclick="javascript:validateIcd('add', document.getElementById('inlineicdForm') )" onkeypress="nextfield='';">
+</th>
+
+<th> <input type='text'  id='maso' name='maso' size='8' value='' onkeypress="formname='inlineicdForm'; nextfield='node';"> </th><th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlineicdForm'; nextfield='saveicd';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($icd in $icds)
+	#if($icd.id)
+	<tr class='tableitem' id='tr$icd.id' onDblClick="javascript:makeGetRequestAddIcd($icd.id, 'edit')">
+	<td id='td$icd.id'>
+	<a href="javascript:makeGetRequestAddIcd($icd.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('icdDelete.action?id=$icd.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$icd.id').style.background ='#CCCCCC'; document.getElementById('td$icd.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('icdView.action?id=$icd.id', 'View icd', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+		
+	</td>	
+		
+		<td>$!icd.maso</td>
+		
+		<td>$!icd.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddIcd(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

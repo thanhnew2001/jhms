@@ -1,0 +1,113 @@
+
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addpackagedetail'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divPackagedetail'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divPackagedetail').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('packagedetail')  
+</div>
+<br>
+<div>
+<select id='combopackagedetail' name='combopackagedetail'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='serpackage'>$i18n.get('serpackage')</option>
+	
+	<option value='service'>$i18n.get('service')</option>
+	
+</select>
+<input name='searchpackagedetail' id='searchpackagedetail' onkeyup='makeGetRequestPackagedetailBySearch()' value='' onclick='clearSearchBox(searchpackagedetail)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestPackagedetailByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddPackagedetail(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tablepackagedetail' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlinepackagedetailForm' name='inlinepackagedetailForm' action='packagedetailAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('serpackage')</th>	
+	
+	<th>$i18n.get('service')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddpackagedetail' style='display:none;'>
+<th><input type='button' id='savepackagedetail' value="  $i18n.get('save')  " onkeydown="javascript:validatePackagedetail('add', document.getElementById('inlinepackagedetailForm') )"  onclick="javascript:validatePackagedetail('add', document.getElementById('inlinepackagedetailForm') )" onkeypress="nextfield='';">
+</th>
+
+
+			#set ($ses = $req.getSession())					
+			#set ($serpackage_id = $ses.getAttribute('serpackage_id'))
+			#set ($serpackage_node = $ses.getAttribute('serpackage_node'))
+		<th>
+			<input type='hidden' id='serpackage' name='serpackage'  size='1' value='$!serpackage_id' onchange='makeGetRequestSerpackageByTypeHead()' onkeypress="formname='inlinepackagedetailForm'; nextfield='textserpackage';"> 
+			
+			<input type='text' id='textserpackage' name='textserpackage' size='18' value='$!serpackage_node' onkeypress="formname='inlinepackagedetailForm'; nextfield='cboserpackage';"  onkeyup='makeGetRequestSerpackageByTypeHead()' onclick='makeGetRequestSerpackageByTypeHead()'>	
+			
+			<div id='divserpackage' style='display:none;position:absolute'  onkeypress="formname='inlinepackagedetailForm'; nextfield='textservice';"></div>				
+		 </th>		
+		
+			#set ($ses = $req.getSession())					
+			#set ($service_id = $ses.getAttribute('service_id'))
+			#set ($service_node = $ses.getAttribute('service_node'))
+		<th>
+			<input type='hidden' id='service' name='service'  size='1' value='$!service_id' onchange='makeGetRequestServiceByTypeHead()' onkeypress="formname='inlinepackagedetailForm'; nextfield='textservice';"> 
+			
+			<input type='text' id='textservice' name='textservice' size='18' value='$!service_node' onkeypress="formname='inlinepackagedetailForm'; nextfield='cboservice';"  onkeyup='makeGetRequestServiceByTypeHead()' onclick='makeGetRequestServiceByTypeHead()'>	
+			
+			<div id='divservice' style='display:none;position:absolute'  onkeypress="formname='inlinepackagedetailForm'; nextfield='savepackagedetail';"></div>				
+		 </th>		
+		
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($packagedetail in $packagedetails)
+	#if($packagedetail.id)
+	<tr class='tableitem' id='tr$packagedetail.id' onDblClick="javascript:makeGetRequestAddPackagedetail($packagedetail.id, 'edit')">
+	<td id='td$packagedetail.id'>
+	<a href="javascript:makeGetRequestAddPackagedetail($packagedetail.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('packagedetailDelete.action?id=$packagedetail.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$packagedetail.id').style.background ='#CCCCCC'; document.getElementById('td$packagedetail.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('packagedetailView.action?id=$packagedetail.id', 'View packagedetail', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+		
+	</td>	
+		
+		<td>$!packagedetail.serpackage.node</td>
+		
+		<td>$!packagedetail.service.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddPackagedetail(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

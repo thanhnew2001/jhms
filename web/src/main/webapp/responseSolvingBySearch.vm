@@ -1,0 +1,44 @@
+
+<form name='solvingForm' action='solvingAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddsolving' style='display:none;'>
+<th><input type='button' id='savesolving' value="  $i18n.get('save')  " onclick="javascript:validateSolving('add')" onkeypress="nextfield='';"></th>
+<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlinesolvingForm'; nextfield='savesolving';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($solving in $solvings)
+	#if($solving.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddSolving($solving.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddSolving($solving.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='solvingDelete.action?id=$solving.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('solvingView.action?id=$solving.id', 'View solving', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menusolving$solving.id').style.display='block'; " ondblclick="javascript:document.getElementById('menusolving$solving.id').style.display='none'"  value='>>' >  
+	
+	<div id='menusolving$solving.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!solving.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

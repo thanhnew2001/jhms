@@ -1,0 +1,114 @@
+#parse("top.vm")
+#parse("common.vm")
+#parse("client_js.vm")
+#parse("mycalendar.vm")
+
+
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+<script language='javascript' type='text/javascript' src='js/jquery.js'></script>
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<script>
+
+
+var clientaction = 'add';
+$(window).keypress(function(event) {
+
+	
+    if (!(event.which == 115 && event.ctrlKey)) return true;
+    //alert("Ctrl-S pressed");
+	if (clientaction=='add')
+		validateClient('add', document.getElementById('clientForm') );
+	if (clientaction=='edit')
+		validateClient('edit', document.getElementById('clientForm') );
+    event.preventDefault();
+    return false;
+});
+
+</script>
+
+
+
+<body id='wrap' onload="makeGetRequestAddClient(0,'add');">
+<div id='addclient'></div>
+<div id='divEncounter'> </div>
+<br>
+<div id='divClient'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divClient').innerHTML=''" value=' X '>  
+$i18n.get('clientlist')  
+</div>
+<br>
+<div>
+<select id='comboclient' name='comboclient'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='code'>$i18n.get('code')</option>
+	
+	<option value='node'>$i18n.get('node')</option>
+	
+	<option value='birthday'>$i18n.get('birthday')</option>
+	
+	<option value='sex'>$i18n.get('sex')</option>
+	
+	<option value='occupation'>$i18n.get('occupation')</option>
+	
+	<option value='ethnic'>$i18n.get('ethnic')</option>
+	
+	<option value='education'>$i18n.get('education')</option>
+	
+	<option value='oversea'>$i18n.get('oversea')</option>
+	
+	<option value='address'>$i18n.get('address')</option>
+	
+	<option value='ward'>$i18n.get('ward')</option>
+	
+	<option value='company'>$i18n.get('company')</option>
+	
+	<option value='paymenttype'>$i18n.get('paymenttype')</option>
+	
+	<option value='insurancenumber'>$i18n.get('insurancenumber')</option>
+	
+	<option value='joineddate'>$i18n.get('joineddate')</option>
+	
+	<option value='expireddate'>$i18n.get('expireddate')</option>
+	
+	<option value='motherfather'>$i18n.get('motherfather')</option>
+	
+	<option value='phone'>$i18n.get('phone')</option>
+	
+	<option value='age'>$i18n.get('age')</option>
+	
+	<option value='maritalstatus'>$i18n.get('maritalstatus')</option>
+	
+	<option value='createddate'>$i18n.get('createddate')</option>
+	
+	<option value='password'>$i18n.get('password')</option>
+	
+</select>
+<input name='searchclient' id='searchclient' onkeyup='makeGetRequestClientBySearch()' value='' onclick='clearSearchBox(searchclient)'>
+Search  or Filter
+
+
+				<input type='text' id='filtercreateddate' name='filtercreateddate' value='$today' onClick="GetDate(this);">				
+				
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestClientByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddClient(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tableclient' class='mytable'>
+
+#parse("responseClientBySearch.vm")
+
+</div>
+<a href="javascript:makeGetRequestAddClient(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

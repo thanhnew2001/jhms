@@ -1,0 +1,56 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addcashadvance').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('cashadvance')
+</div>
+<br>
+<div id='msg'></div>
+<br>
+<form id='cashadvanceForm'  name='cashadvanceForm' action='cashadvanceUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!cashadvance.id' size='15'>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('encounter'):</label> </td>
+			<td>		
+			<input type='hidden' id='encounter' name='encounter'  size='1' value='$!cashadvance.encounter.id' onchange='makeGetRequestEncounterByTypeHead()' onkeypress="formname='cashadvanceForm'; nextfield='textencounter';"> 			<input type='text' id='textencounter' name='textencounter' size='18'  value='$!cashadvance.encounter.node' onkeypress="formname='cashadvanceForm'; nextfield='cboencounter'; isSelect=true;"  onkeyup='makeGetRequestEncounterByTypeHead()' onclick='makeGetRequestEncounterByTypeHead()'>	
+			
+			<div id='divencounter' style='display:none;position:absolute' onkeypress="formname='cashadvanceForm'; nextfield='node';"></div>				
+			<a href='javascript:void(0)' onclick="window.open('encounterList.action', 'Add encounter', 'width=400, height=300')"> ... </a>
+			</td>
+		
+				#if($!cashadvance.node)
+					#set($ngay = "$cashadvance.node")
+					#set($ngay = "$ngay.substring(8,10)/$ngay.substring(5,7)/$ngay.substring(0,4)")
+				#end
+			<td><label>$i18n.get('node'):</label></td> 
+			<td>
+			<input type='text'  id='node' name='node' value='$!ngay' size='15' onblur='getSmartDate(this)' onkeypress="formname='cashadvanceForm'; nextfield='amount';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggernode'>
+			</td>
+			
+			<td><label>$i18n.get('amount'):</label></td> <td><input type='text' id='amount' name='amount' value='$!cashadvance.amount' size='15' value='' onkeypress="formname='cashadvanceForm'; nextfield='code';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('code'):</label></td> <td><input type='text' id='code' name='code' value='$!cashadvance.code' size='15' value='TU' onkeypress="formname='cashadvanceForm'; nextfield='type';"> </td>
+			
+			<td><label>$i18n.get('type'):</label></td> <td><input type='text' id='type' name='type' value='$!cashadvance.type' size='15' value='TAMUNG, HOANUNG' onkeypress="formname='cashadvanceForm'; nextfield='updatecashadvance';"> </td>
+			
+
+<tr><td colspan='6'>
+<input id='updatecashadvance' type='button' value="  $i18n.get('save')  " onkeydown="javascript: validateCashadvance('edit', document.getElementById('cashadvanceForm') )" onclick="javascript: validateCashadvance('edit', document.getElementById('cashadvanceForm') )" onkeypress="formname='cashadvanceForm'; nextfield = '';">
+
+
+&nbsp;
+
+</td></tr>
+</table>
+</form>
+</div>
+</body>

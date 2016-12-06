@@ -1,0 +1,262 @@
+
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addencounter'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divEncounter'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divEncounter').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('encounter')  
+</div>
+<br>
+
+<div id='msg'></div>
+<div id='tableencounter' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineencounterForm' name='inlineencounterForm' action='encounterAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('client')</th>	
+	
+	<th>$i18n.get('insurancenumber')</th>	
+	
+	<th>$i18n.get('joineddate')</th>	
+	
+	<th>$i18n.get('expireddate')</th>	
+	
+	<th>$i18n.get('code')</th>	
+	
+	<th>$i18n.get('date')</th>	
+	
+	<th>$i18n.get('time')</th>	
+	
+	<th>$i18n.get('reference')</th>	
+	
+	<th>$i18n.get('room')</th>	
+	
+	<th>$i18n.get('hospital')</th>	
+	
+	<th>$i18n.get('initialdiagnosis')</th>	
+	
+	<th>$i18n.get('icd')</th>	
+	
+	<th>$i18n.get('solving')</th>	
+	
+	<th>$i18n.get('advise')</th>	
+	
+	<th>$i18n.get('revisit')</th>	
+	
+	<th>$i18n.get('revisitdate')</th>	
+	
+	<th>$i18n.get('prescriptiontemplate')</th>	
+	
+	<th>$i18n.get('totalamount')</th>	
+	
+	<th>$i18n.get('insurancepay')</th>	
+	
+	<th>$i18n.get('paidamount')</th>	
+	
+	<th>$i18n.get('leftamount')</th>	
+	
+	<th>$i18n.get('paid')</th>	
+	
+	<th>$i18n.get('user')</th>	
+	
+	<th>$i18n.get('node')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddencounter' style='display:none;'>
+<th><input type='button' id='saveencounter' value="  $i18n.get('save')  " onkeydown="javascript:validateEncounter('add', document.getElementById('inlineencounterForm') )"  onclick="javascript:validateEncounter('add', document.getElementById('inlineencounterForm') )" onkeypress="nextfield='';">
+</th>
+
+
+			#set ($ses = $req.getSession())					
+			#set ($client_id = $ses.getAttribute('client_id'))
+			#set ($client_node = $ses.getAttribute('client_node'))
+		<th>
+			<input type='hidden' id='client' name='client'  size='1' value='$!client_id' onchange='makeGetRequestClientByTypeHead()' onkeypress="formname='inlineencounterForm'; nextfield='textclient';"> 
+			
+			<input type='text' id='textclient' name='textclient' size='18' value='$!client_node' onkeypress="formname='inlineencounterForm'; nextfield='cboclient';"  onkeyup='makeGetRequestClientByTypeHead()' onclick='makeGetRequestClientByTypeHead()'>	
+			
+			<div id='divclient' style='display:none;position:absolute'  onkeypress="formname='inlineencounterForm'; nextfield='insurancenumber';"></div>				
+		 </th>		
+		<th> <input type='text'  id='insurancenumber' name='insurancenumber' size='8' value='' onkeypress="formname='inlineencounterForm'; nextfield='joineddate';"> </th><th><input type='text'  id='joineddate' name='joineddate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlineencounterForm'; nextfield='expireddate';" value=$!novalue >
+			<th><input type='text'  id='expireddate' name='expireddate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlineencounterForm'; nextfield='code';" value=$!novalue >
+			<th> <input type='text'  id='code' name='code' size='8' value='$!code' onkeypress="formname='inlineencounterForm'; nextfield='date';"> </th><th><input type='text'  id='date' name='date' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlineencounterForm'; nextfield='time';" value=$!today >
+			<th> <input type='text'  id='time' name='time' size='8' value='' onkeypress="formname='inlineencounterForm'; nextfield='reference';"> </th><th> <select id='reference' name='reference' onkeypress=" formname='inlineencounterForm';nextfield='room';"> <option value=CQYT>CQYT</option><option value= TUDEN> TUDEN</option><option value= KHAC> KHAC</option> </select> </th>
+			#set ($ses = $req.getSession())					
+			#set ($room_id = $ses.getAttribute('room_id'))
+			#set ($room_node = $ses.getAttribute('room_node'))
+		<th>
+			<select id='room' name='room' onkeypress="formname='inlineencounterForm'; nextfield='hospital';">
+				<option value='$!room_id' selected> $!room_node </option>
+			#foreach($room in $rooms)
+				<option value='$room.id'>$room.node</option>
+			#end
+			</select>			
+		 </th>		
+		
+			#set ($ses = $req.getSession())					
+			#set ($hospital_id = $ses.getAttribute('hospital_id'))
+			#set ($hospital_node = $ses.getAttribute('hospital_node'))
+		<th>
+			<select id='hospital' name='hospital' onkeypress="formname='inlineencounterForm'; nextfield='initialdiagnosis';">
+				<option value='$!hospital_id' selected> $!hospital_node </option>
+			#foreach($hospital in $hospitals)
+				<option value='$hospital.id'>$hospital.node</option>
+			#end
+			</select>			
+		 </th>		
+		<th> <input type='text'  id='initialdiagnosis' name='initialdiagnosis' size='8' value='' onkeypress="formname='inlineencounterForm'; nextfield='texticd';"> </th>
+			#set ($ses = $req.getSession())					
+			#set ($icd_id = $ses.getAttribute('icd_id'))
+			#set ($icd_node = $ses.getAttribute('icd_node'))
+		<th>
+			<input type='hidden' id='icd' name='icd'  size='1' value='$!icd_id' onchange='makeGetRequestIcdByTypeHead()' onkeypress="formname='inlineencounterForm'; nextfield='texticd';"> 
+			
+			<input type='text' id='texticd' name='texticd' size='18' value='$!icd_node' onkeypress="formname='inlineencounterForm'; nextfield='cboicd';"  onkeyup='makeGetRequestIcdByTypeHead()' onclick='makeGetRequestIcdByTypeHead()'>	
+			
+			<div id='divicd' style='display:none;position:absolute'  onkeypress="formname='inlineencounterForm'; nextfield='solving';"></div>				
+		 </th>		
+		
+			#set ($ses = $req.getSession())					
+			#set ($solving_id = $ses.getAttribute('solving_id'))
+			#set ($solving_node = $ses.getAttribute('solving_node'))
+		<th>
+			<select id='solving' name='solving' onkeypress="formname='inlineencounterForm'; nextfield='advise';">
+				<option value='$!solving_id' selected> $!solving_node </option>
+			#foreach($solving in $solvings)
+				<option value='$solving.id'>$solving.node</option>
+			#end
+			</select>			
+		 </th>		
+		<th> <input type='text'  id='advise' name='advise' size='8' value='' onkeypress="formname='inlineencounterForm'; nextfield='revisit';"> </th><th> <select id='revisit' name='revisit' onkeypress=" formname='inlineencounterForm';nextfield='revisitdate';"> <option value=N>N</option><option value= Y> Y</option> </select> </th><th><input type='text'  id='revisitdate' name='revisitdate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlineencounterForm'; nextfield='textprescriptiontemplate';" value=$!novalue >
+			
+			#set ($ses = $req.getSession())					
+			#set ($prescriptiontemplate_id = $ses.getAttribute('prescriptiontemplate_id'))
+			#set ($prescriptiontemplate_node = $ses.getAttribute('prescriptiontemplate_node'))
+		<th>
+			<input type='hidden' id='prescriptiontemplate' name='prescriptiontemplate'  size='1' value='$!prescriptiontemplate_id' onchange='makeGetRequestPrescriptiontemplateByTypeHead()' onkeypress="formname='inlineencounterForm'; nextfield='textprescriptiontemplate';"> 
+			
+			<input type='text' id='textprescriptiontemplate' name='textprescriptiontemplate' size='18' value='$!prescriptiontemplate_node' onkeypress="formname='inlineencounterForm'; nextfield='cboprescriptiontemplate';"  onkeyup='makeGetRequestPrescriptiontemplateByTypeHead()' onclick='makeGetRequestPrescriptiontemplateByTypeHead()'>	
+			
+			<div id='divprescriptiontemplate' style='display:none;position:absolute'  onkeypress="formname='inlineencounterForm'; nextfield='totalamount';"></div>				
+		 </th>		
+		<th> <input type='text'  id='totalamount' name='totalamount' size='8' value='' onkeypress="formname='inlineencounterForm'; nextfield='insurancepay';"> </th><th> <input type='text'  id='insurancepay' name='insurancepay' size='8' value='' onkeypress="formname='inlineencounterForm'; nextfield='paidamount';"> </th><th> <input type='text'  id='paidamount' name='paidamount' size='8' value='' onkeypress="formname='inlineencounterForm'; nextfield='leftamount';"> </th><th> <input type='text'  id='leftamount' name='leftamount' size='8' value='' onkeypress="formname='inlineencounterForm'; nextfield='paid';"> </th><th> <select id='paid' name='paid' onkeypress=" formname='inlineencounterForm';nextfield='user';"> <option value=N>N</option><option value= Y> Y</option> </select> </th>
+			#set ($ses = $req.getSession())					
+			#set ($user_id = $ses.getAttribute('user_id'))
+			#set ($user_node = $ses.getAttribute('user_node'))
+		<th>
+			<select id='user' name='user' onkeypress="formname='inlineencounterForm'; nextfield='node';">
+				<option value='$!user_id' selected> $!user_node </option>
+			#foreach($user in $users)
+				<option value='$user.id'>$user.node</option>
+			#end
+			</select>			
+		 </th>		
+		<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlineencounterForm'; nextfield='saveencounter';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($encounter in $encounters)
+	#if($encounter.id)
+	<tr class='tableitem' id='tr$encounter.id' onDblClick="javascript:makeGetRequestAddEncounter($encounter.id, 'edit')">
+	<td id='td$encounter.id'>
+	<a href="javascript:makeGetRequestAddEncounter($encounter.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('encounterDelete.action?id=$encounter.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$encounter.id').style.background ='#CCCCCC'; document.getElementById('td$encounter.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('encounterView.action?id=$encounter.id', 'View encounter', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuencounter$encounter.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuencounter$encounter.id').style.display='none'"  value='>>' >  	
+
+	<div id='menuencounter$encounter.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+		 <a href='javascript:makeGetRequestPrescriptiondetailByEncounter($encounter.id)'> prescriptiondetail </a> &nbsp;
+		 <br>
+		
+		 <a href='javascript:makeGetRequestIndicationdetailByEncounter($encounter.id)'> indicationdetail </a> &nbsp;
+		 <br>
+		
+		 <a href='javascript:makeGetRequestReceiptByEncounter($encounter.id)'> receipt </a> &nbsp;
+		 <br>
+		
+		 <a href='javascript:makeGetRequestDruginvoiceByEncounter($encounter.id)'> druginvoice </a> &nbsp;
+		 <br>
+		
+	</div>
+	
+	</td>	
+		
+		<td>$!encounter.client.node</td>
+		
+		<td>$!encounter.insurancenumber</td>
+		
+		<td>$!encounter.joineddate</td>
+		
+		<td>$!encounter.expireddate</td>
+		
+		<td>$!encounter.code</td>
+		
+		<td>$!encounter.date</td>
+		
+		<td>$!encounter.time</td>
+		
+		<td>$!encounter.reference</td>
+		
+		<td>$!encounter.room.node</td>
+		
+		<td>$!encounter.hospital.node</td>
+		
+		<td>$!encounter.initialdiagnosis</td>
+		
+		<td>$!encounter.icd.node</td>
+		
+		<td>$!encounter.solving.node</td>
+		
+		<td>$!encounter.advise</td>
+		
+		<td>$!encounter.revisit</td>
+		
+		<td>$!encounter.revisitdate</td>
+		
+		<td>$!encounter.prescriptiontemplate.node</td>
+		
+		<td>$!encounter.totalamount</td>
+		
+		<td>$!encounter.insurancepay</td>
+		
+		<td>$!encounter.paidamount</td>
+		
+		<td>$!encounter.leftamount</td>
+		
+		<td>$!encounter.paid</td>
+		
+		<td>$!encounter.user.node</td>
+		
+		<td>$!encounter.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddEncounter(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

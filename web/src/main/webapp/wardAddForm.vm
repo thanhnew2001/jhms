@@ -1,0 +1,45 @@
+
+<div id='addward'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addward').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('ward')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='wardForm' name='wardForm' action='wardAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text'  id='node' name='node' size='15' value='' onkeypress="formname='wardForm'; nextfield='textdistrict';"> </td>
+			
+			<td><label>$i18n.get('district'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($district_id = $ses.getAttribute('district_id'))
+			#set ($district_node = $ses.getAttribute('district_node'))
+			
+			<input type='hidden' id='district' name='district'  size='1' value='$!district_id' onchange='makeGetRequestDistrictByTypeHead()' onkeypress="formname='wardForm'; nextfield='textdistrict';"> 
+			
+			<input type='text' id='textdistrict' name='textdistrict' size='18' value='$!district_node' onkeypress="formname='wardForm'; nextfield='cbodistrict'; isSelect=true;"  onkeyup='makeGetRequestDistrictByTypeHead()' onclick='makeGetRequestDistrictByTypeHead()'>	
+			
+			<div id='divdistrict' style='display:none;position:absolute'  onkeypress="formname='wardForm'; nextfield='saveward';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('districtList.action', 'Add district', 'width=400, height=300')"> ... </a>
+		
+<tr><td>
+<input type='button' id='saveward' value="  $i18n.get('save')  " onkeydown="javascript:validateWard('add', document.getElementById('wardForm') )"  onclick="javascript:validateWard('add', document.getElementById('wardForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

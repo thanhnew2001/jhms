@@ -1,0 +1,98 @@
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='adddruginvoicedetail'></div>
+
+<div id='divDruginvoicedetail'>
+<div id='container'>
+<br>
+<div id='msg'></div>
+<div id='tabledruginvoicedetail' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='frmDrug' name='frmDrug' action='druginvoicedetailAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('drug')</th>	
+	
+	<th>$i18n.get('quantity')</th>	
+	
+	<th>$i18n.get('batchnumber')</th>	
+	
+	<th>$i18n.get('expireddate')</th>	
+	
+	<th>Th&aacute;ng HH </th>
+	<th>$i18n.get('price')</th>	
+	
+	<th>$i18n.get('subtotal')</th>	
+</tr>
+
+
+<tr class='tableitem'>
+<div id='inlineadddruginvoicedetail' style='display:none;'>
+<th><input type='button' id='savedruginvoicedetail' value="  $i18n.get('save')  " onkeydown="javascript:validateDruginvoicedetail('add', document.getElementById('frmDrug') )"  onclick="javascript:validateDruginvoicedetail('add', document.getElementById('frmDrug') )" onkeypress="nextfield='';"></th>
+
+			#set ($ses = $req.getSession())					
+			#set ($druginvoice_id = $ses.getAttribute('druginvoice_id'))
+			#set ($druginvoice_node = $ses.getAttribute('druginvoice_node'))
+			<input type='hidden' id='druginvoice' name='druginvoice'  size='1' value='$!druginvoice_id' onchange='makeGetRequestDruginvoiceByTypeHead()' onkeypress="formname='frmDrug'; nextfield='textdruginvoice';"> 
+
+	
+			#set ($ses = $req.getSession())					
+			#set ($drug_id = $ses.getAttribute('drug_id'))
+			#set ($drug_node = $ses.getAttribute('drug_node'))
+		<th>
+			<input type='hidden' id='drug' name='drug'  size='1' value='$!drug_id' onchange='makeGetRequestDrugByTypeHead()' onkeypress="formname='frmDrug'; nextfield='textdrug';"> 
+			
+			<input type='text' id='textdrug' name='textdrug' size='20' value='$!drug_node' onkeypress="formname='frmDrug'; nextfield='textdrug';"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()' onFocus="textdrug">	
+			
+			<div id='divdrug' style='display:none; position:absolute; left: 10px; top: 185px;' onkeypress="formname='frmDrug'; nextfield='quantity';"></div>		 </th>		
+		<th> <input type='text'  id='quantity' name='quantity' size='10' value='' onkeypress="formname='frmDrug'; nextfield='batchnumber';" onchange = "document.getElementById('subtotal').value = document.getElementById('price').value*this.value"> </th>
+		
+		<th> <input type='button' onclick="win2 = window.open('getBatchnumber.action?requestQuantity='+document.frmDrug.quantity.value+'&drugid='+document.frmDrug.drug.value+'&warehouseid='+document.getElementById('warehouse').value,'Get batch number','width=300;height=100')" value=" Get "> <input type='text'  id='batchnumber' name='batchnumber' size='10' value='' onkeypress="formname='frmDrug'; nextfield='savedruginvoicedetail';"> </th><th><input type='text'  id='expireddate' name='expireddate' size='10' onblur='getSmartDate(this)' onkeypress="formname='frmDrug'; nextfield='expiredmonth';" value=$!novalue >
+			<th><input type='text'  id='expiredmonth' name='expiredmonth' size='10' onblur='getSmartDate(this)' onkeypress="formname='frmDrug'; nextfield='price';" value=$!novalue ></th>
+			<th> <input type='text'  id='price' name='price' size='10' value='' onkeypress="formname='frmDrug'; nextfield='savedruginvoicedetail';" onchange = "document.getElementById('subtotal').value = document.getElementById('quantity').value*this.value" disabled> </th>
+			
+			<th> <input type='text'  id='subtotal' name='subtotal' size='10' value='' onkeypress="formname='frmDrug'; nextfield='savedruginvoicedetail';" disabled> </th>
+</div>
+</tr>
+</theader>
+<tbody>
+#foreach($druginvoicedetail in $druginvoicedetails)
+	#if($druginvoicedetail.id)
+	<tr class='tableitem' id='tr$druginvoicedetail.id' ondblclick="makeGetRequestAddDruginvoicedetail($druginvoicedetail.id, 'edit')">
+	<td id='td$druginvoicedetail.id'>
+	<a href="javascript:makeGetRequestAddDruginvoicedetail($druginvoicedetail.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onclick="if(confirm('Do you want to delete?')){ window.open('druginvoicedetailDelete.action?id=$druginvoicedetail.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$druginvoicedetail.id').style.background ='#CCCCCC'; document.getElementById('td$druginvoicedetail.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('druginvoicedetailView.action?id=$druginvoicedetail.id', 'View druginvoicedetail', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>	</td>	
+		
+		<td>$!druginvoicedetail.drug.node</td>
+		
+		<td>$!druginvoicedetail.quantity</td>
+		
+		<td>$!druginvoicedetail.batchnumber</td>
+		
+		<td>$!dateTool.format('dd/MM/yyyy',$!druginvoicedetail.expireddate)</td>
+		
+		<td>$!druginvoicedetail.expiredmonth</td>
+		<td>$numberTool.format('integer' ,$!druginvoicedetail.price)</td>
+		
+		<td>$numberTool.format('integer' ,$!druginvoicedetail.subtotal)</td>
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+</div>
+</div>
+</body>

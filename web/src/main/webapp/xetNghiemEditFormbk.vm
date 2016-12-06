@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script>
+function createRequestObject() {
+    var tmpXmlHttpObject;
+    if (window.XMLHttpRequest) { 
+        tmpXmlHttpObject = new XMLHttpRequest();
+    } else if (window.ActiveXObject) { 
+        tmpXmlHttpObject = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+ 
+    return tmpXmlHttpObject;
+}
+var http = createRequestObject();
+
+var g_indicationdetail = '';
+function saveValue(id, value)
+{
+	g_indicationdetail = id;
+	var url = 'id='+ id +'&result='+ value ;
+	http.open('get', 'clientList.action');
+	http.onreadystatechange = processSaveValue2(); 
+}
+function processSaveValue2()
+{
+	if(http.readyState == 4)
+	{
+	alert('asdfsdf');
+		var response = http.responseText;
+		alert(response);
+	}
+}
+</script>
+<input type='button' onclick='saveValue(1,2)'>

@@ -1,0 +1,65 @@
+
+<div id='addprescriptiontemplatedetail'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addprescriptiontemplatedetail').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('prescriptiontemplatedetail')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='prescriptiontemplatedetailForm' name='prescriptiontemplatedetailForm' action='prescriptiontemplatedetailAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('prescriptiontemplate'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($prescriptiontemplate_id = $ses.getAttribute('prescriptiontemplate_id'))
+			#set ($prescriptiontemplate_node = $ses.getAttribute('prescriptiontemplate_node'))
+			
+			<input type='hidden' id='prescriptiontemplate' name='prescriptiontemplate'  size='1' value='$!prescriptiontemplate_id' onchange='makeGetRequestPrescriptiontemplateByTypeHead()' onkeypress="formname='prescriptiontemplatedetailForm'; nextfield='textprescriptiontemplate';"> 
+			
+			<input type='text' id='textprescriptiontemplate' name='textprescriptiontemplate' size='18' value='$!prescriptiontemplate_node' onkeypress="formname='prescriptiontemplatedetailForm'; nextfield='cboprescriptiontemplate'; isSelect=true;"  onkeyup='makeGetRequestPrescriptiontemplateByTypeHead()' onclick='makeGetRequestPrescriptiontemplateByTypeHead()'>	
+			
+			<div id='divprescriptiontemplate' style='display:none;position:absolute'  onkeypress="formname='prescriptiontemplatedetailForm'; nextfield='textdrug';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('prescriptiontemplateList.action', 'Add prescriptiontemplate', 'width=400, height=300')"> ... </a>
+		
+			<td><label>$i18n.get('drug'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($drug_id = $ses.getAttribute('drug_id'))
+			#set ($drug_node = $ses.getAttribute('drug_node'))
+			
+			<input type='hidden' id='drug' name='drug'  size='1' value='$!drug_id' onchange='makeGetRequestDrugByTypeHead()' onkeypress="formname='prescriptiontemplatedetailForm'; nextfield='textdrug';"> 
+			
+			<input type='text' id='textdrug' name='textdrug' size='18' value='$!drug_node' onkeypress="formname='prescriptiontemplatedetailForm'; nextfield='cbodrug'; isSelect=true;"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+			
+			<div id='divdrug' style='display:none;position:absolute'  onkeypress="formname='prescriptiontemplatedetailForm'; nextfield='quantity';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('drugList.action', 'Add drug', 'width=400, height=300')"> ... </a>
+		
+			<td><label>$i18n.get('quantity'):</label></td> <td><input type='text'  id='quantity' name='quantity' size='15' value='' onkeypress="formname='prescriptiontemplatedetailForm'; nextfield='timeuse';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('timeuse'):</label></td> <td><input type='text'  id='timeuse' name='timeuse' size='15' value='' onkeypress="formname='prescriptiontemplatedetailForm'; nextfield='quantityuse';"> </td>
+			
+			<td><label>$i18n.get('quantityuse'):</label></td> <td><input type='text'  id='quantityuse' name='quantityuse' size='15' value='' onkeypress="formname='prescriptiontemplatedetailForm'; nextfield='note';"> </td>
+			
+			<td><label>$i18n.get('note'):</label></td> <td><input type='text'  id='note' name='note' size='15' value='' onkeypress="formname='prescriptiontemplatedetailForm'; nextfield='saveprescriptiontemplatedetail';"> </td>
+			</tr>
+<tr><td>
+<input type='button' id='saveprescriptiontemplatedetail' value="  $i18n.get('save')  " onkeydown="javascript:validatePrescriptiontemplatedetail('add', document.getElementById('prescriptiontemplatedetailForm') )"  onclick="javascript:validatePrescriptiontemplatedetail('add', document.getElementById('prescriptiontemplatedetailForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

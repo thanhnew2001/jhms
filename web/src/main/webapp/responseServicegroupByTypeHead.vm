@@ -1,0 +1,8 @@
+
+<select name='cboservicegroup' id='cboservicegroup' multiple='multiple' onkeypress="formname='encounterForm'; typehead = 'servicegroup'; nextfield='saveservicegroup';">
+#foreach($servicegroup in $servicegroups)
+<option value='$servicegroup.id'>$servicegroup.node</option>
+#end						
+<option value=''></option>
+</select>
+

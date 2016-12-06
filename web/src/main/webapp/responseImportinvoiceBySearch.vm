@@ -1,0 +1,93 @@
+<div id='tableimportinvoice' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineimportinvoiceForm' name='inlineimportinvoiceForm' action='importinvoiceAdd.action' class='niceform' method='POST'>
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>STT</th>
+<th>Action</th>
+
+	<th>$i18n.get('code')</th>	
+	
+	<th>$i18n.get('date')</th>	
+	
+	<th>$i18n.get('warehouse')</th>	
+	
+	<th>$i18n.get('type')</th>	
+	
+	<th>$i18n.get('provider')</th>	
+	
+	<th>$i18n.get('fromwarehouse')</th>	
+	
+	<th>$i18n.get('vat')</th>	
+	
+	<th>$i18n.get('total')</th>	
+	
+	<th>$i18n.get('totalaftertax')</th>	
+	
+	<th>$i18n.get('user')</th>	
+	
+	<th>$i18n.get('identity')</th>	
+	
+</tr>
+
+
+
+</theader>
+<tbody>
+#set($i=0)
+#foreach($importinvoice in $importinvoices)
+	#if($importinvoice.id)
+	#set($i=$i+1)
+	<tr class='tableitem' id='tr$importinvoice.id' onDblClick="document.getElementById('divImportinvoicedetail').innerHTML='';makeGetRequestAddImportinvoice($importinvoice.id, 'edit')">
+	
+	<td>$i</td>
+	
+	<td id='td$importinvoice.id'>
+	<a href="javascript:makeGetRequestAddImportinvoice($importinvoice.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('importinvoiceDelete.action?id=$importinvoice.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$importinvoice.id').style.background ='#CCCCCC'; document.getElementById('td$importinvoice.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('importinvoiceView.action?id=$importinvoice.id', 'View importinvoice', 'width=400, height=300, scrollbars=yes')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuimportinvoice$importinvoice.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuimportinvoice$importinvoice.id').style.display='none'"  value='>>' >  	
+
+	<div id='menuimportinvoice$importinvoice.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+		 <a href='javascript:makeGetRequestImportinvoicedetailByImportinvoice($importinvoice.id)'> importinvoicedetail </a> &nbsp;
+		 <br>
+		
+	</div>
+	
+	</td>	
+		
+		<td>$!importinvoice.code</td>
+		
+		<td>$!dateTool.format('dd/MM/yyyy',$!importinvoice.date)</td>
+		
+		<td>$!importinvoice.warehouse.node</td>
+		
+		<td>$!importinvoice.type</td>
+		
+		<td>$!importinvoice.provider.node</td>
+		
+		<td>$!importinvoice.fromwarehouse.node</td>
+		
+		<td>$!importinvoice.vat</td>
+		
+		<td>$numberTool.format('integer' ,$!importinvoice.total)</td>
+		
+		<td>$numberTool.format('integer' ,$!importinvoice.totalaftertax)</td>
+		
+		<td>$!importinvoice.user.fullname</td>
+		
+		<td>$!importinvoice.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

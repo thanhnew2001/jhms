@@ -1,0 +1,23 @@
+#parse("top.vm")
+
+<br>
+<br>
+<body id="wrap">
+<div class="pageheader" > 
+Ki&#7875;m tra th&#7867;
+</div>
+<br>
+<div style="height:50">
+ Th&#7867; khuy&#7871;n m&atilde;i: 
+			  <input type='text'  id='promotionCode' name='promotionCode' size='18' value=''>
+			  </strong>
+			  <input type='button' size='18' value="  Ki&#7875;m tra  " onClick="window.open('encounterList.action?promotionCode='+getElementById('promotionCode').value, 'Promotion Code', 'height=500,width=800,scrollbars=yes')">	
+	
+ Th&#7867; VIP: 
+			  <input type='text'  id='prepaidCard' name='prepaidCard' size='18' value=''>
+			  </strong>
+			  <input type='button' size='18' value=" Ki&#7875;m tra " onClick="window.open('prepaidCardTransactionDetail.action?prepaidCard='+getElementById('prepaidCard').value, 'Prepaid Card Transaction', 'height=500,width=800,scrollbars=yes')">
+			  
+</div>
+
+</body>			  

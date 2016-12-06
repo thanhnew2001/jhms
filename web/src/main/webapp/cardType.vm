@@ -1,0 +1,99 @@
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+
+<script language='javascript' type='text/javascript' src='common.js'></script>
+<script type="text/javascript">
+
+
+function beforeDelete(id)
+{
+	document.getElementById('cardTypeForm').action = "cardType.action?action=delete&id="+id;
+	document.getElementById('cardTypeForm').submit();
+}	
+
+function beforeSave(id)
+{
+	document.getElementById('cardTypeForm').action = "cardType.action?action=save&id="+id;
+	document.getElementById('cardTypeForm').submit();
+}	
+
+</script>
+
+<body>
+<form id='cardTypeForm' name='cardTypeForm' action='cardType.action' class='niceform' method='POST'>
+<br>
+<input type='hidden'  id='id' name='id' value="$cardType.id" size='15'>
+
+<div id='container' >
+  <div class='pageheader'>
+    <p>
+      <input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('savecardType').innerHTML=''" value=' X '>
+      C&#7853;p nh&#7853;t lo&#7841;i th&#7867;</p>
+    </div>
+  <table width="100%" border="0">
+    <tr>
+      <td width="82">&nbsp;</td>
+      <td width="159">M&atilde; s&#7889; lo&#7841;i th&#7867; </td>
+      <td width="549">
+        $!cardType.code</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>T&ecirc;n lo&#7841;i th&#7867; </td>
+      <td><input type='text'  id='name' name='name' size='50' value='$!cardType.name' ></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&#272;i&#7875;m t&#7889;i &#273;a </td>
+      <td><input type='text'  id='unit' name='unit' size='50' value='$!cardType.maxPoint'></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td><input name="button2" type="button" onClick="beforeSave($service.id, $cardType.id)" value="  Save ">
+      <input type="button" value="Add new" onClick="document.location = 'cardType.action?serviceId=$service.id&cardTypeId=0'">    </tr>
+  </table>
+
+<table width="800" border="0">
+      <tr class='pageheader'>
+        <td colspan="2">C&aacute;c th&ocirc;ng s&#7889; c&#7911;a d&#7883;ch v&#7909; n&agrave;y:	    </td>
+      </tr>
+</table>
+
+
+<table border='0' width='100%' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>M&atilde; s&#7889; </th>
+	<th>T&ecirc;n th&#7867; </th>
+	<th>&#272;i&#7875;m t&#7889;i &#273;a </th>
+    </tr>
+</theader>
+<tbody>
+	#foreach($ct in $cardTypes)
+		
+	#if($ct.id)
+	<tr class='tableitem' id='tr$sp.id'>
+		
+	<td id='td$sp.id'><a href="cardType.action?action=edit&id=$ct.id">
+	<img src='images/edit.png' width='15' height='15' alt='Edit' /></a>
+	
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ beforeDelete($ct.id, $ct.id) } ">	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>	</td>	
+		
+		<td>$!ct.code</td>
+		<td>$!ct.name</td>
+		<td>$!ct.maxPoint</td>
+	  </tr>
+		
+	#end
+</tbody>
+#end
+</table>
+
+</div>
+</div>
+    <br>
+</form>
+</body>

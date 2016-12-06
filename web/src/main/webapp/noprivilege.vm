@@ -1,0 +1,16 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+
+<body id='wrap'>
+<div style='height:300px;text-align:center; vertical-align:middle'>
+<br>
+<br>
+<br>
+<br>
+Oop! Sorry, it seems that you do not have privileges to access this area. 
+<br>
+
+Please contact admin or click Back button to go back. 
+</div>
+
+</body>

@@ -1,0 +1,52 @@
+
+<form name='reportForm' action='reportAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('source')</th>	
+	
+	<th>$i18n.get('note')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddreport' style='display:none;'>
+<th><input type='button' id='savereport' value="  $i18n.get('save')  " onclick="javascript:validateReport('add')" onkeypress="nextfield='';"></th>
+<th> <input type='text'  id='node' name='node' size='15' value='' onkeypress="formname='inlinereportForm'; nextfield='source';"> </th><th> <input type='text'  id='source' name='source' size='15' value='' onkeypress="formname='inlinereportForm'; nextfield='note';"> </th><th> <textarea  id='note' name='note' size='15' onkeypress="formname='inlinereportForm'; nextfield='savereport';">  </textarea> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($report in $reports)
+	#if($report.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddReport($report.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddReport($report.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='reportDelete.action?id=$report.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('reportView.action?id=$report.id', 'View report', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menureport$report.id').style.display='block'; " ondblclick="javascript:document.getElementById('menureport$report.id').style.display='none'"  value='>>' >  
+	
+	<div id='menureport$report.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!report.node</td>
+		
+		<td>$!report.source</td>
+		
+		<td>$!report.note</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

@@ -1,0 +1,86 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<body id='wrap' >
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addimportinvoice').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('importinvoice')
+</div>
+<br>
+<div id='msg'></div>
+<br>
+<form id='importinvoiceForm'  name='importinvoiceForm' action='importinvoiceUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!importinvoice.id' size='15'>
+<table align="center" width="100%">
+<tr class='formlabel'>
+			<td><label>$i18n.get('code'):</label></td> <td><input type='text'  id='code' name='code' value='$!importinvoice.code' size='15' onKeyPress="formname='importinvoiceForm'; nextfield='date';" disabled="disabled"> </td>
+			
+				#if($!importinvoice.date)
+					#set($ngay = "$importinvoice.date")
+					#set($ngay = "$ngay.substring(8,10)/$ngay.substring(5,7)/$ngay.substring(0,4)")
+				#end
+			<td><label>$i18n.get('date'):</label></td> 
+			<td>
+			<input type='text'  id='date' name='date' value='$!dateTool.format('dd/MM/yyyy',$!importinvoice.date)' size='15' onblur='getSmartDate(this)' onKeyPress="formname='importinvoiceForm'; nextfield='warehouse';" >
+			<img src='images/calendar_icon.gif' id='triggerdate'>			</td>
+			
+			<td><label>$i18n.get('warehouse'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())					
+			#set ($selectedwarehouse = $ses.getAttribute('selectedwarehouse'))
+			
+			<select id='warehouse' name='warehouse' style='width:90px;max-width:90px' onkeypress="formname='importinvoiceForm'; nextfield='type';">
+			<option value='$!selectedwarehouse.id'>$!selectedwarehouse.id - $!selectedwarehouse.node</option>
+			</select>			</td>
+		</tr><tr class='formlabel'>
+			<td><label>$i18n.get('type'):</label></td> <td><select id='type' name='type' onkeypress="formname='importinvoiceForm'; nextfield='textprovider';"> <option value='$!importinvoice.type' selected>$!importinvoice.type</option><option value=HN>HN</option><option value= NB> NB</option> </select></td>
+			
+			<td><label>$i18n.get('provider'):</label> </td>
+			<td>		
+			<input type='hidden' id='provider' name='provider'  size='1' value='$!importinvoice.provider.id' onchange='makeGetRequestProviderByTypeHead()' onKeyPress="formname='importinvoiceForm'; nextfield='textprovider';"> 			<input type='text' id='textprovider' name='textprovider' size='15'  value='$!importinvoice.provider.node' onKeyPress="formname='importinvoiceForm'; nextfield='cboprovider'; isSelect=true;"  onkeyup='makeGetRequestProviderByTypeHead()' onclick='makeGetRequestProviderByTypeHead()'>	
+			
+			<div id='divprovider' style='display:none;position:absolute' onKeyPress="formname='importinvoiceForm'; nextfield='fromwarehouse';"></div>				
+			<a href='javascript:void(0)' onClick="window.open('providerList.action', 'Add provider', 'width=400, height=300')">+</a>			</td>
+		
+			<td><label>$i18n.get('fromwarehouse'):</label> </td>
+			<td>
+			<select id='fromwarehouse' name='fromwarehouse' onkeypress="formname='importinvoiceForm'; nextfield='vat';">
+				<option value='$!importinvoice.fromwarehouse.id' selected>$!importinvoice.fromwarehouse.node</option>		
+			</select>			</td>
+		</tr><tr class='formlabel'>
+			<td><label>$i18n.get('vat'):</label></td> <td><input type='text' id='vat' name='vat' value='$!importinvoice.vat' size='15'  onkeypress="formname='importinvoiceForm'; nextfield='user';"></td>
+			<td>$i18n.get('identity'):</td>
+			<td><input type='text' id='node' name='node' value='$!importinvoice.node' size='15' onKeyPress="formname='importinvoiceForm'; nextfield='updateimportinvoice';"></td>
+			<td><label>$i18n.get('user'):</label></td>
+			<td><select id='user' name='user' onkeypress="formname='importinvoiceForm'; nextfield='node';">
+              <option value='$!importinvoice.user.id' selected>$!importinvoice.user.fullname</option>
+            </select></td>
+			
+			</tr>
+		<tr>
+		  <td >D&#7841;ng H&#272; </td>
+		   <td ><select id='tax' name='tax' onkeypress="formname='importinvoiceForm'; nextfield='identity';">
+             <option value=$!importinvoice.tax>$!importinvoice.tax</option>
+             <option value=N>Ko VAT</option>
+             <option value=Y>Co VAT</option>
+           </select></td>
+	  </tr>
+		<tr><td colspan='6'>
+<input id='updateimportinvoice' type='button' value="  $i18n.get('save')  " onKeyDown="javascript: validateImportinvoice('edit', document.getElementById('importinvoiceForm') )" onClick="document.getElementById('divImportinvoicedetail').innerHTML=''; validateImportinvoice('edit', document.getElementById('importinvoiceForm') );" >
+
+
+&nbsp;
+
+<input type='button' onclick='javascript:makeGetRequestImportinvoicedetailByImportinvoice($importinvoice.id)' value="$i18n.get('importinvoicedetail')"> &nbsp;
+	
+		
+</td></tr>
+</table>
+</form>
+</div>
+</body>

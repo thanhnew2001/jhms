@@ -1,0 +1,131 @@
+
+<form name='clientForm' action='clientAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<theader>
+<tr class='tableheader'>
+<th>STT</th>
+<th>Action</th>
+
+	<th>$i18n.get('code')</th>	
+	
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('birthday')</th>	
+	
+	<th>$i18n.get('sex')</th>	
+	
+	<th>$i18n.get('occupation')</th>	
+	
+	<th>$i18n.get('ethnic')</th>	
+	
+	<th>$i18n.get('education')</th>	
+	
+	<th>$i18n.get('oversea')</th>	
+	
+	<th>$i18n.get('address')</th>	
+	
+	<th>$i18n.get('ward')</th>	
+	
+	<th>$i18n.get('company')</th>	
+	
+	<th>$i18n.get('paymenttype')</th>	
+	
+	<th>$i18n.get('insurancenumber')</th>	
+	
+	<th>$i18n.get('joineddate')</th>	
+	
+	<th>$i18n.get('expireddate')</th>	
+	
+	<th>$i18n.get('motherfather')</th>	
+	
+	<th>$i18n.get('phone')</th>	
+	
+	<th>$i18n.get('age')</th>	
+	
+	<th>$i18n.get('maritalstatus')</th>	
+	
+	<th>$i18n.get('createddate')</th>	
+	
+	<th>$i18n.get('password')</th>	
+	
+</tr>
+
+
+</theader>
+<tbody>
+#set($i=0)
+#foreach($client in $clients)
+	#if($client.id)
+	#set($i=$i+1)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddClient($client.id, 'edit')">
+	<td>$i</td>
+	<td>
+	<a href="javascript:makeGetRequestAddClient($client.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('clientDelete.action?id=$client.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$client.id').style.background ='#CCCCCC'; document.getElementById('td$client.id').style.visibility='hidden'} ">
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('clientView.action?id=$client.id', 'View client', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuclient$client.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuclient$client.id').style.display='none'"  value='>>' >  
+	
+	<div id='menuclient$client.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+		 <a href='javascript:makeGetRequestEncounterByClient($client.id)'> encounter </a> &nbsp;
+		 <br>
+		
+		 <a href='javascript:makeGetRequestDruginvoiceByClient($client.id)'> druginvoice </a> &nbsp;
+		 <br>
+		
+	</div>
+	</td>
+	
+		
+		<td>$!client.code</td>
+		
+		<td>$!client.node</td>
+		
+		<td>$!dateTool.format('dd-MM-yyyy',$!client.birthday)</td>
+		
+		<td>$!client.sex</td>
+		
+		<td>$!client.occupation.node</td>
+		
+		<td>$!client.ethnic.node</td>
+		
+		<td>$!client.education</td>
+		
+		<td>$!client.oversea</td>
+		
+		<td>$!client.address</td>
+		
+		<td>$!client.ward.node</td>
+		
+		<td>$!client.company</td>
+		
+		<td>$!client.paymenttype.node</td>
+		
+		<td>$!client.insurancenumber</td>
+		
+		<td>$!dateTool.format('dd-MM-yyyy',$!client.joineddate)</td>
+		
+		<td>$!dateTool.format('dd-MM-yyyy',$!client.expireddate)</td>
+		
+		<td>$!client.motherfather</td>
+		
+		<td>$!client.phone</td>
+		
+		<td>$!client.age</td>
+		
+		<td>$!client.maritalstatus</td>
+		
+		<td>$!dateTool.format('dd-MM-yyyy',$!client.createddate)</td>
+		
+		<td>$!client.password</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

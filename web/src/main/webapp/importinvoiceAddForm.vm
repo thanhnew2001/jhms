@@ -1,0 +1,102 @@
+
+<div id='addimportinvoice'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap' onload='document.importinvoiceForm.type.focus();'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addimportinvoice').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('importinvoice')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='importinvoiceForm' name='importinvoiceForm' action='importinvoiceAdd.action' class='niceform' method='POST'>
+<br>
+<table align="center">
+<tr class='formlabel'>
+			<td><label>$i18n.get('code'):</label></td> <td><input type='text'  id='code' name='code' size='15' onKeyPress="formname='importinvoiceForm'; nextfield='date';" onblur='makeGetRequestImportinvoiceByCode()' value='[auto]' disabled> </td>			
+			
+			<td><label>$i18n.get('date'):</label></td> 
+			<td>
+			<input type='text'  id='date' name='date' size='15' onblur='getSmartDate(this)' onKeyPress="formname='importinvoiceForm'; nextfield='warehouse';" value=$!today >
+			<img src='images/calendar_icon.gif' id='triggerdate'>			</td>
+			
+			<td><label>$i18n.get('warehouse'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())					
+			#set ($selectedwarehouse = $ses.getAttribute('selectedwarehouse'))
+			
+			<select id='warehouse' name='warehouse' style='width:90px;max-width:90px' onkeypress="formname='importinvoiceForm'; nextfield='type';">
+			<option value='$!selectedwarehouse.id'>$!selectedwarehouse.id - $!selectedwarehouse.node</option>
+			</select>			</td>
+		</tr><tr class='formlabel'>
+			<td><label>$i18n.get('type'):</label></td> <td><select id='type' name='type' style='width:90px;max-width:90px' onChange="if(this.value=='NB'){ document.importinvoiceForm.textprovider.disabled = true; document.importinvoiceForm.fromwarehouse.disabled = false; } if(this.value=='HN') { document.importinvoiceForm.textprovider.disabled = false; document.importinvoiceForm.fromwarehouse.disabled = true; }" onkeypress="formname='importinvoiceForm'; nextfield='textprovider';"> <option value=HN>HN</option><option value= NB> NB</option> </select></td>
+
+			
+			<td><label>$i18n.get('provider'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($provider_id = $ses.getAttribute('provider_id'))
+			#set ($provider_node = $ses.getAttribute('provider_node'))
+			
+			<input type='hidden' id='provider' name='provider'  size='1' value='$!provider_id' onchange='makeGetRequestProviderByTypeHead()' onKeyPress="formname='importinvoiceForm'; nextfield='textprovider';"> 
+			
+			<input type='text' id='textprovider' name='textprovider' size='15' value='$!provider_node' onKeyPress="formname='importinvoiceForm'; nextfield='cboprovider'; isSelect=true;"  onkeyup='makeGetRequestProviderByTypeHead()' onclick='makeGetRequestProviderByTypeHead()'>	
+			
+			<div id='divprovider' style='display:none;position:absolute'  onkeypress="formname='importinvoiceForm'; nextfield='vat';"></div>							
+			<a href='javascript:void(0)' onClick="window.open('providerList.action', 'Add provider', 'width=400, height=300')">+</a>
+			<td><label>$i18n.get('fromwarehouse'):</label> </td>
+		  <td>
+			#set ($ses = $req.getSession())					
+			#set ($fromwarehouse_id = $ses.getAttribute('fromwarehouse_id'))
+			#set ($fromwarehouse_node = $ses.getAttribute('fromwarehouse_node'))
+			
+			<select id='fromwarehouse' name='fromwarehouse' style='width:90px;max-width:90px' onkeypress="formname='importinvoiceForm'; nextfield='vat';" disabled>
+			<option value=''>[select...]</option>
+			#foreach($fromwarehouse in $warehouses)
+				<option value='$fromwarehouse.id'>$fromwarehouse.id - $fromwarehouse.node</option>
+			#end
+			</select>
+			<input type="hidden" name="druginvoice" id="druginvoice">
+			<input type="text" name="textdruginvoice" id="textdruginvoice">
+			<input type='button' onClick="window.open('getNotImportedDruginvoice.action?flag=notimported', 'PX', 'width=400; height=400')" value='Phi&#7871;u Xu&#7845;t'></td>
+		</tr>
+		<tr class='formlabel'>
+		  <td colspan="6"><hr></td>
+	  </tr>
+		<tr class='formlabel'>
+			<td><label>$i18n.get('vat'):</label></td> <td><input type='text'  id='vat' name='vat' size='15' onKeyPress="formname='importinvoiceForm'; nextfield='tax';"></td>
+			<td><label>$i18n.get('identity')</label></td> <td><input type='text'  id='node' name='node' size='15' value='' onKeyPress="formname='importinvoiceForm'; nextfield='user';"></td>
+			
+			<td><label>$i18n.get('user'):</label></td> 
+					<td>
+			#set($user = $ses.getAttribute('user'))
+			<select id='payfor' name='user' onkeypress="formname='importinvoiceForm'; nextfield='savereceipt';">
+			<option value=$user.id>$user.node</option>
+			 </select></td>
+        <tr>
+          <td>D&#7841;ng H&#272; </td>
+          <td><select id='tax' name='tax' onkeypress="formname='importinvoiceForm'; nextfield='identity';">
+            <option value=""> </option>
+            <option value=N>Ko VAT</option>
+            <option value=Y>Co VAT</option>
+          </select></td>
+          <td></td>
+        </tr>
+      <tr><td>
+<input type='button' id='saveimportinvoice' value="  $i18n.get('save')  " onKeyDown="this.disabled=true; validateImportinvoice('add', document.getElementById('importinvoiceForm') )"  onclick="this.disabled=true;validateImportinvoice('add', document.getElementById('importinvoiceForm') )" onKeyPress="nextfield='';">
+</td>
+<td><input name="button2" type='button' onClick="window.open('getDruginvoiceList.action', 'PX', 'location=1,status=1,scrollbars=1,width=1024, height=800')" value='H&#272; Ho&agrave;n thu&#7889;c'></td>
+<td></td>
+</tr>
+</table>
+</form>
+</div>
+</body>
+</div>

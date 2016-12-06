@@ -1,0 +1,101 @@
+#parse('myjs.vm')
+#parse('top.vm')
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+
+<script language='javascript' type='text/javascript' src='common.js'></script>
+<script>
+function searchClient()
+{
+	document.getElementById('clientForm').action = "familyMemberList.action";
+	document.getElementById('clientForm').submit();
+}
+
+function saveDrugGroup(id)
+{
+	document.getElementById('drugGroupForm').action = "drugGroupList.action?action=savedruggroup&id="+id;
+
+	document.getElementById('drugGroupForm').submit();
+}
+
+function deleteDrugGroup(id)
+{
+	document.getElementById('drugGroupForm').action = "drugGroupList.action?action=deletedruggroup&id="+id;
+	document.getElementById('drugGroupForm').submit();
+}
+function editDrugGroup(id)
+{
+	document.getElementById('drugGroupForm').action = "drugGroupList.action?action=editdruggroup&id="+id;
+	document.getElementById('drugGroupForm').submit();
+}
+
+
+</script>
+
+<body id='wrap'>
+<form id='drugGroupForm' name='drugGroupForm' action='drugGroupList.action' class='niceform' method='POST'>
+<br>
+<div id='divDrugGroup'>
+<div id='container'>
+  <div class='pageheader'>
+    <input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('adddrug').innerHTML=''" value=' X '>
+    $i18n.get('add') $i18n.get('druggroup')
+  <div id='msg' align='right'></div>
+  </div>
+  <div></div>
+<div id='tabledrug' style='border:#FFFFFF thin solid; width:100%; height: auto; left:25; overflow-y: auto; '>
+
+<table width="804" border="0">
+    <tr>
+      <td width="82">&nbsp;</td>
+      <td width="159">&nbsp;</td>
+      <td width="549"><input type='hidden'  id='id' name='id' value="$drugGroup.id" size='15'></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>Name</td>
+      <td><input type='text'  id='node' name='node' size='15' value='$!drugGroup.node' onKeyPress="formname='drugGroupForm'; nextfield='description';"></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>Description</td>
+      <td><input type='text'  id='description' name='description' size='15' value='$!drugGroup.description' onKeyPress="formname='drugGroupForm'; " width="250"></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td><input name="button2" type="button" onClick="saveDrugGroup('$!drugGroup.id')" value=" L&#432;u ">
+      <input name="button22" type="button" onClick="editDrugGroup(0)" value="Add new "></td>
+    </tr>
+  </table>
+<br>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>
+	<th>$i18n.get('description')</th>
+	</tr>
+</theader>
+<tbody>
+		  #foreach($drugGroup in $druggroups)
+	
+	#if($drugGroup.id)
+		<tr class='tableitem' id='tr$druggroup.id'>
+	<td id='td$druggroup.id' align="center"><a href='javascript:void(0)' onClick="editDrugGroup($!drugGroup.id)"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a>
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ deleteDrugGroup($drugGroup.id) } ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>	</td>	
+		
+		<td>$!drugGroup.node</td>
+		<td>$!drugGroup.description</td>
+		</tr>
+	#end
+</tbody>
+#end
+</table>
+
+</div>
+<br>
+</form>
+</body>

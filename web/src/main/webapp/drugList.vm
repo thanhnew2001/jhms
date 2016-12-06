@@ -1,0 +1,55 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='adddrug'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divDrug'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divDrug').innerHTML=''" value=' X '>  $i18n.get('druglist')  
+</div>
+<br>
+<div>
+<select id='combodrug' name='combodrug'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='node'>$i18n.get('node')</option>
+	
+	<option value='unit'>$i18n.get('unit')</option>
+	
+	<option value='ingredient'>$i18n.get('ingredient')</option>
+	
+	<option value='indication'>$i18n.get('indication')</option>
+	
+	<option value='price'>$i18n.get('price')</option>
+	
+	<option value='insurance'>$i18n.get('insurance')</option>
+	
+</select>
+<input name='searchdrug' id='searchdrug' onkeyup='makeGetRequestDrugBySearch()' value='' onclick='clearSearchBox(searchdrug)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestDrugByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddDrug(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tabledrug' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+
+#parse("responseDrugBySearch.vm")
+
+</div>
+<a href="javascript:makeGetRequestAddDrug(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

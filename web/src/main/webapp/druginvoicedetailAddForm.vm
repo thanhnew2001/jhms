@@ -1,0 +1,118 @@
+
+<div id='adddruginvoicedetail'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'> 
+  <div class='pageheader'> 
+    <input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('adddruginvoicedetail').innerHTML=''" value=' X '>
+    $i18n.get('add') $i18n.get('druginvoicedetail') 
+    <div id='msg' align='right'></div>
+  </div>
+  <form id='druginvoicedetailForm' name='druginvoicedetailForm' action='druginvoicedetailAdd.action' class='niceform' method='POST'>
+    <br>
+    <table>
+      <tr class='formlabel'> 
+        <td><label>$i18n.get('druginvoice'):</label> </td>
+        <td> #set ($ses = $req.getSession()) #set ($druginvoice_id = $ses.getAttribute('druginvoice_id')) 
+          #set ($druginvoice_node = $ses.getAttribute('druginvoice_node')) 
+          <input type='hidden' id='druginvoice' name='druginvoice'  size='1' value='$!druginvoice_id' onchange='makeGetRequestDruginvoiceByTypeHead()' onkeypress="formname='druginvoicedetailForm'; nextfield='textdruginvoice';"> 
+          <input type='text' id='textdruginvoice' name='textdruginvoice' size='15' value='$!druginvoice_node' onkeypress="formname='druginvoicedetailForm'; nextfield='cbodruginvoice'; isSelect=true;"  onkeyup='makeGetRequestDruginvoiceByTypeHead()' onclick='makeGetRequestDruginvoiceByTypeHead()' onFocus="textdruginvoice">	
+          <div id='divdruginvoice' style='display:none;position:absolute'  onkeypress="formname='druginvoicedetailForm'; nextfield='textdrug';"></div>
+          <a href='javascript:void(0)' onclick="window.open('druginvoiceList.action', 'Add druginvoice', 'width=400, height=300')">+</a> 
+        <td><label>$i18n.get('drug'):</label> </td>
+        <td> #set ($ses = $req.getSession()) #set ($drug_id = $ses.getAttribute('drug_id')) 
+          #set ($drug_node = $ses.getAttribute('drug_node')) 
+          <input type='hidden' id='drug' name='drug'  size='1' value='$!drug_id' onchange='makeGetRequestDrugByTypeHead()' onkeypress="formname='druginvoicedetailForm'; nextfield='textdrug';"> 
+          <input type='text' id='textdrug' name='textdrug' size='15' value='$!drug_node' onkeypress="formname='druginvoicedetailForm'; nextfield='cbodrug'; isSelect=true;"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+          <div id='divdrug' style='display:none;position:absolute'  onkeypress="formname='druginvoicedetailForm'; nextfield='batchnumber';"></div>
+          <a href='javascript:void(0)' onclick="window.open('drugList.action', 'Add drug', 'width=400, height=300')">+</a> 
+        <td><label>$i18n.get('batchnumber'):</label></td>
+        <td><input type='text'  id='batchnumber' name='batchnumber' size='15' value='' onkeypress="formname='druginvoicedetailForm'; nextfield='expireddate';">        </td>
+      </tr>
+      <tr class='formlabel'> 
+        <td><label>$i18n.get('expireddate'):</label></td>
+        <td> <input type='text'  id='expireddate' name='expireddate' size='15' onblur='getSmartDate(this)' onkeypress="formname='druginvoicedetailForm'; nextfield='quantity';" value=$!novalue > 
+          <img src='images/calendar_icon.gif' id='triggerexpireddate'> </td>
+        <td><label>$i18n.get('quantity'):</label></td>
+        <td><input type='text'  id='quantity' name='quantity' size='15' value='' onkeypress="formname='druginvoicedetailForm'; nextfield='subtotal';" >        </td>
+        <td><label>$i18n.get('subtotal'):</label></td>
+        <td><input type='text'  id='subtotal' name='subtotal' size='15' value='' onkeypress="formname='druginvoicedetailForm'; nextfield='expiredmonth';" disabled>        </td>
+      </tr>
+      <tr class='formlabel'>
+        <td>$i18n.get('expireddate'): </td>
+        <td><input type='text'  id='expiredmonth' name='expiredmonth' size='15' onkeypress="formname='druginvoicedetailForm'; nextfield='price';" value=$!novalue ></td>
+      <tr class='formlabel'> 
+        <td><label>$i18n.get('price'):</label></td>
+        <td><input type='text'  id='price' name='price' size='15' value='' onkeypress="formname='druginvoicedetailForm'; nextfield='savedruginvoicedetail';" disabled>        </td>
+      <tr>
+        <td> <input type='button' id='savedruginvoicedetail' value="  $i18n.get('save')  " onkeydown="javascript:validateDruginvoicedetail('add', document.getElementById('druginvoicedetailForm') )"  onclick="javascript:validateDruginvoicedetail('add', document.getElementById('druginvoicedetailForm') )" onkeypress="nextfield='';">        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</div>
+
+<div id='adddruginvoicedetail'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'> 
+  <div class='pageheader'> 
+    <input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('adddruginvoicedetail').innerHTML=''" value=' X '>
+    $i18n.get('add') $i18n.get('druginvoicedetail') 
+    <div id='msg' align='right'></div>
+  </div>
+  <form id='druginvoicedetailForm' name='druginvoicedetailForm' action='druginvoicedetailAdd.action' class='niceform' method='POST'>
+    <br>
+    <table>
+      <tr class='formlabel'> 
+        <td><label>$i18n.get('druginvoice'):</label> </td>
+        <td> #set ($ses = $req.getSession()) #set ($druginvoice_id = $ses.getAttribute('druginvoice_id')) 
+          #set ($druginvoice_node = $ses.getAttribute('druginvoice_node')) 
+          <input type='hidden' id='druginvoice' name='druginvoice'  size='1' value='$!druginvoice_id' onchange='makeGetRequestDruginvoiceByTypeHead()' onkeypress="formname='druginvoicedetailForm'; nextfield='textdruginvoice';"> 
+          <input type='text' id='textdruginvoice' name='textdruginvoice' size='15' value='$!druginvoice_node' onkeypress="formname='druginvoicedetailForm'; nextfield='cbodruginvoice'; isSelect=true;"  onkeyup='makeGetRequestDruginvoiceByTypeHead()' onclick='makeGetRequestDruginvoiceByTypeHead()' onFocus="textdruginvoice">	
+          <div id='divdruginvoice' style='display:none;position:absolute'  onkeypress="formname='druginvoicedetailForm'; nextfield='textdrug';"></div>
+          <a href='javascript:void(0)' onclick="window.open('druginvoiceList.action', 'Add druginvoice', 'width=400, height=300')">+</a> 
+        <td><label>$i18n.get('drug'):</label> </td>
+        <td> #set ($ses = $req.getSession()) #set ($drug_id = $ses.getAttribute('drug_id')) 
+          #set ($drug_node = $ses.getAttribute('drug_node')) 
+          <input type='hidden' id='drug' name='drug'  size='1' value='$!drug_id' onchange='makeGetRequestDrugByTypeHead()' onkeypress="formname='druginvoicedetailForm'; nextfield='textdrug';"> 
+          <input type='text' id='textdrug' name='textdrug' size='15' value='$!drug_node' onkeypress="formname='druginvoicedetailForm'; nextfield='cbodrug'; isSelect=true;"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+          <div id='divdrug' style='display:none;position:absolute'  onkeypress="formname='druginvoicedetailForm'; nextfield='batchnumber';"></div>
+          <a href='javascript:void(0)' onclick="window.open('drugList.action', 'Add drug', 'width=400, height=300')">+</a> 
+        <td><label>$i18n.get('batchnumber'):</label></td>
+        <td><input type='text'  id='batchnumber' name='batchnumber' size='15' value='' onkeypress="formname='druginvoicedetailForm'; nextfield='expireddate';">        </td>
+      </tr>
+      <tr class='formlabel'> 
+        <td><label>$i18n.get('expireddate'):</label></td>
+        <td> <input type='text'  id='expireddate' name='expireddate' size='15' onblur='getSmartDate(this)' onkeypress="formname='druginvoicedetailForm'; nextfield='quantity';" value=$!novalue > 
+          <img src='images/calendar_icon.gif' id='triggerexpireddate'> </td>
+        <td><label>$i18n.get('quantity'):</label></td>
+        <td><input type='text'  id='quantity' name='quantity' size='15' value='' onkeypress="formname='druginvoicedetailForm'; nextfield='subtotal';" >        </td>
+        <td><label>$i18n.get('subtotal'):</label></td>
+        <td><input type='text'  id='subtotal' name='subtotal' size='15' value='' onkeypress="formname='druginvoicedetailForm'; nextfield='expiredmonth';" disabled>        </td>
+      </tr>
+      <tr class='formlabel'>
+        <td>Th&aacute;ng HH </td>
+        <td><input type='text'  id='expiredmonth' name='expiredmonth' size='15' onkeypress="formname='druginvoicedetailForm'; nextfield='price';" value=$!novalue ></td>
+      <tr class='formlabel'> 
+        <td><label>$i18n.get('price'):</label></td>
+        <td><input type='text'  id='price' name='price' size='15' value='' onkeypress="formname='druginvoicedetailForm'; nextfield='savedruginvoicedetail';" disabled>        </td>
+      <tr>
+        <td> <input type='button' id='savedruginvoicedetail' value="  $i18n.get('save')  " onkeydown="javascript:validateDruginvoicedetail('add', document.getElementById('druginvoicedetailForm') )"  onclick="javascript:validateDruginvoicedetail('add', document.getElementById('druginvoicedetailForm') )" onkeypress="nextfield='';">        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</div>

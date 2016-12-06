@@ -1,0 +1,114 @@
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+
+<form action='noiSoiTMHSave.action' method='POST'>
+<h2>PHI&#7870;U K&#7870;T QU&#7842; N&#7896;I SOI TAI M&#360;I H&#7884;NG </h2>
+<table width="100%" border="0">
+  <tr>
+    <td width="15%"><strong>H&#7885; v&agrave; t&ecirc;n: </strong></td>
+    <td width="35%">$!noiSoiTMH.indicationdetail.encounter.client.node</td>
+    <td width="10%"><strong>Tu&#7893;i:</strong></td>
+    <td width="10%">$dateTool.format('dd/MM/yyyy',$!noiSoiTMH.indicationdetail.encounter.client.birthday)</td>
+    <td width="10%">Gi&#7899;i:</td>
+    <td width="20%">$!noiSoiTMH.indicationdetail.encounter.client.sex</td>
+  </tr>
+  <tr>
+    <td><strong>&#272;&#7883;a ch&#7881;: </strong></td>
+    <td>$!noiSoiTMH.indicationdetail.encounter.client.ward.node</td>
+    <td><strong>L&acirc;m s&agrave;ng: </strong></td>
+    <td colspan="3">$!noiSoiTMH.indicationdetail.encounter.initialdiagnosis</td>
+    </tr>
+  <tr>
+    <td><strong>BS ch&#7881; &#273;&#7883;nh:</strong> </td>
+    <td>$!noiSoiTMH.indicationdetail.encounter.user.node</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><strong>M&aacute;y n&#7897;i soi:</strong> </td>
+    <td>&nbsp;</td>
+    <td colspan="3">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<br>
+<H2>T&#431;&#7900;NG TR&Igrave;NH K&#7870;T QU&#7842; </H2>
+<table width="100%">
+
+	<tr>
+	<td width="20%"><strong>1. Tai </strong></td>
+	<td width="80%">&nbsp;</td>
+	</tr>
+	
+	<tr>
+	<td>&#7888;ng tai ngo&agrave;i:</td>
+	<td>
+	<input type="text" size="100" name="ongtaingoai" value="$!noiSoiTMH.ongtaingoai"></td>
+	</tr>
+	
+	<tr>
+	<td>M&agrave;ng nh&#297;: </td>
+	<td><input type="text" size="100" name="mangnhi" value="$!noiSoiTMH.mangnhi"></td>
+	</tr>
+	<tr>
+	  <td><strong>2. M&#361;i xoang </strong></td>
+	  <td>&nbsp;</td>
+    </tr>
+	<tr>
+	  <td>Ni&ecirc;m m&#7841;c m&#361;i: </td>
+	  <td><input type="text" size="100" name="niemmacmui" value="$!noiSoiTMH.niemmacmui"></td>
+    </tr>
+	<tr>
+	  <td>V&aacute;ch ng&#259;n: </td>
+	  <td><input type="text" size="100" name="vachngan" value="$!noiSoiTMH.vachngan"></td>
+    </tr>
+	<tr>
+	  <td>Khe gi&#7919;a: </td>
+	  <td><input type="text" size="100" name="khegiua" value="$!noiSoiTMH.khegiua"></td>
+    </tr>
+	<tr>
+	  <td>Khe tr&ecirc;n: </td>
+	  <td><input type="text" size="100" name="khetren" value="$!noiSoiTMH.khetren"></td>
+    </tr>
+	<tr>
+	  <td>M&#7887;m m&oacute;c, b&ograve;ng s&agrave;ng: </td>
+	  <td><input type="text" size="100" name="mommoc" value="$!noiSoiTMH.mommoc"></td>
+    </tr>
+	<tr>
+	  <td><strong>3. V&ograve;m h&#7885;ng: </strong></td>
+	  <td><input type="text" size="100" name="vomhong" value="$!noiSoiTMH.vomhong"></td>
+    </tr>
+	<tr>
+	  <td><strong>4. H&#7885;ng: </strong></td>
+	  <td><input type="text" size="100" name="hong" value="$!noiSoiTMH.hong"></td>
+    </tr>
+	<tr>
+	  <td><strong>5. Thanh qu&#7843;n: </strong></td>
+	  <td><input type="text" size="100" name="thanhquan" value="$!noiSoiTMH.thanhquan"></td>
+    </tr>
+	<tr>
+	  <td><strong>*C&#7843;m ngh&#297;: </strong></td>
+	  <td><input type="text" size="100" name="camnghi" value="$!noiSoiTMH.camnghi"></td>
+    </tr>
+	<tr>
+	  <td><strong>*&#272;&#7873; ngh&#7883;: </strong></td>
+	  <td><input type="text" size="100" name="denghi" value="$!noiSoiTMH.denghi"></td>
+    </tr>
+	<tr>
+	<input type='hidden' name='id' value='$!noiSoiTMH.id'>
+	<input type='hidden' name='action' value='save'>
+	  <td><input type='submit' value='Save'></td>
+	  <td></td>
+    </tr>
+</table>
+<br>
+<br>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+</form>

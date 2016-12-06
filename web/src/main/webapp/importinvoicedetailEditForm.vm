@@ -1,0 +1,77 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addimportinvoicedetail').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('importinvoicedetail')
+</div>
+<br>
+<div id='msg'></div>
+<br>
+<form id='importinvoicedetailForm'  name='importinvoicedetailForm' action='importinvoicedetailUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!importinvoicedetail.id' size='15'>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('importinvoice'):</label> </td>
+			<td>		
+			<input type='hidden' id='importinvoice' name='importinvoice'  size='1' value='$!importinvoicedetail.importinvoice.id' onchange='makeGetRequestImportinvoiceByTypeHead()' onKeyPress="formname='importinvoicedetailForm'; nextfield='textimportinvoice';"> 			<input type='text' id='textimportinvoice' name='textimportinvoice' size='15'  value='$!importinvoicedetail.importinvoice.node' onKeyPress="formname='importinvoicedetailForm'; nextfield='cboimportinvoice'; isSelect=true;"  onkeyup='makeGetRequestImportinvoiceByTypeHead()' onclick='makeGetRequestImportinvoiceByTypeHead()'>	
+			
+			<div id='divimportinvoice' style='display:none;position:absolute' onKeyPress="formname='importinvoicedetailForm'; nextfield='textdrug';"></div>				
+			<a href='javascript:void(0)' onClick="window.open('importinvoiceList.action', 'Add importinvoice', 'width=400, height=300')">+</a>			</td>
+		
+			<td><label>$i18n.get('drug'):</label> </td>
+			<td>		
+			<input type='hidden' id='drug' name='drug'  size='1' value='$!importinvoicedetail.drug.id' onchange='makeGetRequestDrugByTypeHead()' onKeyPress="formname='importinvoicedetailForm'; nextfield='textdrug';"> 			<input type='text' id='textdrug' name='textdrug' size='15'  value='$!importinvoicedetail.drug.node' onKeyPress="formname='importinvoicedetailForm'; nextfield='cbodrug'; isSelect=true;"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+			
+			<div id='divdrug' style='display:none;position:absolute' onKeyPress="formname='importinvoicedetailForm'; nextfield='quantity';"></div>				
+			<a href='javascript:void(0)' onClick="window.open('drugList.action', 'Add drug', 'width=400, height=300')">+</a>			</td>
+		
+			<td><label>$i18n.get('quantity'):</label></td> <td><input type='text' id='quantity' name='quantity' value='$!importinvoicedetail.quantity' size='15' onKeyPress="formname='importinvoicedetailForm'; nextfield='expireddate';" onchange = "document.getElementById('subtotal').value = document.getElementById('price').value*this.value"> </td>
+			</tr><tr class='formlabel'>
+				#if($!importinvoicedetail.expireddate)
+					#set($ngay = "$importinvoicedetail.expireddate")
+					#set($ngay = "$ngay.substring(8,10)/$ngay.substring(5,7)/$ngay.substring(0,4)")
+				#end
+			<td><label>$i18n.get('expireddate'):</label></td> 
+			<td>
+			<input type='text'  id='expireddate' name='expireddate' value='$!ngay' size='15' onblur='getSmartDate(this)' onKeyPress="formname='importinvoicedetailForm'; nextfield='batchnumber';" >
+			<img src='images/calendar_icon.gif' id='triggerexpireddate'>			</td>
+			
+			<td><label>$i18n.get('batchnumber'):</label></td> <td><input type='text' id='batchnumber' name='batchnumber' value='$!importinvoicedetail.batchnumber' size='15'  onkeypress="formname='importinvoicedetailForm'; nextfield='price';"> </td>
+			
+			<td><label>$i18n.get('price'):</label></td> <td><input type='text' id='price' name='price' value='$!importinvoicedetail.price' size='15'  onkeypress="formname='importinvoicedetailForm'; nextfield='expiredmonth';" onchange = "document.getElementById('subtotal').value = document.getElementById('quantity').value*this.value"> </td>
+			</tr>
+			<tr class='formlabel'>
+			  <td>$i18n.get('expiredmonth'): </td>
+			  <td><input type='text'  id='expiredmonth' name='expiredmonth' value='$!importinvoicedetail.expiredmonth' size='15' onKeyPress="formname='importinvoicedetailForm'; nextfield='visanumber';" >
+		      <img src='images/calendar_icon.gif' id='triggerexpireddate'></td>
+			  <td>$i18n.get('visaNo'):</td>
+			  <td><input type='text' id='visano' name='visano' value='$!importinvoicedetail.visaNo' size='15'  onkeypress="formname='importinvoicedetailForm'; nextfield='node';"></td>
+			  <td>$i18n.get('note'):</td>
+			  <td><input type='text' id='node' name='node' value='$!importinvoicedetail.node' size='15' onKeyPress="formname='importinvoicedetailForm'; nextfield='discount';"></td>
+	  </tr>
+			<tr class='formlabel'>
+			<td><label>$i18n.get('discount'):</label></td> <td><input type='text' id='discount' name='discount' value='$!importinvoicedetail.discount' size='15' onKeyPress="formname='importinvoicedetailForm'; nextfield='subtotal';"> </td>
+			
+			<td><label>$i18n.get('subtotal'):</label></td> <td><input type='text' id='subtotal' name='subtotal' value='$!importinvoicedetail.subtotal' size='15'  onKeyPress="formname='importinvoicedetailForm'; nextfield='updateimportinvoicedetail';" onchange = "document.getElementById('subtotal').value = document.getElementById('quantity').value*this.value"></td>
+			
+			<td><label></label></td> <td>&nbsp;</td>
+			</tr>
+
+<tr><td colspan='6'>
+<input id='updateimportinvoicedetail' type='button' value="  $i18n.get('save')  " onKeyDown="javascript: validateImportinvoicedetail('edit', document.getElementById('importinvoicedetailForm') )" onClick="javascript: validateImportinvoicedetail('edit', document.getElementById('importinvoicedetailForm') )" onKeyPress="formname='importinvoicedetailForm'; nextfield = '';">
+
+
+&nbsp;
+
+</td></tr>
+</table>
+</form>
+</div>
+</body>

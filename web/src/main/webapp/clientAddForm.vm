@@ -1,0 +1,252 @@
+
+<div id='addclient'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+
+
+
+<body id='wrap' onload='document.clientForm.code.focus();'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addclient').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('client')
+</div>
+<div id='notice'></div>
+<form id='clientForm' name='clientForm' action='clientAdd.action' class='niceform' method='POST'>
+<br>
+<table align="center" width="100%">
+<tr class='formlabel'>
+  <td colspan="6"><strong>&nbsp;$i18n.get('administrativeinformation'):</strong>
+    <hr></td>
+  </tr>
+<tr class='formlabel'>
+			<td><label>$i18n.get('code'):</label></td> <td><input type='text'  id='code' name='code' size='18' onKeyPress="formname='clientForm'; nextfield='node';" onBlur="makeGetRequestClientByCode('code')"> </td>			
+			
+			<td><label>$i18n.get('node'):</label></td> 
+		<td><input type='text'  id='node' name='node' size='18' value='' onKeyPress="formname='clientForm'; nextfield='birthday';"></td>
+			
+			<td colspan="2" rowspan="5">
+			#parse("saveWebcam.vm")	    </td> 
+	  </tr>
+<tr class='formlabel'>
+  <td>$i18n.get('birthday'):</td>
+  <td><input type='text'  id='birthday' name='birthday' size='18' onBlur='getSmartDate(this)' onKeyPress="formname='clientForm'; nextfield='sex';" value=$!novalue >
+    <img src='images/calendar_icon.gif' id='triggerbirthday'></td>
+  <td>$i18n.get('sex'):</td>
+  <td><select id='sex' name='sex' onkeypress="formname='clientForm'; nextfield='occupation';">
+    <option value="Nam">Nam</option>
+    <option value="N&#7919;">N&#7919;</option>
+  </select></td>
+  </tr>
+<tr class='formlabel'>
+		<td><label>$i18n.get('occupation'):</label></td> <td> #set ($ses = $req.getSession())					
+			#set ($occupation_id = $ses.getAttribute('occupation_id'))
+			#set ($occupation_node = $ses.getAttribute('occupation_node'))
+          <select id='occupation' name='occupation' onkeypress="formname='clientForm'; nextfield='ethnic';">
+             
+			#foreach($occupation in $occupations)
+				
+            <option value='$occupation.id'>$occupation.id - $occupation.node</option>
+            
+			#end
+			
+          </select>
+</td>
+
+			
+		<td><label></label> <label>$i18n.get('ethnic'):</label></td>
+		<td> #set ($ses = $req.getSession())					
+			#set ($ethnic_id = $ses.getAttribute('ethnic_id'))
+			#set ($ethnic_node = $ses.getAttribute('ethnic_node'))
+          <select id='ethnic' name='ethnic' onkeypress="formname='clientForm'; nextfield='education';">
+            
+			#foreach($ethnic in $ethnics)
+				
+            <option value='$ethnic.id'>$ethnic.id - $ethnic.node</option>
+            
+			#end
+			
+        </select></td>
+	  </tr>
+		    
+	    <tr class='formlabel'>
+			<td><label>$i18n.get('education'):</label></td> <td><select id='education' name='education' onkeypress="formname='clientForm'; nextfield='oversea';">
+			    <option value="Kh&aacute;c">Kh&aacute;c</option> 
+		      <option value=9/12>9/12</option>
+			    <option value="12/12">12/12</option>
+			    <option value="Trung c&#7845;p">Trung c&#7845;p</option>
+			    <option value="Cao &#272;&#7859;ng">Cao &#272;&#7859;ng</option>
+			    <option value="&#272;&#7841;i H&#7885;c">&#272;&#7841;i H&#7885;c</option>
+			    <option value="Sau &#272;&#7841;i H&#7885;c">Sau &#272;&#7841;i H&#7885;c</option>
+            </select></td>
+
+			
+			<td><label>$i18n.get('oversea'):</label></td> <td><input type='text'  id='oversea' name='oversea' size='18' value='' onKeyPress="formname='clientForm'; nextfield='address';"> </td>
+	  </tr>
+	    <tr class='formlabel'>
+	      <td>$i18n.get('address'):</td>
+	      <td><input type='text'  id='address' name='address' size='18' value='' onKeyPress="formname='clientForm'; nextfield='textward';">        
+	      <td><label>$i18n.get('ward'):</label></td>
+	      <td>#set ($ses = $req.getSession())
+					
+			#set ($ward_id = $ses.getAttribute('ward_id'))
+			#set ($ward_node = $ses.getAttribute('ward_node'))
+            <input type='hidden' id='ward' name='ward'  size='1' value='$!ward_id' onchange='makeGetRequestWardByTypeHead()' onKeyPress="formname='clientForm'; nextfield='textward';">
+            <input type='text' id='textward' name='textward' size='18' value='$!ward_node' onKeyPress="formname='clientForm'; nextfield='cboward'; isSelect=true;"  onkeyup='makeGetRequestWardByTypeHead()' onclick='makeGetRequestWardByTypeHead()'>
+            <div id='divward' style='display:none;position:absolute'  onkeypress="formname='clientForm'; nextfield='company';"></div>
+          <a href='javascript:void(0)' onClick="window.open('wardList.action', 'Add ward', 'width=400, height=300')"></a>+ </td>
+      </tr>
+	    <tr class='formlabel'>
+		  <td><label>$i18n.get('company'):</label></td>
+		  <td><input type='text'  id='company' name='company' size='18' value='' onKeyPress="formname='clientForm'; nextfield='paymenttype';">
+		  <td><label>$i18n.get('paymenttype')</label></td> <td> #set ($ses = $req.getSession())					
+			#set ($paymenttype_id = $ses.getAttribute('paymenttype_id'))
+			#set ($paymenttype_node = $ses.getAttribute('paymenttype_node'))
+            <select id='paymenttype' name='paymenttype' onkeypress="formname='clientForm'; nextfield='insurancenumber';">
+              
+              
+			#foreach($paymenttype in $paymenttypes)
+				
+              
+              <option value='$paymenttype.id'>$paymenttype.id - $paymenttype.node</option>
+              
+              
+			#end
+			
+            
+            </select>
+</td>
+	      <td colspan="2">$i18n.get('picture'):
+	        <input type="text" id="file1" name="file1">
+            <input name="button3" type="button" onClick="window.open('upload.action','Upload file','width=500;height=500')" value="Upload"></td>
+	    </tr>
+			<tr class='formlabel'>
+			  <td colspan="6">&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="6">&nbsp;<strong>$i18n.get('communication')</strong>
+		      <hr></td>
+	  </tr>
+		<tr class='formlabel'>
+			<td><label>$i18n.get('insurancenumber'):</label></td> <td><input type='text'  id='insurancenumber' name='insurancenumber' size='18' value='' onKeyPress="formname='clientForm'; nextfield='joineddate';"> </td>
+			
+			<td><label>$i18n.get('joineddate'):</label></td> 
+			<td>
+			<input type='text'  id='joineddate' name='joineddate' size='18' onblur='getSmartDate(this)' onKeyPress="formname='clientForm'; nextfield='expireddate';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggerjoineddate'>			</td>
+			
+			<td><label>$i18n.get('expireddate'):</label></td> 
+			<td>
+			<input type='text'  id='expireddate' name='expireddate' size='18' onblur='getSmartDate(this)' onKeyPress="formname='clientForm'; nextfield='motherfather';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggerexpireddate'>			</td>
+	  </tr><tr class='formlabel'>
+			<td><label>$i18n.get('motherfather'):</label></td> <td><input type='text'  id='motherfather' name='motherfather' size='18' value='' onKeyPress="formname='clientForm'; nextfield='phone';"> </td>
+			
+			<td><label>$i18n.get('phone'):</label></td> 
+			<td><input type='text'  id='phone' name='phone' size='18' value='' onKeyPress="formname='clientForm'; nextfield='email';" onBlur="makeGetRequestClientByCode('phone');"></td>
+			
+			<td><label>$i18n.get('email'):</label></td> 
+			<td><input type='text'  id='email' name='email' size='18' value='' onKeyPress="formname='clientForm'; nextfield='maritalstatus';" onBlur="makeGetRequestClientByCode('email');"></td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('maritalstatus'):</label></td> <td><select id='maritalstatus' name='maritalstatus' onkeypress="formname='clientForm'; nextfield='room';">
+			  <option value="&#272;&#7897;c Th&acirc;n">&#272;&#7897;c Th&acirc;n</option>
+			  <option value="K&#7871;t H&ocirc;n">K&#7871;t H&ocirc;n</option>
+            </select></td>
+
+			
+			<td><label>$i18n.get('createddate'):</label></td> 
+			<td>
+			<input type='text'  id='createddate' name='createddate' size='18' onblur='getSmartDate(this)' onKeyPress="formname='clientForm'; nextfield='room';" value=$!today disabled="disabled" >
+			<img src='images/calendar_icon.gif' id='triggercreateddate'>			</td>
+			
+			<td><label></label></td> <td>&nbsp;</td>
+			</tr>
+			<tr class='formlabel'>
+			  <td colspan="6">&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="6">
+			  <strong>$i18n.get('chooseoutpatientclinic'):
+			  <select id='room' name='room' onkeypress="nextfield = 'service';">
+			      	
+				#foreach($room in $rooms)
+				
+			      <option value='$room.id'>$room.node</option>
+			      
+				#end
+				
+		      </select>
+			  $i18n.get('ser_examination'):
+			  <select id='service' name='service' onkeypress="nextfield = 'serpackage';">  
+			    <option value=''></option>	              
+				#foreach($service in $services)			      
+                <option value='$service.id'>$service.node</option>	
+				#end		      
+              </select>
+			  $i18n.get('ser_package'):
+			  <select id='serpackage' name='serpackage' onkeypress="nextfield = 'pulse';">
+  <option value=''></option>			  
+#foreach($serpackage in $serpackages)			      
+  <option value='$serpackage.id'>$serpackage.node</option>
+#end	  
+</select><br>
+			<br>	
+			  $i18n.get('promotioncode'): 
+			  <input type='text'  id='promotionCode' name='promotionCode' size='18' value=''>
+			  </strong>
+			  <input type='button' size='18' value="$i18n.get('check')" onClick="window.open('encounterList.action?promotionCode='+getElementById('promotionCode').value, 'Promotion Code', 'height=500,width=800,scrollbars=yes')">	
+	
+			  Prepaid Card: 
+			  <input type='text'  id='prepaidCard' name='prepaidCard' size='18' value=''>
+			  </strong>
+			  <input type='button' size='18' value="$i18n.get('check')" onClick="window.open('prepaidCardTransactionDetail.action?prepaidCard='+getElementById('prepaidCard').value, 'Prepaid Card Transaction', 'height=500,width=800,scrollbars=yes')">		  
+			  
+			  </td>
+	  </tr>
+			
+			<tr class='formlabel'>
+			  <td colspan="6"><strong>$i18n.get('survivalsign'): </strong></td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="6"><hr></td>
+	  </tr>
+			<tr class='formlabel'>
+              <td><label>$i18n.get('pulse'):</label></td>
+			  <td><input type='text'  id='pulse' name='pulse' size='10' value='' onKeyPress="formname='clientForm'; nextfield='pressurel';" ></td>
+			  <td><label>$i18n.get('pressure_h_l'):</label></td>
+			  <td><input type='text'  id='pressurel' name='pressurel' size='10' value='' onKeyPress="formname='clientForm'; nextfield='pressureh';">
+			    /
+		          <input type='text'  id='pressureh' name='pressureh' size='10' value='' onKeyPress="formname='clientForm'; nextfield='temperature';"></td>
+			  <td>$i18n.get('temperature'):</td>
+			  <td><input type='text'  id='temperature' name='temperature' size='10' value='' onKeyPress="formname='clientForm'; nextfield='breath';"></td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td>$i18n.get('breathing'):</td>
+			  <td><input type='text'  id='breath' name='breath' size='10' value='' onKeyPress="formname='clientForm'; nextfield='sbo2';" onBlur="makeGetRequestClientByCode('phone');"></td>
+			  <td>sbo2:</td>
+			  <td><input type='text'  id='sbo2' name='sbo2' size='10' value='' onKeyPress="formname='clientForm'; nextfield='height';" onBlur="makeGetRequestClientByCode('phone');"></td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td>$i18n.get('height'):</td>
+			  <td><input type='text'  id='height' name='height' size='10' value='' onKeyPress="formname='clientForm'; nextfield='weight';" o></td>
+			  <td>$i18n.get('weight'):</td>
+			  <td><input type='text'  id='weight' name='weight' size='10' value='' onKeyPress="formname='clientForm'; nextfield='saveclient';" ></td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+			
+			
+	<tr><td>
+<input type='button' id='saveclient' value="  $i18n.get('save')  " onClick="this.disabled = 'true'; validateClient('add', document.getElementById('clientForm') )" >
+</td></tr>
+</table>
+
+</form>
+</div>
+</body>
+</div>

@@ -1,0 +1,93 @@
+
+<div id='addreceipt'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addreceipt').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('receipt')
+</div>
+<div id='msg' align='right'></div>
+
+
+<form id='receiptForm' name='receiptForm' action='receiptAdd.action' class='niceform' method='POST'>
+<br>
+<table width="100%">
+<tr class='formlabel'>
+			<td><label>$i18n.get('code'):</label></td> <td><input type='text'  id='code' name='code' size='15' onKeyPress="formname='receiptForm'; nextfield='date';" onblur='makeGetRequestReceiptByCode()' value='[auto]' disabled> </td>			
+			
+			<td><label>$i18n.get('date'):</label></td> 
+			<td>
+			<input type='text'  id='date' name='date' size='15' onblur='getSmartDate(this)' onKeyPress="formname='receiptForm'; nextfield='textencounter';" value='$!today' >
+			<img src='images/calendar_icon.gif' id='triggerdate'>
+			</td>
+			
+			<td><label>$i18n.get('encounter'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+			
+			<input type='hidden' id='encounter' name='encounter'  size='1' value='$!encounter_id' onchange='makeGetRequestEncounterByTypeHead()' onKeyPress="formname='receiptForm'; nextfield='textencounter';">
+			<div id='divencounter' style='display:none;position:absolute'  onkeypress="formname='receiptForm'; nextfield='node';"></div>							
+			<input id='getencounter' name='getencounter' type='button' value="$i18n.get('encounterlist')"  onclick="window.open('encounterNotPaidServiceList.action?flag=popup', 'Add encounter', 'width=800, height=500, scrollbars =yes')" >
+		</tr><tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text'  id='node' name='node' size='15' value='' onKeyPress="formname='receiptForm'; nextfield='birthday';"> </td>
+			
+			<td><label>$i18n.get('birthday'):</label></td> 
+			<td>
+			<input type='text'  id='birthday' name='birthday' size='15' onblur='getSmartDate(this)' onKeyPress="formname='receiptForm'; nextfield='age';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggerbirthday'>
+			</td>
+			
+			<td><label>$i18n.get('age'):</label></td> <td><input type='text'  id='age' name='age' size='15' value='' onKeyPress="formname='receiptForm'; nextfield='address';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('address'):</label></td> <td><input type='text'  id='address' name='address' size='15' value='' onKeyPress="formname='receiptForm'; nextfield='phone';"> </td>
+			
+			<td><label>$i18n.get('phone'):</label></td> <td><input type='text'  id='phone' name='phone' size='15' value='' onKeyPress="formname='receiptForm'; nextfield='paymenttype';"> </td>
+			
+			<td><label>$i18n.get('paymenttype'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())					
+			#set ($paymenttype_id = $ses.getAttribute('paymenttype_id'))
+			#set ($paymenttype_node = $ses.getAttribute('paymenttype_node'))
+			
+			<select id='paymenttype' name='paymenttype' style='width:90px;max-width:90px' onkeypress="formname='receiptForm'; nextfield='paymentmethod';">
+			#foreach($paymenttype in $paymenttypes)
+				<option value='$paymenttype.id'>$paymenttype.id - $paymenttype.node</option>
+			#end
+			</select>
+			</td>
+		</tr><tr class='formlabel'>
+			<td><label>$i18n.get('paymentmethod'):</label></td> <td>
+			<select id='paymentmethod' name='paymentmethod' style='width:90px;max-width:90px' onkeypress="formname='receiptForm'; nextfield='payfor';">
+			  <option value="TT">Thanh to&aacute;n</option>
+			  <option value="TU">Th&#7867; Vip</option> 
+			 </select></td>
+
+			
+			<td><label>$i18n.get('payfor'):</label></td> <td>
+			<select id='payfor' name='payfor' style='width:90px;max-width:90px' onkeypress="formname='receiptForm'; nextfield='user';">
+			<option value=DV>DV</option>
+			<option value=TH>TH</option>
+			 </select></td>
+
+			<td><label>$i18n.get('user'):</label></td> 
+			<td>
+			#set($user = $ses.getAttribute('user'))
+			<select id='user' name='user' onkeypress="formname='receiptForm'; nextfield='savereceipt';">
+			<option value=$user.id selected>$user.fullname</option>
+			 </select></td>			
+			</tr>
+		
+<tr><td>
+<input type='button' id='savereceipt' value="  $i18n.get('save')  " onKeyDown="this.disabled = 'true'; validateReceipt('add', document.getElementById('receiptForm') )"  onclick="this.disabled = 'true';validateReceipt('add', document.getElementById('receiptForm') )" onKeyPress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

@@ -1,0 +1,38 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addreport').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('report')
+</div>
+<br>
+<div id='msg'></div>
+<br>
+<form id='reportForm'  name='reportForm' action='reportUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!report.id' size='15'>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text' id='node' name='node' value='$!report.node' size='15' value='' onkeypress="formname='reportForm'; nextfield='source';"> </td>
+			
+			<td><label>$i18n.get('source'):</label></td> <td><input type='text' id='source' name='source' value='$!report.source' size='15' value='' onkeypress="formname='reportForm'; nextfield='note';"> </td>
+			
+			<td><label>$i18n.get('note'):</label></td> <td><textarea  id='note' name='note' value='$!report.note' size='15' onkeypress="formname='reportForm'; nextfield='updatereport';">  </textarea></td>
+			</tr>
+
+<tr><td colspan='6'>
+<input id='updatereport' type='button' value="  $i18n.get('save')  " onkeydown="javascript: validateReport('edit', document.getElementById('reportForm') )" onclick="javascript: validateReport('edit', document.getElementById('reportForm') )" onkeypress="formname='reportForm'; nextfield = '';">
+
+
+&nbsp;
+
+</td></tr>
+</table>
+</form>
+</div>
+</body>

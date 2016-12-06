@@ -1,0 +1,33 @@
+
+<div id='adddepartment'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('adddepartment').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('department')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='departmentForm' name='departmentForm' action='departmentAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text'  id='node' name='node' size='15' value='' onkeypress="formname='departmentForm'; nextfield='deptype';"> </td>
+			
+			<td><label>$i18n.get('deptype'):</label></td> <td><input type='text'  id='deptype' name='deptype' size='15' value='OP' onkeypress="formname='departmentForm'; nextfield='savedepartment';"> </td>
+			
+<tr><td>
+<input type='button' id='savedepartment' value="  $i18n.get('save')  " onkeydown="javascript:validateDepartment('add', document.getElementById('departmentForm') )"  onclick="javascript:validateDepartment('add', document.getElementById('departmentForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

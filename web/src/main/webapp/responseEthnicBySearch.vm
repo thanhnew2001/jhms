@@ -1,0 +1,44 @@
+
+<form name='ethnicForm' action='ethnicAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddethnic' style='display:none;'>
+<th><input type='button' id='saveethnic' value="  $i18n.get('save')  " onclick="javascript:validateEthnic('add')" onkeypress="nextfield='';"></th>
+<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlineethnicForm'; nextfield='saveethnic';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($ethnic in $ethnics)
+	#if($ethnic.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddEthnic($ethnic.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddEthnic($ethnic.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='ethnicDelete.action?id=$ethnic.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('ethnicView.action?id=$ethnic.id', 'View ethnic', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuethnic$ethnic.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuethnic$ethnic.id').style.display='none'"  value='>>' >  
+	
+	<div id='menuethnic$ethnic.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!ethnic.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

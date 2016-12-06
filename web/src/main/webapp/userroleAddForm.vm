@@ -1,0 +1,57 @@
+
+<div id='adduserrole'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('adduserrole').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('userrole')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='userroleForm' name='userroleForm' action='userroleAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('user'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($user_id = $ses.getAttribute('user_id'))
+			#set ($user_node = $ses.getAttribute('user_node'))
+			
+			<input type='hidden' id='user' name='user'  size='1' value='$!user_id' onchange='makeGetRequestUserByTypeHead()' onkeypress="formname='userroleForm'; nextfield='textuser';"> 
+			
+			<input type='text' id='textuser' name='textuser' size='18' value='$!user_node' onkeypress="formname='userroleForm'; nextfield='cbouser'; isSelect=true;"  onkeyup='makeGetRequestUserByTypeHead()' onclick='makeGetRequestUserByTypeHead()'>	
+			
+			<div id='divuser' style='display:none;position:absolute'  onkeypress="formname='userroleForm'; nextfield='textrole';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('userList.action', 'Add user', 'width=400, height=300')"> ... </a>
+		
+			<td><label>$i18n.get('role'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($role_id = $ses.getAttribute('role_id'))
+			#set ($role_node = $ses.getAttribute('role_node'))
+			
+			<input type='hidden' id='role' name='role'  size='1' value='$!role_id' onchange='makeGetRequestRoleByTypeHead()' onkeypress="formname='userroleForm'; nextfield='textrole';"> 
+			
+			<input type='text' id='textrole' name='textrole' size='18' value='$!role_node' onkeypress="formname='userroleForm'; nextfield='cborole'; isSelect=true;"  onkeyup='makeGetRequestRoleByTypeHead()' onclick='makeGetRequestRoleByTypeHead()'>	
+			
+			<div id='divrole' style='display:none;position:absolute'  onkeypress="formname='userroleForm'; nextfield='saveuserrole';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('roleList.action', 'Add role', 'width=400, height=300')"> ... </a>
+		
+<tr><td>
+<input type='button' id='saveuserrole' value="  $i18n.get('save')  " onkeydown="javascript:validateUserrole('add', document.getElementById('userroleForm') )"  onclick="javascript:validateUserrole('add', document.getElementById('userroleForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

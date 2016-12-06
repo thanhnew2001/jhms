@@ -1,0 +1,103 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addprovider'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divProvider'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divProvider').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('provider')  
+</div>
+<br>
+<div>
+<select id='comboprovider' name='comboprovider'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='node'>$i18n.get('node')</option>
+	
+	<option value='address'>$i18n.get('address')</option>
+	
+	<option value='phone'>$i18n.get('phone')</option>
+	
+	<option value='fax'>$i18n.get('fax')</option>
+	
+</select>
+<input name='searchprovider' id='searchprovider' onkeyup='makeGetRequestProviderBySearch()' value='' onclick='clearSearchBox(searchprovider)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestProviderByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddProvider(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tableprovider' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineproviderForm' name='inlineproviderForm' action='providerAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('address')</th>	
+	
+	<th>$i18n.get('phone')</th>	
+	
+	<th>$i18n.get('fax')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddprovider' style='display:none;'>
+<th><input type='button' id='saveprovider' value="  $i18n.get('save')  " onkeydown="javascript:validateProvider('add', document.getElementById('inlineproviderForm') )"  onclick="javascript:validateProvider('add', document.getElementById('inlineproviderForm') )" onkeypress="nextfield='';">
+</th>
+
+<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlineproviderForm'; nextfield='address';"> </th><th> <input type='text'  id='address' name='address' size='8' value='' onkeypress="formname='inlineproviderForm'; nextfield='phone';"> </th><th> <input type='text'  id='phone' name='phone' size='8' value='' onkeypress="formname='inlineproviderForm'; nextfield='fax';"> </th><th> <input type='text'  id='fax' name='fax' size='8' value='' onkeypress="formname='inlineproviderForm'; nextfield='saveprovider';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($provider in $providers)
+	#if($provider.id)
+	<tr class='tableitem' id='tr$provider.id' onDblClick="javascript:makeGetRequestAddProvider($provider.id, 'edit')">
+	<td id='td$provider.id'>
+	<a href="javascript:makeGetRequestAddProvider($provider.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('providerDelete.action?id=$provider.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$provider.id').style.background ='#CCCCCC'; document.getElementById('td$provider.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('providerView.action?id=$provider.id', 'View provider', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+		
+	</td>	
+		
+		<td>$!provider.node</td>
+		
+		<td>$!provider.address</td>
+		
+		<td>$!provider.phone</td>
+		
+		<td>$!provider.fax</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddProvider(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

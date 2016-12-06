@@ -1,0 +1,119 @@
+
+<div id='addhistory'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addhistory').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('history')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='historyForm' name='historyForm' action='historyAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('client'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($client_id = $ses.getAttribute('client_id'))
+			#set ($client_node = $ses.getAttribute('client_node'))
+			
+			<input type='hidden' id='client' name='client'  size='1' value='$!client_id' onchange='makeGetRequestClientByTypeHead()' onkeypress="formname='historyForm'; nextfield='textclient';"> 
+			
+			<input type='text' id='textclient' name='textclient' size='18' value='$!client_node' onkeypress="formname='historyForm'; nextfield='cboclient'; isSelect=true;"  onkeyup='makeGetRequestClientByTypeHead()' onclick='makeGetRequestClientByTypeHead()'>	
+			
+			<div id='divclient' style='display:none;position:absolute'  onkeypress="formname='historyForm'; nextfield='father';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('clientList.action', 'Add client', 'width=400, height=300')"> ... </a>
+		
+			<td><label>$i18n.get('father'):</label></td> <td><input type='text'  id='father' name='father' size='15' value='' onkeypress="formname='historyForm'; nextfield='mother';"> </td>
+			
+			<td><label>$i18n.get('mother'):</label></td> <td><input type='text'  id='mother' name='mother' size='15' value='' onkeypress="formname='historyForm'; nextfield='sibling';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('sibling'):</label></td> <td><input type='text'  id='sibling' name='sibling' size='15' value='' onkeypress="formname='historyForm'; nextfield='partner';"> </td>
+			
+			<td><label>$i18n.get('partner'):</label></td> <td><input type='text'  id='partner' name='partner' size='15' value='' onkeypress="formname='historyForm'; nextfield='offspring';"> </td>
+			
+			<td><label>$i18n.get('offspring'):</label></td> <td><input type='text'  id='offspring' name='offspring' size='15' value='' onkeypress="formname='historyForm'; nextfield='cancer';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('cancer'):</label></td> <td><input type='text'  id='cancer' name='cancer' size='15' value='' onkeypress="formname='historyForm'; nextfield='tuberculosis';"> </td>
+			
+			<td><label>$i18n.get('tuberculosis'):</label></td> <td><input type='text'  id='tuberculosis' name='tuberculosis' size='15' value='' onkeypress="formname='historyForm'; nextfield='diabetes';"> </td>
+			
+			<td><label>$i18n.get('diabetes'):</label></td> <td><input type='text'  id='diabetes' name='diabetes' size='15' value='' onkeypress="formname='historyForm'; nextfield='highbloodpressure';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('highbloodpressure'):</label></td> <td><input type='text'  id='highbloodpressure' name='highbloodpressure' size='15' value='' onkeypress="formname='historyForm'; nextfield='heartproblem';"> </td>
+			
+			<td><label>$i18n.get('heartproblem'):</label></td> <td><input type='text'  id='heartproblem' name='heartproblem' size='15' value='' onkeypress="formname='historyForm'; nextfield='stroke';"> </td>
+			
+			<td><label>$i18n.get('stroke'):</label></td> <td><input type='text'  id='stroke' name='stroke' size='15' value='' onkeypress="formname='historyForm'; nextfield='epilepsi';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('epilepsi'):</label></td> <td><input type='text'  id='epilepsi' name='epilepsi' size='15' value='' onkeypress="formname='historyForm'; nextfield='mentalillness';"> </td>
+			
+			<td><label>$i18n.get('mentalillness'):</label></td> <td><input type='text'  id='mentalillness' name='mentalillness' size='15' value='' onkeypress="formname='historyForm'; nextfield='sucide';"> </td>
+			
+			<td><label>$i18n.get('sucide'):</label></td> <td><input type='text'  id='sucide' name='sucide' size='15' value='' onkeypress="formname='historyForm'; nextfield='breastexamdate';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('breastexamdate'):</label></td> 
+			<td>
+			<input type='text'  id='breastexamdate' name='breastexamdate' size='15' onblur='getSmartDate(this)' onkeypress="formname='historyForm'; nextfield='breastexamresult';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggerbreastexamdate'>
+			</td>
+			
+			<td><label>$i18n.get('breastexamresult'):</label></td> <td><input type='text'  id='breastexamresult' name='breastexamresult' size='15' value='N, A' onkeypress="formname='historyForm'; nextfield='cadiacechodate';"> </td>
+			
+			<td><label>$i18n.get('cadiacechodate'):</label></td> 
+			<td>
+			<input type='text'  id='cadiacechodate' name='cadiacechodate' size='15' onblur='getSmartDate(this)' onkeypress="formname='historyForm'; nextfield='cadiacechoresult';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggercadiacechodate'>
+			</td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('cadiacechoresult'):</label></td> <td><input type='text'  id='cadiacechoresult' name='cadiacechoresult' size='15' value='N, A' onkeypress="formname='historyForm'; nextfield='gynexamdate';"> </td>
+			
+			<td><label>$i18n.get('gynexamdate'):</label></td> 
+			<td>
+			<input type='text'  id='gynexamdate' name='gynexamdate' size='15' onblur='getSmartDate(this)' onkeypress="formname='historyForm'; nextfield='gynexamresult';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggergynexamdate'>
+			</td>
+			
+			<td><label>$i18n.get('gynexamresult'):</label></td> <td><input type='text'  id='gynexamresult' name='gynexamresult' size='15' value='N, A' onkeypress="formname='historyForm'; nextfield='prostateexamdate';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('prostateexamdate'):</label></td> 
+			<td>
+			<input type='text'  id='prostateexamdate' name='prostateexamdate' size='15' onblur='getSmartDate(this)' onkeypress="formname='historyForm'; nextfield='prostateexamresult';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggerprostateexamdate'>
+			</td>
+			
+			<td><label>$i18n.get('prostateexamresult'):</label></td> <td><input type='text'  id='prostateexamresult' name='prostateexamresult' size='15' value='N, A' onkeypress="formname='historyForm'; nextfield='rectalexamdate';"> </td>
+			
+			<td><label>$i18n.get('rectalexamdate'):</label></td> 
+			<td>
+			<input type='text'  id='rectalexamdate' name='rectalexamdate' size='15' onblur='getSmartDate(this)' onkeypress="formname='historyForm'; nextfield='rectalexamresult';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggerrectalexamdate'>
+			</td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('rectalexamresult'):</label></td> <td><input type='text'  id='rectalexamresult' name='rectalexamresult' size='15' value='N, A' onkeypress="formname='historyForm'; nextfield='sigmoiddate';"> </td>
+			
+			<td><label>$i18n.get('sigmoiddate'):</label></td> 
+			<td>
+			<input type='text'  id='sigmoiddate' name='sigmoiddate' size='15' onblur='getSmartDate(this)' onkeypress="formname='historyForm'; nextfield='sigmoidresult';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggersigmoiddate'>
+			</td>
+			
+			<td><label>$i18n.get('sigmoidresult'):</label></td> <td><input type='text'  id='sigmoidresult' name='sigmoidresult' size='15' value='N, A' onkeypress="formname='historyForm'; nextfield='savehistory';"> </td>
+			</tr>
+<tr><td>
+<input type='button' id='savehistory' value="  $i18n.get('save')  " onkeydown="javascript:validateHistory('add', document.getElementById('historyForm') )"  onclick="javascript:validateHistory('add', document.getElementById('historyForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

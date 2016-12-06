@@ -1,0 +1,93 @@
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+<form name='druginvoicedetailForm' action='druginvoicedetailAdd.action' class='niceform' method='POST'>
+
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('druginvoice')</th>	
+	
+	<th>$i18n.get('drug')</th>	
+	
+	<th>$i18n.get('batchnumber')</th>	
+	
+	<th>$i18n.get('expireddate')</th>	
+	
+	<th>$i18n.get('quantity')</th>	
+	
+	<th>$i18n.get('subtotal')</th>	
+	
+	<th>$i18n.get('price')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineadddruginvoicedetail' style='display:none;'>
+<th><input type='button' id='savedruginvoicedetail' value="  $i18n.get('save')  " onclick="javascript:validateDruginvoicedetail('add')" onkeypress="nextfield='';"></th>
+
+			#set ($ses = $req.getSession())					
+			#set ($druginvoice_id = $ses.getAttribute('druginvoice_id'))
+			#set ($druginvoice_node = $ses.getAttribute('druginvoice_node'))
+		<th>
+			<input type='hidden' id='druginvoice' name='druginvoice'  size='1' value='$!druginvoice_id' onchange='makeGetRequestDruginvoiceByTypeHead()' onkeypress="formname='inlinedruginvoicedetailForm'; nextfield='textdruginvoice';"> 
+			
+			<input type='text' id='textdruginvoice' name='textdruginvoice' size='15' value='$!druginvoice_node' onkeypress="formname='inlinedruginvoicedetailForm'; nextfield='cbodruginvoice';"  onkeyup='makeGetRequestDruginvoiceByTypeHead()' onclick='makeGetRequestDruginvoiceByTypeHead()'>	
+			
+			<div id='divdruginvoice' style='display:none;position:absolute'  onkeypress="formname='inlinedruginvoicedetailForm'; nextfield='textdrug';"></div>				
+		 </th>		
+		
+			#set ($ses = $req.getSession())					
+			#set ($drug_id = $ses.getAttribute('drug_id'))
+			#set ($drug_node = $ses.getAttribute('drug_node'))
+		<th>
+			<input type='hidden' id='drug' name='drug'  size='1' value='$!drug_id' onchange='makeGetRequestDrugByTypeHead()' onkeypress="formname='inlinedruginvoicedetailForm'; nextfield='textdrug';"> 
+			
+			<input type='text' id='textdrug' name='textdrug' size='15' value='$!drug_node' onkeypress="formname='inlinedruginvoicedetailForm'; nextfield='cbodrug';"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+			
+			<div id='divdrug' style='display:none;position:absolute'  onkeypress="formname='inlinedruginvoicedetailForm'; nextfield='batchnumber';"></div>				
+		 </th>		
+		<th> <input type='text'  id='batchnumber' name='batchnumber' size='15' value='' onkeypress="formname='inlinedruginvoicedetailForm'; nextfield='expireddate';"> </th><th><input type='text'  id='expireddate' name='expireddate' size='15' onblur='getSmartDate(this)' onkeypress="formname='inlinedruginvoicedetailForm'; nextfield='quantity';" value=$!novalue >
+			<th> <input type='text'  id='quantity' name='quantity' size='15' value='' onkeypress="formname='inlinedruginvoicedetailForm'; nextfield='subtotal';"> </th><th> <input type='text'  id='subtotal' name='subtotal' size='15' value='' onkeypress="formname='inlinedruginvoicedetailForm'; nextfield='price';"> </th><th> <input type='text'  id='price' name='price' size='15' value='' onkeypress="formname='inlinedruginvoicedetailForm'; nextfield='savedruginvoicedetail';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($druginvoicedetail in $druginvoicedetails)
+	#if($druginvoicedetail.id)
+	<tr class='tableitem' ondblclick="javascript:makeGetRequestAddDruginvoicedetail($druginvoicedetail.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddDruginvoicedetail($druginvoicedetail.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='druginvoicedetailDelete.action?id=$druginvoicedetail.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('druginvoicedetailView.action?id=$druginvoicedetail.id', 'View druginvoicedetail', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menudruginvoicedetail$druginvoicedetail.id').style.display='block'; " ondblclick="javascript:document.getElementById('menudruginvoicedetail$druginvoicedetail.id').style.display='none'"  value='>>' >  
+	
+	<div id='menudruginvoicedetail$druginvoicedetail.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!druginvoicedetail.druginvoice.node</td>
+		
+		<td>$!druginvoicedetail.drug.node</td>
+		
+		<td>$!druginvoicedetail.batchnumber</td>
+		
+		<td>$!dateTool.format('dd/MM/yyyy',$!druginvoice.expireddate)</td>
+		
+		<td>$!druginvoicedetail.quantity</td>
+		
+		<td>$numberTool.format('integer' ,$!druginvoicedetail.subtotal)</td>
+		
+		<td>$numberTool.format('integer' ,$!druginvoicedetail.price)</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

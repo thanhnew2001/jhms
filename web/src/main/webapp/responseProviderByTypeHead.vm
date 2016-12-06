@@ -1,0 +1,8 @@
+
+<select name='cboprovider' id='cboprovider' multiple='multiple' onclick="selectprovider(this.value, this.options[selectedIndex].text)" onkeypress="formname='encounterForm'; typehead = 'provider'; nextfield='saveprovider';">
+#foreach($provider in $providers)
+<option value='$provider.id'>$provider.node</option>
+#end						
+<option value=''></option>
+</select>
+

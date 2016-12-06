@@ -1,0 +1,223 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<style type="text/css">
+<!--
+.style3 {
+	font-size: 36px;
+	font-weight: bold;
+}
+.style6 {font-size: 16px}
+.style13 {font-size: 14px}
+.style14 {
+	font-size: 12px;
+	font-style: italic;
+}
+.style15 {font-size: 14px; font-weight: bold; }
+.style16 {font-size: 12px}
+.style17 {font-size: 11px}
+-->
+</style>
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') ) 
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+
+<!-- cho nay de in -->
+<style type="text/css">
+<!--
+.style3 {
+	font-size: 24px;
+	font-weight: bold;
+}
+.style4 {font-size: 18px; font-weight: bold; }
+-->
+</style>
+
+<div id='header'>
+
+  <p>
+    <input type="button" value="In" onClick="document.getElementById('header').style.display='none';window.print();self.close();">
+</p>
+  
+  
+  <table width="100%" border="0">
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><div align="right">$!prescriptiondetail.encounter.client.code<br>
+          <img src="../barbecue/barcode?data=$!prescriptiondetail.encounter.client.code" width="138" height="50"/></div></td>
+    </tr>
+  </table>
+</div>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+  <div id='div'>
+    <table width="100%" border="0">
+     
+      <tr valign="top">
+        <td width="50" align="center"><p>&nbsp;</p>
+        <p>&nbsp;</p></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div id='container'>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="bottom">
+    <td width="25%" valign="top" align="left" style="border-right-style:double;border-right-width:medium;border-right-color:#000000"><p><span class="style14"><strong><span class="style17">K. Y H&#7884;C GIA &#272;&Igrave;NH</span></strong><span class="style17"><br>
+            PGS.TS. BS. Ph&#7841;m L&ecirc; An<br>
+            PGS.TS.BS. Nguy&#7877;n Duy Phong<br>
+            TS. BS. L&ecirc; Thanh To&agrave;n <br>
+            TS. BS. Ng&ocirc; T&iacute;ch Linh<br>
+            BS. CKI. V&otilde; Qu&#7889;c H&#432;ng<br>
+            BS.CK1. Tr&#7847;n Th&#7843;o Tuy&#7871;t T&acirc;m<br>
+            ThS. BS. Nguy&#7877;n Nh&#432; Vinh<br>
+            BS. Hu&#7923;nh Th&#7883; Ki&#7873;u Thu<br>
+            <br>
+              <strong> PK. TAI-M&#360;I-H&#7884;NG</strong><br>
+              PGS. TS. BS. Ph&#7841;m Ki&ecirc;n H&#7919;u<br>
+              BS. CKI. V&otilde; C&ocirc;ng Minh<br>
+              BS. CKI. L&ecirc; Minh T&acirc;m<br>
+              BS. CKI. V&#259;n Th&#7883; H&#7843;i H&agrave;<br>
+              BS. CKI. L&yacute; Xu&acirc;n Quang<br>
+              BS. CKI. Ng Ph&#7841;m Trung Ngh&#297;a<br>
+              ThS. BS. L&ecirc; Quang H&#432;ng<br>
+              BS.CKI. Phan T&#7845;n Ngh&#7883; <br>
+              <br>
+              <strong>PK. DA LI&#7876;U</strong><br>
+              BS. CKI. Nguy&#7877;n Nh&#7853;t Ninh<br>
+              Ths. BS. Tr&#7847;n Th&#7883; Thanh Mai<br>
+              Ths. BS. Ph&#7841;m Th&#7883; Ti&#7871;ng<br>
+              BS. CKI. B&ugrave;i Th&#7883; Ph&#432;&#7907;ng Trang<br>
+      
+              <br>
+              <strong>PK S&#7842;N</strong><br>
+              BS. CKI. Nguy&#7877;n Th&#7883; Thu Loan <br>
+              Ths. BS.  Tr&#7847;n Nh&#7853;t Th&#259;ng <br>
+              BS. Tr&#7847;n L&acirc;m Khoa <br>
+              <br>
+              <strong>PK. NHI</strong><br>
+              PGS.TS.BS Nguy&#7877;n Th&#7883; Thanh Lan<br>
+              BS. CKI. Tr&#7847;n V&#259;n &#272;&#7903;<br>
+              ThS. BS. Tr&#432;&#417;ng S&#417;n&nbsp;<br>
+              ThS. BS. Nguy&#7877;n Huy Lu&acirc;n<br>
+              BS. CKI. Tr&#7847;n Th&#7883; Minh Nguy&#7879;t<br>
+              BS. CKI. Ph&#7841;m Ph&#432;&#417;ng Phi<br>
+              Ths. BS. Nguy&#7877;n Ho&agrave;i Phong<br>
+              Ths. BS. Ph&#7841;m Di&#7879;p Th&ugrave;y D&#432;&#417;ng<br>
+      
+              <br>
+              <strong>PK N&#7896;I</strong><br>
+              PGS. TS. BS &#272;&#7895; Tr&#7885;ng H&#7843;i<br>
+              Ths. BS. &#272;&#7895; Minh Quang <br>
+              BS Nguy&#7877;n H&#7891;ng Minh <br>
+              BS L&ecirc; Nguy&#7877;n Th&#7909;y Ph&#432;&#417;ng <br>
+              BS Nguy&#7877;n B&aacute; H&#7907;p<br>
+              BS. CKI. &#272;&#7895; Trung Ng&#7885;c<br>
+              BS.CKI. &#272;&#7895; Tr&#7885;ng Th&agrave;nh<br>
+              BS. H&agrave; Ng&#7885;c B&#7843;n<br>
+              BS. CKI. &#272;inh Nguy&#7877;n Hi&#7873;n Giao<br>
+              <br>
+              <strong>PK NGO&#7840;I</strong><br>
+              ThS. BS. Phan &#272;&#7913;c Minh M&#7851;n<br>
+	  ThS. BS. Nguy&#7877;n T&#7841; Quy&#7871;t <br>
+	  ThS. BS. &#272;&#7895; Anh To&agrave;n <br>
+	  ThS. BS. D&#432;&#417;ng B&aacute; L&#7853;p</span></span></p>      </td>
+    <td valign="top" bordercolor="#000000"><table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" bordercolor="#000000" bgcolor="#FFFFFF" style="font-size:14px">
+        <tr  valign="top">
+          <td colspan="4"><div align="center"><span class="style3">TOA THU&#7888;C </span></div><br></td>
+          </tr>
+        <tr  valign="top">
+          <td>            </td>
+          <td width="18%">&nbsp;</td>
+          <td width="31%">&nbsp;</td>
+          <td width="26%">&nbsp;</td>
+        </tr>
+        <tr  valign="top">
+          <td colspan="4"><span class="style6" ><strong>&nbsp;&nbsp;<span class="style13">&nbsp;H&#7885; v&agrave; t&ecirc;n</span></strong><span class="style13">: </span></span><span class="style13" ><strong>$!prescriptiondetail.encounter.client.node</strong></span></td>
+          </tr>
+        <tr  valign="top">
+          <td colspan="4"><span class="style13"><strong>&nbsp;&nbsp; N&#259;m Sinh</strong>: $!dateTool.format('yyyy',$!prescriptiondetail.encounter.client.birthday)&nbsp;<strong>&nbsp;&nbsp;&nbsp; Gi&#7899;i t&iacute;nh</strong>:
+            $!prescriptiondetail.encounter.client.sex</span></td>
+        </tr>
+        <tr  valign="top">
+          <td colspan="4"><span class="style6"><strong>&nbsp;&nbsp; <span class="style13">&#272;&#7883;a ch&#7881;</span></strong><span class="style13">:            <span class="style16">$!prescriptiondetail.encounter.client.address $!prescriptiondetail.encounter.client.ward.node</span></span></span></td>
+          </tr>
+        <tr valign="top">
+          <td colspan="4" ><span class="style6"><strong>&nbsp;<span class="style13">&nbsp;&nbsp;Ch&#7849;n &#273;o&aacute;n: </span></strong><span class="style13">$!prescriptiondetail.encounter.initialdiagnosis </span></span></td>
+          </tr>
+        <tr valign="top">
+          <td >&nbsp;</td>
+          <td >&nbsp;</td>
+          <td >&nbsp;</td>
+         <td >&nbsp;</td>
+        </tr>
+        <tr valign="top">
+          <td height="21" >&nbsp;</td>
+          <td >&nbsp;</td>
+          <td >&nbsp;</td>
+         <td >&nbsp;</td>
+        </tr>
+		#set( $encounter=$prescriptiondetail.encounter)
+        #set($i=0)
+        #foreach($pd in $pds)
+        #set($i=$i+1)
+        <tr valign="top">
+          <td height="19" colspan="3" >&nbsp;&nbsp;&nbsp;<span class="style6"><strong>$i /</strong><span class="style14">$!pd.drug.ingredient</span></span><span class="style15" > /#if($pd.drug.drugGroup.id != 28)$!pd.drug.node #end
+		  #if($pd.drug.drugGroup.id == 28)
+		  -- $pd.note </span> #end</td>
+          <td valign="top" style="text-transform:" width="26%"><div align="right"><span class="style13">$!pd.quantity $!pd.drug.unit</span></div></td>
+        </tr>
+        <tr valign="top">
+          <td colspan="3" ><span class="style13">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="style13">		  <span >Ng&agrave;y $!pd.howtouse $!pd.timeuse l&#7847;n :		  $!pd.usageDescription #if($pd.drug.drugGroup.id != 28) - $!pd.note #end</span></span></td>
+          <td ><span class="style13"></span></td>
+        </tr>
+		
+        <tr valign="top">
+          <td >&nbsp;            </td>
+          <td >&nbsp;</td>
+          <td >&nbsp;</td>
+          <td >&nbsp;</td>
+        </tr>
+		#end
+        <tr valign="bottom" style="bottom:1000">
+         <td height="563" colspan="2" ><p class="style13">&nbsp;</p>
+           <p class="style13">&nbsp;</p>
+           <p class="style13"><strong>L&#7901;i d&#7863;n : </strong>$!prescriptiondetail.encounter.advise</p>
+           <p class="style13">&nbsp;</p>
+           <p class="style13">&nbsp;</p>
+           <p class="style13"><strong>T&aacute;i kh&aacute;m ng&agrave;y :</strong> $!dateTool.format('dd/MM/yyyy',$!prescriptiondetail.encounter.revisitdate) t&#7841;i $!prescriptiondetail.encounter.room.node</p></td>
+          <td colspan="2" ><p align="center" class="style13">Ng&agrave;y ...$!dateTool.format('dd/MM/yyyy',$!prescriptiondetail.encounter.date)...<br/>
+            <strong>B&aacute;c s&#297; &#273;i&#7873;u tr&#7883; </strong> </p>
+            <p align="center" class="style13">&nbsp;</p>
+            <p align="center" class="style13">&nbsp;</p>
+            <p align="center" class="style13">&nbsp;</p>
+            <p align="center" class="style13"><strong>$!prescriptiondetail.encounter.user.fullname</strong></p></td>
+         </tr>
+      </table></td>
+  </tr>
+  </table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bordercolor="#000000" bgcolor="#FFFFFF" >
+  
+  
+  <tr class='tableitemleft'>
+    <td colspan="2" valign="top">
+      
+    </td>
+    </tr>
+</table>
+</div>
+<div id='footer'>
+	
+	<table align="center" width="100%">
+	<tr valign="top">
+	<td height="48" style="border-right-width:medium; border-right-style:double; border-right-color:#000000;border-left-width:medium; border-left-style:double; border-left-color:#000000;border-top-width:medium; border-top-style:double; border-top-color:#000000;border-bottom-width:medium; border-bottom-style:double; border-bottom-color:#000000"><div align="center">Toa thu&#7889;c d&ugrave;ng m&#7897;t l&#7847;n - Khi c&#7847;n t&#432; v&#7845;n th&ocirc;ng tin v&#7873; thu&#7889;c &#273;ang d&ugrave;ng, xin li&ecirc;n h&#7879; s&#7889; &#273;i&#7879;n tho&#7841;i: (08) 3924 0888 g&#7863;p Nh&agrave; Thu&#7889;c</div></td>
+	 </tr>
+  </table>
+    <div align="center"></div>
+</div>

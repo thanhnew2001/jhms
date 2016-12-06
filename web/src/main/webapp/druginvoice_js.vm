@@ -1,0 +1,718 @@
+<!--
+druginvoiceAddForm.vm
+druginvoicedetailAddForm.vm
+druginvoicedetailEditForm.vm
+druginovicedetailList.vm
+druginvoicedetailView.vm
+druginvoiceEditForm.vm
+druginvoiceList.vm
+druginvoiceView.vm
+
+responseDruginvoiceByClient.vm
+responseDruginvoiceByEncounter.vm
+
+responseDruginvoicedetailByDruginvoice2.vm
+
+responseDruginvoiceList.vm
+-->
+
+
+<script>
+
+user = 0
+
+	function makeGetRequestDruginvoiceFilterByMonth(m, y) 
+	{	
+		http.open('get', 'druginvoiceFilterByMonth.action?month='+m+'&year='+ y);
+		
+		
+		http.onreadystatechange = processResponseDruginvoiceFilterByMonth;
+		http.send(null);
+	}		
+	
+	function processResponseDruginvoiceFilterByMonth() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('tabledruginvoice').innerHTML = response;
+			
+			makeGetRequestAddDruginvoice(0, 'add');
+		}
+	}
+
+	function selectdrug( id, text)
+		{
+			document.getElementById('drug').value = id;
+			document.getElementById('textdrug').value = text;
+			document.getElementById('divdrug').style.display = 'none';
+		}	
+
+	function makeGetRequestProviderByTypeHead() 
+	{
+		if (document.getElementById('divprovider') != null)
+		{
+			document.getElementById('divprovider').style.display = 'block';
+		}
+		wordId = document.getElementById('textprovider').value;
+		http.open('get', 'getProviderByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponseProviderByTypeHead;
+		http.send(null);
+		}
+		
+	function processResponseProviderByTypeHead() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divprovider').innerHTML = response;
+		}
+	}
+	
+	function makeGetRequestEncounterByTypeHead() 
+	{
+		if (document.getElementById('divencounter') != null)
+		{
+			document.getElementById('divencounter').style.display = 'block';
+		}
+		wordId = document.getElementById('textencounter').value;
+		http.open('get', 'getEncounterByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponseEncounterByTypeHead;
+		http.send(null);
+	}
+	
+	function processResponseEncounterByTypeHead() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divencounter').innerHTML = response;
+		}
+	}
+	
+	function validateDruginvoice( action, f )
+	{
+		var strmessage = '';
+		
+		if (isNaN(f.warehouse.value)) 
+		{
+			f.warehouse.focus();
+			strmessage += "warehouse must be a number. ";
+		}					
+		
+		
+		if ( (f.date.value!='') && isDate(java2mysql(f.date.value)) == false) 
+		{
+			f.date.focus();
+			strmessage += "date must be a valid date. ";
+		}	
+		
+		if (f.type.value == 'NB' && f.towarehouse.value == '')
+		{
+			f.towarehouse.focus();
+			strmessage += "Please select a warehouse to export to. ";				
+		}
+		
+		if (f.type.value == 'HB' && f.encounter.value == '' && f.node.value == '' && f.provider.value =='')
+		{				
+			strmessage += "Please select an encounter or enter client name";				
+		}
+	
+		if (isNaN(f.towarehouse.value)) 
+		{
+			f.towarehouse.focus();
+			strmessage += "towarehouse must be a number. ";
+		}							
+		
+		
+		if (isNaN(f.encounter.value)) 
+		{
+			f.encounter.focus();
+			strmessage += "encounter must be a number. ";
+		}							
+		
+		
+		if (isNaN(f.paymenttype.value)) 
+		{
+			f.paymenttype.focus();
+			strmessage += "paymenttype must be a number. ";
+		}							
+		
+	
+		if (isNaN(f.vat.value)) 
+		{
+			f.vat.focus();
+			strmessage += "vat must be a number. ";
+		}	
+		if (document.getElementById('warehouse').value == 0)  //Chua chon kho
+		{
+			f.warehouse.focus();
+			strmessage += " -- Please select an warehouse where you are doing! ";
+		}					
+								
+			
+		if (strmessage!='') {
+			alert(strmessage); 
+			document.getElementById('savedruginvoice').disabled = false;
+			return false;
+		}
+		else
+		{
+			makeGetRequestSaveDruginvoice ( action, f );
+				
+		}
+	}
+	
+	druginvoice = 0;
+	
+	function makeGetRequestSaveDruginvoice ( action, f ) 
+	{
+				
+		var url = '';
+		var value = '';
+		for (var i = 0; i<f.elements.length; i++) 
+		{
+			value = f.elements[i].value;
+			 da = value.split('/'); //ngay thang nam
+			 if (da[2] != null)
+			 {
+			 	  value = da[1] + '/' + da[0] + '/' + da[2] ;
+			 }
+
+			url=url+f.elements[i].name + '=' + value + '&';
+		}
+		
+		if (action == 'add')
+		{
+
+				http.open('get', 'druginvoiceAdd.action?'+url);
+				http.onreadystatechange = processResponseSaveAddDruginvoice ; // no () here please, not know the reason
+				for (var i = 0; i<f.elements.length; i++) 
+				{
+					if (f.elements[i].name.type == 'text')	f.elements[i].value = '';
+				}
+		}
+		else
+		{
+				http.open('get', 'druginvoiceUpdate.action?'+url);
+				http.onreadystatechange = processResponseSaveUpdateDruginvoice ; // no () here please, not know the reason
+				
+		}
+		http.send(null);
+		document.getElementById('msg').innerHTML ='Saving...';
+	}
+	
+	
+	function processResponseSaveAddDruginvoice () 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+
+			if (isNaN(response))
+			{
+				//document.getElementById('msg').innerHTML = response;
+				//alert(document.getElementById('msg').innerHTML);
+				alert(response);
+			}
+			else			
+			{
+				makeGetRequestAddDruginvoice(response, 'edit');
+			}
+		}
+	}	
+	
+	
+	function processResponseSaveUpdateDruginvoice () 
+	{
+		if(http.readyState == 4)
+		{
+			document.getElementById('msg').innerHTML ='Saved successfully';
+			makeGetRequestDruginvoiceByFilter();		
+		}
+	}	
+	
+	
+	function makeGetRequestAddDruginvoice(wordId, action) 
+	{
+		druginvoice = wordId;
+		if (action == 'add')
+		{
+			url = 'druginvoiceAddForm.action?id=' + wordId;
+			druginvoiceaction = 'add';
+		}
+		else
+		{
+			url = 'druginvoiceEditForm.action?id=' + wordId;	
+			druginvoiceaction = 'edit';
+		}
+		http.open('get', url);
+		http.onreadystatechange = processResponseAddDruginvoice;
+		http.send(null);
+	}
+	
+	
+	function processResponseAddDruginvoice() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;			
+			document.getElementById('adddruginvoice').innerHTML = response;
+			if ((document.druginvoiceForm.node) != null)
+				document.druginvoiceForm.node.focus(); //can kiem tra focusfield truoc
+				
+
+			if (druginvoice > 0)
+			makeGetRequestDruginvoicedetailByDruginvoice(druginvoice);	
+		}
+	}	
+	
+	
+	
+	function makeGetRequestDruginvoiceByFilter() 
+	{
+		warehouse = document.getElementById('filterwarehouse').value; 
+		date = document.getElementById('filterdate').value; 
+		type = document.getElementById('filtertype').value; 	
+
+		http.open('get', 'getDruginvoiceBySearch.action?flag=filter&warehouse='+ warehouse+'&date='+ date+'&type='+ type);
+		http.onreadystatechange = processResponseDruginvoiceByFilter;
+		http.send(null);
+	}
+	
+	function processResponseDruginvoiceByFilter() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('tabledruginvoice').innerHTML = response;
+			
+			makeGetRequestAddDruginvoice(0, 'add');
+		}
+	}	
+	
+	function makeGetRequestDruginvoicedetailByDruginvoice(wordId) 
+	{
+		druginvoice = wordId;
+		http.open('get', 'getDruginvoicedetailByDruginvoice.action?id=' + wordId);
+		http.onreadystatechange = processResponseDruginvoicedetailByDruginvoice;
+		http.send(null);
+	}
+	
+	function processResponseDruginvoicedetailByDruginvoice() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divDruginvoicedetail').innerHTML = response;
+			//makeGetRequestAddDruginvoicedetail(druginvoice, 'add');
+			document.getElementById('textdrug').focus();
+
+			 
+		}
+	}
+	
+	
+	function makeGetRequestDruginvoiceByTypeHead() 
+	{
+		if (document.getElementById('divdruginvoice') != null)
+		{
+			document.getElementById('divdruginvoice').style.display = 'block';
+		}
+		wordId = document.getElementById('textdruginvoice').value;
+		http.open('get', 'getDruginvoiceByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponseDruginvoiceByTypeHead;
+		http.send(null);
+	}
+		
+	function processResponseDruginvoiceByTypeHead() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divdruginvoice').innerHTML = response;
+		}
+	}			
+	
+	
+	function makeGetRequestDrugByTypeHead() 
+	{
+		if (document.getElementById('divdrug') != null)
+		{
+			document.getElementById('divdrug').style.display = 'block';
+		}
+		wordId = document.getElementById('textdrug').value;
+		http.open('get', 'getDrugByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponseDrugByTypeHead;
+		http.send(null);
+	}
+	
+	function processResponseDrugByTypeHead() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divdrug').innerHTML = response;
+		}
+	}
+	
+	
+	function validateDruginvoicedetail( action, f )
+	{
+		var strmessage = '';
+		
+		if (f.druginvoice.value=='') 
+		{
+			f.druginvoice.focus();
+			strmessage += "-- Druginvoice can not be null. ";
+		}	
+	
+		if (isNaN(f.druginvoice.value)) 
+		{
+			f.druginvoice.focus();
+			strmessage += "-- Druginvoice must be a number. ";
+		}							
+		
+		
+		if (isNaN(f.drug.value)) 
+		{
+			f.drug.focus();
+			strmessage += "-- Drug must be a number. ";
+		}							
+		
+		
+		if (isNaN(f.quantity.value)) 
+		{
+			f.quantity.focus();
+			strmessage += "-- Quantity must be a number. ";
+		}							
+		
+		
+		if ( (f.expireddate.value!='') && isDate(java2mysql(f.expireddate.value)) == false) 
+		{
+			f.expireddate.focus();
+			strmessage += "-- Expireddate must be a valid date. ";
+		}	
+	
+		if (isNaN(f.price.value)) 
+		{
+			f.price.focus();
+			strmessage += "-- Price must be a number. ";
+		}							
+		
+		/*
+		if (isNaN(f.subtotal.value)) 
+		{
+			f.subtotal.focus();
+			strmessage += "-- Subtotal must be a number. ";
+		}	
+		*/
+		if (document.getElementById('textdrug').value =='')  //Chua chon kho
+		{
+			f.drug.focus();
+			strmessage += " -- Please select an drug name ";
+		}	
+		if (document.getElementById('quantity').value =='')  //Chua chon kho
+		{
+			f.quantity.focus();
+			strmessage += " -- Quantity can't null ";
+		}	
+			
+			
+		if (strmessage!='') {
+			alert(strmessage); return false;
+		}
+		else
+		{
+			
+			if (drug > 0 )
+			{
+			//sao khong thay function nay???	
+				makeGetRequestSaveDruginvoicedetailByDrug (action, f);				
+			}
+			else 
+	
+			if (druginvoice > 0 )
+			{	
+				makeGetRequestSaveDruginvoicedetailByDruginvoice (action, f);				
+			}
+			else 
+					
+				makeGetRequestSaveDruginvoicedetail ( action, f );
+					
+				
+		}
+	}
+	
+	
+	
+	function makeGetRequestSaveDruginvoicedetail ( action, f ) {
+				
+			var url = '';
+			var value = '';
+			for (var i = 0; i<f.elements.length; i++) 
+			{
+				value = f.elements[i].value;
+				if (value.indexOf('/')==2) 
+				{
+				  da = value.split('/'); //ngay thang nam
+				  value = da[1] + '/' + da[0] + '/' + da[2] ;
+				  
+				}
+				url=url+f.elements[i].name + '=' + value + '&';
+			}
+			
+			if (action == 'add')
+			{
+					http.open('get', 'druginvoicedetailAdd.action?'+url);
+					http.onreadystatechange = processResponseSaveAddDruginvoicedetail ; // no () here please, not know the reason
+					for (var i = 0; i<f.elements.length; i++) 
+					{
+						if (f.elements[i].name.type == 'text')	f.elements[i].value = '';
+					}
+			}
+			else
+			{
+					http.open('get', 'druginvoicedetailUpdate.action?'+url);
+					http.onreadystatechange = processResponseSaveUpdateDruginvoicedetail ; // no () here please, not know the reason
+					
+			}
+			http.send(null);
+			document.getElementById('msg').innerHTML ='Saving...';
+	}
+	
+	
+	
+	function processResponseSaveAddDruginvoicedetail () {
+			if(http.readyState == 4){
+				var response = http.responseText;
+				var viewurl = 'druginvoicedetailView.action?id='+response;			
+				var viewlink = "<input type='button' id='edit' value='View' onclick=window.open('"+viewurl+"')  >";				
+			
+				var action = 'edit';				
+				var url = "<input type='button' id='edit' value='Edit' onclick='makeGetRequestAddDruginvoicedetail("+response+","+action+")' >";
+			
+				document.getElementById('msg').innerHTML ='Saved successfully: ' + viewlink + url;
+			
+			}
+	}	
+
+	function processResponseSaveUpdateDruginvoicedetail () {
+			if(http.readyState == 4){
+				makeGetRequestDruginvoicedetail();		
+				document.getElementById('msg').innerHTML ='Saved successfully';
+			}
+	}	
+	
+	
+	
+	
+	function makeGetRequestSaveDruginvoicedetailByDruginvoice ( action, f ) 
+	{
+				
+		var url = '';
+		var value = '';
+		for (var i = 0; i<f.elements.length; i++) 
+		{
+			value = f.elements[i].value;
+			if (value.indexOf('/')==2) 
+			{
+			  da = value.split('/'); //ngay thang nam
+			  value = da[1] + '/' + da[0] + '/' + da[2] ;
+			  
+			}
+			
+			url=url+f.elements[i].name + '=' + value + '&';
+		}
+		
+		if (action  == 'add')
+			http.open('get', 'druginvoicedetailAdd.action?'+url);
+		else
+			http.open('get', 'druginvoicedetailUpdate.action?'+url);
+		
+		http.onreadystatechange = processResponseSaveDruginvoicedetailByDruginvoice;
+		http.send(null);
+		document.getElementById('adddruginvoicedetail').innerHTML ='';
+	}
+		
+
+	function processResponseSaveDruginvoicedetailByDruginvoice (  ) 
+	{
+		if(http.readyState == 4)
+		{
+			makeGetRequestDruginvoicedetailByDruginvoice(druginvoice);
+		}
+	}
+	
+	
+	
+	
+	function makeGetRequestDruginvoicedetailBySearch() 
+	{
+		wordId = document.getElementById('searchdruginvoicedetail').value;
+		con = document.getElementById('combodruginvoicedetail').value;
+		http.open('get', 'getDruginvoicedetailBySearch.action?con=' + con + '&typehead=' + wordId);
+		http.onreadystatechange = processResponseDruginvoicedetailBySearch;
+		http.send(null);
+	}
+		
+	function processResponseDruginvoicedetailBySearch() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('tabledruginvoicedetail').innerHTML = response;
+		}
+	}
+	
+	
+	function makeGetRequestAddDruginvoicedetail(wordId, action) 
+	{
+		if (action == 'add')
+			url = 'druginvoicedetailAddForm.action?id=' + wordId;
+		else
+			url = 'druginvoicedetailEditForm.action?id=' + wordId;	
+		http.open('get', url);
+		http.onreadystatechange = processResponseAddDruginvoicedetail;
+		http.send(null);
+	}
+	
+	function processResponseAddDruginvoicedetail() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;			
+			document.getElementById('adddruginvoicedetail').innerHTML = response;
+			if ((document.druginvoicedetailForm.node) != null)
+				document.druginvoicedetailForm.node.focus(); //can kiem tra focusfield truoc
+		}
+	}
+	
+	
+	
+	function makeGetRequestDruginvoiceBySearch() 
+	{
+		wordId = document.getElementById('searchdruginvoice').value;
+		con = document.getElementById('combodruginvoice').value;
+		http.open('get', 'getDruginvoiceBySearch.action?con=' + con + '&typehead=' + wordId);
+		http.onreadystatechange = processResponseDruginvoiceBySearch;
+		http.send(null);
+	}
+		
+	function processResponseDruginvoiceBySearch() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('tabledruginvoice').innerHTML = response;
+		}
+	}	
+	
+	
+	function clearSearchBox() {
+			document.getElementById('searchdruginvoice').value='';
+	}	
+	
+	
+	
+	function makeGetRequestClientByTypeHead() {
+			if (document.getElementById('divclient') != null)
+			{
+				document.getElementById('divclient').style.display = 'block';
+			}
+			wordId = document.getElementById('textclient').value;
+			http.open('get', 'getClientByTypeHead.action?typehead=' + wordId);
+			http.onreadystatechange = processResponseClientByTypeHead;
+			http.send(null);
+		}
+		
+		function processResponseClientByTypeHead() {
+			if(http.readyState == 4){
+				var response = http.responseText;
+				document.getElementById('divclient').innerHTML = response;
+			}
+		}	
+		
+		function selectclient( id, text)
+		{
+			document.getElementById('client').value = id;
+			document.getElementById('textclient').value = text;
+			document.getElementById('divclient').style.display = 'none';
+		}
+		function selectprovider( id, text)
+		{
+			document.getElementById('provider').value = id;
+			document.getElementById('textprovider').value = text;
+			document.getElementById('divprovider').style.display = 'none';
+		}		
+			
+			
+			
+	////////////////////////////////cua Viet
+	function makeGetRequestDruginvoiceFilterByMonthViet(m,y,tax) 
+	{	
+
+		http.open('get', 'druginvoiceFilterByMonthViet.action?month='+m+'&year='+ y +'&tax='+ tax);
+		http.onreadystatechange = processResponseDruginvoiceFilterByMonthViet;
+		http.send(null);
+	}		
+	
+	function makeGetRequestDruginvoiceFilterByMonthTax(m,y,tax, warehouseTax) 
+	{	
+
+		http.open('get', 'getDruginvoiceBySearch.action?flag=filtertax&month='+m+'&year='+ y +'&tax='+ tax + '&warehouseTax='+warehouseTax);
+		http.onreadystatechange = processResponseDruginvoiceByFilter;
+		http.send(null);
+	}		
+
+
+	function processResponseDruginvoiceFilterByMonthViet() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('tabledruginvoice').innerHTML = response;
+			
+		}
+	}
+/////////////////////////////////////////////////////////////////////////	
+
+	////////////////viet
+	function makeGetRequestDruginvoiceBySearchViet() 
+	{
+		wordId = document.getElementById('searchdruginvoice').value;
+		con = document.getElementById('combodruginvoice').value;
+		http.open('get', 'getDruginvoiceBySearchViet.action?con=' + con + '&typehead=' + wordId);
+		http.onreadystatechange = processResponseDruginvoiceBySearch;
+		http.send(null);
+	}
+		
+/////////////////////////////////////////////////////////////	
+///////////////////////////cua Viet
+function makeGetRequestDruginvoiceByFilterViet() 
+	{
+		warehouse = document.getElementById('filterwarehouse').value; 
+		date = document.getElementById('filterdate').value; 
+		type = document.getElementById('filtertype').value; 
+
+		
+		http.open('get', 'getDruginvoiceBySearchViet.action?flag=filter&warehouse='+ warehouse+'&date='+ date+'&type='+ type);
+		http.onreadystatechange = processResponseDruginvoiceByFilterViet;
+		http.send(null);
+	}
+	
+	function processResponseDruginvoiceByFilterViet() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('tabledruginvoice').innerHTML = response;
+				
+		}
+	}
+//////////////////////////////////////
+
+
+
+
+</script>

@@ -1,0 +1,36 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('adddoctor').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('doctor')
+</div>
+<br>
+<div id='msg'></div>
+<br>
+<form id='doctorForm'  name='doctorForm' action='doctorUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!doctor.id' size='15'>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text' id='node' name='node' value='$!doctor.node' size='15' onkeypress="formname='doctorForm'; nextfield='type';"> </td>
+			
+			<td><label>$i18n.get('type'):</label></td> <td><input type='text' id='type' name='type' value='$!doctor.type' size='15' onkeypress="formname='doctorForm'; nextfield='updatedoctor';"> </td>
+			
+
+<tr><td colspan='6'>
+<input id='updatedoctor' type='button' value="  $i18n.get('save')  " onkeydown="javascript: validateDoctor('edit', document.getElementById('doctorForm') )" onclick="javascript: validateDoctor('edit', document.getElementById('doctorForm') )" onkeypress="formname='doctorForm'; nextfield = '';">
+
+
+&nbsp;
+
+</td></tr>
+</table>
+</form>
+</div>
+</body>

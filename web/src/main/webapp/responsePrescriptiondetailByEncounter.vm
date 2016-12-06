@@ -1,0 +1,229 @@
+
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('encounter_js.vm')
+#parse('common.vm')
+
+
+<body id='wrap' >
+<div id='addprescriptiondetail'>
+
+
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divPrescriptiondetail').innerHTML=''" value=' X '>  
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+$i18n.get('list') $i18n.get('prescriptiondetail')  
+#foreach($prescriptiondetail in $prescriptiondetails)
+	#set($pid = $prescriptiondetail.id)
+#end	
+<input name='printprescription' type='button' onClick="document.getElementById('solving').options[document.getElementById('solving').selectedIndex].value=3; validateEncounter('edit', document.getElementById('encounterForm')); window.open('prescriptiondetailView.action?id=$pid', 'Xem HD thuoc', 'width=800,height=600,scrollbars=yes')" value= "$i18n.get('print')" >
+</div>
+<br>
+
+<div id='msg'></div>
+<div id='tableprescriptiondetail' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineprescriptiondetailForm' name='inlineprescriptiondetailForm' action='prescriptiondetailAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('drug')</th>	
+	
+	<th>$i18n.get('unit')</th>	
+	
+	<th>$i18n.get('price')</th>
+	<th>$i18n.get('quantity')</th>	
+	
+	<th>C&aacute;ch d&ugrave;ng </th>
+	<th>$i18n.get('timeuse')/$i18n.get('date')</th>	
+	
+	<th>$i18n.get('usageDescription')</th>	
+	
+	<th>$i18n.get('note')</th>
+	<th>$i18n.get('paid')</th>	
+	</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddprescriptiondetail' style='display:none;'>
+<th><input type='button' id='saveprescriptiondetail' value="  $i18n.get('save')  " onKeyDown="this.disabled = true; validatePrescriptiondetail('add', document.getElementById('inlineprescriptiondetailForm') )"  onclick="this.disabled = true; validatePrescriptiondetail('add', document.getElementById('inlineprescriptiondetailForm') )" onKeyPress="nextfield='';"></th>
+
+			#set ($ses = $req.getSession())					
+			#set ($encounter_id = $ses.getAttribute('encounter_id'))
+			#set ($encounter_node = $ses.getAttribute('encounter_node'))
+			
+			<input type='hidden' id='encounter' name='encounter'  size='1' value='$!encounter_id' onchange='makeGetRequestEncounterByTypeHead()' onKeyPress="formname='inlineprescriptiondetailForm'; nextfield='textencounter';"> 
+		
+		
+			#set ($ses = $req.getSession())					
+			#set ($drug_id = $ses.getAttribute('drug_id'))
+			#set ($drug_node = $ses.getAttribute('drug_node'))
+		<th>
+			<input type='hidden' id='drug' name='drug'  size='1' value='$!drug_id' onchange='makeGetRequestDrugByTypeHead()' onKeyPress="formname='inlineprescriptiondetailForm'; nextfield='textdrug';"> 
+			
+			<input type='text' id='textdrug' name='textdrug' size='18' value='$!drug_node' onKeyPress="formname='inlineprescriptiondetailForm'; nextfield='quantity';"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+			
+			<div id='divdrug' style='display:none;position:absolute'  onkeypress="formname='inlineprescriptiondetailForm'; nextfield='quantity';"></div>		 </th>		
+		<th><input type='text'  id='unit' name='unit' disabled size='8' value='' onKeyPress="formname='inlineprescriptiondetailForm'; nextfield='price';"></th>
+		
+		<th><input type='text'  id='price' name='price' disabled size='8' value='' onKeyPress="formname='inlineprescriptiondetailForm'; nextfield='price';"></th>
+		<th><input type='text'  id='quantity' name='quantity' size='8' value='10' onKeyPress="formname='inlineprescriptiondetailForm'; nextfield='howtouse';"></th>
+		
+		<th>
+		<SELECT name="howtouse" id="howtouse" onKeyDown="fnKeyDownHandler(this, event);" onKeyUp="fnKeyUpHandler_A(this, event); return false;" onKeyPress = "return fnKeyPressHandler_A(this, event);"  onChange="fnChangeHandler_A(this, event);nextfield='timeuse';">
+
+
+
+
+
+
+
+ 		  <OPTION value="" selected style="COLOR:#ff0000;BACKGROUND-COLOR:#ffff00;">-----</OPTION>
+ 		  <option value="u&#7889;ng">u&#7889;ng</option> 
+ 		  <!-- This is the Editable Option -->
+		<option value='nhai'>nhai</option>
+		<option value="ng&#7853;m">ng&#7853;m</option>
+		<option value="b&ocirc;i">b&ocirc;i</option>
+		<option value="thoa">thoa</option>
+		<option value="nh&eacute;t">nh&eacute;t</option>
+		<option value="x&ocirc;ng">x&ocirc;ng</option>
+		<option value="ch&iacute;ch">ch&iacute;ch</option>
+		<option value="truy&#7873;n">truy&#7873;n</option>
+		  </select>		  </th>
+		<th> <input type='text'  id='timeuse' name='timeuse' size='5' value='' onKeyPress="formname='inlineprescriptiondetailForm'; nextfield='morning';">		</th>
+		<th><SELECT name="usageDescription" id="usageDescription" onKeyDown="fnKeyDownHandler(this, event);" onKeyUp="fnKeyUpHandler_A(this, event); return false;" onKeyPress = "return fnKeyPressHandler_A(this, event);"  onChange="fnChangeHandler_A(this, event);nextfield='note';">
+          <OPTION value="" selected style="COLOR:#ff0000;BACKGROUND-COLOR:#ffff00;">-----</OPTION>
+          <option value="S&aacute;ng 1v">S&aacute;ng 1v</option>
+          <option value="S&aacute;ng 1/2v">S&aacute;ng 1/2v</option>
+          <option value="S&aacute;ng 1/4v">S&aacute;ng 1/4v</option>
+          <option value="Tr&#432;a 1v">Tr&#432;a 1v</option>
+          <option value="Tr&#432;a 1/2v">Tr&#432;a 1/2v</option>
+          <option value="Tr&#432;a 1/4v">Tr&#432;a 1/4v</option>
+          <option value="Chi&#7873;u 1v">Chi&#7873;u 1v</option>
+          <option value="Chi&#7873;u 1/2v">Chi&#7873;u 1/2v</option>
+          <option value="Chi&#7873;u 1/4v">Chi&#7873;u 1/4v</option>
+          <option value="T&#7889;i 1v">T&#7889;i 1v</option>
+          <option value="T&#7889;i 1/2v">T&#7889;i 1/2v</option>
+          <option value="T&#7889;i 1/4v">T&#7889;i 1/4v</option>
+          <option value="S&aacute;ng 1v, tr&#432;a 1v, chi&#7873;u 1v, t&#7889;i 1v">S&aacute;ng 1v, tr&#432;a 1v, chi&#7873;u 1v, t&#7889;i 1v</option>
+          <option value="S&aacute;ng 1/2v, tr&#432;a 1/2v, chi&#7873;u 1/2v, t&#7889;i 1/2v">S&aacute;ng 1/2v, tr&#432;a 1/2v, chi&#7873;u 1/2v, t&#7889;i 1/2v</option>
+          <option value="S&aacute;ng 1/4v, tr&#432;a 1/4v, chi&#7873;u 1/4v, t&#7889;i 1/4v">S&aacute;ng 1/4v, tr&#432;a 1/4v, chi&#7873;u 1/4v, t&#7889;i 1/4v</option>
+          <option value="S&aacute;ng 1v, chi&#7873;u 1v, t&#7889;i 1v">S&aacute;ng 1v, chi&#7873;u 1v, t&#7889;i 1v</option>
+          <option value="S&aacute;ng 1/2v, chi&#7873;u 1/2v, t&#7889;i 1/2v">S&aacute;ng 1/2v, chi&#7873;u 1/2v, t&#7889;i 1/2v</option>
+          <option>S&aacute;ng 1/4v, chi&#7873;u 1/4v, t&#7889;i 1/4v</option>
+          <option value="S&aacute;ng 1v, chi&#7873;u 1v">S&aacute;ng 1v, chi&#7873;u 1v</option>
+          <option value="S&aacute;ng 1/2v, chi&#7873;u 1/2v">S&aacute;ng 1/2v, chi&#7873;u 1/2v</option>
+          <option value="S&aacute;ng 1/4v, chi&#7873;u 1/4v">S&aacute;ng 1/4v, chi&#7873;u 1/4v</option>
+          <option value="S&aacute;ng 1v, tr&#432;a 1v, t&#7889;i 1v">S&aacute;ng 1v, tr&#432;a 1v, t&#7889;i 1v</option>
+          <option value="S&aacute;ng 1/2v, tr&#432;a 1/2v, t&#7889;i 1/2v">S&aacute;ng 1/2v, tr&#432;a 1/2v, t&#7889;i 1/2v</option>
+          <option value="S&aacute;ng 1/4v, tr&#432;a 1/4v, t&#7889;i 1/4v">S&aacute;ng 1/4v, tr&#432;a 1/4v, t&#7889;i 1/4v</option>
+          <option value="S&aacute;ng 1v, t&#7889;i 1v">S&aacute;ng 1v, t&#7889;i 1v</option>
+          <option value="S&aacute;ng 1/2v, t&#7889;i 1/2v">S&aacute;ng 1/2v, t&#7889;i 1/2v</option>
+          <option value="S&aacute;ng 1/4v, t&#7889;i 1/4v">S&aacute;ng 1/4v, t&#7889;i 1/4v</option>
+          <option value="S&aacute;ng 1 l&#7847;n">S&aacute;ng 1 l&#7847;n</option>
+          <option value="S&aacute;ng 2 l&#7847;n">S&aacute;ng 2 l&#7847;n</option>
+          <option value="T&#7889;i 1 l&#7847;n">T&#7889;i 1 l&#7847;n</option>
+
+          <option value="T&#7889;i 2 l&#7847;n">T&#7889;i 2 l&#7847;n</option>
+          <option value="S&aacute;ng 1 l&#7847;n, chi&#7873;u 1 l&#7847;n">S&aacute;ng 1 l&#7847;n, chi&#7873;u 1 l&#7847;n</option>
+          <option value="S&aacute;ng 1 l&#7847;n, t&#7889;i 1 l&#7847;n">S&aacute;ng 1 l&#7847;n, t&#7889;i 1 l&#7847;n</option>
+          <option value="Thoa s&aacute;ng">Thoa s&aacute;ng</option>
+          <option value="Thoa t&#7889;i">Thoa t&#7889;i</option>
+          <option value="Thoa tr&#432;&#7899;c khi ra n&#7855;ng">Thoa tr&#432;&#7899;c khi ra n&#7855;ng</option>
+          <option value="Thoa sau khi r&#7917;a s&#7841;ch">Thoa sau khi r&#7917;a s&#7841;ch</option>
+          <option value="Thoa m&#7897;t l&#7899;p m&#7887;ng s&aacute;ng, t&#7889;i">Thoa m&#7897;t l&#7899;p m&#7887;ng s&aacute;ng, t&#7889;i</option>
+          <option value="Thoa ch&#7895; m&#7909;n">Thoa ch&#7895; m&#7909;n</option>
+          <option value="Thoa tr&ecirc;n m&ocirc;i">Thoa tr&ecirc;n m&ocirc;i</option>
+          <option value="B&ocirc;i khi c&ocirc;n tr&ugrave;ng c&#7855;n">B&ocirc;i khi c&ocirc;n tr&ugrave;ng c&#7855;n</option>
+          <option value="Phun m&#7897;t l&#7899;p m&#7887;ng tr&ecirc;n m&#7863;t">Phun m&#7897;t l&#7899;p m&#7887;ng tr&ecirc;n m&#7863;t</option>
+          <option value="X&#7883;t 1 nh&aacute;t s&aacute;ng, 1 nh&aacute;t t&#7889;i">X&#7883;t 1 nh&aacute;t s&aacute;ng, 1 nh&aacute;t t&#7889;i</option>
+          <option value="X&#7883;t 1 l&#7847;n 2 nh&aacute;t b&ecirc;n m&#361;i">X&#7883;t 1 l&#7847;n 2 nh&aacute;t b&ecirc;n m&#361;i</option>
+          <option value="R&#7917;a &acirc;m h&#7897; 2 l&#7847;n/ng&agrave;y">R&#7917;a &acirc;m h&#7897; 2 l&#7847;n/ng&agrave;y</option>
+          <option value="R&#7917;a m&#7863;t">R&#7917;a m&#7863;t</option>
+          <option value="Ti&ecirc;m b&#7855;p">Ti&ecirc;m b&#7855;p</option>
+          <option value="Ti&ecirc;m t&#297;nh m&#7841;ch ch&#7853;m">Ti&ecirc;m t&#297;nh m&#7841;ch ch&#7853;m</option>
+          <option value="Nh&eacute;t h&#7853;u m&ocirc;n">Nh&eacute;t h&#7853;u m&ocirc;n</option>
+          <option value="Truy&#7873;n t&#297;nh m&#7841;ch">Truy&#7873;n t&#297;nh m&#7841;ch</option>
+          <option value="&#272;&#7863;t &acirc;m &#273;&#7841;o 1v/l&#7847;n">&#272;&#7863;t &acirc;m &#273;&#7841;o 1v/l&#7847;n</option>
+          <option value="U&#7889;ng khi th&#7845;y s&#7889;t">U&#7889;ng khi th&#7845;y s&#7889;t</option>
+          <option value="1 chai">1 chai</option>
+          <option value="1/2 chai">1/2 chai</option>
+          <option value="1/4 chai">1/4 chai</option>
+          <option value="1 &#7889;ng">1 &#7889;ng </option>
+          <option value="1/2 &#7889;ng">1/2 &#7889;ng</option>
+          <option value="1/4 &#7889;ng">1/4 &#7889;ng</option>
+          <option value="1 tu&yacute;p">1 tu&yacute;p</option>
+          <option value="1/2 tu&yacute;p">1/2 tu&yacute;p</option>
+          <option value="1/4 tu&yacute;p">1/4 tu&yacute;p</option>
+          <option value="1 g&oacute;i">1 g&oacute;i</option>
+          <option value="1/2 g&oacute;i">1/2 g&oacute;i</option>
+          <option value="1/4 g&oacute;i">1/4 g&oacute;i</option>
+          <option value="1mg">1 mg</option>
+          <option value="2 mg">2 mg</option>
+          <option value="1 ml">1 ml</option>
+          <option value="2 ml">2 ml</option>
+          <!-- This is the Editable Option -->
+                </select></th>
+		
+		<th><input type='text'  id='note' name='note' size='20' value='' onKeyPress="formname='inlineprescriptiondetailForm'; nextfield='saveprescriptiondetail';"></th>
+		<th><select id='paid' name='paid' onkeypress="formname='prescriptiondetailForm'; nextfield='saveprescriptiondetail';" disabled="disabled">
+          <option value=N>N</option>
+
+		  <option value= Y> Y</option>
+        </select></th>
+		</div>
+</tr>
+</theader>
+<tbody>
+#foreach($prescriptiondetail in $pds)
+	#if($prescriptiondetail.id)
+	<tr class='tableitem' id='tr$prescriptiondetail.id' onDblClick="javascript:makeGetRequestAddPrescriptiondetail($prescriptiondetail.id, 'edit')">
+	<td id='td$prescriptiondetail.id'>
+	<a href="javascript:makeGetRequestAddPrescriptiondetail($prescriptiondetail.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('prescriptiondetailDelete.action?id=$prescriptiondetail.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$prescriptiondetail.id').style.background ='#CCCCCC'; document.getElementById('td$prescriptiondetail.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onClick="window.open('prescriptiondetailView.action?id=$prescriptiondetail.id', 'View prescriptiondetail', 'width=500, height=500')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>	</td>	
+		
+		<td>$!prescriptiondetail.drug.node <br> </td>
+		
+		<td>$!prescriptiondetail.unit</td>
+		
+		<td>$numberTool.format('integer' ,$!prescriptiondetail.price)</td>
+		<td>$!prescriptiondetail.quantity</td>
+		
+				<td>$!prescriptiondetail.howtouse</td>
+
+		<td>$!prescriptiondetail.timeuse</td>
+		
+		<td>$!prescriptiondetail.usageDescription</td>
+		
+		<td>$!prescriptiondetail.note</td>
+		<td>$!prescriptiondetail.paid</td>
+		</tr>	
+	#end
+
+</tbody>
+#end
+<tr class='tableitem' id='tr$prescriptiondetail.id' onDblClick="javascript:makeGetRequestAddPrescriptiondetail($prescriptiondetail.id, 'edit')">
+	  <td id='td$prescriptiondetail.id'>&nbsp;</td>
+	  <td colspan="2"><strong>T&#7893;ng ti&#7873;n</strong></td>
+	  <td><strong>$numberTool.format('integer' ,$total)
+	  &nbsp;</strong></td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td></td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  </tr>
+</table>
+</form>
+</div>
+</div>
+</div>
+<br>
+
+</body>

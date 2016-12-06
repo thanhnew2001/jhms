@@ -1,0 +1,219 @@
+
+<div id='addclient'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+
+<style type="text/css">
+<!--
+.style2 {font-size: x-small}
+-->
+</style>
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addclient').innerHTML=''" value=' X '>
+&#272;&#259;ng k&yacute; kh&aacute;m t&#7841;i PK&#272;K M&#7929; T&ugrave;ng
+<div id='msg' align='right'></div>
+</div>
+
+<form id='clientForm' name='clientForm' action='clientAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+  <td colspan="2"><strong>Th&ocirc;ng tin v&#7873; b&#7841;n? </strong></td>
+  <td width="96">&nbsp;</td>
+  <td width="108">&nbsp;</td>
+  <td width="95">&nbsp;</td>
+  <td width="185">&nbsp;</td>
+</tr>
+<tr class='formlabel'>
+  <td colspan="6"><hr></td>
+  </tr>
+<tr class='formlabel'>
+			<td width="127">$i18n.get('node'):</td> <td width="108"><input type='text'  id='node' name='node' size='18' value=''></td>			
+			
+			<td><label>$i18n.get('age'):</label></td> <td><input type='text'  id='age' name='age' size='5' ></td>
+			
+			<td><label>$i18n.get('sex'):</label></td> 
+			<td><select id='sex' name='sex'>
+              <option value=M>M</option>
+			  <option value= F> F</option>
+            </select></td>
+			</tr>
+<tr class='formlabel'>
+  <td>&#272;T di &#273;&#7897;ng: </td>
+  <td><input type='text'  id='phone' name='phone' size='18' value='' "></td>
+  <td>Email:</td>
+  <td><input type='text'  id='email' name='email' size='18'   ></td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class='formlabel'>
+  <td colspan="2"><strong>&#272;&#259;ng k&yacute; kh&aacute;m</strong></td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+		
+			<tr class='formlabel'>
+			  <td colspan="6"><hr></td>
+	  </tr>
+			
+			<tr class='formlabel'>
+			  <td>Ph&ograve;ng kh&aacute;m: </td>
+			  <td><select id='room' name='room'>
+			    	
+				#foreach($room in $rooms)
+				
+			    <option value='$room.id'>$room.node</option>
+			    
+				#end
+				
+			    </select>			  </td>
+			  <td>Ng&agrave;y kh&aacute;m: </td>
+			  <td><input type='text'  id='date' name='date' size='18'   ></td>
+			  <td>Gi&#7901; kh&aacute;m:</td>
+			  <td><input type='text'  id='time' name='time' size='18'   ></td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="2"><input name="button2" type='button' id='saveclient'  onClick="javascript:dosubmit('register.action', document.getElementById('clientForm') )" value="  &#272;&#259;ng k&yacute; "></td>
+			  <td>&nbsp;</td>
+			  <td><span class="style2">VD: 30/05/2009</span></td>
+			  <td>&nbsp;</td>
+			  <td><span class="style2">VD: 10:30 </span></td>
+	  </tr>
+			  
+			<tr class='formlabel'>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="2"><strong>Xem b&#7879;nh &aacute;n c&#7911;a b&#7841;n </strong></td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td colspan="6"><hr></td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td>MS kh&aacute;ch h&agrave;ng </td>
+			  <td><input type='text'  id='txtcode' name='txtcode' size='18' value=''></td>
+			  <td>Ho&#7863;c S&#7889; &#272;T </td>
+			  <td><input type='text'  id='txtphone' name='txtphone' size='18' value=''></td>
+			  <td>Ho&#7863;c Email </td>
+			  <td><input type='text'  id='txtemail' name='txtemail' size='18' value=''></td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td>M&#7853;t kh&#7849;u</td>
+			  <td><input type='text'  id='txtpassword' name='txtpassword' size='18' value=''></td>
+			  <td colspan="2"><a href="#" onclick="popup('forgetPassword.action' , document.getElementById('clientForm') )">T&ocirc;i &#273;&atilde; qu&ecirc;n m&#7853;t kh&#7849;u? </a></td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td><input name="button22" type='button' id='button2'  onClick="popup('viewRecord.action', document.getElementById('clientForm'));"  value="  Xem  "></td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+	  </tr>
+<tr><td>&nbsp;</td></tr>
+</table>
+
+</form>
+</div>
+</body>
+</div>
+ <script>
+			  function dosubmit(action, f)
+			  {
+			  
+			   if (f.node.value == '' || f.age.value == '')
+			  {
+			  	alert('Xin vui long nhap ten va tuoi');
+				return false;
+			  }
+			  if (f.phone.value == '' && f.email.value == '')
+			  {
+			  	alert('Phai nhap it nhat di dong hoac email');
+				return false;
+			  }
+			  
+			  if (f.date.value == '' || f.time.value == '')
+			  {
+			  	alert('Xin vui long chon ngay va gio kham');
+				return false;
+			  }
+			  
+			  	var url = '';
+				var value = '';
+				for (var i = 0; i<f.elements.length; i++) 
+				{
+					value = f.elements[i].value;
+					if (value.indexOf('/')==2) 
+					{
+					  da = value.split('/'); //ngay thang nam
+					  value = da[1] + '/' + da[0] + '/' + da[2] ;					  
+					}
+					
+					url=url+f.elements[i].name + '=' + trim(value) + '&';
+				}
+				f.action = action+"?flag=register&"+url;
+				f.submit();
+			  }
+			  
+			  function popup(action, f)
+			  {
+			  
+			  if (f.txtcode.value == '' && f.txtphone.value == '' && f.email.value =='')
+			  {
+			  	alert('Xin vui long nhap it nhat 1 dinh dang');
+				return false;
+			  }
+			  if (f.txtpassword.value == '')
+			  {
+			  	alert('Mat khau khong duoc rong');
+				return false;
+			  }
+			  
+			  	var url = '';
+				var value = '';
+				for (var i = 0; i<f.elements.length; i++) 
+				{
+					value = f.elements[i].value;
+					if (value.indexOf('/')==2) 
+					{
+					  da = value.split('/'); //ngay thang nam
+					  value = da[1] + '/' + da[0] + '/' + da[2] ;					  
+					}
+					
+					url=url+f.elements[i].name + '=' + trim(value) + '&';
+				}
+
+				window.open(action+'?'+url, 'Xem', 'width=600;height=600');
+			  }
+			  
+			  function trim(str, chars) {
+	return ltrim(rtrim(str, chars), chars);
+}
+ 
+function ltrim(str, chars) {
+	chars = chars || "\\s";
+	return str.replace(new RegExp("^[" + chars + "]+", "g"), "");
+}
+ 
+function rtrim(str, chars) {
+	chars = chars || "\\s";
+	return str.replace(new RegExp("[" + chars + "]+$", "g"), "");
+}
+</script>

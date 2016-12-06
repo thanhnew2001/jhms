@@ -1,0 +1,78 @@
+
+<div id='addservice'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addservice').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('service')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='serviceForm' name='serviceForm' action='serviceAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text'  id='node' name='node' size='15' value='' onkeypress="formname='serviceForm'; nextfield='textservicegroup';"> </td>
+			
+			<td><label>$i18n.get('servicegroup'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($servicegroup_id = $ses.getAttribute('servicegroup_id'))
+			#set ($servicegroup_node = $ses.getAttribute('servicegroup_node'))
+			
+			<input type='hidden' id='servicegroup' name='servicegroup'  size='1' value='$!servicegroup_id' onchange='makeGetRequestServicegroupByTypeHead()' onkeypress="formname='serviceForm'; nextfield='textservicegroup';"> 
+			
+			<input type='text' id='textservicegroup' name='textservicegroup' size='18' value='$!servicegroup_node' onkeypress="formname='serviceForm'; nextfield='cboservicegroup'; isSelect=true;"  onkeyup='makeGetRequestServicegroupByTypeHead()' onclick='makeGetRequestServicegroupByTypeHead()'>	
+			
+			<div id='divservicegroup' style='display:none;position:absolute'  onkeypress="formname='serviceForm'; nextfield='price';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('servicegroupList.action', 'Add servicegroup', 'width=400, height=300')"> + </a>
+			<td><label>$i18n.get('price'):</label></td> <td><input type='text'  id='price' name='price' size='15' value='' onkeypress="formname='serviceForm'; nextfield='insuranceprice';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('insuranceprice'):</label></td> <td><input type='text'  id='insuranceprice' name='insuranceprice' size='15' value='' onkeypress="formname='serviceForm'; nextfield='textdepartment';"> </td>
+			
+			<td><label>$i18n.get('department'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($department_id = $ses.getAttribute('department_id'))
+			#set ($department_node = $ses.getAttribute('department_node'))
+			
+			<input type='hidden' id='department' name='department'  size='1' value='$!department_id' onchange='makeGetRequestDepartmentByTypeHead()' onkeypress="formname='serviceForm'; nextfield='textdepartment';"> 
+			
+			<input type='text' id='textdepartment' name='textdepartment' size='18' value='$!department_node' onkeypress="formname='serviceForm'; nextfield='cbodepartment'; isSelect=true;"  onkeyup='makeGetRequestDepartmentByTypeHead()' onclick='makeGetRequestDepartmentByTypeHead()'>	
+			
+			<div id='divdepartment' style='display:none;position:absolute'  onkeypress="formname='serviceForm'; nextfield='saveservice';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('departmentList.action', 'Add department', 'width=400, height=300')"> + </a>		</td>
+		<td>B&#7897; ph&#7853;n </td>
+		<td>
+		<select name='bodyPart'>
+		<option value="">-</option>
+		#foreach($bodyPart in $bodyParts)		
+		<option value="$bodyPart.id" #if($bodyPart.id == $service.bodyPart.id) selected #end>$bodyPart.node</option>
+		#end
+		</select>		</td>
+		
+            <tr>
+              <td>$i18n.get('min'):</td>
+			  <td><input type='text'  id='min' name='min' size='15' value='' onkeypress="formname='serviceForm'; nextfield='max';"></td>
+			  <td>$i18n.get('max'):</td>
+			  <td><input type='text'  id='max' name='max' size='15' value='' onkeypress="formname='serviceForm'; nextfield='saveservice';"></td>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+            </tr>
+      <tr><td>
+<input type='button' id='saveservice' value="  $i18n.get('save')  " onkeydown="javascript:validateService('add', document.getElementById('serviceForm') )"  onclick="javascript:validateService('add', document.getElementById('serviceForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

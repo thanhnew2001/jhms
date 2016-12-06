@@ -1,0 +1,343 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addethnic'></div>
+<div id='divPaymenttype'>#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addhistory'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divHistory'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divHistory').innerHTML=''" value=' X '>  
+$i18n.get('historylist')  
+</div>
+<br>
+<div>
+<select id='combohistory' name='combohistory'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='client'>$i18n.get('client')</option>
+	
+	<option value='father'>$i18n.get('father')</option>
+	
+	<option value='mother'>$i18n.get('mother')</option>
+	
+	<option value='sibling'>$i18n.get('sibling')</option>
+	
+	<option value='partner'>$i18n.get('partner')</option>
+	
+	<option value='offspring'>$i18n.get('offspring')</option>
+	
+	<option value='cancer'>$i18n.get('cancer')</option>
+	
+	<option value='tuberculosis'>$i18n.get('tuberculosis')</option>
+	
+	<option value='diabetes'>$i18n.get('diabetes')</option>
+	
+	<option value='highbloodpressure'>$i18n.get('highbloodpressure')</option>
+	
+	<option value='heartproblem'>$i18n.get('heartproblem')</option>
+	
+	<option value='stroke'>$i18n.get('stroke')</option>
+	
+	<option value='epilepsi'>$i18n.get('epilepsi')</option>
+	
+	<option value='mentalillness'>$i18n.get('mentalillness')</option>
+	
+	<option value='sucide'>$i18n.get('sucide')</option>
+	
+	<option value='breastexamdate'>$i18n.get('breastexamdate')</option>
+	
+	<option value='breastexamresult'>$i18n.get('breastexamresult')</option>
+	
+	<option value='cadiacechodate'>$i18n.get('cadiacechodate')</option>
+	
+	<option value='cadiacechoresult'>$i18n.get('cadiacechoresult')</option>
+	
+	<option value='gynexamdate'>$i18n.get('gynexamdate')</option>
+	
+	<option value='gynexamresult'>$i18n.get('gynexamresult')</option>
+	
+	<option value='prostateexamdate'>$i18n.get('prostateexamdate')</option>
+	
+	<option value='prostateexamresult'>$i18n.get('prostateexamresult')</option>
+	
+	<option value='rectalexamdate'>$i18n.get('rectalexamdate')</option>
+	
+	<option value='rectalexamresult'>$i18n.get('rectalexamresult')</option>
+	
+	<option value='sigmoiddate'>$i18n.get('sigmoiddate')</option>
+	
+	<option value='sigmoidresult'>$i18n.get('sigmoidresult')</option>
+	
+</select>
+<input name='searchhistory' id='searchhistory' onkeyup='makeGetRequestHistoryBySearch()' value='' onclick='clearSearchBox(searchhistory)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestHistoryByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddHistory(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tablehistory' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlinehistoryForm' name='inlinehistoryForm' action='historyAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('client')</th>	
+	
+	<th>$i18n.get('father')</th>	
+	
+	<th>$i18n.get('mother')</th>	
+	
+	<th>$i18n.get('sibling')</th>	
+	
+	<th>$i18n.get('partner')</th>	
+	
+	<th>$i18n.get('offspring')</th>	
+	
+	<th>$i18n.get('cancer')</th>	
+	
+	<th>$i18n.get('tuberculosis')</th>	
+	
+	<th>$i18n.get('diabetes')</th>	
+	
+	<th>$i18n.get('highbloodpressure')</th>	
+	
+	<th>$i18n.get('heartproblem')</th>	
+	
+	<th>$i18n.get('stroke')</th>	
+	
+	<th>$i18n.get('epilepsi')</th>	
+	
+	<th>$i18n.get('mentalillness')</th>	
+	
+	<th>$i18n.get('sucide')</th>	
+	
+	<th>$i18n.get('breastexamdate')</th>	
+	
+	<th>$i18n.get('breastexamresult')</th>	
+	
+	<th>$i18n.get('cadiacechodate')</th>	
+	
+	<th>$i18n.get('cadiacechoresult')</th>	
+	
+	<th>$i18n.get('gynexamdate')</th>	
+	
+	<th>$i18n.get('gynexamresult')</th>	
+	
+	<th>$i18n.get('prostateexamdate')</th>	
+	
+	<th>$i18n.get('prostateexamresult')</th>	
+	
+	<th>$i18n.get('rectalexamdate')</th>	
+	
+	<th>$i18n.get('rectalexamresult')</th>	
+	
+	<th>$i18n.get('sigmoiddate')</th>	
+	
+	<th>$i18n.get('sigmoidresult')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddhistory' style='display:none;'>
+<th><input type='button' id='savehistory' value="  $i18n.get('save')  " onkeydown="javascript:validateHistory('add', document.getElementById('inlinehistoryForm') )"  onclick="javascript:validateHistory('add', document.getElementById('inlinehistoryForm') )" onkeypress="nextfield='';">
+</th>
+
+
+			#set ($ses = $req.getSession())					
+			#set ($client_id = $ses.getAttribute('client_id'))
+			#set ($client_node = $ses.getAttribute('client_node'))
+		<th>
+			<input type='hidden' id='client' name='client'  size='1' value='$!client_id' onchange='makeGetRequestClientByTypeHead()' onkeypress="formname='inlinehistoryForm'; nextfield='textclient';"> 
+			
+			<input type='text' id='textclient' name='textclient' size='18' value='$!client_node' onkeypress="formname='inlinehistoryForm'; nextfield='cboclient';"  onkeyup='makeGetRequestClientByTypeHead()' onclick='makeGetRequestClientByTypeHead()'>	
+			
+			<div id='divclient' style='display:none;position:absolute'  onkeypress="formname='inlinehistoryForm'; nextfield='father';"></div>				
+		 </th>		
+		<th> <input type='text'  id='father' name='father' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='mother';"> </th><th> <input type='text'  id='mother' name='mother' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='sibling';"> </th><th> <input type='text'  id='sibling' name='sibling' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='partner';"> </th><th> <input type='text'  id='partner' name='partner' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='offspring';"> </th><th> <input type='text'  id='offspring' name='offspring' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='cancer';"> </th><th> <input type='text'  id='cancer' name='cancer' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='tuberculosis';"> </th><th> <input type='text'  id='tuberculosis' name='tuberculosis' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='diabetes';"> </th><th> <input type='text'  id='diabetes' name='diabetes' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='highbloodpressure';"> </th><th> <input type='text'  id='highbloodpressure' name='highbloodpressure' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='heartproblem';"> </th><th> <input type='text'  id='heartproblem' name='heartproblem' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='stroke';"> </th><th> <input type='text'  id='stroke' name='stroke' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='epilepsi';"> </th><th> <input type='text'  id='epilepsi' name='epilepsi' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='mentalillness';"> </th><th> <input type='text'  id='mentalillness' name='mentalillness' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='sucide';"> </th><th> <input type='text'  id='sucide' name='sucide' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='breastexamdate';"> </th><th><input type='text'  id='breastexamdate' name='breastexamdate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinehistoryForm'; nextfield='breastexamresult';" value=$!novalue >
+			<th> <input type='text'  id='breastexamresult' name='breastexamresult' size='8' value='N, A' onkeypress="formname='inlinehistoryForm'; nextfield='cadiacechodate';"> </th><th><input type='text'  id='cadiacechodate' name='cadiacechodate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinehistoryForm'; nextfield='cadiacechoresult';" value=$!novalue >
+			<th> <input type='text'  id='cadiacechoresult' name='cadiacechoresult' size='8' value='N, A' onkeypress="formname='inlinehistoryForm'; nextfield='gynexamdate';"> </th><th><input type='text'  id='gynexamdate' name='gynexamdate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinehistoryForm'; nextfield='gynexamresult';" value=$!novalue >
+			<th> <input type='text'  id='gynexamresult' name='gynexamresult' size='8' value='N, A' onkeypress="formname='inlinehistoryForm'; nextfield='prostateexamdate';"> </th><th><input type='text'  id='prostateexamdate' name='prostateexamdate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinehistoryForm'; nextfield='prostateexamresult';" value=$!novalue >
+			<th> <input type='text'  id='prostateexamresult' name='prostateexamresult' size='8' value='N, A' onkeypress="formname='inlinehistoryForm'; nextfield='rectalexamdate';"> </th><th><input type='text'  id='rectalexamdate' name='rectalexamdate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinehistoryForm'; nextfield='rectalexamresult';" value=$!novalue >
+			<th> <input type='text'  id='rectalexamresult' name='rectalexamresult' size='8' value='N, A' onkeypress="formname='inlinehistoryForm'; nextfield='sigmoiddate';"> </th><th><input type='text'  id='sigmoiddate' name='sigmoiddate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinehistoryForm'; nextfield='sigmoidresult';" value=$!novalue >
+			<th> <input type='text'  id='sigmoidresult' name='sigmoidresult' size='8' value='N, A' onkeypress="formname='inlinehistoryForm'; nextfield='savehistory';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($history in $historys)
+	#if($history.id)
+	<tr class='tableitem' id='tr$history.id' onDblClick="javascript:makeGetRequestAddHistory($history.id, 'edit')">
+	<td id='td$history.id'>
+	<a href="javascript:makeGetRequestAddHistory($history.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('historyDelete.action?id=$history.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$history.id').style.background ='#CCCCCC'; document.getElementById('td$history.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('historyView.action?id=$history.id', 'View history', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+		
+	</td>	
+		
+		<td>$!history.client.node</td>
+		
+		<td>$!history.father</td>
+		
+		<td>$!history.mother</td>
+		
+		<td>$!history.sibling</td>
+		
+		<td>$!history.partner</td>
+		
+		<td>$!history.offspring</td>
+		
+		<td>$!history.cancer</td>
+		
+		<td>$!history.tuberculosis</td>
+		
+		<td>$!history.diabetes</td>
+		
+		<td>$!history.highbloodpressure</td>
+		
+		<td>$!history.heartproblem</td>
+		
+		<td>$!history.stroke</td>
+		
+		<td>$!history.epilepsi</td>
+		
+		<td>$!history.mentalillness</td>
+		
+		<td>$!history.sucide</td>
+		
+		<td>$!history.breastexamdate</td>
+		
+		<td>$!history.breastexamresult</td>
+		
+		<td>$!history.cadiacechodate</td>
+		
+		<td>$!history.cadiacechoresult</td>
+		
+		<td>$!history.gynexamdate</td>
+		
+		<td>$!history.gynexamresult</td>
+		
+		<td>$!history.prostateexamdate</td>
+		
+		<td>$!history.prostateexamresult</td>
+		
+		<td>$!history.rectalexamdate</td>
+		
+		<td>$!history.rectalexamresult</td>
+		
+		<td>$!history.sigmoiddate</td>
+		
+		<td>$!history.sigmoidresult</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddHistory(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>
+ </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divEthnic'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divEthnic').innerHTML=''" value=' X '>  
+$i18n.get('ethniclist')  
+</div>
+<br>
+<div>
+<select id='comboethnic' name='comboethnic'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='node'>$i18n.get('node')</option>
+	
+</select>
+<input name='searchethnic' id='searchethnic' onkeyup='makeGetRequestEthnicBySearch()' value='' onclick='clearSearchBox(searchethnic)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestEthnicByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddEthnic(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tableethnic' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineethnicForm' name='inlineethnicForm' action='ethnicAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddethnic' style='display:none;'>
+<th><input type='button' id='saveethnic' value="  $i18n.get('save')  " onkeydown="javascript:validateEthnic('add', document.getElementById('inlineethnicForm') )"  onclick="javascript:validateEthnic('add', document.getElementById('inlineethnicForm') )" onkeypress="nextfield='';">
+</th>
+
+<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlineethnicForm'; nextfield='saveethnic';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($ethnic in $ethnics)
+	#if($ethnic.id)
+	<tr class='tableitem' id='tr$ethnic.id' onDblClick="javascript:makeGetRequestAddEthnic($ethnic.id, 'edit')">
+	<td id='td$ethnic.id'>
+	<a href="javascript:makeGetRequestAddEthnic($ethnic.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('ethnicDelete.action?id=$ethnic.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$ethnic.id').style.background ='#CCCCCC'; document.getElementById('td$ethnic.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('ethnicView.action?id=$ethnic.id', 'View ethnic', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+		
+	</td>	
+		
+		<td>$!ethnic.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddEthnic(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

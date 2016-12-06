@@ -1,0 +1,4 @@
+
+#foreach($role in $roles)
+	$role.id
+#end

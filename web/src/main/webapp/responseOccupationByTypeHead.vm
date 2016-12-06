@@ -1,0 +1,8 @@
+
+<select name='cbooccupation' id='cbooccupation' multiple='multiple' onkeypress="formname='encounterForm'; typehead = 'occupation'; nextfield='saveoccupation';">
+#foreach($occupation in $occupations)
+<option value='$occupation.id'>$occupation.node</option>
+#end						
+<option value=''></option>
+</select>
+

@@ -1,0 +1,803 @@
+<!--
+importinvoiceAddForm.vm
+importinvoicedetailAddForm.vm
+importinvoicedetailEditForm.vm
+importinvoicedetailList.vm
+importinvoiceView.vm
+importinvoiceEditForm.vm
+importinvoiceList.vm
+importinvoiceView.vm
+
+
+responseImportinvoiceByWarehouse.vm
+
+-->
+<script>
+
+user = 0
+function selectdrug( id, text)
+		{
+			document.getElementById('drug').value = id;
+			document.getElementById('textdrug').value = text;
+			document.getElementById('divdrug').style.display = 'none';
+		}	
+	
+	function makeGetRequestProviderByTypeHead() 
+	{
+		if (document.getElementById('divprovider') != null)
+		{
+			document.getElementById('divprovider').style.display = 'block';
+		}
+		wordId = document.getElementById('textprovider').value;
+		http.open('get', 'getProviderByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponseProviderByTypeHead;
+		http.send(null);
+	}
+		
+	function processResponseProviderByTypeHead() 
+	{
+		if(http.readyState == 4){
+			var response = http.responseText;
+			document.getElementById('divprovider').innerHTML = response;
+		}
+	}	
+	
+	function selectprovider( id, text)
+	{
+		document.getElementById('provider').value = id;
+		document.getElementById('textprovider').value = text;
+		document.getElementById('divprovider').style.display = 'none';
+	}	
+
+	
+
+	function makeGetRequestImportinvoiceByCode() 
+	{
+		wordId = document.getElementById('code').value;
+		http.open('get', 'getImportinvoiceByCode.action?con=code&typehead=' + wordId);
+		http.onreadystatechange = processResponseImportinvoiceByCode;
+		http.send(null);
+	}
+		
+	function processResponseImportinvoiceByCode() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = trim(http.responseText);
+			//alert(response);
+			if (response !=0)
+				makeGetRequestAddImportinvoice(response, 'edit');
+			else
+				//document.getElementById('searchimportinvoice').innerHTML="i18n.get('notfound')";
+				alert ('The record is not found');
+		}
+	}
+	
+	
+	function makeGetRequestAddImportinvoice(wordId, action) 
+	{
+		if (action == 'add')
+		{
+		
+			url = 'importinvoiceAddForm.action?id=' + wordId;
+			importinvoiceaction = 'add';
+		}
+		else
+		{
+			url = 'importinvoiceEditForm.action?id=' + wordId;	
+			importinvoiceaction = 'edit';
+		}
+		importinvoice = wordId;
+		http.open('get', url);
+		http.onreadystatechange = processResponseAddImportinvoice;
+		http.send(null);
+	}
+	
+
+	
+	function processResponseAddImportinvoice() {
+		if(http.readyState == 4){
+			var response = http.responseText;			
+			document.getElementById('addimportinvoice').innerHTML = response;
+
+			document.getElementById('divImportinvoicedetail').innerHTML = '';
+			//alert(importinvoice);
+			if (importinvoice != 0)
+			{
+				makeGetRequestImportinvoicedetailByImportinvoice(importinvoice)
+			}
+					
+		}
+	}
+	
+	
+	
+	function validateImportinvoice( action, f )
+	{
+		var strmessage = '';
+		
+		
+		
+		if ( (f.type.value == 'NB') && f.druginvoice.value == '') 
+		{
+			f.textdruginvoice.focus();
+			strmessage += "you must select a drug invoice. ";
+		}	
+		
+	
+	
+		if ( (f.date.value!='') && isDate(java2mysql(f.date.value)) == false) 
+		{
+			f.date.focus();
+			strmessage += "date must be a valid date. ";
+		}	
+	
+		if (isNaN(f.warehouse.value)) 
+		{
+			f.warehouse.focus();
+			strmessage += "warehouse must be a number. ";
+		}							
+		
+		
+		if (isNaN(f.provider.value)) 
+		{
+			f.provider.focus();
+			strmessage += "provider must be a number. ";
+		}							
+		
+		
+		if (isNaN(f.fromwarehouse.value)) 
+		{
+			f.fromwarehouse.focus();
+			strmessage += "fromwarehouse must be a number. ";
+		}							
+		
+		
+		if (isNaN(f.vat.value)) 
+		{
+			f.vat.focus();
+			strmessage += "vat must be a number. ";
+		}							
+		if (document.getElementById('warehouse').value == 0)  //Chua chon kho
+		{
+			f.warehouse.focus();
+			strmessage += " -- Please select an warehouse where you are doing! ";
+		}	
+						
+		if (strmessage!='') 
+		{ 
+			alert(strmessage); 
+			document.getElementById('saveimportinvoice').disabled = false; return false; 
+		} 
+		else 
+		{ 
+			makeGetRequestSaveImportinvoice ( action, f ); 
+		}	
+	
+		/*	
+		if (strmessage!='') {
+			alert(strmessage); 
+				document.getElementById('saveimportinvoice').disabled = false;
+			return false;
+		}
+		else
+		{
+			
+			if (user > 0 )
+			{	
+				makeGetRequestSaveImportinvoiceByUser (action, f);				
+			}
+			else 
+	
+			if (provider > 0 )
+			{	
+				makeGetRequestSaveImportinvoiceByProvider (action, f);				
+			}
+			else 
+	
+			if (warehouse > 0 )
+			{	
+				makeGetRequestSaveImportinvoiceByWarehouse (action, f);				
+			}
+			else 
+					
+				makeGetRequestSaveImportinvoice ( action, f );
+					
+				
+		}
+		*/
+	}
+	
+	importinvoice = 0;
+	
+	function makeGetRequestImportinvoicedetailByImportinvoice(wordId) 
+	{
+		importinvoice = wordId;
+		http.open('get', 'getImportinvoicedetailByImportinvoice.action?id=' + wordId);
+		http.onreadystatechange = processResponseImportinvoicedetailByImportinvoice;
+		http.send(null);
+	}
+	
+	function processResponseImportinvoicedetailByImportinvoice() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divImportinvoicedetail').innerHTML = response;
+
+		}
+	}		
+		
+	
+	function makeGetRequestSaveImportinvoiceByWarehouse ( action, f ) 
+	{
+				
+		var url = '';
+		var value = '';
+		for (var i = 0; i<f.elements.length; i++) 
+		{
+			value = f.elements[i].value;
+			if (value.indexOf('/')==2) 
+			{
+			  da = value.split('/'); //ngay thang nam
+			  value = da[1] + '/' + da[0] + '/' + da[2] ;
+			  
+			}
+			
+			url=url+f.elements[i].name + '=' + value + '&';
+		}
+		
+		if (action  == 'add')
+		{
+			http.open('get', 'importinvoiceAdd.action?'+url);
+			
+		}
+		else
+		{
+			http.open('get', 'importinvoiceUpdate.action?'+url);
+		
+		}
+		
+		http.onreadystatechange = processResponseSaveImportinvoiceByWarehouse;
+		http.send(null);
+		document.getElementById('addimportinvoice').innerHTML ='';
+	}
+		
+
+	function processResponseSaveImportinvoiceByWarehouse (  ) 
+	{
+		if(http.readyState == 4)
+		{
+			makeGetRequestImportinvoiceByWarehouse(warehouse);
+		}
+	}
+	
+	function makeGetRequestImportinvoiceByWarehouse(wordId) 
+	{
+		warehouse = wordId;
+		http.open('get', 'getImportinvoiceByWarehouse.action?id=' + wordId);
+		http.onreadystatechange = processResponseImportinvoiceByWarehouse;
+		http.send(null);
+	}
+	
+	function processResponseImportinvoiceByWarehouse() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divImportinvoice').innerHTML = response;
+			//makeGetRequestAddImportinvoice(warehouse, 'add');
+		}
+	}		
+			
+	function makeGetRequestSaveImportinvoice ( action, f ) 
+	{
+				
+		var url = '';
+		var value = '';
+		for (var i = 0; i<f.elements.length; i++) 
+		{
+			value = f.elements[i].value;
+			if (value.indexOf('/')==2) 
+			{
+			  da = value.split('/'); //ngay thang nam
+			  value = da[1] + '/' + da[0] + '/' + da[2] ;
+			  
+			}
+			url=url+f.elements[i].name + '=' + value + '&';
+		}
+		
+		if (action == 'add')
+		{
+				http.open('get', 'importinvoiceAdd.action?'+url);
+				http.onreadystatechange = processResponseSaveAddImportinvoice ; // no () here please, not know the reason
+				for (var i = 0; i<f.elements.length; i++) 
+				{
+					if (f.elements[i].name.type == 'text')	f.elements[i].value = '';
+				}
+		}
+		else
+		{
+				http.open('get', 'importinvoiceUpdate.action?'+url);
+				http.onreadystatechange = processResponseSaveUpdateImportinvoice ; // no () here please, not know the reason
+				
+		}
+		http.send(null);
+		document.getElementById('msg').innerHTML ='Saving...';
+	}
+		
+
+	function processResponseSaveAddImportinvoice () 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			var viewurl = 'importinvoiceView.action?id='+response;			
+			var viewlink = "<input type='button' id='edit' value='View' onclick=window.open('"+viewurl+"')  >";				
+		
+			var action = 'edit';				
+			var url = "<input type='button' id='edit' value='Edit' onclick='makeGetRequestAddImportinvoice("+response+","+action+")' >";
+		
+			document.getElementById('msg').innerHTML ='Saved successfully: ' + viewlink + url;
+			makeGetRequestAddImportinvoice(response, "edit");
+		
+		}
+	}	
+
+	function processResponseSaveUpdateImportinvoice () 
+	{
+		if(http.readyState == 4)
+		{
+			document.getElementById('msg').innerHTML ='Saved successfully';
+			makeGetRequestImportinvoiceByFilter();		
+		}
+	}
+	
+	function makeGetRequestImportinvoiceByFilter() 
+	{
+		type = document.getElementById('filtertype').value; 
+		warehouse = document.getElementById('filterwarehouse').value; 
+		date = document.getElementById('filterdate').value; 		
+
+		http.open('get', 'getImportinvoiceBySearch.action?flag=filter&date='+date+'&type='+ type+'&warehouse='+ warehouse);
+		
+		
+		http.onreadystatechange = processResponseImportinvoiceByFilter;
+		http.send(null);
+	}
+		
+	function processResponseImportinvoiceByFilter() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('tableimportinvoice').innerHTML = response;
+			
+			makeGetRequestAddImportinvoice(0, 'add');
+		}
+	}
+	
+	function makeGetRequestImportinvoiceFilterByMonth(m, y) 
+	{	
+		http.open('get', 'importinvoiceFilterByMonth.action?month='+m+'&year='+ y);
+		
+		
+		http.onreadystatechange = processResponseImportinvoiceFilterByMonth;
+		http.send(null);
+	}		
+	
+	function makeGetRequestImportinvoiceFilterByMonthTax(m, y, tax, warehouseTax) 
+	{	
+		http.open('get', 'getImportinvoiceBySearch.action?flag=filtertax&month='+m+'&year='+ y+'&tax='+tax+'&warehouseTax='+warehouseTax);		
+		
+		http.onreadystatechange = processResponseImportinvoiceBySearch;
+		http.send(null);
+	}		
+	
+	
+	function processResponseImportinvoiceFilterByMonth() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('tableimportinvoice').innerHTML = response;
+			
+			makeGetRequestAddImportinvoice(0, 'add');
+		}
+	}
+	
+	
+	
+	
+	function makeGetRequestImportinvoiceByTypeHead() 
+	{
+		if (document.getElementById('divimportinvoice') != null)
+		{
+			document.getElementById('divimportinvoice').style.display = 'block';
+		}
+		wordId = document.getElementById('textimportinvoice').value;
+		http.open('get', 'getImportinvoiceByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponseImportinvoiceByTypeHead;
+		http.send(null);
+	}
+	
+	function processResponseImportinvoiceByTypeHead() 
+	{
+		if(http.readyState == 4){
+			var response = http.responseText;
+			document.getElementById('divimportinvoice').innerHTML = response;
+		}
+	}
+	
+	
+	
+	
+		
+	
+	function selectimportinvoice( id, text)
+	{
+		document.getElementById('importinvoice').value = id;
+		document.getElementById('textimportinvoice').value = text;
+		document.getElementById('divimportinvoice').style.display = 'none';
+	}
+	
+	
+	
+	
+	
+	
+	function makeGetRequestDrugByTypeHead() 
+	{
+		if (document.getElementById('divdrug') != null)
+		{
+			document.getElementById('divdrug').style.display = 'block';
+		}
+		wordId = document.getElementById('textdrug').value;
+		http.open('get', 'getDrugByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponseDrugByTypeHead;
+		http.send(null);
+	}
+	
+	function processResponseDrugByTypeHead() 
+	{
+		if(http.readyState == 4){
+			var response = http.responseText;
+			document.getElementById('divdrug').innerHTML = response;
+		}
+	}
+	
+	
+	
+	function validateImportinvoicedetail( action, f )
+	{
+		var strmessage = '';
+		
+			if (isNaN(f.importinvoice.value)) 
+			{
+				f.importinvoice.focus();
+				strmessage += "importinvoice must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.drug.value)) 
+			{
+				f.drug.focus();
+				strmessage += "drug must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.quantity.value)) 
+			{
+				f.quantity.focus();
+				strmessage += "quantity must be a number. ";
+			}							
+
+			if (f.batchnumber.value == '') 
+			{
+				f.batchnumber.focus();
+				strmessage += "batchnumber must not be null. ";
+			}							
+			
+			if (f.expireddate.value == ''&& f.expiredmonth.value == '') 
+			{
+				f.expireddate.focus();
+				strmessage += "expireddate & expiredmonth must not be null. ";
+			}		
+			if (f.expireddate.value != ''&& f.expiredmonth.value != '') 
+			{
+				f.expireddate.focus();
+				strmessage += "expireddate or expiredmonth ";
+			}					
+		
+			
+			if ( (f.expireddate.value!='') && isDate(java2mysql(f.expireddate.value)) == false) 
+			{
+				f.expireddate.focus();
+				strmessage += "expireddate must be a valid date. ";
+			}	
+		
+			if (isNaN(f.price.value)) 
+			{
+				f.price.focus();
+				strmessage += "price must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.discount.value)) 
+			{
+				f.discount.focus();
+				strmessage += "discount must be a number. ";
+			}							
+			
+			
+			if (f.subtotal.value=='') 
+			{
+				f.subtotal.focus();
+				strmessage += "subtotal can not be null. ";
+			}	
+		
+			if (isNaN(f.subtotal.value)) 
+			{
+				f.subtotal.focus();
+				strmessage += "subtotal must be a number. ";
+			}							
+			
+			
+		if (strmessage!='') {
+			alert(strmessage); return false;
+		}
+		else
+		{
+			
+			if (drug > 0 )
+			{	
+				makeGetRequestSaveImportinvoicedetailByDrug (action, f);				
+			}
+			else 
+	
+			if (importinvoice > 0 )
+			{	
+				makeGetRequestSaveImportinvoicedetailByImportinvoice (action, f);				
+			}
+			else 
+					
+				makeGetRequestSaveImportinvoicedetail ( action, f );
+					
+				
+		}
+	}
+	
+	function makeGetRequestSaveImportinvoicedetail ( action, f ) 
+	{
+				
+		var url = '';
+		var value = '';
+		for (var i = 0; i<f.elements.length; i++) 
+		{
+			value = f.elements[i].value;
+			if (value.indexOf('/')==2) 
+			{
+			  da = value.split('/'); //ngay thang nam
+			  value = da[1] + '/' + da[0] + '/' + da[2] ;
+			  
+			}
+			url=url+f.elements[i].name + '=' + value + '&';
+		}
+		
+		if (action == 'add')
+		{
+				http.open('get', 'importinvoicedetailAdd.action?'+url);
+				http.onreadystatechange = processResponseSaveAddImportinvoicedetail ; // no () here please, not know the reason
+				for (var i = 0; i<f.elements.length; i++) 
+				{
+					if (f.elements[i].name.type == 'text')	f.elements[i].value = '';
+				}
+		}
+		else
+		{
+				http.open('get', 'importinvoicedetailUpdate.action?'+url);
+				http.onreadystatechange = processResponseSaveUpdateImportinvoicedetail ; // no () here please, not know the reason
+				
+		}
+		http.send(null);
+		document.getElementById('msg').innerHTML ='Saving...';
+	}
+		
+
+	function processResponseSaveAddImportinvoicedetail () 
+	{
+		if(http.readyState == 4){
+			var response = http.responseText;
+			var viewurl = 'importinvoicedetailView.action?id='+response;			
+			var viewlink = "<input type='button' id='edit' value='View' onclick=window.open('"+viewurl+"')  >";				
+		
+			var action = 'edit';				
+			var url = "<input type='button' id='edit' value='Edit' onclick='makeGetRequestAddImportinvoicedetail("+response+","+action+")' >";
+		
+			document.getElementById('msg').innerHTML ='Saved successfully: ' + viewlink + url;
+		
+		}
+	}	
+
+	function processResponseSaveUpdateImportinvoicedetail () 
+	{
+			if(http.readyState == 4){
+				makeGetRequestImportinvoicedetail();		
+				document.getElementById('msg').innerHTML ='Saved successfully';
+			}
+	}
+	
+	
+	function makeGetRequestAddImportinvoicedetail(wordId, action) 
+	{
+		if (action == 'add')
+			url = 'importinvoicedetailAddForm.action?id=' + wordId;
+		else
+			url = 'importinvoicedetailEditForm.action?id=' + wordId;	
+		http.open('get', url);
+		http.onreadystatechange = processResponseAddImportinvoicedetail;
+		http.send(null);
+	}
+	
+	function processResponseAddImportinvoicedetail() 
+	{
+		if(http.readyState == 4){
+			var response = http.responseText;			
+			document.getElementById('addimportinvoicedetail').innerHTML = response;
+			if ((document.importinvoicedetailForm.node) != null)
+				document.importinvoicedetailForm.node.focus(); //can kiem tra focusfield truoc
+		}
+	}
+	
+	
+	
+	function makeGetRequestSaveImportinvoicedetailByImportinvoice ( action, f ) 
+	{
+				
+			var url = '';
+			var value = '';
+			for (var i = 0; i<f.elements.length; i++) 
+			{
+				value = f.elements[i].value;
+				if (value.indexOf('/')==2) 
+				{
+				  da = value.split('/'); //ngay thang nam
+				  value = da[1] + '/' + da[0] + '/' + da[2] ;
+				  
+				}
+				
+				url=url+f.elements[i].name + '=' + value + '&';
+			}
+			
+			if (action  == 'add')
+				http.open('get', 'importinvoicedetailAdd.action?'+url);
+			else
+				http.open('get', 'importinvoicedetailUpdate.action?'+url);
+			
+			http.onreadystatechange = processResponseSaveImportinvoicedetailByImportinvoice;
+			http.send(null);
+			document.getElementById('addimportinvoicedetail').innerHTML ='';
+	}
+		
+
+	function processResponseSaveImportinvoicedetailByImportinvoice (  ) 
+	{
+			if(http.readyState == 4)
+			{
+				makeGetRequestImportinvoicedetailByImportinvoice(importinvoice);
+			}
+	}	
+	
+	
+	
+	
+	
+	function makeGetRequestAddDruginvoice(wordId, action) 
+	{
+		druginvoice = wordId;
+		if (action == 'add')
+		{
+			url = 'druginvoiceAddForm.action?id=' + wordId;
+			druginvoiceaction = 'add';
+		}
+		else
+		{
+			url = 'druginvoiceEditForm.action?id=' + wordId;	
+			druginvoiceaction = 'edit';
+		}
+		http.open('get', url);
+		http.onreadystatechange = processResponseAddDruginvoice;
+		http.send(null);
+	}
+	
+	function processResponseAddDruginvoice() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;			
+			document.getElementById('adddruginvoice').innerHTML = response;
+			if ((document.druginvoiceForm.node) != null)
+				document.druginvoiceForm.node.focus(); //can kiem tra focusfield truoc
+				
+
+			if (druginvoice > 0)
+			makeGetRequestDruginvoicedetailByDruginvoice(druginvoice);	
+		}
+	}	
+	
+	
+	druginvoice = 0;
+	
+	function makeGetRequestDruginvoicedetailByDruginvoice(wordId) 
+	{
+		druginvoice = wordId;
+		http.open('get', 'getDruginvoicedetailByDruginvoice.action?id=' + wordId);
+		http.onreadystatechange = processResponseDruginvoicedetailByDruginvoice;
+		http.send(null);
+	}
+	
+	function processResponseDruginvoicedetailByDruginvoice() 
+	{
+		if(http.readyState == 4){
+			var response = http.responseText;
+			document.getElementById('divDruginvoicedetail').innerHTML = response;
+			//makeGetRequestAddDruginvoicedetail(druginvoice, 'add');
+			 document.getElementById('textdrug').focus();
+
+			 
+		}
+	}
+	
+	
+	
+	function makeGetRequestImportinvoicedetailBySearch() 
+	{
+		wordId = document.getElementById('searchimportinvoicedetail').value;
+		con = document.getElementById('comboimportinvoicedetail').value;
+		http.open('get', 'getImportinvoicedetailBySearch.action?con=' + con + '&typehead=' + wordId);
+		http.onreadystatechange = processResponseImportinvoicedetailBySearch;
+		http.send(null);
+	}
+		
+	function processResponseImportinvoicedetailBySearch() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('tableimportinvoicedetail').innerHTML = response;
+		}
+	}	
+	function clearSearchBox() 
+	{
+		document.getElementById('searchimportinvoicedetail').value='';
+	}
+	
+	
+	function makeGetRequestImportinvoiceBySearch() 
+	{
+		wordId = document.getElementById('searchimportinvoice').value;
+		con = document.getElementById('comboimportinvoice').value;
+		http.open('get', 'getImportinvoiceBySearch.action?con=' + con + '&typehead=' + wordId);
+		http.onreadystatechange = processResponseImportinvoiceBySearch;
+		http.send(null);
+	}
+		
+	function processResponseImportinvoiceBySearch() 
+	{
+			if(http.readyState == 4){
+				var response = http.responseText;
+				document.getElementById('tableimportinvoice').innerHTML = response;
+			}
+	}	
+	function clearSearchBox() 
+	{
+			document.getElementById('searchimportinvoice').value='';
+	}
+	
+	
+	
+			
+	
+					
+
+</script>

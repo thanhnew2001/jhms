@@ -1,0 +1,7 @@
+
+<select name='cboroom' id='cboroom' multiple='multiple' onkeypress="typehead = 'room'; nextfield='saveroom';">
+#foreach($room in $rooms)
+<option value='$room.id'>$room.node</option>
+#end						
+</select>
+

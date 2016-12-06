@@ -1,0 +1,4 @@
+
+#foreach($room in $rooms)
+	$room.id
+#end

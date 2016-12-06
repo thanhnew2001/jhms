@@ -1,0 +1,55 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+<div id='container'>
+<h2>$i18n.get('user')</h2>
+<br>
+<table>
+
+	<tr>
+	<td>$i18n.get('node'):</td>
+	<td>$user.node</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('password'):</td>
+	<td>$user.password</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('position'):</td>
+	<td>$user.position</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('fullname'):</td>
+	<td>$user.fullname</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('phone'):</td>
+	<td>$user.phone</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('cellphone'):</td>
+	<td>$user.cellphone</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('email'):</td>
+	<td>$user.email</td>
+	</tr>
+	
+</table>
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>

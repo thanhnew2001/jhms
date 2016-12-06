@@ -1,0 +1,31 @@
+
+<div id='addpaymenttype'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addpaymenttype').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('paymenttype')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='paymenttypeForm' name='paymenttypeForm' action='paymenttypeAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text'  id='node' name='node' size='15' value='' onkeypress="formname='paymenttypeForm'; nextfield='savepaymenttype';"> </td>
+			
+<tr><td>
+<input type='button' id='savepaymenttype' value="  $i18n.get('save')  " onkeydown="javascript:validatePaymenttype('add', document.getElementById('paymenttypeForm') )"  onclick="javascript:validatePaymenttype('add', document.getElementById('paymenttypeForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

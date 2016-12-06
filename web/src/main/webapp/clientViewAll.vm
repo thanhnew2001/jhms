@@ -1,0 +1,125 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+<div id='container'>
+<h2>$i18n.get('client')</h2>
+<br>
+<table>
+
+	<tr>
+	<td>$i18n.get('code'):</td>
+	<td>$client.code</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('node'):</td>
+	<td>$client.node</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('birthday'):</td>
+	<td>$client.birthday</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('sex'):</td>
+	<td>$client.sex</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('occupation'):</td>
+	<td>$client.occupation</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('ethnic'):</td>
+	<td>$client.ethnic</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('education'):</td>
+	<td>$client.education</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('oversea'):</td>
+	<td>$client.oversea</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('address'):</td>
+	<td>$client.address</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('ward'):</td>
+	<td>$client.ward</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('company'):</td>
+	<td>$client.company</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('paymenttype'):</td>
+	<td>$client.paymenttype</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('insurancenumber'):</td>
+	<td>$client.insurancenumber</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('joineddate'):</td>
+	<td>$client.joineddate</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('expireddate'):</td>
+	<td>$client.expireddate</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('motherfather'):</td>
+	<td>$client.motherfather</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('phone'):</td>
+	<td>$client.phone</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('age'):</td>
+	<td>$client.age</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('maritalstatus'):</td>
+	<td>$client.maritalstatus</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('createddate'):</td>
+	<td>$client.createddate</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('password'):</td>
+	<td>$client.password</td>
+	</tr>
+	
+</table>
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>

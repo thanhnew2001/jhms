@@ -1,0 +1,96 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addrole'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divRole'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divRole').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('role')  
+</div>
+<br>
+<div>
+<select id='comborole' name='comborole'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='node'>$i18n.get('node')</option>
+	
+</select>
+<input name='searchrole' id='searchrole' onkeyup='makeGetRequestRoleBySearch()' value='' onclick='clearSearchBox(searchrole)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestRoleByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddRole(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tablerole' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineroleForm' name='inlineroleForm' action='roleAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddrole' style='display:none;'>
+<th><input type='button' id='saverole' value="  $i18n.get('save')  " onkeydown="javascript:validateRole('add', document.getElementById('inlineroleForm') )"  onclick="javascript:validateRole('add', document.getElementById('inlineroleForm') )" onkeypress="nextfield='';">
+</th>
+
+<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlineroleForm'; nextfield='saverole';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($role in $roles)
+	#if($role.id)
+	<tr class='tableitem' id='tr$role.id' onDblClick="javascript:makeGetRequestAddRole($role.id, 'edit')">
+	<td id='td$role.id'>
+	<a href="javascript:makeGetRequestAddRole($role.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('roleDelete.action?id=$role.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$role.id').style.background ='#CCCCCC'; document.getElementById('td$role.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('roleView.action?id=$role.id', 'View role', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menurole$role.id').style.display='block'; " ondblclick="javascript:document.getElementById('menurole$role.id').style.display='none'"  value='>>' >  	
+
+	<div id='menurole$role.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+		 <a href='javascript:makeGetRequestUserroleByRole($role.id)'> userrole </a> &nbsp;
+		 <br>
+		
+		 <a href='javascript:makeGetRequestRoleformByRole($role.id)'> roleform </a> &nbsp;
+		 <br>
+		
+	</div>
+	
+	</td>	
+		
+		<td>$!role.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddRole(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

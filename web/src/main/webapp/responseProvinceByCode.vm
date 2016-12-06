@@ -1,0 +1,4 @@
+
+#foreach($province in $provinces)
+	$province.id
+#end

@@ -1,0 +1,172 @@
+
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+
+<div id='header'></div>
+<form action='ketQuaCLSSave.action' method='POST'>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td colspan="2"> <div align="center"><strong><h2>K&#7870;T QU&#7842; C&#7852;N L&Acirc;M S&Agrave;NG</h2></strong>
+    </div>
+      <div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divClient').innerHTML=''" value=' X '>
+<strong> $i18n.get('clientEncounter')</strong></div></td>
+  </tr>
+  
+  <tr>
+    <td width="43%"><strong>$i18n.get('servicegroup'):</strong> $!indicationdetail.service.servicegroup.node</td>
+    <td width="57%"><strong>$i18n.get('node'):</strong> $!indicationdetail.encounter.client.node</td>
+    </tr>
+  <tr>
+    <td><strong>$i18n.get('servicename'):</strong> $!indicationdetail.service.node</td>
+    <td><strong>$i18n.get('address'): </strong>$!indicationdetail.encounter.client.address</td>
+    </tr>
+  <tr>
+    <td><strong>$i18n.get('doctorindicated') </strong>$!indicationdetail.encounter.user.fullname</td>
+    <td><strong>$i18n.get('age'): </strong>$!indicationdetail.encounter.client.age &nbsp;&nbsp; <strong>$i18n.get('sex'):</strong> $!indicationdetail.encounter.client.sex</td>
+    </tr>
+  <tr>
+    <td><strong>$i18n.get('initialdiagnosis'):</strong> $!indicationdetail.encounter.initialdiagnosis</td>
+    <td>
+	<strong>B&aacute;c s&#297; th&#7921;c hi&#7879;n:</strong>
+		#set($ses = $req.getSession())
+			#set($user = $ses.getAttribute('user'))
+		
+		  <select id='user' name='user'  style="width:40">
+		  #if($!encounter.user.id)
+			<option value='$!indicationdetail.user.id' selected>$!indicationdetail.user.node - $!indicationdetail.user.fullname</option>
+     		  <option value='$!user.id'>$!user.node - $!user.fullname</option>
+		  #else
+			  <option value='$!user.id' selected>$!user.node - $!user.fullname</option>
+		  #end
+			
+    		#foreach($user in $users)
+		    <option value='$!user.id'>$!user.node - $!user.fullname</option>
+			#end
+	      	</select>	</td>
+    </tr>
+  <tr>
+    <td><strong>K&#7871;t qu&#7843; t&oacute;m t&#7855;t</strong> &nbsp;
+	  <select name="shortResult">
+	    
+	    <option value="N" #if($!indicationdetail.shortResult.equals("N")) selected #end>binh thuong</option>
+	    <option value="A" #if($!indicationdetail.shortResult.equals("A")) selected #end>BAT THUONG</option>
+	    <option value="" #if($!indicationdetail.shortResult.equals("")) selected #end></option>
+        </select></td>
+    <td><strong>T&igrave;nh tr&#7841;ng: </strong> 
+	  <select name="status" id="status">
+	
+      <option value="DONE" #if($indicationdetail.status.equals("DONE")) selected #end>DONE</option>
+      <option value="NEW" #if($indicationdetail.status.equals("NEW")) selected #end>NEW</option>
+	  <option value="NEW" #if($indicationdetail.status.equals("")) selected #end>NEW</option>
+    </select>	</td>
+    </tr>
+</table>
+
+<table width="100%">
+	    <tr class='pageheader'>
+	      <td width="43%"><strong>$i18n.get('result')</strong></td>
+	      <td width="57%" ><strong>$i18n.get('image')</strong></td>
+	    </tr>
+    
+	    <tr>
+	      <td width="43%" rowspan="3"><textarea name="result" rows="25" cols="70">$!indicationdetail.result</textarea></td>
+	      <td height="397" valign="top">
+		    <p><a href="../jhmsdata/$!indicationdetail.file1">H&igrave;nh 1 </a>  &nbsp;    <a href="../jhmsdata/$!indicationdetail.file2">H&igrave;nh 2 </a>&nbsp;   <a href="../jhmsdata/$!indicationdetail.file3">H&igrave;nh 3 </a> &nbsp;  <a href="../jhmsdata/$!indicationdetail.file4">H&igrave;nh 4 </a> <a href="../jhmsdata/$!indicationdetail.file5">H&igrave;nh 5 </a>  &nbsp;    <a href="../jhmsdata/$!indicationdetail.file6">H&igrave;nh 6 </a>&nbsp;   <a href="../jhmsdata/$!indicationdetail.file7">H&igrave;nh 7 </a> &nbsp;  <a href="../jhmsdata/$!indicationdetail.file8">H&igrave;nh 8 </a>     </p>
+		    <div align="left">
+              <p>
+                <input type='text' id='file1' name='file1' size='20' value='$!indicationdetail.file1'>
+                <input type='text' id='file2' name='file2' size='20' value='$!indicationdetail.file2'>
+                <input type='text' id='file3' name='file3' size='20' value='$!indicationdetail.file3'>
+                <input type='text' id='file4' name='file4' size='20' value='$!indicationdetail.file4'>
+              </p>
+			  #if ($indicationdetail.encounter.room.id == 2)
+              <p>Hinh 1
+                <select id='note1' name='note1' onkeypress="formname='indicationdetailForm'; nextfield='node';">
+                  <option value="Tai">Tai</option>
+                  <option value="Mui" selected>Mui</option>
+                  <option value="Hong" selected>Hong</option>
+                </select>
+Hinh 2
+<select id='note2' name='note2' onkeypress="formname='indicationdetailForm'; nextfield='node';">
+  <option value="Tai">Tai</option>
+  <option value="Mui" selected>Mui</option>
+  <option value="Hong" selected>Hong</option>
+</select>
+Hinh 3
+<select id='note3' name='note3' onkeypress="formname='indicationdetailForm'; nextfield='node';">
+  <option value="Tai">Tai</option>
+  <option value="Mui" selected>Mui</option>
+  <option value="Hong" selected>Hong</option>
+</select>
+Hinh 4
+<select id='note4' name='note4' onkeypress="formname='indicationdetailForm'; nextfield='node';">
+  <option value="Tai">Tai</option>
+  <option value="Mui" selected>Mui</option>
+  <option value="Hong" selected>Hong</option>
+</select>
+</p>
+#end
+
+              <p>
+			  <input type='text' id='file5' name='file5' size='20' value='$!indicationdetail.file5'>
+                <input type='text' id='file6' name='file6' size='20' value='$!indicationdetail.file6'>
+                <input type='text' id='file7' name='file7' size='20' value='$!indicationdetail.file7'>
+                <input type='text' id='file8' name='file8' size='20' value='$!indicationdetail.file8'>
+			  </p>
+			  
+			  #if ($indicationdetail.encounter.room.id == 2)
+              <p>Hinh 5
+                <select id='note5' name='note5' onkeypress="formname='indicationdetailForm'; nextfield='node';">
+                  <option value="Tai">Tai</option>
+                  <option value="Mui" selected>Mui</option>
+                  <option value="Hong" selected>Hong</option>
+                </select>
+Hinh 6
+<select id='note6' name='note6' onkeypress="formname='indicationdetailForm'; nextfield='node';">
+  <option value="Tai">Tai</option>
+  <option value="Mui" selected>Mui</option>
+  <option value="Hong" selected>Hong</option>
+</select>
+Hinh 7
+<select id='note7' name='note7' onkeypress="formname='indicationdetailForm'; nextfield='node';">
+  <option value="Tai">Tai</option>
+  <option value="Mui" selected>Mui</option>
+  <option value="Hong" selected>Hong</option>
+</select>
+Hinh 8
+<select id='note8' name='note8' onkeypress="formname='indicationdetailForm'; nextfield='node';">
+  <option value="Tai">Tai</option>
+  <option value="Mui" selected>Mui</option>
+  <option value="Hong" selected>Hong</option>
+</select>
+</p>
+#end
+              <p>
+                <input name="submit" type='submit' onClick="window.open('upload.action', 'Upload file', 'width=600, height=400,scrollbars=yes')" value='Upload File'>
+              </p>
+		    </div>
+		    <p>&nbsp;</p>
+	      <p>&nbsp;  </p></td>
+    </tr>
+    <tr>
+	  
+    </tr>
+	<tr>
+	 
+    </tr>
+	<tr>
+	<input type='hidden' name='id' value='$!indicationdetail.id'>
+	<input type='hidden' name='action' value='save'>
+	  <td colspan="2"><input type='submit' value='L&#432;u &amp; &#272;&oacute;ng' onClick="window.close();"></td>
+    </tr>
+</table>
+<br>
+<br>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+</form>

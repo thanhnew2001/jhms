@@ -1,0 +1,4 @@
+
+#foreach($warehouse in $warehouses)
+	$warehouse.id
+#end

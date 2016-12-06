@@ -1,0 +1,215 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap' onload="document.getElementById('searchencounter').focus();">
+<div id='addencounter'></div>
+<div id='divPrescriptiondetail'> </div><div id='divIndicationdetail'> </div>
+<br>
+<div id='divEncounter'>
+<a name='list'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divEncounter').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('encounter')  
+</div>
+</a>
+<br>
+<div>
+<select id='comboencounter' name='comboencounter'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='client'>$i18n.get('client')</option>
+	
+	<option value='insurancenumber'>$i18n.get('insurancenumber')</option>
+	
+	<option value='joineddate'>$i18n.get('joineddate')</option>
+	
+	<option value='expireddate'>$i18n.get('expireddate')</option>
+	
+	<option value='code' selected>$i18n.get('code')</option>
+	
+	<option value='date'>$i18n.get('date')</option>
+	
+	<option value='time'>$i18n.get('time')</option>
+	
+	<option value='reference'>$i18n.get('reference')</option>
+	
+	<option value='room'>$i18n.get('room')</option>
+	
+	<option value='hospital'>$i18n.get('hospital')</option>
+	
+	<option value='initialdiagnosis'>$i18n.get('initialdiagnosis')</option>
+	
+	<option value='icd'>$i18n.get('icd')</option>
+	
+	<option value='solving'>$i18n.get('solving')</option>
+	
+	
+	<option value='advise'>$i18n.get('advise')</option>
+	
+	<option value='revisit'>$i18n.get('revisit')</option>
+	
+	<option value='revisitdate'>$i18n.get('revisitdate')</option>
+	
+	<option value='prescriptiontemplate'>$i18n.get('prescriptiontemplate')</option>
+	
+	<option value='totalamount'>$i18n.get('totalamount')</option>
+	
+	<option value='insurancepay'>$i18n.get('insurancepay')</option>
+	
+	<option value='paidamount'>$i18n.get('paidamount')</option>
+	
+	<option value='leftamount'>$i18n.get('leftamount')</option>
+	
+	<option value='paid'>$i18n.get('paid')</option>
+	
+	<option value='user'>$i18n.get('user')</option>
+	
+	<option value='node'>$i18n.get('note')</option>
+	
+</select>
+<input name='searchencounter' id='searchencounter' onkeyup='makeGetRequestEncounterNotPaidBySearch()' value='' onclick='clearSearchBox(searchencounter)'>
+
+</div>
+<div id='msg'></div>
+<div id='tableencounter' class='mytable'>
+<form id='inlineencounterForm' name='inlineencounterForm' action='encounterAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('client')</th>	
+	
+	<th>$i18n.get('insurancenumber')</th>	
+	
+	<th>$i18n.get('joineddate')</th>	
+	
+	<th>$i18n.get('expireddate')</th>	
+	
+	<th>$i18n.get('code')</th>	
+	
+	<th>$i18n.get('date')</th>	
+	
+	<th>$i18n.get('time')</th>	
+	
+	<th>$i18n.get('reference')</th>	
+	
+	<th>$i18n.get('room')</th>	
+	
+	<th>$i18n.get('hospital')</th>	
+	
+	<th>$i18n.get('initialdiagnosis')</th>	
+	
+	<th>$i18n.get('icd')</th>	
+	
+	<th>$i18n.get('solving')</th>	
+	
+	<th>CLS</th>	
+	
+	<th>$i18n.get('advise')</th>	
+	
+	<th>$i18n.get('revisit')</th>	
+	
+	<th>$i18n.get('revisitdate')</th>	
+	
+	<th>$i18n.get('prescriptiontemplate')</th>	
+	
+	<th>$i18n.get('totalamount')</th>	
+	
+	<th>$i18n.get('insurancepay')</th>	
+	
+	<th>$i18n.get('paidamount')</th>	
+	
+	<th>$i18n.get('leftamount')</th>	
+	
+	<th>$i18n.get('paid')</th>	
+	
+	<th>$i18n.get('user')</th>	
+	
+	<th>$i18n.get('note')</th>	
+	
+</tr>
+
+
+
+</theader>
+<tbody>
+#foreach($encounter in $encounters)
+	#if($encounter.id)
+	<tr class='tableitem' id='tr$encounter.id' onDblClick="javascript:makeGetRequestAddEncounter($encounter.id, 'edit')">
+	<td id='td$encounter.id'>	
+	<a href='javascript:void(0)' onclick="window.open('encounterView.action?id=$encounter.id', 'View encounter', 'width=600, height=500')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	</td>	
+		
+		<td>$!encounter.client.node</td>
+		
+		<td>$!encounter.insurancenumber</td>
+		
+		<td>$!encounter.joineddate</td>
+		
+		<td>$!encounter.expireddate</td>
+		
+		<td>$!encounter.code</td>
+		
+		<td>$!encounter.date</td>
+		
+		<td>$!encounter.time</td>
+		
+		<td>$!encounter.reference</td>
+		
+		<td>$!encounter.room.node</td>
+		
+		<td>$!encounter.hospital.node</td>
+		
+		<td>$!encounter.initialdiagnosis</td>
+		
+		<td>$!encounter.icd.node</td>
+		
+		<td>$!encounter.solving.node</td>
+		
+		<td>
+		#set ($ids = $!encounter.indicationdetails)
+		#foreach ($id in $ids)
+			#if($id.status == 'NEW')
+				<li><span style="color:red"> $id.service.node ($!id.status) </span>
+			#else
+				<li><span style="color:green"> $id.service.node ($!id.status) </span>
+			#end
+		#end		
+		</td>
+		
+		<td>$!encounter.advise</td>
+		
+		<td>$!encounter.revisit</td>
+		
+		<td>$!encounter.revisitdate</td>
+		
+		<td>$!encounter.prescriptiontemplate.node</td>
+		
+		<td>$!encounter.totalamount</td>
+		
+		<td>$!encounter.insurancepay</td>
+		
+		<td>$!encounter.paidamount</td>
+		
+		<td>$!encounter.leftamount</td>
+		
+		<td>$!encounter.paid</td>
+		
+		<td>$!encounter.user.node</td>
+		
+		<td>$!encounter.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+</div>
+<br>

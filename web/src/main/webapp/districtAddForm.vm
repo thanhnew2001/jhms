@@ -1,0 +1,45 @@
+
+<div id='adddistrict'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('adddistrict').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('district')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='districtForm' name='districtForm' action='districtAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text'  id='node' name='node' size='15' value='' onkeypress="formname='districtForm'; nextfield='textprovince';"> </td>
+			
+			<td><label>$i18n.get('province'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($province_id = $ses.getAttribute('province_id'))
+			#set ($province_node = $ses.getAttribute('province_node'))
+			
+			<input type='hidden' id='province' name='province'  size='1' value='$!province_id' onchange='makeGetRequestProvinceByTypeHead()' onkeypress="formname='districtForm'; nextfield='textprovince';"> 
+			
+			<input type='text' id='textprovince' name='textprovince' size='18' value='$!province_node' onkeypress="formname='districtForm'; nextfield='cboprovince'; isSelect=true;"  onkeyup='makeGetRequestProvinceByTypeHead()' onclick='makeGetRequestProvinceByTypeHead()'>	
+			
+			<div id='divprovince' style='display:none;position:absolute'  onkeypress="formname='districtForm'; nextfield='savedistrict';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('provinceList.action', 'Add province', 'width=400, height=300')"> ... </a>
+		
+<tr><td>
+<input type='button' id='savedistrict' value="  $i18n.get('save')  " onkeydown="javascript:validateDistrict('add', document.getElementById('districtForm') )"  onclick="javascript:validateDistrict('add', document.getElementById('districtForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

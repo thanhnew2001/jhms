@@ -1,0 +1,301 @@
+
+		
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+<style type="text/css">
+<!--
+.style10 {font-size: 9px}
+.style11 {
+	color: #990000;
+	font-weight: bold;
+}
+-->
+</style>
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<script language='javascript' type='text/javascript' src='js/jquery.js'></script>
+
+
+<script>
+$(window).keypress(function(event) {
+    if (!(event.which == 115 && event.ctrlKey)) return true;
+    //alert("Ctrl-S pressed");
+	validateEncounter('edit', document.getElementById('updateencounter'));
+    event.preventDefault();
+    return false;
+});
+</script>
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<a name="form">
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divClient').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('encounter')</div>
+</a>
+<br>
+<div id='msg'> </div>
+<form id='encounterForm'  name='encounterForm' action='encounterUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!encounter.id' size='15'>
+<table align="center" width="100%">
+
+<table width="100%">
+<tr class='formlabel'>
+  <td height="40" colspan="7"><span class="style11">>>$i18n.get('customerinformation') </span>
+      <hr></td>
+</tr>
+<tr class='formlabel' valign="top">
+			<td ><label>$i18n.get('client')</label> </td>
+		    <td colspan="3" ><input type='hidden' id='client' name='client'  size='1' value='$!encounter.client.id' onchange='makeGetRequestClientByTypeHead()' onKeyPress="formname='encounterForm'; nextfield='textclient';">
+                $!encounter.client.node
+                <div id='divclient' style='displaynone;positionabsolute' onKeyPress="formname='encounterForm'; nextfield='insurancenumber';"></div>
+		      <a href='javascript:void(0)' onClick="window.open('clientList.action', 'Add client', 'width=400, height=300')"></a>		      <label></label></td>
+		    <td ><label></label>
+	        $i18n.get('age') : $!encounter.client.age</td> 
+			<td>$i18n.get('sex') :$!encounter.client.sex</td>
+			<td rowspan="3"><div align="center"><img src="../jhmsdata/$!encounter.client.photo" width="60" height="70" border="0"></div></td>
+	  </tr>
+<tr class='formlabel' v>
+  <td >$i18n.get('address')</td>
+  <td colspan="3">$!encounter.client.address, $!encounter.client.ward.node</td>
+  <td>$i18n.get('phone')</td>
+  <td>$!encounter.client.phone</td>
+</tr>
+
+
+<tr class='formlabel'>
+				
+		<td ><label>$i18n.get('insurancenumber')</label></td> 
+			<td><input type='text'  id='insurancenumber' name='insurancenumber' value='$!encounter.insurancenumber' size='15' onKeyPress="formname='encounterForm'; nextfield='joineddate';"></td>
+			
+			<td>$i18n.get('joineddate')</td> 
+			<td><input type='text'  id='joineddate' name='joineddate' value='$!dateTool.format('dd/MM/yyyy',$!encounter.joineddate)' size='15' onKeyPress="formname='encounterForm'; nextfield='expireddate';" onBlur='getSmartDate(this)'></td>
+			<td>$i18n.get('expireddate')</td> 
+			<td><input type='text'  id='expireddate' name='expireddate' value='$!dateTool.format('dd/MM/yyyy',$!encounter.expireddate)' size='15' onKeyPress="formname='encounterForm'; nextfield='date';" onBlur='getSmartDate(this)'>		    </td>
+	  </tr>
+
+</table>	
+<table width="100%">		
+			<tr class='formlabel'>
+              <td colspan="7"><span class="style11">>>$i18n.get('examineinformation')</span>
+              <hr></td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td><label>$i18n.get('code')</label></td>
+			  <td><input type='text'  id='code' name='code' value='$!encounter.code' size='15' onKeyPress="formname='encounterForm'; nextfield='date';" disabled="disabled">              </td>
+			  <td><label>$i18n.get('date')</label></td>
+			  
+			  
+			  <td><input type='text'  id='date' name='date' value='$!dateTool.format('dd/MM/yyyy',$!encounter.date)' size='15' onBlur='getSmartDate(this)' onKeyPress="formname='encounterForm'; nextfield='time';" onClick="GetDate(this);" >
+		      <img src='images/calendar_icon.gif' id='triggerdate'> </td>
+			  <td colspan="2"><label>$i18n.get('time')</label></td>
+			  <td><input type='text' id='time' name='time' value='$!encounter.time' size='15' onKeyPress="formname='encounterForm'; nextfield='reference';" disabled="disabled">              </td>
+	  </tr>
+			<tr class='formlabel'>
+			  <td><label>$i18n.get('reference')</label></td>
+			  <td><select id='reference' name='reference' onkeypress="formname='encounterForm'; nextfield='room';">
+                  <option value='$!encounter.reference' selected>$!encounter.reference</option>
+			    <option value=CQYT>CQYT</option>
+			    <option value= TUDEN> TUDEN</option>
+			    <option value= KHAC> KHAC</option>
+              </select></td>
+			  <td><label>$i18n.get('room')</label>              </td>
+			  <td><select id='room' name='room' onkeypress="formname='encounterForm'; nextfield='revisit';">
+                  <option value='$!encounter.room.id' selected>$!encounter.room.id - $!encounter.room.node</option>
+			#foreach($room in $rooms)
+			    <option value='$!room.id'>$!room.id - $!room.node</option>
+			#end
+			    </select>              </td>
+			  <td colspan="2"><label>$i18n.get('revisit')</label></td>
+			  <td><select id='revisit' name='revisit' onkeypress="formname='encounterForm'; nextfield='initialdiagnosis';">
+                  <option value='$!encounter.revisit' selected>$!encounter.revisit</option>
+                  <option value=N>N</option>
+                  <option value= Y> Y</option>
+              </select></td>
+		</tr>
+</table>			
+<table width="100%">		
+	    <tr class='formlabel'>
+          <td colspan="7"><span class="style11">>>$i18n.get('treatmentinformation') </span>
+          <hr></td>
+	  </tr>
+		<tr class='formlabel'>
+		  <td width="14%" height="29" valign="top">Ti&#7873;n s&#7917; </td>
+		  <td width="35%" >
+		  <input name="history" value="$!encounter.history" size='60' onKeyPress="formname='encounterForm'; nextfield='problem';"/>
+		  </td>
+		  <td width="51%" rowspan="6" align="center" valign="top">
+		  #foreach($vitalsign in $encounter.vitalsigns)
+		  	#set($vs = $vitalsign )
+		  #end
+		 <table width="300px" border="1"><tr><td colspan="3"><div align="center"><strong>$i18n.get('survivalsign')</strong></div></td>
+            </tr>
+            <tr>
+              <td width="39%">$i18n.get('pressure'):<br>
+                <input type='text'  id='pressurel' name='pressurel' value='$vs.pressurel' size='3'  onKeyPress="formname='encounterForm'; nextfield='pressureh';" > 
+              /
+              <input type='text'  id='pressureh' name='pressureh' value='$vs.pressureh' size='3'  onKeyPress="formname='encounterForm'; nextfield='breath';" >
+              <br></td>
+              <td width="34%">$i18n.get('breath'):<br>
+                <input type='text'  id='breath' name='breath' value='$vs.breath' size='3' onKeyPress="formname='encounterForm'; nextfield='pulse';" ></td>
+              <td width="27%">              $i18n.get('pulse'):<br>
+                <input type='text'  id='pulse' name='pulse' value='$vs.pulse' size='3'  onKeyPress="formname='encounterForm'; nextfield='temperature';" ></td>
+            </tr>
+            <tr>
+              <td >$i18n.get('temperature'):<br>
+                <input type='text'  id='temparature' name='temparature' value='$vs.temparature' size='3'  onKeyPress="formname='encounterForm'; nextfield='sbo2';" ></td>
+              <td>SpO<span class="style10">2</span>:<br>
+                <input type='text'  id='sbo2' name='sbo2' value='$vs.sbo2' size='3'  onKeyPress="formname='encounterForm'; nextfield='solving';" ></td>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td >$i18n.get('height'): $vs.height</td>
+              <td>$i18n.get('weight'): $vs.weight</td>
+              <td>bmi: $vs.bmi</td>
+            </tr>
+          </table>
+ 
+		  </td>
+	  </tr>
+		<tr class='formlabel'>
+		  <td height="24" valign="top">B&#7879;nh s&#7917; </td>
+		  <td>
+		  <input name="problem" value="$!encounter.problem" size='60' onKeyPress="formname='encounterForm'; nextfield='observation';">
+		  </td>
+	  </tr>
+		<tr class='formlabel'>
+		  <td height="24" valign="top">Kh&aacute;m l&acirc;m s&agrave;ng </td>
+		  <td><input name="observation" value="$!encounter.observation" size='60' onKeyPress="formname='encounterForm'; nextfield='initialdiagnosis';"></td>
+	  </tr>
+		<tr class='formlabel'>
+		  <td height="24"><label>$i18n.get('initialdiagnosis')</label></td>
+		  <td ><input type='text' id='initialdiagnosis' name='initialdiagnosis' value='$!encounter.initialdiagnosis' size='60'  onkeypress="formname='encounterForm'; nextfield='texticd';">          </td>
+      </tr>
+		<tr class='formlabel'>
+		  <td><label>$i18n.get('icd')</label></td>
+		  <td ><div id='divicd' style='display:none;position:absolute' onClick="onpopup = 1;">
+		      
+		  </div>
+		  <input type='text' id='texticd' name='texticd' size='60'  value='$!encounter.icd.node' onKeyPress="formname='encounterForm'; nextfield='advise'; isSelect=true; "  onKeyUp="makeGetRequestIcdByTypeHead()"   onClick="makeGetRequestIcdByTypeHead()">
+		      <input type='hidden' id='icd' name='icd'  size='1' value='$!encounter.icd.id' onChange='makeGetRequestIcdByTypeHead()' onKeyPress="formname='encounterForm'; nextfield='texticd';">		    </td>
+      </tr>
+		
+		<tr class='formlabel'>
+		  <td><label>$i18n.get('advise')</label></td>
+		  <td ><input type='text' id='advise' name='advise' value='$!encounter.advise' size='60'  onkeypress="formname='encounterForm'; nextfield='pressurel';">          </td>
+		</tr>
+</table>		
+<table width="100%">
+		<tr class='formlabel'>
+		  <td height="24" colspan="6"><span class="style11">&gt;&gt;Ch&#7881; &#273;&#7883;nh, cho toa, h&#7865;n t&aacute;i kh&aacute;m</span> 
+	      <hr></td>
+	  </tr>
+		<tr class='formlabel'>
+		  <td height="24"><label>$i18n.get('solving')</label></td>
+		  <td><select id='solving' name='solving' onkeypress="formname='encounterForm'; nextfield='revisitdate';">
+              <option value='$!encounter.solving.id' selected>$!encounter.solving.id - $!encounter.solving.node</option>
+			#foreach($solving in $solvings)
+		    <option value='$!solving.id'>$!solving.id - $!solving.node</option>
+			#end
+		    
+		    </select>          </td>
+		  <td><label>$i18n.get('hospital')</label>          </td>
+		  <td><select id='hospital' name='hospital' onkeypress="formname='encounterForm'; nextfield='advise';" style="max-width :50px">
+              <option value='$!encounter.hospital.id' selected>$!encounter.hospital.id - $!encounter.hospital.node</option>
+			#foreach($hospital in $hospitals)
+		    <option value='$!hospital.id'>$!hospital.id - $!hospital.node</option>
+			#end
+		    </select>          </td>
+			<td></td>
+			<td></td>
+	  </tr>
+		<tr class='formlabel'>
+		  <td>$i18n.get('revisitdate')</td>
+		  <td><input type='text'  id='revisitdate' name='revisitdate' value='$!dateTool.format('dd/MM/yyyy',$!encounter.revisitdate)' size='15' onBlur='getSmartDate(this)' onKeyPress="formname='encounterForm'; nextfield='revisitdateCLS';" onClick="GetDate(this);">
+		    <img src='images/calendar_icon.gif' id='triggerrevisitdate'>
+		  <td>Ng&agrave;y &#273;&#7871;n l&agrave;m d&#7883;ch v&#7909; </td>
+		  <td><input type='text'  id='revisitdateCLS' name='revisitdateCLS' value='$!dateTool.format('dd/MM/yyyy',$!encounter.revisitdateCLS)' size='15' onBlur='getSmartDate(this)' onKeyPress="formname='encounterForm'; nextfield='note';" onClick="GetDate(this);">
+            <img src='images/calendar_icon.gif' id='triggerrevisitdate'> </td>
+		  <td>Ghi ch&uacute; t&aacute;i kh&aacute;m </td>
+		  <td colspan="2"><input type='text'  id='note' name='note' value='$!encounter.note' size='15' onKeyPress="formname='encounterForm'; nextfield='updateencounter';" ></td>
+	  </tr>
+		<tr class='formlabel'>
+		  <td><label>$i18n.get('prescriptiontemplate')</label>          </td>
+		  <td><input type='hidden' id='prescriptiontemplate' name='prescriptiontemplate'  size='1' value='$!encounter.prescriptiontemplate.id' onchange='makeGetRequestPrescriptiontemplateByTypeHead()' onKeyPress="formname='encounterForm'; nextfield='textprescriptiontemplate';">
+             
+			  <input type='text' id='textprescriptiontemplate' name='textprescriptiontemplate' size='15'  value='$!encounter.prescriptiontemplate.node' onKeyPress="formname='encounterForm'; nextfield='cboprescriptiontemplate'; isSelect=true;" onkeyup='makeGetRequestPrescriptiontemplateByTypeHead()' onclick='makeGetRequestPrescriptiontemplateByTypeHead()'>
+			  
+              <div id='divprescriptiontemplate' style='displaynone;positionabsolute' onClick="onpopup = 1;" ></div>
+		  <td><label>$i18n.get('paid')</label></td>
+		  <td><select id='paid' name='paid' onkeypress="formname='encounterForm'; nextfield='user';" disabled="disabled">
+            <option value='$!encounter.paid' selected>$!encounter.paid</option>
+            <option value="N">Ch&#432;a</option>
+            <option value="Y">&#272;&atilde; thanh to&aacute;n</option>
+          </select></td>
+		  <td>B&aacute;c s&#297; kh&aacute;m </td>
+		  <td colspan="2"> #set($ses = $req.getSession())
+			#set($user = $ses.getAttribute('user'))
+            <select id='user' name='user' style="max-width:150px;">
+              
+		  #if($!encounter.user.id)
+			
+              <option value='$!encounter.user.id' selected>$!encounter.user.node - $!encounter.user.fullname</option>
+              <option value='$!user.id'>$!user.node - $!user.fullname</option>
+              
+		  #else
+			  
+              <option value='$!user.id' selected>$!user.node - $!user.fullname</option>
+              
+		  #end
+			
+    		#foreach($user in $users)
+		    
+              <option value='$!user.id'>$!user.node - $!user.fullname</option>
+              
+			#end
+	      	
+            </select></td>
+	  </tr>
+	  <tr>
+          <td>$i18n.get('attachfile') </td>
+          <td colspan="3">
+        <input type='text' id='file1' name='file1' size='15' value='$!encounter.file1'>
+		
+        <input name="upload" type='button' id='upload'  onClick="window.open('upload.action', 'Upload file', 'width=400, height=300')" value="Upload" >        
+        <a href="../jhmsdata/$!encounter.file1">$i18n.get('review') $!encounter.file </a> </td>
+          <td>Ghi ch&uacute; m&atilde;: </td>
+		  <td colspan="2"><input type='text'  id='node' name='node' value='$!encounter.node' size='15' onKeyPress="formname='encounterForm'; nextfield='date';" disabled="disabled"></td>
+	  </tr>
+		
+	  
+
+      <tr>
+        <td colspan='7'>&nbsp;</td>
+      </tr>
+      <tr><td colspan='7'>
+<input id='updateencounter' type='button' value="  $i18n.get('save')  "  onClick="validateEncounter('edit', document.getElementById('encounterForm')); " >
+&nbsp;
+
+<input id='updateencounter' type='button' value="  $i18n.get('saveandprint')  " onClick="validateEncounter('edit', document.getElementById('encounterForm') ); window.open('encounterView.action?id=$encounter.id', 'View', 'width=600,height=500,scrollbars=yes');">
+
+&nbsp;
+
+<input type='button' onclick='javascript:makeGetRequestPrescriptiondetailByEncounter($encounter.id)' value="$i18n.get('prescriptiondetail')"> &nbsp;
+<input name="button2" type='button' onClick='javascript:makeGetRequestIndicationdetailByEncounter($encounter.id)' value="$i18n.get('indicationdetail')">&nbsp;
+ 
+
+
+#set($pid = $encounter.client.id)
+
+			
+<span>
+<input name='print' type='button' onClick="window.open('viewRecord.action?id=$pid', 'Xem HD thuoc', 'width=800,height=600,scrollbars=yes')" value="Th&ocirc;ng tin l&#7847;n kh&aacute;m tr&#432;&#7899;c">
+<input name='fm' type='button' onClick="window.open('fmMaster.action?encounterId=$encounter.id', 'B&#7879;nh &aacute;n BSG&#272;', 'width=800,height=600,scrollbars=yes')" value="B&#7879;nh &aacute;n BSG&#272;">
+
+</span></td>
+</tr>
+</table>
+</form>
+</div>
+</body>

@@ -1,0 +1,157 @@
+
+<form name='receiptdetailForm' action='receiptdetailAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('receipt')</th>	
+	
+	<th>$i18n.get('service')</th>	
+	
+	<th>$i18n.get('drug')</th>	
+	
+	<th>$i18n.get('quantity')</th>	
+	
+	<th>$i18n.get('price')</th>	
+	
+	<th>$i18n.get('subtotal')</th>	
+	
+	<th>$i18n.get('insurancepay')</th>	
+	
+	<th>$i18n.get('percentdiscount')</th>	
+	
+	<th>$i18n.get('discount')</th>	
+	
+	<th>$i18n.get('childunder6')</th>	
+	
+	<th>$i18n.get('actualpay')</th>	
+	
+	<th>$i18n.get('exedoctor')</th>	
+	
+	<th>$i18n.get('inddoctor')</th>
+	<th>$i18n.get('note')</th>	
+	</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddreceiptdetail' style='display:none;'>
+<th><input type='button' id='savereceiptdetail' value="  $i18n.get('save')  " onClick="javascript:validateReceiptdetail('add')" onKeyPress="nextfield='';"></th>
+
+			#set ($ses = $req.getSession())					
+			#set ($receipt_id = $ses.getAttribute('receipt_id'))
+			#set ($receipt_node = $ses.getAttribute('receipt_node'))
+		<th>
+			<input type='hidden' id='receipt' name='receipt'  size='1' value='$!receipt_id' onchange='makeGetRequestReceiptByTypeHead()' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='textreceipt';"> 
+			
+			<input type='text' id='textreceipt' name='textreceipt' size='15' value='$!receipt_node' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='cboreceipt';"  onkeyup='makeGetRequestReceiptByTypeHead()' onclick='makeGetRequestReceiptByTypeHead()'>	
+			
+			<div id='divreceipt' style='display:none;position:absolute'  onkeypress="formname='inlinereceiptdetailForm'; nextfield='textservice';"></div>		 </th>		
+		
+			#set ($ses = $req.getSession())					
+			#set ($service_id = $ses.getAttribute('service_id'))
+			#set ($service_node = $ses.getAttribute('service_node'))
+		<th>
+			<input type='hidden' id='service' name='service'  size='1' value='$!service_id' onchange='makeGetRequestServiceByTypeHead()' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='textservice';"> 
+			
+			<input type='text' id='textservice' name='textservice' size='15' value='$!service_node' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='cboservice';"  onkeyup='makeGetRequestServiceByTypeHead()' onclick='makeGetRequestServiceByTypeHead()'>	
+			
+			<div id='divservice' style='display:none;position:absolute'  onkeypress="formname='inlinereceiptdetailForm'; nextfield='textdrug';"></div>		 </th>		
+		
+			#set ($ses = $req.getSession())					
+			#set ($drug_id = $ses.getAttribute('drug_id'))
+			#set ($drug_node = $ses.getAttribute('drug_node'))
+		<th>
+			<input type='hidden' id='drug' name='drug'  size='1' value='$!drug_id' onchange='makeGetRequestDrugByTypeHead()' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='textdrug';"> 
+			
+			<input type='text' id='textdrug' name='textdrug' size='15' value='$!drug_node' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='cbodrug';"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+			
+			<div id='divdrug' style='display:none;position:absolute'  onkeypress="formname='inlinereceiptdetailForm'; nextfield='quantity';"></div>		 </th>		
+		<th> <input type='text'  id='quantity' name='quantity' size='15' value='$!receiptdetail.quantity' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='price';"> </th><th> 
+		
+		<input type='text'  id='price' name='price' size='15' value='$!receiptdetail.price' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='subtotal';"> </th><th> 
+		
+		<input type='text'  id='subtotal' name='subtotal' size='15' value='$!receiptdetail..subtotal' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='insurancepay';"> </th><th>
+		
+		 <input type='text'  id='insurancepay' name='insurancepay' size='15' value='$!receiptdetail.insurancepay' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='percentdiscount';"> </th><th> 
+		
+		<input type='text'  id='percentdiscount' name='percentdiscount' size='15' value='$!receiptdetail.percentdiscount' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='discount';"> </th><th>
+		
+		 <input type='text'  id='discount' name='discount' size='15' value='$!receiptdetail.discount' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='childunder6';"> </th><th> 
+		
+		<input type='text'  id='childunder6' name='childunder6' size='15' value='$!receiptdetail.childunder6' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='actualpay';"> </th><th> 
+		
+		<input type='text'  id='actualpay' name='actualpay' size='15' value='$!receiptdetail.actualpay' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='exedoctor';"> </th>
+			#set ($ses = $req.getSession())					
+			#set ($exedoctor_id = $ses.getAttribute('exedoctor_id'))
+			#set ($exedoctor_node = $ses.getAttribute('exedoctor_node'))
+		<th>
+			<select id='exedoctor' name='exedoctor' style='width:90px;max-width:90px' onkeypress="formname='inlinereceiptdetailForm'; nextfield='inddoctor';">
+				<option value='$!exedoctor_id' selected> $!exedoctor_node </option>
+			#foreach($exedoctor in $exedoctors)
+				<option value='$exedoctor.id'>$exedoctor.node</option>
+			#end
+			</select>		 </th>		
+		
+			<th><select id='inddoctor' name='inddoctor' style='width:90px;max-width:90px' onkeypress="formname='inlinereceiptdetailForm'; nextfield='note';">
+              <option value='$!inddoctor_id' selected> $!inddoctor_node </option>
+			  
+			#foreach($inddoctor in $inddoctors)
+				
+			  <option value='$inddoctor.id'>$inddoctor.node</option>
+			  
+			#end
+			
+		    </select></th>
+			#set ($ses = $req.getSession())					
+			#set ($inddoctor_id = $ses.getAttribute('inddoctor_id'))
+			#set ($inddoctor_node = $ses.getAttribute('inddoctor_node'))
+		<th><input type='text'  id='note' name='note' size='15' value='' onKeyPress="formname='inlinereceiptdetailForm'; nextfield='savereceiptdetail';"></th>		
+		</div>
+</tr>
+</theader>
+<tbody>
+#foreach($receiptdetail in $receiptdetails)
+	#if($receiptdetail.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddReceiptdetail($receiptdetail.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddReceiptdetail($receiptdetail.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='receiptdetailDelete.action?id=$receiptdetail.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onClick="window.open('receiptdetailView.action?id=$receiptdetail.id', 'View receiptdetail', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menureceiptdetail$receiptdetail.id').style.display='block'; " onDblClick="javascript:document.getElementById('menureceiptdetail$receiptdetail.id').style.display='none'"  value='>>' >  
+	
+	<div id='menureceiptdetail$receiptdetail.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onClick="this.style.display='none'">	</div>	</td>
+	
+		
+		<td>$!receiptdetail.receipt.node</td>
+		
+		<td>$!receiptdetail.service.node</td>
+		
+		<td>$!receiptdetail.drug.node</td>
+		
+		<td>$!receiptdetail.quantity</td>
+		
+		<td>$!receiptdetail.price</td>
+		
+		<td>$!receiptdetail.subtotal</td>
+		
+		<td>$!receiptdetail.insurancepay</td>
+		
+		<td>$!receiptdetail.percentdiscount</td>
+		
+		<td>$!receiptdetail.discount</td>
+		
+		<td>$!receiptdetail.childunder6</td>
+		
+		<td>$!receiptdetail.actualpay</td>
+		
+		<td>$!receiptdetail.receipt.encounter.user.fullname</td>
+		
+		<td>$!receiptdetail.receiptdetail.receipt.encounter.indicationdetail.user.fullname</td>
+		<td>$!receiptdetail.note</td>
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

@@ -1,0 +1,11 @@
+
+<select name='cbodrug' id='cbodrug' multiple='multiple' onclick="selectdrug(this.value, this.options[selectedIndex].text)" onkeypress="formname='encounterForm'; typehead = 'drug'; nextfield='savedrug';">
+#foreach($drug in $drugs)
+#if($drug.forprescription == "Y")
+<option value='$drug.id'>$drug.node - $drug.ingredient -         ($drug.price)</option>
+#else
+<option value='$drug.id'  style="color:gray">$drug.node</option>
+#end
+#end						
+<option value=''></option>
+</select>

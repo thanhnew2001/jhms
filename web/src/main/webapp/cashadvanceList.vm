@@ -1,0 +1,121 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addcashadvance'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divCashadvance'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divCashadvance').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('cashadvance')  
+</div>
+<br>
+<div>
+<select id='combocashadvance' name='combocashadvance'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='encounter'>$i18n.get('encounter')</option>
+	
+	<option value='node'>$i18n.get('node')</option>
+	
+	<option value='amount'>$i18n.get('amount')</option>
+	
+	<option value='code'>$i18n.get('code')</option>
+	
+	<option value='type'>$i18n.get('type')</option>
+	
+</select>
+<input name='searchcashadvance' id='searchcashadvance' onkeyup='makeGetRequestCashadvanceBySearch()' value='' onclick='clearSearchBox(searchcashadvance)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestCashadvanceByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddCashadvance(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tablecashadvance' class='mytable'>
+<form id='inlinecashadvanceForm' name='inlinecashadvanceForm' action='cashadvanceAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('encounter')</th>	
+	
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('amount')</th>	
+	
+	<th>$i18n.get('code')</th>	
+	
+	<th>$i18n.get('type')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddcashadvance' style='display:none;'>
+<th><input type='button' id='savecashadvance' value="  $i18n.get('save')  " onKeyDown="javascript:validateCashadvance('add', document.getElementById('inlinecashadvanceForm') )"  onclick="javascript:validateCashadvance('add', document.getElementById('inlinecashadvanceForm') )" onKeyPress="nextfield='';">
+</th>
+
+
+			#set ($ses = $req.getSession())					
+			#set ($encounter_id = $ses.getAttribute('encounter_id'))
+			#set ($encounter_node = $ses.getAttribute('encounter_node'))
+		<th>
+			<input type='hidden' id='encounter' name='encounter'  size='1' value='$!encounter_id' onchange='makeGetRequestEncounterByTypeHead()' onKeyPress="formname='inlinecashadvanceForm'; nextfield='textencounter';"> 
+			
+			<input type='text' id='textencounter' name='textencounter' size='18' value='$!encounter_node' onKeyPress="formname='inlinecashadvanceForm'; nextfield='cboencounter';"  onkeyup='makeGetRequestEncounterByTypeHead()' onclick='makeGetRequestEncounterByTypeHead()'>	
+			
+			<div id='divencounter' style='display:none;position:absolute'  onkeypress="formname='inlinecashadvanceForm'; nextfield='node';"></div>				
+		 </th>		
+		<th><input type='text'  id='node' name='node' size='8' onKeyPress="formname='inlinecashadvanceForm'; nextfield='amount';" value=$!novalue >
+			<th> <input type='text'  id='amount' name='amount' size='8' value='' onKeyPress="formname='inlinecashadvanceForm'; nextfield='code';"> </th><th> <input type='text'  id='code' name='code' size='8' value='TU' onKeyPress="formname='inlinecashadvanceForm'; nextfield='type';"> </th><th> <input type='text'  id='type' name='type' size='8' value='TAMUNG, HOANUNG' onKeyPress="formname='inlinecashadvanceForm'; nextfield='savecashadvance';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($cashadvance in $cashadvances)
+	#if($cashadvance.id)
+	<tr class='tableitem' id='tr$cashadvance.id' onDblClick="javascript:makeGetRequestAddCashadvance($cashadvance.id, 'edit')">
+	<td id='td$cashadvance.id'>
+	<a href="javascript:makeGetRequestAddCashadvance($cashadvance.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('cashadvanceDelete.action?id=$cashadvance.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$cashadvance.id').style.background ='#CCCCCC'; document.getElementById('td$cashadvance.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onClick="window.open('cashadvanceView.action?id=$cashadvance.id', 'View cashadvance', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+		
+	</td>	
+		
+		<td>$!cashadvance.encounter.node</td>
+		
+		<td>$!cashadvance.node</td>
+		
+		<td>$!cashadvance.amount</td>
+		
+		<td>$!cashadvance.code</td>
+		
+		<td>$!cashadvance.type</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddCashadvance(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

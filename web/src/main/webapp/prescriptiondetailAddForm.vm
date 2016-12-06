@@ -1,0 +1,88 @@
+
+<div id='addprescriptiondetail'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addprescriptiondetail').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('prescriptiondetail')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='prescriptiondetailForm' name='prescriptiondetailForm' action='prescriptiondetailAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('encounter'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($encounter_id = $ses.getAttribute('encounter_id'))
+			#set ($encounter_node = $ses.getAttribute('encounter_node'))
+			
+			<input type='hidden' id='encounter' name='encounter'  size='1' value='$!encounter_id' onchange='makeGetRequestEncounterByTypeHead()' onKeyPress="formname='prescriptiondetailForm'; nextfield='textencounter';"> 
+			
+			<input type='text' id='textencounter' name='textencounter' size='18' value='$!encounter_node' onKeyPress="formname='prescriptiondetailForm'; nextfield='cboencounter'; isSelect=true;"  onkeyup='makeGetRequestEncounterByTypeHead()' onclick='makeGetRequestEncounterByTypeHead()'>	
+			
+			<div id='divencounter' style='display:none;position:absolute'  onkeypress="formname='prescriptiondetailForm'; nextfield='textdrug';"></div>							
+			<a href='javascript:void(0)' onClick="window.open('encounterList.action', 'Add encounter', 'width=400, height=300')"> ... </a>
+			<td><label>$i18n.get('drug'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($drug_id = $ses.getAttribute('drug_id'))
+			#set ($drug_node = $ses.getAttribute('drug_node'))
+			
+			<input type='hidden' id='drug' name='drug'  size='1' value='$!drug_id' onchange='makeGetRequestDrugByTypeHead()' onKeyPress="formname='prescriptiondetailForm'; nextfield='textdrug';"> 
+			
+			<input type='text' id='textdrug' name='textdrug' size='18' value='$!drug_node' onKeyPress="formname='prescriptiondetailForm'; nextfield='unit'; isSelect=true;"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+			
+			<div id='divdrug' style='display:none;position:absolute'  onkeypress="formname='prescriptiondetailForm'; nextfield='quantity';"></div>							
+			<a href='javascript:void(0)' onClick="window.open('drugList.action', 'Add drug', 'width=400, height=300')"> ... </a>
+			<td><label></label></td> <td>&nbsp;</td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('unit'):</label></td> <td><input type='text'  id='unit' name='unit' size='15' value='' onKeyPress="formname='prescriptiondetailForm'; nextfield='quantity';"> </td>
+			
+			<td><label>$i18n.get('quantity'):</label></td> <td><input type='text'  id='quantity' name='quantity' size='15' value='' onKeyPress="formname='prescriptiondetailForm'; nextfield='price';"></td>
+			
+			<td><label>$i18n.get('price'):</label></td> <td><input type='text'  id='price' name='price' size='15' value='' onKeyPress="formname='prescriptiondetailForm'; nextfield='howtouse';"></td>
+			</tr>
+			<tr class='formlabel'>
+			  <td>C&aacute;ch d&ugrave;ng: </td>
+			  <td><SELECT name="howtouse" id="howtouse" onKeyDown="fnKeyDownHandler(this, event);" onKeyUp="fnKeyUpHandler_A(this, event); return false;" onKeyPress = "return fnKeyPressHandler_A(this, event);"  onChange="fnChangeHandler_A(this, event);nextfield='timeuse';">
+                <OPTION value="" selected style="COLOR:#ff0000;BACKGROUND-COLOR:#ffff00;">-----</OPTION>
+                <option value="u&#7889;ng">u&#7889;ng</option>
+                <!-- This is the Editable Option -->
+                <option value='nhai'>nhai</option>
+                <option value="ng&#7853;m">ng&#7853;m</option>
+                <option value="b&ocirc;i">b&ocirc;i</option>
+                <option value="thoa">thoa</option>
+                <option value="nh&eacute;t">nh&eacute;t</option>
+                <option value="x&ocirc;ng">x&ocirc;ng</option>
+                <option value="ch&iacute;ch">ch&iacute;ch</option>
+                <option value="truy&#7873;n">truy&#7873;n</option>
+              </select></td>
+			  <td colspan="4">$i18n.get('timeuse'): 
+			    <input type='text'  id='timeuse' name='timeuse' size='10' value='' onKeyPress="formname='prescriptiondetailForm'; nextfield='morning';"></td>
+			</tr>
+			<tr class='formlabel'>
+			<td><label>$i18n.get('usageDescription')</label></td> <td><textarea name="usageDescription" id="usageDescription" onKeyPress="formname='inlineprescriptiondetailForm'; nextfield='note';"></textarea></td>
+			
+			<td><label>$i18n.get('note'):</label></td> <td><textarea  id='note' name='note' size='15' onKeyPress="formname='prescriptiondetailForm'; nextfield='saveprescriptiondetail';">  </textarea></td>
+			
+			<td><label>$i18n.get('paid'):</label></td> <td><select id='paid' name='paid' onkeypress="formname='prescriptiondetailForm'; nextfield='saveprescriptiondetail';"> <option value=N>N</option><option value= Y> Y</option> </select></td>
+			</tr>
+<tr><td>
+<input type='button' id='saveprescriptiondetail' value="  $i18n.get('save')  " onKeyDown="javascript:validatePrescriptiondetail('add', document.getElementById('prescriptiondetailForm') )"  onclick="javascript:validatePrescriptiondetail('add', document.getElementById('prescriptiondetailForm') )" onKeyPress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

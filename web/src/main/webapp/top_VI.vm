@@ -1,0 +1,136 @@
+
+<div id='menu' class='menu'> 
+
+<ul id="maintab" class="basictab">
+<li><a href="index.vm" >Home</a></li>
+<li rel="tiepnhan"><a href="clientList.action" >Ti&#7871;p nh&#7853;n </a></li>
+<li rel="phongkham"><a href="encounterList.action" >Ph&ograve;ng kh&aacute;m </a></li>
+<li rel="cls"><a href="indicationdetailList.action" ">C&#7853;n l&acirc;m s&agrave;ng </a></li>
+<li rel="duoc"><a href="druginvoiceList.action" >D&#432;&#7907;c </a></li>
+<li rel="vienphi"><a href="receiptList.action" >Vi&#7879;n ph&iacute;</a></li>
+<li rel="nguoidung"><a href="userList.action" >Ng&#432;&#7901;i d&ugrave;ng </a></li>
+<li rel="thongso"><a href="selectSetting.action" >Th&ocirc;ng s&#7889; </a></li>
+<li rel="help"><a href="http://mytung.blogdns.net:8081/hms/HelpHMS/HelpTiepNhan.html" target="_new" >Tr&#7907; gi&uacute;p HMS</a></li>
+
+</ul>
+
+<div id="tiepnhan" class="submenustyle">
+	<a href='clientList.action' >Kh&aacute;ch h&agrave;ng </a> &nbsp; 
+		
+		<a href='provinceList.action' >T&#7881;nh</a> &nbsp; 
+		
+		<a href='districtList.action' >Qu&#7853;n/Huy&#7879;n</a> &nbsp; 
+		
+		<a href='wardList.action' >Ph&#432;&#7901;ng/X&atilde;</a> &nbsp; 
+		
+		<a href='ethnicList.action' >D&acirc;n t&#7897;c </a> &nbsp; 
+		
+		<a href='occupationList.action' >Ngh&#7873; nghi&#7879;p </a> &nbsp; 
+		
+		<a href='paymenttypeList.action' >&#272;&#7889;i t&#432;&#7907;ng </a> &nbsp; 
+
+
+	
+</div>
+
+<div id="phongkham" class="submenustyle">
+	<a href='encounterList.action' >Kh&aacute;m </a> &nbsp; 
+		<a href='hospitalList.action' >B&#7879;nh vi&ecirc;n </a> &nbsp; 
+		
+		<a href='roomList.action' >Ph&ograve;ng kh&aacute;m </a> &nbsp; 
+		
+		<a href='doctorList.action' >B&aacute;c s&#297; </a> &nbsp; 
+		<a href='historyList.action' >B&#7879;nh s&#7917; </a> &nbsp; 
+		
+		<a href='solvingList.action' >X&#7917; tr&iacute; </a> &nbsp; 
+		
+		<a href='serviceList.action' >D&#7883;ch v&#7909; </a> &nbsp; 
+		
+		<a href='vitalsignList.action' >DH sinh t&#7891;n </a> &nbsp; 
+		
+				<a href='prescriptiontemplateList.action' >Ph&aacute;c &#273;&#7891; </a> &nbsp; 
+		
+		<a href='serpackageList.action' >G&oacute;i kh&aacute;m </a> &nbsp; 
+		
+		<a href='departmentList.action' >Khoa</a> &nbsp; 				
+		
+		<a href='servicegroupList.action' >Nh&oacute;m DV </a> &nbsp; 
+		
+		<a href='icdList.action' >ICD</a> &nbsp; 
+		
+ 
+
+
+</div>
+
+<div id="cls" class="submenustyle">
+	<a href='indicationdetailList.action' >Danh s&aacute;ch ch&#7881; &#273;&#7883;nh </a>
+	<a href='bodypartList.action' >M&#7851;u XN-SA </a>
+	</div>
+
+<div id="vienphi" class="submenustyle">
+	<a href='encounterList.action?con=paid&typehead=N' >Kh&aacute;m	 </a> &nbsp; 
+	<a href='receiptList.action' >Phi&#7871;u thu </a> &nbsp; 
+	<a href='cashadvanceList.action' >T&#7841;m &#7913;ng </a>&nbsp;	
+	<a href='cardCheck.vm'> Ki&#7875;m tra th&#7867; </a>&nbsp;</div>
+	
+
+<div id="nguoidung" class="submenustyle">
+	<a href='userList.action' >Ng&#432;&#7901;i d&ugrave;ng </a> &nbsp; 
+	<a href='roleList.action' >Nh&oacute;m ng&#432;&#7901;i d&ugrave;ng </a> &nbsp; 
+	<a href='bschidinh.php' >LuongBSCD</a> &nbsp;
+	<a href='bsthuchien.php' >LuongBSTH</a> &nbsp;
+</div>
+
+<div id="ngoaitru" class="submenustyle">
+	<a href='clientList.action' >Kh&aacute;ch h&agrave;ng </a> &nbsp; 
+		
+	<a href='receiptList.action' >H&oacute;a &#273;&#417;n </a> &nbsp; 
+		
+	<a href='cashadvanceList.action' >T&#7841;m &#7913;ng </a> &nbsp; 
+		
+	<a href='encounterList.action' >Kh&aacute;m  </a> &nbsp; 
+	
+	<a href='indicationdetailList.action' > C&#7853;n l&acirc;m s&agrave;ng  </a> &nbsp; 		
+</div>
+
+<div id="duoc" class="submenustyle">
+		<a href='importinvoiceList.action' >H&#272; nh&#7853;p </a>&nbsp;
+		<a href='druginvoiceList.action' >H&oacute;a &#273;&#417;n thu&#7889;c </a> 
+		<a href='providerList.action' >Nh&agrave; CC </a>&nbsp;	
+		<a href='warehouseList.action' >DM Kho </a>&nbsp;
+		<a href='reportList.action' >B&aacute;o c&aacute;o </a>&nbsp;	
+		<a href='warehouseCard.action?action=search' >Th&#7867; kho</a>&nbsp;
+		<a href='drugList.action' >Thu&#7889;c</a>&nbsp;	
+		<a href='drugGroupList.action' >Nh&oacute;m Thu&#7889;c</a>&nbsp;	
+		
+</div>
+<div id="help" class="submenustyle">
+	<a href='HelpHMS/HelpTiepNhan.html' target="_new">Ti&#7871;p nh&#7853;n </a> &nbsp; 
+		
+	<a href='HelpHMS/HelpPhongKham.html' target="_new">Ph&ograve;ng kh&aacute;m </a> &nbsp; 
+		
+	<a href='HelpHMS/HelpCLS.html' target="_new">C&#7853;n l&acirc;m s&agrave;ng </a> &nbsp; 
+		
+	<a href='HelpHMS/HelpKho.html' target="_new">Kho d&#432;&#7907;c   </a> &nbsp; 
+	
+	<a href='HelpHMS/HelpVienPhi.html' target="_new"> Vi&#7879;n ph&iacute; </a>&nbsp;
+</div>
+
+
+<div id="thongso" class="submenustyle">
+	#set ($ses = $req.getSession())					
+	#set ($user = $ses.getAttribute('user'))
+	#set ($room = $ses.getAttribute('selectedroom'))
+	#set ($department = $ses.getAttribute('selecteddepartment'))
+	#set ($warehouse = $ses.getAttribute('selectedwarehouse'))
+	
+	User: $user.fullname - $!room.node - $!department.node - $!warehouse.node
+</div>
+
+	
+	
+		
+		
+		
+		

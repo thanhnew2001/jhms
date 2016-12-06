@@ -1,0 +1,126 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addroleform'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divRoleform'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divRoleform').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('roleform')  
+</div>
+<br>
+<div>
+<select id='comboroleform' name='comboroleform'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='role'>$i18n.get('role')</option>
+	
+	<option value='form'>$i18n.get('form')</option>
+	
+	<option value='listable'>$i18n.get('listable')</option>
+	
+	<option value='addable'>$i18n.get('addable')</option>
+	
+	<option value='updatable'>$i18n.get('updatable')</option>
+	
+	<option value='deletable'>$i18n.get('deletable')</option>
+	
+</select>
+<input name='searchroleform' id='searchroleform' onkeyup='makeGetRequestRoleformBySearch()' value='' onclick='clearSearchBox(searchroleform)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestRoleformByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddRoleform(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tableroleform' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineroleformForm' name='inlineroleformForm' action='roleformAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('role')</th>	
+	
+	<th>$i18n.get('form')</th>	
+	
+	<th>$i18n.get('listable')</th>	
+	
+	<th>$i18n.get('addable')</th>	
+	
+	<th>$i18n.get('updatable')</th>	
+	
+	<th>$i18n.get('deletable')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddroleform' style='display:none;'>
+<th><input type='button' id='saveroleform' value="  $i18n.get('save')  " onkeydown="javascript:validateRoleform('add', document.getElementById('inlineroleformForm') )"  onclick="javascript:validateRoleform('add', document.getElementById('inlineroleformForm') )" onkeypress="nextfield='';">
+</th>
+
+
+			#set ($ses = $req.getSession())					
+			#set ($role_id = $ses.getAttribute('role_id'))
+			#set ($role_node = $ses.getAttribute('role_node'))
+		<th>
+			<input type='hidden' id='role' name='role'  size='1' value='$!role_id' onchange='makeGetRequestRoleByTypeHead()' onkeypress="formname='inlineroleformForm'; nextfield='textrole';"> 
+			
+			<input type='text' id='textrole' name='textrole' size='18' value='$!role_node' onkeypress="formname='inlineroleformForm'; nextfield='cborole';"  onkeyup='makeGetRequestRoleByTypeHead()' onclick='makeGetRequestRoleByTypeHead()'>	
+			
+			<div id='divrole' style='display:none;position:absolute'  onkeypress="formname='inlineroleformForm'; nextfield='form';"></div>				
+		 </th>		
+		<th> <input type='text'  id='form' name='form' size='8' value='' onkeypress="formname='inlineroleformForm'; nextfield='listable';"> </th><th> <input type='text'  id='listable' name='listable' size='8' value='Yes, No' onkeypress="formname='inlineroleformForm'; nextfield='addable';"> </th><th> <input type='text'  id='addable' name='addable' size='8' value='Yes, No' onkeypress="formname='inlineroleformForm'; nextfield='updatable';"> </th><th> <input type='text'  id='updatable' name='updatable' size='8' value='Yes, No' onkeypress="formname='inlineroleformForm'; nextfield='deletable';"> </th><th> <input type='text'  id='deletable' name='deletable' size='8' value='Yes, No' onkeypress="formname='inlineroleformForm'; nextfield='saveroleform';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($roleform in $roleforms)
+	#if($roleform.id)
+	<tr class='tableitem' id='tr$roleform.id' onDblClick="javascript:makeGetRequestAddRoleform($roleform.id, 'edit')">
+	<td id='td$roleform.id'>
+	<a href="javascript:makeGetRequestAddRoleform($roleform.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('roleformDelete.action?id=$roleform.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$roleform.id').style.background ='#CCCCCC'; document.getElementById('td$roleform.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('roleformView.action?id=$roleform.id', 'View roleform', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+		
+	</td>	
+		
+		<td>$!roleform.role.node</td>
+		
+		<td>$!roleform.form</td>
+		
+		<td>$!roleform.listable</td>
+		
+		<td>$!roleform.addable</td>
+		
+		<td>$!roleform.updatable</td>
+		
+		<td>$!roleform.deletable</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddRoleform(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

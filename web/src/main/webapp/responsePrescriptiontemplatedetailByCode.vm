@@ -1,0 +1,4 @@
+
+#foreach($prescriptiontemplatedetail in $prescriptiontemplatedetails)
+	$prescriptiontemplatedetail.id
+#end

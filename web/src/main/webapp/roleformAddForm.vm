@@ -1,0 +1,53 @@
+
+<div id='addroleform'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addroleform').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('roleform')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='roleformForm' name='roleformForm' action='roleformAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('role'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($role_id = $ses.getAttribute('role_id'))
+			#set ($role_node = $ses.getAttribute('role_node'))
+			
+			<input type='hidden' id='role' name='role'  size='1' value='$!role_id' onchange='makeGetRequestRoleByTypeHead()' onkeypress="formname='roleformForm'; nextfield='textrole';"> 
+			
+			<input type='text' id='textrole' name='textrole' size='18' value='$!role_node' onkeypress="formname='roleformForm'; nextfield='cborole'; isSelect=true;"  onkeyup='makeGetRequestRoleByTypeHead()' onclick='makeGetRequestRoleByTypeHead()'>	
+			
+			<div id='divrole' style='display:none;position:absolute'  onkeypress="formname='roleformForm'; nextfield='form';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('roleList.action', 'Add role', 'width=400, height=300')"> ... </a>
+		
+			<td><label>$i18n.get('form'):</label></td> <td><input type='text'  id='form' name='form' size='15' value='' onkeypress="formname='roleformForm'; nextfield='listable';"> </td>
+			
+			<td><label>$i18n.get('listable'):</label></td> <td><input type='text'  id='listable' name='listable' size='15' value='Yes, No' onkeypress="formname='roleformForm'; nextfield='addable';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('addable'):</label></td> <td><input type='text'  id='addable' name='addable' size='15' value='Yes, No' onkeypress="formname='roleformForm'; nextfield='updatable';"> </td>
+			
+			<td><label>$i18n.get('updatable'):</label></td> <td><input type='text'  id='updatable' name='updatable' size='15' value='Yes, No' onkeypress="formname='roleformForm'; nextfield='deletable';"> </td>
+			
+			<td><label>$i18n.get('deletable'):</label></td> <td><input type='text'  id='deletable' name='deletable' size='15' value='Yes, No' onkeypress="formname='roleformForm'; nextfield='saveroleform';"> </td>
+			</tr>
+<tr><td>
+<input type='button' id='saveroleform' value="  $i18n.get('save')  " onkeydown="javascript:validateRoleform('add', document.getElementById('roleformForm') )"  onclick="javascript:validateRoleform('add', document.getElementById('roleformForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

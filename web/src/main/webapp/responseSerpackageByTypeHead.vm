@@ -1,0 +1,8 @@
+
+<select name='cboserpackage' id='cboserpackage' multiple='multiple' onkeypress="formname='encounterForm'; typehead = 'serpackage'; nextfield='saveserpackage';">
+#foreach($serpackage in $serpackages)
+<option value='$serpackage.id'>$serpackage.node</option>
+#end						
+<option value=''></option>
+</select>
+

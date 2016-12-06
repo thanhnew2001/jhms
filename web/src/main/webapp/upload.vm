@@ -1,0 +1,38 @@
+<html>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<body id='wrap'>
+  <h2>Upload files here</h2>
+  <div id='selectfile'>
+
+	<form action="upload.action" method="post" enctype="multipart/form-data">
+      <input type="file" name="upload">
+      <input type="submit" value="Upload">
+  	</form>
+  	
+   </div>
+  <h2>Uploaded file list</h2>
+   <div id='listfile'>
+   <table>
+	#foreach($file in $files)
+	<tr>
+	<td class='tableitemleft' align='left'>
+		#set($size = $file.length())
+		<li>
+		<a href="#" onclick="window.opener.document.getElementById('file1').value='$browsedir/$file.name'; self.close();">H&igrave;nh 1 </a>		
+		<a href="#" onclick="window.opener.document.getElementById('file2').value='$browsedir/$file.name'; self.close();">H&igrave;nh 2</a>
+		<a href="#" onclick="window.opener.document.getElementById('file3').value='$browsedir/$file.name'; self.close();">H&igrave;nh 3</a>
+		<a href="#" onclick="window.opener.document.getElementById('file4').value='$browsedir/$file.name'; self.close();">H&igrave;nh 4</a>
+		<a href="#" onclick="window.opener.document.getElementById('file5').value='$browsedir/$file.name'; self.close();">H&igrave;nh 5</a>		
+		<a href="#" onclick="window.opener.document.getElementById('file6').value='$browsedir/$file.name'; self.close();">H&igrave;nh 6</a>
+		<a href="#" onclick="window.opener.document.getElementById('file7').value='$browsedir/$file.name'; self.close();">H&igrave;nh 7</a>
+		<a href="#" onclick="window.opener.document.getElementById('file8').value='$browsedir/$file.name'; self.close();">H&igrave;nh 8</a>
+		 </li>
+		T&ecirc;n h&igrave;nh : $file.name - $size Byte		</td>
+	</tr>
+	#end 
+	</table> 	
+   </div>
+   
+</form>
+</body>
+</html>

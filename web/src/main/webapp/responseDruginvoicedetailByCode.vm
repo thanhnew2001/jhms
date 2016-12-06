@@ -1,0 +1,4 @@
+
+#foreach($druginvoicedetail in $druginvoicedetails)
+	$druginvoicedetail.id
+#end

@@ -1,0 +1,136 @@
+
+
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('client')</th>	
+	
+	<th>$i18n.get('insurancenumber')</th>	
+	
+	<th>$i18n.get('joineddate')</th>	
+	
+	<th>$i18n.get('expireddate')</th>	
+	
+	<th>$i18n.get('code')</th>	
+	
+	<th>$i18n.get('date')</th>	
+	
+	<th>$i18n.get('time')</th>	
+	
+	<th>$i18n.get('reference')</th>	
+	
+	<th>$i18n.get('room')</th>	
+	
+	<th>$i18n.get('hospital')</th>	
+	
+	<th>$i18n.get('initialdiagnosis')</th>	
+	
+	<th>$i18n.get('icd')</th>	
+	
+	<th>$i18n.get('solving')</th>	
+	
+	<th>$i18n.get('subclinical')</th>	
+	
+	<th>$i18n.get('advise')</th>	
+	
+	<th>$i18n.get('revisit')</th>	
+	
+	<th>$i18n.get('revisitdate')</th>	
+	
+	<th>$i18n.get('prescriptiontemplate')</th>	
+	
+	<th>$i18n.get('totalamount')</th>	
+	
+	<th>$i18n.get('insurancepay')</th>	
+	
+	<th>$i18n.get('paidamount')</th>	
+	
+	<th>$i18n.get('leftamount')</th>	
+	
+	<th>$i18n.get('paid')</th>	
+	
+	<th>$i18n.get('user')</th>	
+	
+	<th>$i18n.get('note')</th>	
+	
+</tr>
+
+
+
+</theader>
+<tbody>
+#foreach($encounter in $encounters)
+	#if($encounter.id)
+	<tr class='tableitem' id='tr$encounter.id' onDblClick="javascript:makeGetRequestAddEncounter($encounter.id, 'edit')">
+	<td id='td$encounter.id'>	
+	<a href='javascript:void(0)' onclick="window.open('encounterView.action?id=$encounter.id', 'View encounter', 'width=600, height=500')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	</td>	
+		
+		<td>$!encounter.client.node</td>
+		
+		<td>$!encounter.insurancenumber</td>
+		
+		<td>$!encounter.joineddate</td>
+		
+		<td>$!encounter.expireddate</td>
+		
+		<td>$!encounter.code</td>
+		
+		<td>$!encounter.date</td>
+		
+		<td>$!encounter.time</td>
+		
+		<td>$!encounter.reference</td>
+		
+		<td>$!encounter.room.node</td>
+		
+		<td>$!encounter.hospital.node</td>
+		
+		<td>$!encounter.initialdiagnosis</td>
+		
+		<td>$!encounter.icd.node</td>
+		
+		<td>$!encounter.solving.node</td>
+		
+		<td>
+		#set ($ids = $!encounter.indicationdetails)
+		#foreach ($id in $ids)
+			#if($id.status == 'NEW')
+				<span style="color:red"> $id.service.node ($!id.status) </span> ,
+			#else
+				<span style="color:green"> $id.service.node ($!id.status) </span> ,
+			#end
+		#end		
+		</td>
+		
+		<td>$!encounter.advise</td>
+		
+		<td>$!encounter.revisit</td>
+		
+		<td>$!encounter.revisitdate</td>
+		
+		<td>$!encounter.prescriptiontemplate.node</td>
+		
+		<td>$!encounter.totalamount</td>
+		
+		<td>$!encounter.insurancepay</td>
+		
+		<td>$!encounter.paidamount</td>
+		
+		<td>$!encounter.leftamount</td>
+		
+		<td>$!encounter.paid</td>
+		
+		<td>$!encounter.user.node</td>
+		
+		<td>$!encounter.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+

@@ -1,0 +1,5443 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE beans PUBLIC
+ '-//SPRING//DTD BEAN//EN'
+ 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+	<bean id='com.ph.hms.action.util.NoAction' class='com.ph.hms.action.util.NoAction'
+		singleton='false' />
+	<bean id='i18nManager' class='com.ph.hms.action.util.I18nManager'
+		singleton='false' />
+
+	<bean id='com.ph.hms.action.util.SendMailAction' class='com.ph.hms.action.util.SendMailAction'
+		singleton='false'>
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+		
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+	</bean>
+	
+	<bean id='com.ph.hms.action.util.PrepaidCardTransactionDetailAction' class='com.ph.hms.action.util.PrepaidCardTransactionDetailAction'
+		singleton='false'>
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+		
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+		
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+		
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+	</bean>
+	
+	
+	<bean id='com.ph.hms.action.WarehouseCardAction' class='com.ph.hms.action.WarehouseCardAction'
+		singleton='false'>
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+	</bean>
+
+	<bean id='com.ph.hms.action.FamilyMemberListAction' class='com.ph.hms.action.FamilyMemberListAction'
+		singleton='false'>
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+	</bean>
+	
+	<bean id='com.ph.hms.action.DrugGroupListAction' class='com.ph.hms.action.DrugGroupListAction'
+		singleton='false'>
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+	</bean>
+	
+	<bean id='com.ph.hms.action.BodypartListAction' class='com.ph.hms.action.BodypartListAction'
+		singleton='false'>
+		<property name='bodyPartManager'>
+			<ref bean='bodyPartManager' />
+		</property>
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+		
+	</bean>
+
+	<bean id='com.ph.hms.action.NoiSoiTMHSaveAction' class='com.ph.hms.action.NoiSoiTMHSaveAction'
+		singleton='false'>
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+	</bean>
+
+	<bean id='com.ph.hms.action.KetQuaCLSSaveAction' class='com.ph.hms.action.KetQuaCLSSaveAction'
+		singleton='false'>
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+		
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+		
+	</bean>
+	
+	<!--
+	<bean id='com.ph.hms.action.XNAction' class='com.ph.hms.action.XNAction'
+		singleton='false'>
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+	</bean>
+	-->
+
+	<bean id='com.ph.hms.action.XetNghiemSaveAction' class='com.ph.hms.action.XetNghiemSaveAction'
+		singleton='false'>
+
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+	</bean>
+	
+	<bean id='com.ph.hms.action.util.LoginAction' class='com.ph.hms.action.util.LoginAction'
+		singleton='false'>
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+	</bean>
+
+	<bean id='com.ph.hms.action.EncounterNotPaidListAction' class='com.ph.hms.action.EncounterNotPaidListAction'
+		singleton='false'>
+
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+
+	<bean id='com.ph.hms.action.EncounterNotPaidServiceListAction'
+		class='com.ph.hms.action.EncounterNotPaidServiceListAction' singleton='false'>
+
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.EncounterNotPaidDrugListAction' class='com.ph.hms.action.EncounterNotPaidDrugListAction'
+		singleton='false'>
+
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+
+	<bean id='com.ph.hms.action.util.GetBatchnumberAction' class='com.ph.hms.action.util.GetBatchnumberAction'
+		singleton='false'>
+		<property name='druginvoicedetailManager'>
+			<ref bean='druginvoicedetailManager' />
+		</property>
+	</bean>
+
+	<bean id='com.ph.hms.action.ClientChangePasswordAction' class='com.ph.hms.action.ClientChangePasswordAction'
+		singleton='false'>
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+	</bean>
+
+
+	<bean id='com.ph.hms.action.ViewRecordAction' class='com.ph.hms.action.ViewRecordAction'
+		singleton='false'>
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+		
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+	</bean>
+
+	<bean id='com.ph.hms.action.RegisterFormAction' class='com.ph.hms.action.RegisterFormAction'
+		singleton='false'>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RegisterAddAction' class='com.ph.hms.action.RegisterAddAction'
+		singleton='false'>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='registerManager'>
+			<ref bean='registerManager' />
+		</property>
+
+
+	</bean>
+
+	<bean id='com.ph.hms.action.util.UploadFileAction' class='com.ph.hms.action.util.UploadFileAction'
+		singleton='false'>
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+	</bean>
+
+
+	<bean id='com.ph.hms.action.PaymenttypeListAction' class='com.ph.hms.action.PaymenttypeListAction'
+		singleton='false'>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PaymenttypeAddAction' class='com.ph.hms.action.PaymenttypeAddAction'
+		singleton='false'>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PaymenttypeFormAction' class='com.ph.hms.action.PaymenttypeFormAction'
+		singleton='false'>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PaymenttypeUpdateAction' class='com.ph.hms.action.PaymenttypeUpdateAction'
+		singleton='false'>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PaymenttypeDeleteAction' class='com.ph.hms.action.PaymenttypeDeleteAction'
+		singleton='false'>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetPaymenttypeByTypeHeadAction' class='com.ph.hms.action.GetPaymenttypeByTypeHeadAction'
+		singleton='false'>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ClientListAction' class='com.ph.hms.action.ClientListAction'
+		singleton='false'>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ClientAddUpdateAction' class='com.ph.hms.action.ClientAddUpdateAction'
+		singleton='false'>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+		<property name='vitalsignManager'>
+			<ref bean='vitalsignManager' />
+		</property>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='historyManager'>
+			<ref bean='historyManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ClientFormAction' class='com.ph.hms.action.ClientFormAction'
+		singleton='false'>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+		
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+		
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ClientDeleteAction' class='com.ph.hms.action.ClientDeleteAction'
+		singleton='false'>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetClientByTypeHeadAction' class='com.ph.hms.action.GetClientByTypeHeadAction'
+		singleton='false'>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ServiceListAction' class='com.ph.hms.action.ServiceListAction'
+		singleton='false'>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ServiceAddAction' class='com.ph.hms.action.ServiceAddAction'
+		singleton='false'>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<!-- for adding body part -->
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ServiceEditFormAction' class='com.ph.hms.action.ServiceEditFormAction'
+		singleton='false'>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<!-- for adding body part -->
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ServiceUpdateAction' class='com.ph.hms.action.ServiceUpdateAction'
+		singleton='false'>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<!-- for adding body part -->
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ServiceDeleteAction' class='com.ph.hms.action.ServiceDeleteAction'
+		singleton='false'>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ServiceAddFormAction' class='com.ph.hms.action.ServiceAddFormAction'
+		singleton='false'>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<!-- for adding body part -->
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetServiceByTypeHeadAction' class='com.ph.hms.action.GetServiceByTypeHeadAction'
+		singleton='false'>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.EncounterListAction' class='com.ph.hms.action.EncounterListAction'
+		singleton='false'>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.EncounterAddUpdateAction' class='com.ph.hms.action.EncounterAddUpdateAction'
+		singleton='false'>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.EncounterDeleteAction' class='com.ph.hms.action.EncounterDeleteAction'
+		singleton='false'>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.EncounterFormAction' class='com.ph.hms.action.EncounterFormAction'
+		singleton='false'>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+		
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+		
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+		
+		
+	</bean>
+
+	<bean id='com.ph.hms.action.GetEncounterByTypeHeadAction' class='com.ph.hms.action.GetEncounterByTypeHeadAction'
+		singleton='false'>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.IcdListAction' class='com.ph.hms.action.IcdListAction'
+		singleton='false'>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.IcdAddAction' class='com.ph.hms.action.IcdAddAction'
+		singleton='false'>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.IcdFormAction' class='com.ph.hms.action.IcdFormAction'
+		singleton='false'>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.IcdUpdateAction' class='com.ph.hms.action.IcdUpdateAction'
+		singleton='false'>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.IcdDeleteAction' class='com.ph.hms.action.IcdDeleteAction'
+		singleton='false'>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetIcdByTypeHeadAction' class='com.ph.hms.action.GetIcdByTypeHeadAction'
+		singleton='false'>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DrugListAction' class='com.ph.hms.action.DrugListAction'
+		singleton='false'>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DrugUpdateAction' class='com.ph.hms.action.DrugUpdateAction'
+		singleton='false'>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+	
+	
+
+	<bean id='com.ph.hms.action.DrugDeleteAction' class='com.ph.hms.action.DrugDeleteAction'
+		singleton='false'>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+	
+	
+
+	<bean id='com.ph.hms.action.DrugFormAction' class='com.ph.hms.action.DrugFormAction'
+		singleton='false'>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	
+	<bean id='com.ph.hms.action.GetDrugByTypeHeadAction' class='com.ph.hms.action.GetDrugByTypeHeadAction'
+		singleton='false'>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+		
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiondetailListAction' class='com.ph.hms.action.PrescriptiondetailListAction'
+		singleton='false'>
+
+		<property name='prescriptiondetailManager'>
+			<ref bean='prescriptiondetailManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiondetailAddAction' class='com.ph.hms.action.PrescriptiondetailAddAction'
+		singleton='false'>
+
+		<property name='prescriptiondetailManager'>
+			<ref bean='prescriptiondetailManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiondetailFormAction'
+		class='com.ph.hms.action.PrescriptiondetailFormAction' singleton='false'>
+
+		<property name='prescriptiondetailManager'>
+			<ref bean='prescriptiondetailManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiondetailUpdateAction' class='com.ph.hms.action.PrescriptiondetailUpdateAction'
+		singleton='false'>
+
+		<property name='prescriptiondetailManager'>
+			<ref bean='prescriptiondetailManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiondetailDeleteAction' class='com.ph.hms.action.PrescriptiondetailDeleteAction'
+		singleton='false'>
+
+		<property name='prescriptiondetailManager'>
+			<ref bean='prescriptiondetailManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+
+	<bean id='com.ph.hms.action.GetPrescriptiondetailByTypeHeadAction'
+		class='com.ph.hms.action.GetPrescriptiondetailByTypeHeadAction'
+		singleton='false'>
+
+		<property name='prescriptiondetailManager'>
+			<ref bean='prescriptiondetailManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.VitalsignListAction' class='com.ph.hms.action.VitalsignListAction'
+		singleton='false'>
+
+		<property name='vitalsignManager'>
+			<ref bean='vitalsignManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.VitalsignAddAction' class='com.ph.hms.action.VitalsignAddAction'
+		singleton='false'>
+
+		<property name='vitalsignManager'>
+			<ref bean='vitalsignManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.VitalsignEditFormAction' class='com.ph.hms.action.VitalsignEditFormAction'
+		singleton='false'>
+
+		<property name='vitalsignManager'>
+			<ref bean='vitalsignManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.VitalsignUpdateAction' class='com.ph.hms.action.VitalsignUpdateAction'
+		singleton='false'>
+
+		<property name='vitalsignManager'>
+			<ref bean='vitalsignManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.VitalsignDeleteAction' class='com.ph.hms.action.VitalsignDeleteAction'
+		singleton='false'>
+
+		<property name='vitalsignManager'>
+			<ref bean='vitalsignManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.VitalsignAddFormAction' class='com.ph.hms.action.VitalsignAddFormAction'
+		singleton='false'>
+
+		<property name='vitalsignManager'>
+			<ref bean='vitalsignManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetVitalsignByTypeHeadAction' class='com.ph.hms.action.GetVitalsignByTypeHeadAction'
+		singleton='false'>
+
+		<property name='vitalsignManager'>
+			<ref bean='vitalsignManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.UserListAction' class='com.ph.hms.action.UserListAction'
+		singleton='false'>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.UserAddAction' class='com.ph.hms.action.UserAddAction'
+		singleton='false'>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+
+	</bean>
+
+	<bean id='com.ph.hms.action.UserFormAction' class='com.ph.hms.action.UserFormAction'
+		singleton='false'>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.UserUpdateAction' class='com.ph.hms.action.UserUpdateAction'
+		singleton='false'>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.UserDeleteAction' class='com.ph.hms.action.UserDeleteAction'
+		singleton='false'>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetUserByTypeHeadAction' class='com.ph.hms.action.GetUserByTypeHeadAction'
+		singleton='false'>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.UserroleListAction' class='com.ph.hms.action.UserroleListAction'
+		singleton='false'>
+
+		<property name='userroleManager'>
+			<ref bean='userroleManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.UserroleAddAction' class='com.ph.hms.action.UserroleAddAction'
+		singleton='false'>
+
+		<property name='userroleManager'>
+			<ref bean='userroleManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.UserroleEditFormAction' class='com.ph.hms.action.UserroleEditFormAction'
+		singleton='false'>
+
+		<property name='userroleManager'>
+			<ref bean='userroleManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.UserroleUpdateAction' class='com.ph.hms.action.UserroleUpdateAction'
+		singleton='false'>
+
+		<property name='userroleManager'>
+			<ref bean='userroleManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.UserroleDeleteAction' class='com.ph.hms.action.UserroleDeleteAction'
+		singleton='false'>
+
+		<property name='userroleManager'>
+			<ref bean='userroleManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.UserroleAddFormAction' class='com.ph.hms.action.UserroleAddFormAction'
+		singleton='false'>
+
+		<property name='userroleManager'>
+			<ref bean='userroleManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetUserroleByTypeHeadAction' class='com.ph.hms.action.GetUserroleByTypeHeadAction'
+		singleton='false'>
+
+		<property name='userroleManager'>
+			<ref bean='userroleManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoleListAction' class='com.ph.hms.action.RoleListAction'
+		singleton='false'>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoleAddAction' class='com.ph.hms.action.RoleAddAction'
+		singleton='false'>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoleEditFormAction' class='com.ph.hms.action.RoleEditFormAction'
+		singleton='false'>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoleUpdateAction' class='com.ph.hms.action.RoleUpdateAction'
+		singleton='false'>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoleDeleteAction' class='com.ph.hms.action.RoleDeleteAction'
+		singleton='false'>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoleAddFormAction' class='com.ph.hms.action.RoleAddFormAction'
+		singleton='false'>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetRoleByTypeHeadAction' class='com.ph.hms.action.GetRoleByTypeHeadAction'
+		singleton='false'>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoleformListAction' class='com.ph.hms.action.RoleformListAction'
+		singleton='false'>
+
+		<property name='roleformManager'>
+			<ref bean='roleformManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoleformAddAction' class='com.ph.hms.action.RoleformAddAction'
+		singleton='false'>
+
+		<property name='roleformManager'>
+			<ref bean='roleformManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoleformEditFormAction' class='com.ph.hms.action.RoleformEditFormAction'
+		singleton='false'>
+
+		<property name='roleformManager'>
+			<ref bean='roleformManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoleformUpdateAction' class='com.ph.hms.action.RoleformUpdateAction'
+		singleton='false'>
+
+		<property name='roleformManager'>
+			<ref bean='roleformManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoleformDeleteAction' class='com.ph.hms.action.RoleformDeleteAction'
+		singleton='false'>
+
+		<property name='roleformManager'>
+			<ref bean='roleformManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoleformAddFormAction' class='com.ph.hms.action.RoleformAddFormAction'
+		singleton='false'>
+
+		<property name='roleformManager'>
+			<ref bean='roleformManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetRoleformByTypeHeadAction' class='com.ph.hms.action.GetRoleformByTypeHeadAction'
+		singleton='false'>
+
+		<property name='roleformManager'>
+			<ref bean='roleformManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ServicegroupListAction' class='com.ph.hms.action.ServicegroupListAction'
+		singleton='false'>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ServicegroupAddAction' class='com.ph.hms.action.ServicegroupAddAction'
+		singleton='false'>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ServicegroupEditFormAction' class='com.ph.hms.action.ServicegroupEditFormAction'
+		singleton='false'>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ServicegroupUpdateAction' class='com.ph.hms.action.ServicegroupUpdateAction'
+		singleton='false'>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ServicegroupDeleteAction' class='com.ph.hms.action.ServicegroupDeleteAction'
+		singleton='false'>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ServicegroupAddFormAction' class='com.ph.hms.action.ServicegroupAddFormAction'
+		singleton='false'>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetServicegroupByTypeHeadAction'
+		class='com.ph.hms.action.GetServicegroupByTypeHeadAction' singleton='false'>
+
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.IndicationdetailListAction' class='com.ph.hms.action.IndicationdetailListAction'
+		singleton='false'>
+
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.IndicationdetailAddAction' class='com.ph.hms.action.IndicationdetailAddAction'
+		singleton='false'>
+
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+		
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.IndicationdetailFormAction' class='com.ph.hms.action.IndicationdetailFormAction'
+		singleton='false'>
+
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.IndicationdetailUpdateAction' class='com.ph.hms.action.IndicationdetailUpdateAction'
+		singleton='false'>
+
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.IndicationdetailDeleteAction' class='com.ph.hms.action.IndicationdetailDeleteAction'
+		singleton='false'>
+
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetIndicationdetailByTypeHeadAction'
+		class='com.ph.hms.action.GetIndicationdetailByTypeHeadAction'
+		singleton='false'>
+
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+	</bean>
+
+
+
+	<bean id='com.ph.hms.action.ReceiptListAction' class='com.ph.hms.action.ReceiptListAction'
+		singleton='false'>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReceiptAddAction' class='com.ph.hms.action.ReceiptAddAction'
+		singleton='false'>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='receiptdetailManager'>
+			<ref bean='receiptdetailManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+		
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+	</bean>
+
+	<bean id='com.ph.hms.action.ReceiptEditFormAction' class='com.ph.hms.action.ReceiptEditFormAction'
+		singleton='false'>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+		
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReceiptUpdateAction' class='com.ph.hms.action.ReceiptUpdateAction'
+		singleton='false'>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReceiptDeleteAction' class='com.ph.hms.action.ReceiptDeleteAction'
+		singleton='false'>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReceiptAddFormAction' class='com.ph.hms.action.ReceiptAddFormAction'
+		singleton='false'>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetReceiptByTypeHeadAction' class='com.ph.hms.action.GetReceiptByTypeHeadAction'
+		singleton='false'>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReceiptdetailListAction' class='com.ph.hms.action.ReceiptdetailListAction'
+		singleton='false'>
+
+		<property name='receiptdetailManager'>
+			<ref bean='receiptdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReceiptdetailAddAction' class='com.ph.hms.action.ReceiptdetailAddAction'
+		singleton='false'>
+
+		<property name='receiptdetailManager'>
+			<ref bean='receiptdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReceiptdetailEditFormAction' class='com.ph.hms.action.ReceiptdetailEditFormAction'
+		singleton='false'>
+
+		<property name='receiptdetailManager'>
+			<ref bean='receiptdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReceiptdetailUpdateAction' class='com.ph.hms.action.ReceiptdetailUpdateAction'
+		singleton='false'>
+
+		<property name='receiptdetailManager'>
+			<ref bean='receiptdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReceiptdetailDeleteAction' class='com.ph.hms.action.ReceiptdetailDeleteAction'
+		singleton='false'>
+
+		<property name='receiptdetailManager'>
+			<ref bean='receiptdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReceiptdetailAddFormAction' class='com.ph.hms.action.ReceiptdetailAddFormAction'
+		singleton='false'>
+
+		<property name='receiptdetailManager'>
+			<ref bean='receiptdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetReceiptdetailByTypeHeadAction'
+		class='com.ph.hms.action.GetReceiptdetailByTypeHeadAction' singleton='false'>
+
+		<property name='receiptdetailManager'>
+			<ref bean='receiptdetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiontemplateListAction' class='com.ph.hms.action.PrescriptiontemplateListAction'
+		singleton='false'>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiontemplateAddAction' class='com.ph.hms.action.PrescriptiontemplateAddAction'
+		singleton='false'>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiontemplateEditFormAction'
+		class='com.ph.hms.action.PrescriptiontemplateEditFormAction'
+		singleton='false'>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiontemplateUpdateAction'
+		class='com.ph.hms.action.PrescriptiontemplateUpdateAction' singleton='false'>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiontemplateDeleteAction'
+		class='com.ph.hms.action.PrescriptiontemplateDeleteAction' singleton='false'>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiontemplateAddFormAction'
+		class='com.ph.hms.action.PrescriptiontemplateAddFormAction' singleton='false'>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetPrescriptiontemplateByTypeHeadAction'
+		class='com.ph.hms.action.GetPrescriptiontemplateByTypeHeadAction'
+		singleton='false'>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiontemplatedetailListAction'
+		class='com.ph.hms.action.PrescriptiontemplatedetailListAction'
+		singleton='false'>
+
+		<property name='prescriptiontemplatedetailManager'>
+			<ref bean='prescriptiontemplatedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiontemplatedetailAddAction'
+		class='com.ph.hms.action.PrescriptiontemplatedetailAddAction'
+		singleton='false'>
+
+		<property name='prescriptiontemplatedetailManager'>
+			<ref bean='prescriptiontemplatedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiontemplatedetailEditFormAction'
+		class='com.ph.hms.action.PrescriptiontemplatedetailEditFormAction'
+		singleton='false'>
+
+		<property name='prescriptiontemplatedetailManager'>
+			<ref bean='prescriptiontemplatedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiontemplatedetailUpdateAction'
+		class='com.ph.hms.action.PrescriptiontemplatedetailUpdateAction'
+		singleton='false'>
+
+		<property name='prescriptiontemplatedetailManager'>
+			<ref bean='prescriptiontemplatedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiontemplatedetailDeleteAction'
+		class='com.ph.hms.action.PrescriptiontemplatedetailDeleteAction'
+		singleton='false'>
+
+		<property name='prescriptiontemplatedetailManager'>
+			<ref bean='prescriptiontemplatedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PrescriptiontemplatedetailAddFormAction'
+		class='com.ph.hms.action.PrescriptiontemplatedetailAddFormAction'
+		singleton='false'>
+
+		<property name='prescriptiontemplatedetailManager'>
+			<ref bean='prescriptiontemplatedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetPrescriptiontemplatedetailByTypeHeadAction'
+		class='com.ph.hms.action.GetPrescriptiontemplatedetailByTypeHeadAction'
+		singleton='false'>
+
+		<property name='prescriptiontemplatedetailManager'>
+			<ref bean='prescriptiontemplatedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DepartmentListAction' class='com.ph.hms.action.DepartmentListAction'
+		singleton='false'>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DepartmentAddAction' class='com.ph.hms.action.DepartmentAddAction'
+		singleton='false'>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DepartmentFormAction' class='com.ph.hms.action.DepartmentFormAction'
+		singleton='false'>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DepartmentUpdateAction' class='com.ph.hms.action.DepartmentUpdateAction'
+		singleton='false'>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DepartmentDeleteAction' class='com.ph.hms.action.DepartmentDeleteAction'
+		singleton='false'>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+
+	<bean id='com.ph.hms.action.GetDepartmentByTypeHeadAction' class='com.ph.hms.action.GetDepartmentByTypeHeadAction'
+		singleton='false'>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoomListAction' class='com.ph.hms.action.RoomListAction'
+		singleton='false'>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoomAddAction' class='com.ph.hms.action.RoomAddAction'
+		singleton='false'>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoomEditFormAction' class='com.ph.hms.action.RoomEditFormAction'
+		singleton='false'>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoomUpdateAction' class='com.ph.hms.action.RoomUpdateAction'
+		singleton='false'>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoomDeleteAction' class='com.ph.hms.action.RoomDeleteAction'
+		singleton='false'>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.RoomAddFormAction' class='com.ph.hms.action.RoomAddFormAction'
+		singleton='false'>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetRoomByTypeHeadAction' class='com.ph.hms.action.GetRoomByTypeHeadAction'
+		singleton='false'>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='departmentManager'>
+			<ref bean='departmentManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DoctorListAction' class='com.ph.hms.action.DoctorListAction'
+		singleton='false'>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DoctorAddAction' class='com.ph.hms.action.DoctorAddAction'
+		singleton='false'>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DoctorFormAction' class='com.ph.hms.action.DoctorFormAction'
+		singleton='false'>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DoctorUpdateAction' class='com.ph.hms.action.DoctorUpdateAction'
+		singleton='false'>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DoctorDeleteAction' class='com.ph.hms.action.DoctorDeleteAction'
+		singleton='false'>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	
+
+	<bean id='com.ph.hms.action.GetDoctorByTypeHeadAction' class='com.ph.hms.action.GetDoctorByTypeHeadAction'
+		singleton='false'>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ImportinvoiceListAction' class='com.ph.hms.action.ImportinvoiceListAction'
+		singleton='false'>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ImportinvoiceAddAction' class='com.ph.hms.action.ImportinvoiceAddAction'
+		singleton='false'>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<property name='importinvoicedetailManager'>
+			<ref bean='importinvoicedetailManager' />
+		</property>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ImportinvoiceFormAction' class='com.ph.hms.action.ImportinvoiceFormAction'
+		singleton='false'>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ImportinvoiceUpdateAction' class='com.ph.hms.action.ImportinvoiceUpdateAction'
+		singleton='false'>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ImportinvoiceDeleteAction' class='com.ph.hms.action.ImportinvoiceDeleteAction'
+		singleton='false'>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+		
+		<property name='importinvoicedetailManager'>
+			<ref bean='importinvoicedetailManager' />
+		</property>
+		
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+	</bean>
+
+
+
+	<bean id='com.ph.hms.action.GetImportinvoiceByTypeHeadAction'
+		class='com.ph.hms.action.GetImportinvoiceByTypeHeadAction' singleton='false'>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.SerpackageListAction' class='com.ph.hms.action.SerpackageListAction'
+		singleton='false'>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.SerpackageAddAction' class='com.ph.hms.action.SerpackageAddAction'
+		singleton='false'>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.SerpackageEditFormAction' class='com.ph.hms.action.SerpackageEditFormAction'
+		singleton='false'>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.SerpackageUpdateAction' class='com.ph.hms.action.SerpackageUpdateAction'
+		singleton='false'>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.SerpackageDeleteAction' class='com.ph.hms.action.SerpackageDeleteAction'
+		singleton='false'>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.SerpackageAddFormAction' class='com.ph.hms.action.SerpackageAddFormAction'
+		singleton='false'>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetSerpackageByTypeHeadAction' class='com.ph.hms.action.GetSerpackageByTypeHeadAction'
+		singleton='false'>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.OccupationListAction' class='com.ph.hms.action.OccupationListAction'
+		singleton='false'>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.OccupationAddAction' class='com.ph.hms.action.OccupationAddAction'
+		singleton='false'>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.OccupationFormAction' class='com.ph.hms.action.OccupationFormAction'
+		singleton='false'>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.OccupationUpdateAction' class='com.ph.hms.action.OccupationUpdateAction'
+		singleton='false'>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.OccupationDeleteAction' class='com.ph.hms.action.OccupationDeleteAction'
+		singleton='false'>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetOccupationByTypeHeadAction' class='com.ph.hms.action.GetOccupationByTypeHeadAction'
+		singleton='false'>
+
+		<property name='occupationManager'>
+			<ref bean='occupationManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PackagedetailListAction' class='com.ph.hms.action.PackagedetailListAction'
+		singleton='false'>
+
+		<property name='packagedetailManager'>
+			<ref bean='packagedetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PackagedetailAddAction' class='com.ph.hms.action.PackagedetailAddAction'
+		singleton='false'>
+
+		<property name='packagedetailManager'>
+			<ref bean='packagedetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PackagedetailFormAction' class='com.ph.hms.action.PackagedetailFormAction'
+		singleton='false'>
+
+		<property name='packagedetailManager'>
+			<ref bean='packagedetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PackagedetailUpdateAction' class='com.ph.hms.action.PackagedetailUpdateAction'
+		singleton='false'>
+
+		<property name='packagedetailManager'>
+			<ref bean='packagedetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.PackagedetailDeleteAction' class='com.ph.hms.action.PackagedetailDeleteAction'
+		singleton='false'>
+
+		<property name='packagedetailManager'>
+			<ref bean='packagedetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetPackagedetailByTypeHeadAction'
+		class='com.ph.hms.action.GetPackagedetailByTypeHeadAction' singleton='false'>
+
+		<property name='packagedetailManager'>
+			<ref bean='packagedetailManager' />
+		</property>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetPackagedetailBySerpackageAction'
+		class='com.ph.hms.action.GetPackagedetailBySerpackageAction'
+		singleton='false'>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='packagedetailManager'>
+			<ref bean='packagedetailManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+
+	<bean id='com.ph.hms.action.CashadvanceListAction' class='com.ph.hms.action.CashadvanceListAction'
+		singleton='false'>
+
+		<property name='cashadvanceManager'>
+			<ref bean='cashadvanceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.CashadvanceAddAction' class='com.ph.hms.action.CashadvanceAddAction'
+		singleton='false'>
+
+		<property name='cashadvanceManager'>
+			<ref bean='cashadvanceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.CashadvanceEditFormAction' class='com.ph.hms.action.CashadvanceEditFormAction'
+		singleton='false'>
+
+		<property name='cashadvanceManager'>
+			<ref bean='cashadvanceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.CashadvanceUpdateAction' class='com.ph.hms.action.CashadvanceUpdateAction'
+		singleton='false'>
+
+		<property name='cashadvanceManager'>
+			<ref bean='cashadvanceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.CashadvanceDeleteAction' class='com.ph.hms.action.CashadvanceDeleteAction'
+		singleton='false'>
+
+		<property name='cashadvanceManager'>
+			<ref bean='cashadvanceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.CashadvanceAddFormAction' class='com.ph.hms.action.CashadvanceAddFormAction'
+		singleton='false'>
+
+		<property name='cashadvanceManager'>
+			<ref bean='cashadvanceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetCashadvanceByTypeHeadAction' class='com.ph.hms.action.GetCashadvanceByTypeHeadAction'
+		singleton='false'>
+
+		<property name='cashadvanceManager'>
+			<ref bean='cashadvanceManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReportListAction' class='com.ph.hms.action.ReportListAction'
+		singleton='false'>
+
+		<property name='reportManager'>
+			<ref bean='reportManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReportAddAction' class='com.ph.hms.action.ReportAddAction'
+		singleton='false'>
+
+		<property name='reportManager'>
+			<ref bean='reportManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReportEditFormAction' class='com.ph.hms.action.ReportEditFormAction'
+		singleton='false'>
+
+		<property name='reportManager'>
+			<ref bean='reportManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReportUpdateAction' class='com.ph.hms.action.ReportUpdateAction'
+		singleton='false'>
+
+		<property name='reportManager'>
+			<ref bean='reportManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReportDeleteAction' class='com.ph.hms.action.ReportDeleteAction'
+		singleton='false'>
+
+		<property name='reportManager'>
+			<ref bean='reportManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ReportAddFormAction' class='com.ph.hms.action.ReportAddFormAction'
+		singleton='false'>
+
+		<property name='reportManager'>
+			<ref bean='reportManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetReportByTypeHeadAction' class='com.ph.hms.action.GetReportByTypeHeadAction'
+		singleton='false'>
+
+		<property name='reportManager'>
+			<ref bean='reportManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ProvinceListAction' class='com.ph.hms.action.ProvinceListAction'
+		singleton='false'>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ProvinceAddAction' class='com.ph.hms.action.ProvinceAddAction'
+		singleton='false'>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ProvinceEditFormAction' class='com.ph.hms.action.ProvinceEditFormAction'
+		singleton='false'>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ProvinceUpdateAction' class='com.ph.hms.action.ProvinceUpdateAction'
+		singleton='false'>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ProvinceDeleteAction' class='com.ph.hms.action.ProvinceDeleteAction'
+		singleton='false'>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ProvinceAddFormAction' class='com.ph.hms.action.ProvinceAddFormAction'
+		singleton='false'>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetProvinceByTypeHeadAction' class='com.ph.hms.action.GetProvinceByTypeHeadAction'
+		singleton='false'>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DistrictListAction' class='com.ph.hms.action.DistrictListAction'
+		singleton='false'>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DistrictAddAction' class='com.ph.hms.action.DistrictAddAction'
+		singleton='false'>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DistrictFormAction' class='com.ph.hms.action.DistrictFormAction'
+		singleton='false'>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DistrictUpdateAction' class='com.ph.hms.action.DistrictUpdateAction'
+		singleton='false'>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DistrictDeleteAction' class='com.ph.hms.action.DistrictDeleteAction'
+		singleton='false'>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetDistrictByTypeHeadAction' class='com.ph.hms.action.GetDistrictByTypeHeadAction'
+		singleton='false'>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='provinceManager'>
+			<ref bean='provinceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.WardListAction' class='com.ph.hms.action.WardListAction'
+		singleton='false'>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.WardAddAction' class='com.ph.hms.action.WardAddAction'
+		singleton='false'>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.WardEditFormAction' class='com.ph.hms.action.WardEditFormAction'
+		singleton='false'>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.WardUpdateAction' class='com.ph.hms.action.WardUpdateAction'
+		singleton='false'>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.WardDeleteAction' class='com.ph.hms.action.WardDeleteAction'
+		singleton='false'>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.WardAddFormAction' class='com.ph.hms.action.WardAddFormAction'
+		singleton='false'>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetWardByTypeHeadAction' class='com.ph.hms.action.GetWardByTypeHeadAction'
+		singleton='false'>
+
+		<property name='wardManager'>
+			<ref bean='wardManager' />
+		</property>
+
+		<property name='districtManager'>
+			<ref bean='districtManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.EthnicListAction' class='com.ph.hms.action.EthnicListAction'
+		singleton='false'>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.EthnicAddAction' class='com.ph.hms.action.EthnicAddAction'
+		singleton='false'>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.EthnicFormAction' class='com.ph.hms.action.EthnicFormAction'
+		singleton='false'>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.EthnicUpdateAction' class='com.ph.hms.action.EthnicUpdateAction'
+		singleton='false'>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.EthnicDeleteAction' class='com.ph.hms.action.EthnicDeleteAction'
+		singleton='false'>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetEthnicByTypeHeadAction' class='com.ph.hms.action.GetEthnicByTypeHeadAction'
+		singleton='false'>
+
+		<property name='ethnicManager'>
+			<ref bean='ethnicManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ImportinvoicedetailListAction' class='com.ph.hms.action.ImportinvoicedetailListAction'
+		singleton='false'>
+
+		<property name='importinvoicedetailManager'>
+			<ref bean='importinvoicedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ImportinvoicedetailAddAction' class='com.ph.hms.action.ImportinvoicedetailAddAction'
+		singleton='false'>
+
+		<property name='importinvoicedetailManager'>
+			<ref bean='importinvoicedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+		
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ImportinvoicedetailFormAction'
+		class='com.ph.hms.action.ImportinvoicedetailFormAction' singleton='false'>
+
+		<property name='importinvoicedetailManager'>
+			<ref bean='importinvoicedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ImportinvoicedetailUpdateAction'
+		class='com.ph.hms.action.ImportinvoicedetailUpdateAction' singleton='false'>
+
+		<property name='importinvoicedetailManager'>
+			<ref bean='importinvoicedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ImportinvoicedetailDeleteAction'
+		class='com.ph.hms.action.ImportinvoicedetailDeleteAction' singleton='false'>
+
+		<property name='importinvoicedetailManager'>
+			<ref bean='importinvoicedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetImportinvoicedetailByTypeHeadAction'
+		class='com.ph.hms.action.GetImportinvoicedetailByTypeHeadAction'
+		singleton='false'>
+
+		<property name='importinvoicedetailManager'>
+			<ref bean='importinvoicedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DruginvoiceListAction' class='com.ph.hms.action.DruginvoiceListAction'
+		singleton='false'>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+		
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DruginvoiceAddAction' class='com.ph.hms.action.DruginvoiceAddAction'
+		singleton='false'>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='druginvoicedetailManager'>
+			<ref bean='druginvoicedetailManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+	</bean>
+
+	<bean id='com.ph.hms.action.DruginvoiceFormAction' class='com.ph.hms.action.DruginvoiceFormAction'
+		singleton='false'>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DruginvoiceUpdateAction' class='com.ph.hms.action.DruginvoiceUpdateAction'
+		singleton='false'>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DruginvoiceDeleteAction' class='com.ph.hms.action.DruginvoiceDeleteAction'
+		singleton='false'>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+		
+		<property name='druginvoicedetailManager'>
+			<ref bean='druginvoicedetailManager' />
+		</property>
+		
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+	</bean>
+
+
+	<bean id='com.ph.hms.action.GetDruginvoiceByTypeHeadAction' class='com.ph.hms.action.GetDruginvoiceByTypeHeadAction'
+		singleton='false'>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DruginvoicedetailListAction' class='com.ph.hms.action.DruginvoicedetailListAction'
+		singleton='false'>
+
+		<property name='druginvoicedetailManager'>
+			<ref bean='druginvoicedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+
+	<bean id='com.ph.hms.DruginvoicedetailFormAction'
+		class='com.ph.hms.action.DruginvoicedetailFormAction' singleton='false'>
+
+		<property name='druginvoicedetailManager'>
+			<ref bean='druginvoicedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DruginvoicedetailUpdateAction' class='com.ph.hms.action.DruginvoicedetailUpdateAction'
+		singleton='false'>
+
+		<property name='druginvoicedetailManager'>
+			<ref bean='druginvoicedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.DruginvoicedetailDeleteAction' class='com.ph.hms.action.DruginvoicedetailDeleteAction'
+		singleton='false'>
+
+		<property name='druginvoicedetailManager'>
+			<ref bean='druginvoicedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	
+	<bean id='com.ph.hms.action.GetDruginvoicedetailByTypeHeadAction'
+		class='com.ph.hms.action.GetDruginvoicedetailByTypeHeadAction'
+		singleton='false'>
+
+		<property name='druginvoicedetailManager'>
+			<ref bean='druginvoicedetailManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ProviderListAction' class='com.ph.hms.action.ProviderListAction'
+		singleton='false'>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ProviderAddAction' class='com.ph.hms.action.ProviderAddAction'
+		singleton='false'>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ProviderEditFormAction' class='com.ph.hms.action.ProviderEditFormAction'
+		singleton='false'>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ProviderUpdateAction' class='com.ph.hms.action.ProviderUpdateAction'
+		singleton='false'>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ProviderDeleteAction' class='com.ph.hms.action.ProviderDeleteAction'
+		singleton='false'>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.ProviderAddFormAction' class='com.ph.hms.action.ProviderAddFormAction'
+		singleton='false'>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetProviderByTypeHeadAction' class='com.ph.hms.action.GetProviderByTypeHeadAction'
+		singleton='false'>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.WarehouseListAction' class='com.ph.hms.action.WarehouseListAction'
+		singleton='false'>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.WarehouseAddAction' class='com.ph.hms.action.WarehouseAddAction'
+		singleton='false'>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.WarehouseEditFormAction' class='com.ph.hms.action.WarehouseEditFormAction'
+		singleton='false'>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.WarehouseUpdateAction' class='com.ph.hms.action.WarehouseUpdateAction'
+		singleton='false'>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.WarehouseDeleteAction' class='com.ph.hms.action.WarehouseDeleteAction'
+		singleton='false'>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.WarehouseAddFormAction' class='com.ph.hms.action.WarehouseAddFormAction'
+		singleton='false'>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetWarehouseByTypeHeadAction' class='com.ph.hms.action.GetWarehouseByTypeHeadAction'
+		singleton='false'>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.HistoryListAction' class='com.ph.hms.action.HistoryListAction'
+		singleton='false'>
+
+		<property name='historyManager'>
+			<ref bean='historyManager' />
+		</property>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.HistoryFormAction' class='com.ph.hms.action.HistoryFormAction'
+		singleton='false'>
+
+		<property name='historyManager'>
+			<ref bean='historyManager' />
+		</property>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.HistoryUpdateAction' class='com.ph.hms.action.HistoryUpdateAction'
+		singleton='false'>
+
+		<property name='historyManager'>
+			<ref bean='historyManager' />
+		</property>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.HistoryDeleteAction' class='com.ph.hms.action.HistoryDeleteAction'
+		singleton='false'>
+
+		<property name='historyManager'>
+			<ref bean='historyManager' />
+		</property>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetHistoryByTypeHeadAction' class='com.ph.hms.action.GetHistoryByTypeHeadAction'
+		singleton='false'>
+
+		<property name='historyManager'>
+			<ref bean='historyManager' />
+		</property>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.SolvingListAction' class='com.ph.hms.action.SolvingListAction'
+		singleton='false'>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.SolvingAddAction' class='com.ph.hms.action.SolvingAddAction'
+		singleton='false'>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.SolvingEditFormAction' class='com.ph.hms.action.SolvingEditFormAction'
+		singleton='false'>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.SolvingUpdateAction' class='com.ph.hms.action.SolvingUpdateAction'
+		singleton='false'>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.SolvingDeleteAction' class='com.ph.hms.action.SolvingDeleteAction'
+		singleton='false'>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.SolvingAddFormAction' class='com.ph.hms.action.SolvingAddFormAction'
+		singleton='false'>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetSolvingByTypeHeadAction' class='com.ph.hms.action.GetSolvingByTypeHeadAction'
+		singleton='false'>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.HospitalListAction' class='com.ph.hms.action.HospitalListAction'
+		singleton='false'>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.HospitalAddAction' class='com.ph.hms.action.HospitalAddAction'
+		singleton='false'>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.HospitalFormAction' class='com.ph.hms.action.HospitalFormAction'
+		singleton='false'>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.HospitalUpdateAction' class='com.ph.hms.action.HospitalUpdateAction'
+		singleton='false'>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.HospitalDeleteAction' class='com.ph.hms.action.HospitalDeleteAction'
+		singleton='false'>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetHospitalByTypeHeadAction' class='com.ph.hms.action.GetHospitalByTypeHeadAction'
+		singleton='false'>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+
+	<bean id='com.ph.hms.action.GetEncounterByClientAction' class='com.ph.hms.action.GetEncounterByClientAction'
+		singleton='false'>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+
+		<property name='icdManager'>
+			<ref bean='icdManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='prescriptiontemplateManager'>
+			<ref bean='prescriptiontemplateManager' />
+		</property>
+
+		<property name='roomManager'>
+			<ref bean='roomManager' />
+		</property>
+
+		<property name='solvingManager'>
+			<ref bean='solvingManager' />
+		</property>
+
+		<property name='hospitalManager'>
+			<ref bean='hospitalManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetPrescriptiondetailByEncounterAction'
+		class='com.ph.hms.action.GetPrescriptiondetailByEncounterAction'
+		singleton='false'>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='prescriptiondetailManager'>
+			<ref bean='prescriptiondetailManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetIndicationdetailByEncounterAction'
+		class='com.ph.hms.action.GetIndicationdetailByEncounterAction'
+		singleton='false'>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+		
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>
+		
+		<property name='serpackageManager'>
+			<ref bean='serpackageManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='indicationdetailManager'>
+			<ref bean='indicationdetailManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetReceiptByEncounterAction' class='com.ph.hms.action.GetReceiptByEncounterAction'
+		singleton='false'>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetDruginvoiceByEncounterAction'
+		class='com.ph.hms.action.GetDruginvoiceByEncounterAction' singleton='false'>
+
+		<property name='paymenttypeManager'>
+			<ref bean='paymenttypeManager' />
+		</property>
+
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetUserroleByUserAction' class='com.ph.hms.action.GetUserroleByUserAction'
+		singleton='false'>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='userroleManager'>
+			<ref bean='userroleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetUserroleByRoleAction' class='com.ph.hms.action.GetUserroleByRoleAction'
+		singleton='false'>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='userroleManager'>
+			<ref bean='userroleManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetRoleformByRoleAction' class='com.ph.hms.action.GetRoleformByRoleAction'
+		singleton='false'>
+
+		<property name='roleManager'>
+			<ref bean='roleManager' />
+		</property>
+
+		<property name='roleformManager'>
+			<ref bean='roleformManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetReceiptdetailByReceiptAction'
+		class='com.ph.hms.action.GetReceiptdetailByReceiptAction' singleton='false'>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='receiptManager'>
+			<ref bean='receiptManager' />
+		</property>
+
+		<property name='doctorManager'>
+			<ref bean='doctorManager' />
+		</property>
+
+		<property name='receiptdetailManager'>
+			<ref bean='receiptdetailManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetImportinvoicedetailByImportinvoiceAction'
+		class='com.ph.hms.action.GetImportinvoicedetailByImportinvoiceAction'
+		singleton='false'>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='importinvoicedetailManager'>
+			<ref bean='importinvoicedetailManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetDruginvoicedetailByDruginvoiceAction'
+		class='com.ph.hms.action.GetDruginvoicedetailByDruginvoiceAction'
+		singleton='false'>
+
+		<property name='drugManager'>
+			<ref bean='drugManager' />
+		</property>
+
+		<property name='druginvoiceManager'>
+			<ref bean='druginvoiceManager' />
+		</property>
+
+		<property name='druginvoicedetailManager'>
+			<ref bean='druginvoicedetailManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+
+	<bean id='com.ph.hms.action.GetImportinvoiceByWarehouseAction'
+		class='com.ph.hms.action.GetImportinvoiceByWarehouseAction' singleton='false'>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+
+	</bean>
+	
+	<bean id='com.ph.hms.action.ImportinvoiceFilterByMonthAction'
+		class='com.ph.hms.action.ImportinvoiceFilterByMonthAction' singleton='false'>
+
+		<property name='hmsDataManager'>
+			<ref bean='hmsDataManager' />
+		</property>
+
+		<property name='userManager'>
+			<ref bean='userManager' />
+		</property>
+
+		<property name='providerManager'>
+			<ref bean='providerManager' />
+		</property>
+
+		<property name='warehouseManager'>
+			<ref bean='warehouseManager' />
+		</property>
+
+		<property name='i18nManager'>
+			<ref bean='i18nManager' />
+		</property>
+		
+		<property name='importinvoiceManager'>
+			<ref bean='importinvoiceManager' />
+		</property>
+
+	</bean>
+
+
+<bean id='com.ph.hms.fm.action.FMMasterAction'
+		class='com.ph.hms.fm.action.FMMasterAction' singleton='false'>
+
+		<property name='clientManager'>
+			<ref bean='clientManager' />
+		</property>
+		<property name='encounterManager'>
+			<ref bean='encounterManager' />
+		</property>
+		
+		<property name='bodyPartManager'>
+			<ref bean='bodyPartManager' />
+		</property>
+</bean>
+
+<bean id='com.ph.hms.action.ServiceParamAction'
+		class='com.ph.hms.action.ServiceParamAction' singleton='false'>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+		
+</bean>
+
+<bean id='com.ph.hms.action.LabSaveAction'
+		class='com.ph.hms.action.LabSaveAction' singleton='false'>
+
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+		
+</bean>
+
+<bean id='com.ph.hms.cardmanagement.action.CardTypeAction'
+		class='com.ph.hms.cardmanagement.action.CardTypeAction' singleton='false'>
+
+		<property name='cardManager'>
+			<ref bean='cardManager' />
+		</property>
+		
+</bean>
+
+<bean id='com.ph.hms.cardmanagement.action.PrivilegeAction'
+		class='com.ph.hms.cardmanagement.action.PrivilegeAction' singleton='false'>
+
+		<property name='cardManager'>
+			<ref bean='cardManager' />
+		</property>
+		<property name='serviceManager'>
+			<ref bean='serviceManager' />
+		</property>
+		<property name='servicegroupManager'>
+			<ref bean='servicegroupManager' />
+		</property>		
+</bean>
+
+<bean id='com.ph.hms.smarthealth.action.ConceptAction'
+		class='com.ph.hms.smarthealth.action.ConceptAction' singleton='false'>
+		<property name='genericDao'>
+			<ref bean='genericDao' />
+		</property>		
+</bean>
+
+<bean id='com.ph.hms.smarthealth.action.ConceptClassAction'
+		class='com.ph.hms.smarthealth.action.ConceptClassAction' singleton='false'>
+		<property name='genericDao'>
+			<ref bean='genericDao' />
+		</property>		
+</bean>
+
+<bean id='com.ph.hms.smarthealth.action.GenericAction'
+		class='com.ph.hms.smarthealth.action.GenericAction' singleton='false'>
+		<property name='genericDao'>
+			<ref bean='genericDao' />
+		</property>		
+</bean>
+
+</beans>

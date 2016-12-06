@@ -1,0 +1,138 @@
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<body onLoad="document.getElementById('btnprint').focus();">
+<div id='footer'>
+  <input name="button" type="button" onClick=" document.getElementById('header').style.display='block'; document.getElementById('print').style.display='block';document.getElementById('printfull').style.display='none';document.getElementById('footer').style.display='block';" value="H&oacute;a &#273;&#417;n" >
+  <input name="button2" type="button" onClick=" document.getElementById('header').style.display='block'; document.getElementById('print').style.display='none';document.getElementById('printfull').style.display='block';document.getElementById('footer').style.display='block';" value="H&oacute;a &#273;&#417;n &amp; Th&#7867; xe">
+  <input name="button2" type="button" onClick="document.getElementById('footer').style.display='none';window.print();self.close();" value="In">
+</div>
+<br>
+<div id='header'>
+	<table >
+	<tr>
+	  <td width="197"><p>C&ocirc;ng ty TNHH M&#7929; T&ugrave;ng </p>
+      </td >
+	  </tr>
+	<tr>
+	  <td>142 L&ecirc; H&#7891;ng Phong</td >
+	  </tr>
+	<tr>
+	  <td><p><img src="../barbecue/barcode?data=$!receipt.encounter.client.code" width="200" height="50"/></p>
+      <p><strong>$!receipt.encounter.client.code</strong></p></td >
+	  </tr>
+	</table>
+</div>
+<div id='print' style="display:block">
+<h2>$i18n.get('receipt')</h2>
+<br>
+
+
+<table  border="0">
+  <tr>
+    <td>Ng&agrave;y: </td>
+    <td>$!dateTool.format('dd/MM/yyyy',$!receipt.date)</td>
+  </tr>
+  <tr>
+    <td width="100"><div align="left">M&atilde; phi&#7871;u: </div></td>
+    <td><div align="left">$!receipt.code</div></td>
+  </tr>
+  <tr>
+    <td width="100"><div align="left">T&ecirc;n kh&aacute;ch h&agrave;ng: </div></td>
+    <td>$!receipt.node</td>
+  </tr>
+  <tr>
+    <td width="100" height="21" valign="top"><div align="left">&#272;&#7883;a ch&#7881;:</div></td>
+    <td> $!receipt.address, $!receipt.encounter.client.ward.node      </td>
+  </tr>
+</table>
+<br>
+<table  border="1" cellpadding="0" cellspacing="0" bordercolor="#000000" bgcolor="#FFFFFF">
+  <tr>
+    <td width="10"><strong>STT</strong></td>
+    <td width="80"><strong>T&ecirc;n d&#7883;ch v&#7909;</strong></td>
+    <td width="10"><strong>SL</strong></td>
+    <td width="20"><strong>&#272;&#417;n Gi&aacute; </strong></td>
+    <td><strong>Chi&#7871;t Kh&#7845;u </strong></td>
+    <td><strong>Th&agrave;nh Ti&#7873;n </strong></td>
+  </tr>
+  #set($i=0)
+	#set($total=0)
+	#foreach($receiptdetail in $receiptdetails)
+	#set($i=$i+1)
+  <tr>
+    <td valign="top"><div align="left">$i </div></td>
+    <td valign="top">$!receiptdetail.service.node</td>
+    <td valign="top">$!receiptdetail.quantity</td>
+    <td valign="top">$numberTool.format('integer' ,$!receiptdetail.price)</td>
+    <td valign="top">$numberTool.format('integer' ,$receiptdetail.discount)</td>
+    <td valign="top">$numberTool.format('integer' ,$!receiptdetail.subtotal) - $!receiptdetail.note</td>
+  </tr>
+  #end
+  <tr>
+    <td colspan="5"><div align="center"><strong>T&#7893;ng C&#7897;ng </strong></div></td>
+    <td><strong>$numberTool.format('integer' ,$!receipt.total)</strong></td>
+  </tr>
+</table>
+<table >
+  <tr>
+    <td width="95">Kh&aacute;ch h&agrave;ng </td >
+    <td width="101">Thu ng&acirc;n </td>
+    <td width="208">K&#7871; to&aacute;n </td>
+  </tr>
+</table>
+<p><br>
+</p>
+</div>
+
+<div id='printfull' style="display:none">
+  <h2>$i18n.get('receipt')</h2>
+  <br>
+  <table  border="0">
+    <tr>
+      <td><div align="left">M&atilde; phi&#7871;u: </div></td>
+      <td><div align="left">$!receipt.code</div></td>
+    </tr>
+    <tr>
+      <td width="100"><div align="left">T&ecirc;n kh&aacute;ch h&agrave;ng: </div></td>
+      <td>$!receipt.node</td>
+    </tr>
+    <tr>
+      <td width="100" height="21" valign="top"><div align="left">&#272;&#7883;a ch&#7881;:</div></td>
+      <td> $!receipt.address, $!receipt.encounter.client.ward.node </td>
+    </tr>
+  </table>
+  <br>
+  <table width="100%">
+    <tr>
+      <td width="404"><hr></td >
+    </tr>
+  </table>
+  
+
+  <table  border="1" cellpadding="0" cellspacing="0" bordercolor="#000000" bgcolor="#FFFFFF">
+
+   
+  <tr>
+    <td valign="top"><div align="center">
+      <p><strong>TH&#7866; GI&#7918; XE MI&#7876;N PH&Iacute; </strong></p>
+      <p><strong>Ph&ograve;ng kh&aacute;m &#273;a khoa M&#7928; T&Ugrave;NG </strong></p>
+    </div></td>
+    </tr>
+   
+  <tr>
+    <td><div align="center">
+      <p>&nbsp;</p>
+      <p><img src="../barbecue/barcode?data=$!receipt.code" width="200" height="50"/></p>
+      <p><strong>$!receipt.encounter.client.code</strong></p>
+    </div>      </td>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+  <p><br>
+  </p>
+</div>
+<div id='footer'></div>
+</body>

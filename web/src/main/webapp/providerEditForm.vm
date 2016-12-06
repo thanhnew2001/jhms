@@ -1,0 +1,40 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addprovider').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('provider')
+</div>
+<br>
+<div id='msg'></div>
+<br>
+<form id='providerForm'  name='providerForm' action='providerUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!provider.id' size='15'>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text' id='node' name='node' value='$!provider.node' size='15' value='' onkeypress="formname='providerForm'; nextfield='address';"> </td>
+			
+			<td><label>$i18n.get('address'):</label></td> <td><input type='text' id='address' name='address' value='$!provider.address' size='15' value='' onkeypress="formname='providerForm'; nextfield='phone';"> </td>
+			
+			<td><label>$i18n.get('phone'):</label></td> <td><input type='text' id='phone' name='phone' value='$!provider.phone' size='15' value='' onkeypress="formname='providerForm'; nextfield='fax';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('fax'):</label></td> <td><input type='text' id='fax' name='fax' value='$!provider.fax' size='15' value='' onkeypress="formname='providerForm'; nextfield='updateprovider';"> </td>
+			
+
+<tr><td colspan='6'>
+<input id='updateprovider' type='button' value="  $i18n.get('save')  " onkeydown="javascript: validateProvider('edit', document.getElementById('providerForm') )" onclick="javascript: validateProvider('edit', document.getElementById('providerForm') )" onkeypress="formname='providerForm'; nextfield = '';">
+
+
+&nbsp;
+
+</td></tr>
+</table>
+</form>
+</div>
+</body>

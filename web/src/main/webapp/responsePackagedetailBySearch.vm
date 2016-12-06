@@ -1,0 +1,70 @@
+
+<form name='packagedetailForm' action='packagedetailAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('serpackage')</th>	
+	
+	<th>$i18n.get('service')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddpackagedetail' style='display:none;'>
+<th><input type='button' id='savepackagedetail' value="  $i18n.get('save')  " onclick="javascript:validatePackagedetail('add')" onkeypress="nextfield='';"></th>
+
+			#set ($ses = $req.getSession())					
+			#set ($serpackage_id = $ses.getAttribute('serpackage_id'))
+			#set ($serpackage_node = $ses.getAttribute('serpackage_node'))
+		<th>
+			<input type='hidden' id='serpackage' name='serpackage'  size='1' value='$!serpackage_id' onchange='makeGetRequestSerpackageByTypeHead()' onkeypress="formname='inlinepackagedetailForm'; nextfield='textserpackage';"> 
+			
+			<input type='text' id='textserpackage' name='textserpackage' size='18' value='$!serpackage_node' onkeypress="formname='inlinepackagedetailForm'; nextfield='cboserpackage';"  onkeyup='makeGetRequestSerpackageByTypeHead()' onclick='makeGetRequestSerpackageByTypeHead()'>	
+			
+			<div id='divserpackage' style='display:none;position:absolute'  onkeypress="formname='inlinepackagedetailForm'; nextfield='textservice';"></div>				
+		 </th>		
+		
+			#set ($ses = $req.getSession())					
+			#set ($service_id = $ses.getAttribute('service_id'))
+			#set ($service_node = $ses.getAttribute('service_node'))
+		<th>
+			<input type='hidden' id='service' name='service'  size='1' value='$!service_id' onchange='makeGetRequestServiceByTypeHead()' onkeypress="formname='inlinepackagedetailForm'; nextfield='textservice';"> 
+			
+			<input type='text' id='textservice' name='textservice' size='18' value='$!service_node' onkeypress="formname='inlinepackagedetailForm'; nextfield='cboservice';"  onkeyup='makeGetRequestServiceByTypeHead()' onclick='makeGetRequestServiceByTypeHead()'>	
+			
+			<div id='divservice' style='display:none;position:absolute'  onkeypress="formname='inlinepackagedetailForm'; nextfield='savepackagedetail';"></div>				
+		 </th>		
+		
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($packagedetail in $packagedetails)
+	#if($packagedetail.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddPackagedetail($packagedetail.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddPackagedetail($packagedetail.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='packagedetailDelete.action?id=$packagedetail.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('packagedetailView.action?id=$packagedetail.id', 'View packagedetail', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menupackagedetail$packagedetail.id').style.display='block'; " ondblclick="javascript:document.getElementById('menupackagedetail$packagedetail.id').style.display='none'"  value='>>' >  
+	
+	<div id='menupackagedetail$packagedetail.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!packagedetail.serpackage.node</td>
+		
+		<td>$!packagedetail.service.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

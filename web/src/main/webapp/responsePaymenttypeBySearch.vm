@@ -1,0 +1,44 @@
+
+<form name='paymenttypeForm' action='paymenttypeAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddpaymenttype' style='display:none;'>
+<th><input type='button' id='savepaymenttype' value="  $i18n.get('save')  " onclick="javascript:validatePaymenttype('add')" onkeypress="nextfield='';"></th>
+<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlinepaymenttypeForm'; nextfield='savepaymenttype';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($paymenttype in $paymenttypes)
+	#if($paymenttype.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddPaymenttype($paymenttype.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddPaymenttype($paymenttype.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='paymenttypeDelete.action?id=$paymenttype.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('paymenttypeView.action?id=$paymenttype.id', 'View paymenttype', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menupaymenttype$paymenttype.id').style.display='block'; " ondblclick="javascript:document.getElementById('menupaymenttype$paymenttype.id').style.display='none'"  value='>>' >  
+	
+	<div id='menupaymenttype$paymenttype.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!paymenttype.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

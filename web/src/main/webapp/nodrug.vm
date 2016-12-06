@@ -1,0 +1,9 @@
+The following drug in the prescription <br>
+$prescriptionDetail.drug.node - $prescriptionDetail.quantity $prescriptionDetail.drug.unit<br>
+
+is not available <br>
+
+#if ($!batchnumber)
+	The quantity currently in stock <br>
+	$batchnumber.batchnumber - $batchnumber.expireddate - $batchnumber.remain
+#end

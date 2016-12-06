@@ -1,0 +1,4 @@
+
+#foreach($importinvoice in $importinvoices)
+	$importinvoice.id
+#end

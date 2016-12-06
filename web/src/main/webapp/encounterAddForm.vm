@@ -1,0 +1,180 @@
+
+<div id='addencounter'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addencounter').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('encounter')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='encounterForm' name='encounterForm' action='encounterAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('client'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($client_id = $ses.getAttribute('client_id'))
+			#set ($client_node = $ses.getAttribute('client_node'))
+			
+			<input type='hidden' id='client' name='client'  size='1' value='$!client_id' onchange='makeGetRequestClientByTypeHead()' onkeypress="formname='encounterForm'; nextfield='textclient';"> 
+			
+			<input type='text' id='textclient' name='textclient' size='20' value='$!client_node' onkeypress="formname='encounterForm'; nextfield='cboclient'; isSelect=true;"  onkeyup='makeGetRequestClientByTypeHead()' onclick='makeGetRequestClientByTypeHead()'>	
+			
+			<div id='divclient' style='display:none;position:absolute'  onkeypress="formname='encounterForm'; nextfield='insurancenumber';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('clientList.action', 'Add client', 'width=400, height=300')"></a>+
+		
+			<td><label>$i18n.get('insurancenumber'):</label></td> <td><input type='text'  id='insurancenumber' name='insurancenumber' size='20' value='' onkeypress="formname='encounterForm'; nextfield='joineddate';"> </td>
+			
+			<td><label>$i18n.get('joineddate'):</label></td> 
+			<td>
+			<input type='text'  id='joineddate' name='joineddate' size='20' onblur='getSmartDate(this)' onkeypress="formname='encounterForm'; nextfield='expireddate';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggerjoineddate'>
+			</td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('expireddate'):</label></td> 
+			<td>
+			<input type='text'  id='expireddate' name='expireddate' size='20' onblur='getSmartDate(this)' onkeypress="formname='encounterForm'; nextfield='code';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggerexpireddate'>
+			</td>
+			
+			<td><label>$i18n.get('code'):</label></td> <td><input type='text'  id='code' name='code' size='20' onkeypress="formname='encounterForm'; nextfield='date';" onblur='makeGetRequestEncounterByCode()'> </td>			
+			
+			<td><label>$i18n.get('date'):</label></td> 
+			<td>
+			<input type='text'  id='date' name='date' size='20' onblur='getSmartDate(this)' onkeypress="formname='encounterForm'; nextfield='time';" value=$!today >
+			<img src='images/calendar_icon.gif' id='triggerdate'>
+			</td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('time'):</label></td> <td><input type='text'  id='time' name='time' size='20' value='' onkeypress="formname='encounterForm'; nextfield='reference';"> </td>
+			
+			<td><label>$i18n.get('reference'):</label></td> <td><select id='reference' name='reference' style='width:120px;max-width:120px' onkeypress="formname='encounterForm'; nextfield='room';"> <option value=CQYT>CQYT</option><option value= TUDEN> TUDEN</option><option value= KHAC> KHAC</option> </select></td>
+
+			
+			<td><label>$i18n.get('room'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())					
+			#set ($room_id = $ses.getAttribute('room_id'))
+			#set ($room_node = $ses.getAttribute('room_node'))
+			
+			<select id='room' name='room' style='width:120px;max-width:120px' onkeypress="formname='encounterForm'; nextfield='hospital';">
+				<option value='$!room_id' selected> $!room_id - $!room_node </option>
+			#foreach($room in $rooms)
+				<option value='$room.id'>$room.id - $room.node</option>
+			#end
+			</select>
+			</td>
+		</tr><tr class='formlabel'>
+			<td><label>$i18n.get('hospital'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())					
+			#set ($hospital_id = $ses.getAttribute('hospital_id'))
+			#set ($hospital_node = $ses.getAttribute('hospital_node'))
+			
+			<select id='hospital' name='hospital' style='width:120px;max-width:120px' onkeypress="formname='encounterForm'; nextfield='initialdiagnosis';">
+				<option value='$!hospital_id' selected> $!hospital_id - $!hospital_node </option>
+			#foreach($hospital in $hospitals)
+				<option value='$hospital.id'>$hospital.id - $hospital.node</option>
+			#end
+			</select>
+			</td>
+		
+			<td><label>$i18n.get('initialdiagnosis'):</label></td> <td><input type='text'  id='initialdiagnosis' name='initialdiagnosis' size='20' value='' onkeypress="formname='encounterForm'; nextfield='texticd';"> </td>
+			
+			<td><label>$i18n.get('icd'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($icd_id = $ses.getAttribute('icd_id'))
+			#set ($icd_node = $ses.getAttribute('icd_node'))
+			
+			<input type='hidden' id='icd' name='icd'  size='1' value='$!icd_id' onchange='makeGetRequestIcdByTypeHead()' onkeypress="formname='encounterForm'; nextfield='texticd';"> 
+			
+			<input type='text' id='texticd' name='texticd' size='20' value='$!icd_node' onkeypress="formname='encounterForm'; nextfield='cboicd'; isSelect=true;"  onkeyup='makeGetRequestIcdByTypeHead()' onclick='makeGetRequestIcdByTypeHead()'>	
+			
+			<div id='divicd' style='display:none;position:absolute; width:800px'  onkeypress="formname='encounterForm'; nextfield='solving';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('icdList.action', 'Add icd', 'width=400, height=300')">+</a>
+		</tr><tr class='formlabel'>
+			<td><label>$i18n.get('solving'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())					
+			#set ($solving_id = $ses.getAttribute('solving_id'))
+			#set ($solving_node = $ses.getAttribute('solving_node'))
+			
+			<select id='solving' name='solving' style='width:120px;max-width:120px' onkeypress="formname='encounterForm'; nextfield='advise';">
+				<option value='$!solving_id' selected> $!solving_id - $!solving_node </option>
+			#foreach($solving in $solvings)
+				<option value='$solving.id'>$solving.id - $solving.node</option>
+			#end
+			</select>
+			</td>
+		
+			<td><label>$i18n.get('advise'):</label></td> <td><input type='text'  id='advise' name='advise' size='20' value='' onkeypress="formname='encounterForm'; nextfield='revisit';"> </td>
+			
+			<td><label>$i18n.get('revisit'):</label></td> <td><select id='revisit' name='revisit' style='width:120px;max-width:120px' onkeypress="formname='encounterForm'; nextfield='revisitdate';"> <option value=N>N</option><option value= Y> Y</option> </select></td>
+
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('revisitdate'):</label></td> 
+			<td>
+			<input type='text'  id='revisitdate' name='revisitdate' size='20' onblur='getSmartDate(this)' onkeypress="formname='encounterForm'; nextfield='textprescriptiontemplate';" value=$!novalue >
+			<img src='images/calendar_icon.gif' id='triggerrevisitdate'>
+			</td>
+			
+			<td><label>$i18n.get('prescriptiontemplate'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($prescriptiontemplate_id = $ses.getAttribute('prescriptiontemplate_id'))
+			#set ($prescriptiontemplate_node = $ses.getAttribute('prescriptiontemplate_node'))
+			
+			<input type='hidden' id='prescriptiontemplate' name='prescriptiontemplate'  size='1' value='$!prescriptiontemplate_id' onchange='makeGetRequestPrescriptiontemplateByTypeHead()' onkeypress="formname='encounterForm'; nextfield='textprescriptiontemplate';"> 
+			
+			<input type='text' id='textprescriptiontemplate' name='textprescriptiontemplate' size='20' value='$!prescriptiontemplate_node' onkeypress="formname='encounterForm'; nextfield='cboprescriptiontemplate'; isSelect=true;"  onkeyup='makeGetRequestPrescriptiontemplateByTypeHead()' onclick='makeGetRequestPrescriptiontemplateByTypeHead()'>	
+			
+			<div id='divprescriptiontemplate' style='display:none;position:absolute'  onkeypress="formname='encounterForm'; nextfield='totalamount';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('prescriptiontemplateList.action', 'Add prescriptiontemplate', 'width=400, height=300')">+</a>
+		
+			<td><label>$i18n.get('totalamount'):</label></td> <td><input type='text'  id='totalamount' name='totalamount' size='20' value='' onkeypress="formname='encounterForm'; nextfield='insurancepay';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('insurancepay'):</label></td> <td><input type='text'  id='insurancepay' name='insurancepay' size='20' value='' onkeypress="formname='encounterForm'; nextfield='paidamount';"> </td>
+			
+			<td><label>$i18n.get('paidamount'):</label></td> <td><input type='text'  id='paidamount' name='paidamount' size='20' value='' onkeypress="formname='encounterForm'; nextfield='leftamount';"> </td>
+			
+			<td><label>$i18n.get('leftamount'):</label></td> <td><input type='text'  id='leftamount' name='leftamount' size='20' value='' onkeypress="formname='encounterForm'; nextfield='paid';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('paid'):</label></td> <td><select id='paid' name='paid' style='width:120px;max-width:120px' size onkeypress="formname='encounterForm'; nextfield='user';"> <option value=N>N</option><option value= Y> Y</option> </select></td>
+
+			
+			<td><label>$i18n.get('user'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())					
+			#set ($user_id = $ses.getAttribute('user_id'))
+			#set ($user_node = $ses.getAttribute('user_node'))
+			
+			<select id='user' name='user' style='width:120px;max-width:120px' onkeypress="formname='encounterForm'; nextfield='node';">
+				<option value='$!user_id' selected> $!user_id - $!user_node </option>
+			#foreach($user in $users)
+				<option value='$user.id'>$user.id - $user.node</option>
+			#end
+			</select>
+			</td>
+		
+			<td><label>$i18n.get('note'):</label></td> <td><input type='text'  id='node' name='node' size='20' value='' onkeypress="formname='encounterForm'; nextfield='saveencounter';"> </td>
+			</tr>
+<tr><td>
+<input type='button' id='saveencounter' value="  $i18n.get('save')  " onkeydown="javascript:validateEncounter('add', document.getElementById('encounterForm') )"  onclick="javascript:validateEncounter('add', document.getElementById('encounterForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

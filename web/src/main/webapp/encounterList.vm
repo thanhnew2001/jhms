@@ -1,0 +1,71 @@
+#parse("top.vm")
+#parse('common.vm')
+#parse('encounter_js.vm')
+
+
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='js/jquery.js'></script>
+#parse("mycalendar.vm")
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+
+<script>
+
+$(window).keypress(function(event) {
+	
+
+    if (!(event.which == 115 && event.ctrlKey)) return true;
+	
+		validateEncounter('edit', document.getElementById('encounterForm') );
+	event.preventDefault();
+	
+	
+    return false;
+});
+
+</script>
+
+<body id='wrap' onLoad="makeGetRequestEncounterByFilter();">
+<div id='addencounter'></div>
+<div id='divPrescriptiondetail'> </div><div id='divIndicationdetail'> </div>
+<br>
+<div id='divEncounter'>
+<div id='container'>
+<a name='list'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divEncounter').innerHTML=''" value=' X '>  
+$i18n.get('encounterlist')  
+</div>
+</a>
+<br>
+<div>
+  <input type='text' id='filterdate' name='filterdate' value='$today' onClick="GetDate(this);">				
+				
+		<select id='filtersolving' name='filtersolving' onchange='makeGetRequestEncounterByFilter();'>
+			#foreach($solving in $solvings)
+				<option value='$solving.id'>$solving.node</option>
+			#end
+			<option value=''>All</option>
+		</select>	
+		
+
+T&igrave;m ki&#7871;m theo b&#7879;nh nh&acirc;n
+<input type='text' id='con' name='con' value=''>
+<input name='button2' type='button' onClick='javascript:makeGetRequestEncounterByFilter()' value=' L&#7885;c '>
+
+<a href="javascript:makeGetRequestAddEncounter(0, 'add')"></a><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') 
+
+<img src="search_progress_bar.gif" id="search_progress_bar" style="display:none;position:relative ">
+
+</div>
+<div id='msg'></div>
+<div id='tableencounter' class='mytable'>
+
+#parse("responseEncounterBySearch.vm")
+
+</div>
+<a href="javascript:makeGetRequestAddEncounter(0, 'add')"></a><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') 
+</div>
+</div>
+<br>
+
+</body>

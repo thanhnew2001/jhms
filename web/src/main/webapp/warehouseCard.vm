@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+.style1 {
+	font-size: 24px;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+
+<body>
+
+<table border="0" align="center">
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="8">&nbsp;</td>
+  </tr>
+  <tr style="border-bottom-style:double;border-bottom-color:#000000;border-bottom-width:medium">
+    <td>&nbsp;</td>
+    <td colspan="8"><p><strong>C&Ocirc;NG TY TNHH TMDV M&#7928; T&Ugrave;NG<br />
+  142 L&ecirc; H&#7891;ng Phong P3, Q5, TP.HCM <br />
+		Tel: (08) 3924.0888
+    - Fax: (08) 3924.5598 </strong></p>    </td>
+  </tr>
+  <tr>
+    <td><div align="center"></div></td>
+    <td colspan="8"><div align="center" class="style1">TH&#7866; KHO </div></td>
+  </tr>
+  <tr>
+    <td><div align="center"></div></td>
+    <td colspan="8"><p align="center">(Giai &#273;o&#7841;n <strong>$!dateTool.format('dd/MM/yyyy',$!startdate)</strong> &#273;&#7871;n <strong>$!dateTool.format('dd/MM/yyyy',$!enddate)</strong> ) </p>
+    <p align="center">&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><strong>T&ecirc;n Kho:</strong> $!warehouse.node</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><strong>T&ecirc;n thu&#7889;c:</strong> $!drug.node </td>
+    <td><strong>&#272;&#417;n v&#7883; t&iacute;nh: </strong></td>
+    <td>$!drug.unit</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td rowspan="2" bgcolor="#CCCCCC"><div align="center"><strong>STT</strong></div></td>
+    <td colspan="2" bgcolor="#CCCCCC"><div align="center"><strong>Ch&#7913;ng T&#7915; </strong></div></td>
+    <td rowspan="2" bgcolor="#CCCCCC"><div align="center"><strong>Kh&aacute;ch h&agrave;ng </strong></div></td>
+    <td rowspan="2" bgcolor="#CCCCCC"><div align="center"><strong>Di&#7877;n gi&#7843;i </strong></div></td>
+    <td colspan="3" bgcolor="#CCCCCC"><div align="center"><strong>S&#7889; l&#432;&#7907;ng </strong></div></td>
+    <td rowspan="2" bgcolor="#CCCCCC"><div align="center"><strong>Ghi Ch&uacute;  </strong></div></td>
+  </tr>
+  <tr>
+    <td bgcolor="#CCCCCC"><div align="center"><strong>Ng&agrave;y ghi </strong></div></td>
+    <td bgcolor="#CCCCCC"><div align="center"><strong>S&#7889;</strong></div></td>
+    <td bgcolor="#CCCCCC"><div align="center"><strong>Nh&#7853;p</strong></div></td>
+    <td bgcolor="#CCCCCC"><div align="center"><strong>Xu&#7845;t</strong></div></td>
+    <td bgcolor="#CCCCCC"><div align="center"><strong>T&#7891;n</strong></div></td>
+  </tr>
+  <tr>
+    <td colspan="4">&nbsp;</td>
+    <td colspan="3">S&#7889; d&#432; &#273;&#7847;u k&#7923; </td>
+    <td colspan="2">$tondau</td>
+  </tr>
+  #set ($i=0)
+  #foreach($detail in $warehouseCardDetails)
+  #set ($i= $i+1)
+  <tr>
+    <td>$!i</td>
+    <td>$!dateTool.format('dd/MM/yyyy',$!detail.date)</td>
+    <td>$!detail.code</td>
+    <td>$!detail.customer</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;
+	#if($detail.type == 1)
+	$!detail.totalquantity
+	#end	</td>
+    <td>&nbsp;
+	#if($detail.type == 0)
+	$!detail.totalquantity
+	#end	</td>
+    <td>$!detail.remain</td>
+	<td>&nbsp;</td>
+  </tr>
+  #end
+  <tr style="border-bottom-width:medium;border-bottom-style:double;border-bottom-color:#000000">
+    <td colspan="9" >&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><strong>T&#7893;ng s&#7889; l&#432;&#7907;ng nh&#7853;p </strong></td>
+    <td><strong>$!tongnhap</strong></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+	<td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><strong>T&#7893;ng s&#7889; l&#432;&#7907;ng xu&#7845;t </strong></td>
+    <td><strong>$!tongxuat</strong></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+	<td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+	<td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>Ng&#432;&#7901;i l&#7853;p </td>
+    <td>&nbsp;</td>
+    <td>Th&#7911; kho </td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td colspan="2">Ng&agrave;y ... th&aacute;ng ... n&#259;m ... </td>
+	<td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>Gi&aacute;m &#273;&#7889;c </td>
+    <td>&nbsp;</td>
+	<td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+	<td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+	<td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

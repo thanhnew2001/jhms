@@ -1,0 +1,70 @@
+#parse("top.vm")
+#parse("mycalendar.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap' onload='makeGetRequestReceiptByFilter()'>
+<div id='addreceipt'></div>
+<div id='divReceiptdetail'> 
+</div>
+<br>
+<div id='divReceipt'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divReceipt').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('receipt')  
+</div>
+<br>
+<div>
+<select id='comboreceipt' name='comboreceipt'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='code'>$i18n.get('code')</option>
+	
+	<option value='date'>$i18n.get('date')</option>
+	
+	<option value='encounter'>$i18n.get('encounter')</option>
+	
+	<option value='node'>$i18n.get('node')</option>
+	
+	<option value='birthday'>$i18n.get('birthday')</option>
+	
+	<option value='age'>$i18n.get('age')</option>
+	
+	<option value='address'>$i18n.get('address')</option>
+	
+	<option value='phone'>$i18n.get('phone')</option>
+	
+	<option value='paymenttype'>$i18n.get('paymenttype')</option>
+	
+	<option value='paymentmethod'>$i18n.get('paymentmethod')</option>
+	
+	<option value='payfor'>$i18n.get('payfor')</option>
+	
+	<option value='total'>$i18n.get('total')</option>
+	
+	<option value='user'>$i18n.get('user')</option>
+	
+</select>
+<input name='searchreceipt' id='searchreceipt' onkeyup='makeGetRequestReceiptBySearch()' value='' onclick='clearSearchBox(searchreceipt)'>
+Search  or Filter
+<input type='text' id='filterdate' name='filterdate' value='$today' onClick="GetDate(this);">				
+<input name='button2' type='button' onClick='javascript:makeGetRequestReceiptByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddReceipt(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tablereceipt' class='mytable'>
+
+#parse("responseReceiptBySearch.vm")
+
+</div>
+<a href="javascript:makeGetRequestAddReceipt(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

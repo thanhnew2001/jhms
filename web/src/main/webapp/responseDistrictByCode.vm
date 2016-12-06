@@ -1,0 +1,4 @@
+
+#foreach($district in $districts)
+	$district.id
+#end

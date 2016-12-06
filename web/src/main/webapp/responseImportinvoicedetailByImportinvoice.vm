@@ -1,0 +1,110 @@
+
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+
+<body id='wrap' >
+<div id='addimportinvoicedetail'></div>
+<br>
+<div id='divImportinvoicedetail' >
+<div id='container'>
+<br>
+<div id='msg'></div>
+<div id='tableimportinvoicedetail' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineimportinvoicedetailForm' name='inlineimportinvoicedetailForm' action='importinvoicedetailAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('drug')</th>	
+	
+	<th>$i18n.get('quantity')</th>	
+	
+	<th>$i18n.get('expireddate')</th>	
+	
+	<th>$i18n.get('expiredmonth')</th>	
+	<th>$i18n.get('batchnumber')</th>	
+	
+	<th>$i18n.get('visaNo')</th>
+	<th>$i18n.get('price')</th>	
+	
+	<th>$i18n.get('discount')</th>	
+	
+	<th>$i18n.get('subtotal')</th>	
+	
+	<th>$i18n.get('note')</th>	
+</tr>
+
+
+<tr class='tableitem'>
+<div id='inlineaddimportinvoicedetail' style='display:none;'>
+<th><input type='button' id='saveimportinvoicedetail' value="  $i18n.get('save')  " onkeydown="javascript:validateImportinvoicedetail('add', document.getElementById('inlineimportinvoicedetailForm') )"  onclick="javascript:validateImportinvoicedetail('add', document.getElementById('inlineimportinvoicedetailForm') )" onkeypress="nextfield='';"></th>
+
+			#set ($ses = $req.getSession())					
+			#set ($importinvoice_id = $ses.getAttribute('importinvoice_id'))
+			#set ($importinvoice_node = $ses.getAttribute('importinvoice_node'))
+			<input type='hidden' id='importinvoice' name='importinvoice'  size='1' value='$!importinvoice_id' onchange='makeGetRequestImportinvoiceByTypeHead()' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='textimportinvoice';"> 
+			
+		
+			#set ($ses = $req.getSession())					
+			#set ($drug_id = $ses.getAttribute('drug_id'))
+			#set ($drug_node = $ses.getAttribute('drug_node'))
+		<th>
+			<input type='hidden' id='drug' name='drug'  size='1' value='$!drug_id' onchange='makeGetRequestDrugByTypeHead()' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='textdrug';"> 
+			
+			<input type='text' id='textdrug' name='textdrug' size='20' value='$!drug_node' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='cbodrug';"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+			
+			<div id='divdrug' style='display:none;position:absolute'  onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='quantity';"></div>		 </th>		
+		<th> <input type='text'  id='quantity' name='quantity' size='10' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='expireddate';" onchange="document.getElementById('subtotal').value = document.getElementById('price').value*this.value"> </th><th><input type='text'  id='expireddate' name='expireddate' size='10' onblur='getSmartDate(this)' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='expiredmonth';" value=$!novalue >
+			<th><input type='text'  id='expiredmonth' name='expiredmonth' size='10' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='batchnumber';" value=$!novalue ></th>
+			<th><input type='button' onclick="win2 = window.open('getBatchnumber.action?requestQuantity='+document.inlineimportinvoicedetailForm.quantity.value+'&drugid='+document.inlineimportinvoicedetailForm.drug.value+'&warehouseid='+document.getElementById('warehouse').value,'Get batchnumber','width=300;height=100');document.getElementById('subtotal').value =0" value=" Get "> <input type='text'  id='batchnumber' name='batchnumber' size='10' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='visanumber';"> </th>
+			
+			<th><input type='text'  id='visano' name='visano' size='10' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='price';"></th>
+			<th> <input type='text'  id='price' name='price' size='10' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='discount';" onchange = "document.getElementById('subtotal').value = document.getElementById('quantity').value*this.value"> </th>
+			
+			<th> <input type='text'  id='discount' name='discount' size='10' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='subtotal';"> </th><th> <input type='text'  id='subtotal' name='subtotal' size='10' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='node';"> </th><th> <input type='text'  id='node' name='node' size='10' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='saveimportinvoicedetail';"> </th>
+</div>
+</tr>
+</theader>
+<tbody>
+#foreach($importinvoicedetail in $importinvoicedetails)
+	#if($importinvoicedetail.id)
+	<tr class='tableitem' id='tr$importinvoicedetail.id' onDblClick="javascript:makeGetRequestAddImportinvoicedetail($importinvoicedetail.id, 'edit')">
+	<td id='td$importinvoicedetail.id'>
+	<a href="javascript:makeGetRequestAddImportinvoicedetail($importinvoicedetail.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('importinvoicedetailDelete.action?id=$importinvoicedetail.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$importinvoicedetail.id').style.background ='#CCCCCC'; document.getElementById('td$importinvoicedetail.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('importinvoicedetailView.action?id=$importinvoicedetail.id', 'View importinvoicedetail', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>	</td>	
+		
+		<td>$!importinvoicedetail.drug.node</td>
+		
+		<td>$!importinvoicedetail.quantity</td>
+		
+		<td>$!dateTool.format('dd/MM/yyyy',$!importinvoicedetail.expireddate)</td>
+		
+		<td>$!importinvoicedetail.expiredmonth</td>
+		<td>$!importinvoicedetail.batchnumber</td>
+		
+		<td>$!importinvoicedetail.visaNo</td>
+		<td>$numberTool.format('integer' ,$!importinvoicedetail.price)</td>
+		
+		<td>$!importinvoicedetail.discount</td>
+		
+		<td>$numberTool.format('integer' ,$!importinvoicedetail.subtotal)</td>
+		
+		<td>$!importinvoicedetail.node</td>
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+</div>
+</div>
+</body>

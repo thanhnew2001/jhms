@@ -1,0 +1,8 @@
+
+<select name='cbowarehouse' id='cbowarehouse' multiple='multiple' onkeypress="formname='encounterForm'; typehead = 'warehouse'; nextfield='savewarehouse';">
+#foreach($warehouse in $warehouses)
+<option value='$warehouse.id'>$warehouse.node</option>
+#end						
+<option value=''></option>
+</select>
+

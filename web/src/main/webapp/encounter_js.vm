@@ -1,0 +1,1051 @@
+<!--done:
+encounterAddForm.vm
+encounterEditForm.vm
+encounterList.vm
+encounterNotPaidDrugList.vm
+encounterNotPaidList.vm
+encounterNotPaidServiceInlineList.vm
+encounterNotPaidServicelist.vm
+-->
+
+
+<script>
+
+function makeGetRequestIndicationdetailByFilter() {
+			status = document.getElementById('filterstatus').value; 
+			date = document.getElementById('filterdate').value; 
+
+			http.open('get', 'getIndicationdetailBySearch.action?flag=filter&status='+ status +'&date='+date);
+
+			http.onreadystatechange = processResponseIndicationdetailByFilter;
+			http.send(null);
+		}
+		
+	function processResponseIndicationdetailByFilter() {
+			if(http.readyState == 4){
+				var response = http.responseText;
+			//	alert(response);
+				document.getElementById('tableindicationdetail').innerHTML = response;
+			}
+	}	
+
+
+
+function makeGetRequestAddIndicationdetail(wordId, action) {
+		if (action == 'add')
+			url = 'indicationdetailAddForm.action?id=' + wordId;
+		else
+			url = 'indicationdetailEditForm.action?id=' + wordId;	
+		http.open('get', url);
+		http.onreadystatechange = processResponseAddIndicationdetail;
+		http.send(null);
+	}
+	
+	function processResponseAddIndicationdetail() {
+		if(http.readyState == 4){
+			var response = http.responseText;			
+			document.getElementById('addindicationdetail').innerHTML = response;
+			if ((document.indicationdetailForm.result) != null)
+			{
+				document.indicationdetailForm.result.focus(); //can kiem tra focusfield truoc
+				document.indicationdetailForm.result.select();
+			}
+		}
+	}	
+
+
+function makeGetRequestSaveIndicationdetail ( action, f ) {
+				
+			var url = '';
+			var value = '';
+			for (var i = 0; i<f.elements.length; i++) 
+			{
+				value = f.elements[i].value;
+				if (value.indexOf('/')==2) 
+				{
+				  da = value.split('/'); //ngay thang nam
+				  value = da[1] + '/' + da[0] + '/' + da[2] ;
+				  
+				}
+				url=url+f.elements[i].name + '=' + value + '&';
+			}
+			
+			if (action == 'add')
+			{
+					http.open('get', 'indicationdetailAdd.action?'+url);
+					http.onreadystatechange = processResponseSaveAddIndicationdetail ; // no () here please, not know the reason
+					for (var i = 0; i<f.elements.length; i++) 
+					{
+						if (f.elements[i].name.type == 'text')	f.elements[i].value = '';
+					}
+			}
+			else
+			{
+					http.open('get', 'indicationdetailUpdate.action?'+url);
+					http.onreadystatechange = processResponseSaveUpdateIndicationdetail ; // no () here please, not know the reason
+					
+			}
+			http.send(null);
+			//document.getElementById('addindicationdetail').innerHTML ='';
+	}
+		
+
+	function processResponseSaveAddIndicationdetail () {
+			if(http.readyState == 4){
+				var response = http.responseText;
+				var viewurl = 'indicationdetailView.action?id='+response;			
+				var viewlink = "<input type='button' id='edit' value='View' onclick=window.open('"+viewurl+"')  >";				
+			
+				var action = 'edit';				
+				var url = "<input type='button' id='edit' value='Edit' onclick='makeGetRequestAddIndicationdetail("+response+","+action+")' >";
+			
+				document.getElementById('msg').innerHTML ='Saved successfully: ' + viewlink + url;
+				//makeGetRequestIndicationdetail();	
+						
+			}
+	}	
+
+	function processResponseSaveUpdateIndicationdetail () {
+			if(http.readyState == 4){
+				//makeGetRequestIndicationdetail();		
+				document.getElementById('msg').innerHTML ='Saved successfully';
+				makeGetRequestIndicationdetailByFilter();
+			}
+	}
+
+
+
+function makeGetRequestSaveIndicationdetailByEncounter ( action, f ) {
+				
+			var url = '';
+			var value = '';
+			for (var i = 0; i<f.elements.length; i++) 
+			{
+				value = f.elements[i].value;
+				if (value.indexOf('/')==2) 
+				{
+				  da = value.split('/'); //ngay thang nam
+				  value = da[1] + '/' + da[0] + '/' + da[2] ;
+				  
+				}
+				
+				url=url+f.elements[i].name + '=' + value + '&';
+			}
+			
+			if (action  == 'add')
+				http.open('get', 'indicationdetailAdd.action?'+url);
+			else
+				http.open('get', 'indicationdetailUpdate.action?'+url);
+			
+			http.onreadystatechange = processResponseSaveIndicationdetailByEncounter;
+			http.send(null);
+			//document.getElementById('addindicationdetail').innerHTML ='';
+	}
+		
+
+	function processResponseSaveIndicationdetailByEncounter (  ) {
+			if(http.readyState == 4){
+				makeGetRequestIndicationdetailByEncounter(encounter);
+			}
+	}
+
+
+function validateIndicationdetail( action, f )
+	{
+		var strmessage = '';
+		
+			if (f.encounter.value=='') 
+			{
+				f.encounter.focus();
+				strmessage += "encounter can not be null. ";
+			}	
+		
+			if (isNaN(f.encounter.value)) 
+			{
+				f.encounter.focus();
+				strmessage += "encounter must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.service.value)) 
+			{
+				f.service.focus();
+				strmessage += "service must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.quantity.value)) 
+			{
+				f.quantity.focus();
+				strmessage += "quantity must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.price.value)) 
+			{
+				f.price.focus();
+				strmessage += "price must be a number. ";
+			}							
+			
+			
+			if (f.status.value=='') 
+			{
+				f.status.focus();
+				strmessage += "status can not be null. ";
+			}	
+		
+		if (strmessage!='') {
+			alert(strmessage); return false;
+			document.getElementById('saveindicationdetail').enabled = true;
+		}
+		else
+		{
+			
+			if (service > 0 )
+			{	
+				makeGetRequestSaveIndicationdetailByService (action, f);				
+			}
+			else 
+	
+			if (encounter > 0 )
+			{	
+				makeGetRequestSaveIndicationdetailByEncounter (action, f);				
+			}
+			else 
+					
+				makeGetRequestSaveIndicationdetail ( action, f );
+					
+				
+		}
+	}
+
+
+function makeGetRequestServiceByTypeHead() {
+			if (document.getElementById('divservice') != null)
+			{
+				document.getElementById('divservice').style.display = 'block';
+			}
+			wordId = document.getElementById('textservice').value;
+			http.open('get', 'getServiceByTypeHead.action?typehead=' + wordId);
+			http.onreadystatechange = processResponseServiceByTypeHead;
+			http.send(null);
+		}
+		
+		function processResponseServiceByTypeHead() {
+			if(http.readyState == 4){
+				var response = http.responseText;
+				document.getElementById('divservice').innerHTML = response;
+			}
+		}	
+		
+		function selectservice( id, text)
+		{
+			document.getElementById('service').value = id;
+			document.getElementById('textservice').value = text;
+			document.getElementById('divservice').style.display = 'none';
+		}
+
+
+function makeGetRequestSavePrescriptiondetail ( action, f ) {
+				
+			var url = '';
+			var value = '';
+			for (var i = 0; i<f.elements.length; i++) 
+			{
+				value = f.elements[i].value;
+				if (value.indexOf('/')==2) 
+				{
+				  da = value.split('/'); //ngay thang nam
+				  value = da[1] + '/' + da[0] + '/' + da[2] ;
+				  
+				}
+				url=url+f.elements[i].name + '=' + value + '&';
+			}
+			
+			if (action == 'add')
+			{
+					http.open('get', 'prescriptiondetailAdd.action?'+url);
+					http.onreadystatechange = processResponseSaveAddPrescriptiondetail ; // no () here please, not know the reason
+					for (var i = 0; i<f.elements.length; i++) 
+					{
+						if (f.elements[i].name.type == 'text')	f.elements[i].value = '';
+					}
+			}
+			else
+			{
+					http.open('get', 'prescriptiondetailUpdate.action?'+url);
+					http.onreadystatechange = processResponseSaveUpdatePrescriptiondetail ; // no () here please, not know the reason
+					
+			}
+			http.send(null);
+			document.getElementById('msg').innerHTML ='Saving...';
+	}
+		
+
+	function processResponseSaveAddPrescriptiondetail () {
+			if(http.readyState == 4){
+				var response = http.responseText;
+				var viewurl = 'prescriptiondetailView.action?id='+response;			
+				var viewlink = "<input type='button' id='edit' value='View' onclick=window.open('"+viewurl+"')  >";				
+			
+				var action = 'edit';				
+				var url = "<input type='button' id='edit' value='Edit' onclick='makeGetRequestAddPrescriptiondetail("+response+","+action+")' >";
+			
+				document.getElementById('msg').innerHTML ='Saved successfully: ' + viewlink + url;
+			
+			}
+	}	
+
+	function processResponseSaveUpdatePrescriptiondetail () {
+			if(http.readyState == 4){
+				makeGetRequestPrescriptiondetail();		
+				document.getElementById('msg').innerHTML ='Saved successfully';
+			}
+	}
+
+
+
+function validatePrescriptiondetail( action, f )
+	{
+		var strmessage = '';
+		
+			if (document.getElementById('solving').value != 3)  //ke toa
+			{
+				document.getElementById('solving').focus();
+				strmessage += " Vui long chon xu tri la: Ke toa ";
+			}		
+		
+			if (isNaN(f.encounter.value)) 
+			{
+				f.encounter.focus();
+				strmessage += "encounter must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.drug.value)) 
+			{
+				f.drug.focus();
+				strmessage += "drug must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.quantity.value)) 
+			{
+				f.quantity.focus();
+				strmessage += "quantity must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.price.value)) 
+			{
+				f.price.focus();
+				strmessage += "price must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.timeuse.value)) 
+			{
+				f.timeuse.focus();
+				strmessage += "timeuse must be a number. ";
+			}							
+			
+								
+			
+			
+			if (f.paid.value=='') 
+			{
+				f.paid.focus();
+				strmessage += "paid can not be null. ";
+			}	
+		
+		if (strmessage!='') {
+			alert(strmessage); 
+			//document.getElementById('saveprescriptiondetail').disabled = false;
+			return false;
+		}
+		else
+		{
+			
+			if (encounter > 0 )
+			{	
+				makeGetRequestSavePrescriptiondetailByEncounter (action, f);				
+			}
+			else 
+	
+			if (drug > 0 )
+			{	
+				makeGetRequestSavePrescriptiondetailByDrug (action, f);				
+			}
+			else 
+					
+				makeGetRequestSavePrescriptiondetail ( action, f );
+					
+				
+		}
+	}
+
+
+
+
+function selectdrug( id, text)
+		{
+			document.getElementById('drug').value = id;
+			document.getElementById('textdrug').value = text;
+			document.getElementById('divdrug').style.display = 'none';
+		}
+
+function makeGetRequestDrugByTypeHead() {
+			if (document.getElementById('divdrug') != null)
+			{
+				document.getElementById('divdrug').style.display = 'block';
+			}
+			wordId = document.getElementById('textdrug').value;
+			var druggroup = 0;
+			if(document.getElementById('druggroup') != null)
+			{
+				druggroup = document.getElementById('druggroup').value;
+			}
+			http.open('get', 'getDrugByTypeHead.action?typehead=' + wordId + '&druggroup=' + druggroup);
+			http.onreadystatechange = processResponseDrugByTypeHead;
+			http.send(null);
+		}
+		
+		function processResponseDrugByTypeHead() {
+			if(http.readyState == 4){
+				var response = http.responseText;
+				document.getElementById('divdrug').innerHTML = response;
+			}
+		}	
+
+
+
+	function makeGetRequestClientByTypeHead() 
+	{
+		if (document.getElementById('divclient') != null)
+		{
+			document.getElementById('divclient').style.display = 'block';
+		}
+		wordId = document.getElementById('textclient').value;
+		http.open('get', 'getClientByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponseClientByTypeHead;
+		http.send(null);
+	}
+	
+	function processResponseClientByTypeHead() 
+	{
+		if(http.readyState == 4){
+			var response = http.responseText;
+			document.getElementById('divclient').innerHTML = response;
+		}
+	}	
+	
+	function selectclient( id, text)
+	{
+		document.getElementById('client').value = id;
+		document.getElementById('textclient').value = text;
+		document.getElementById('divclient').style.display = 'none';
+	}
+
+	
+	function makeGetRequestEncounterByCode() 
+	{
+		wordId = document.getElementById('code').value;
+		http.open('get', 'getEncounterByCode.action?con=code&typehead=' + wordId);
+		http.onreadystatechange = processResponseEncounterByCode;
+		http.send(null);
+	}
+		
+	function processResponseEncounterByCode() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = trim(http.responseText);
+			//alert(response);
+			if (response !=0)
+				makeGetRequestAddEncounter(response, 'edit');
+			else
+				//document.getElementById('searchencounter').innerHTML="i18n.get('notfound')";
+				alert ('The record is not found');
+		}
+	}		
+
+	
+	function makeGetRequestAddEncounter(wordId, action) 
+	{
+		if (action == 'add')
+		{
+			url = 'encounterAddForm.action?id=' + wordId;
+			encounteraction = 'add';
+		}	
+		else
+		{
+			url = 'encounterEditForm.action?id=' + wordId;	
+			encounteraction = 'edit';
+		}
+		http.open('get', url);
+		http.onreadystatechange = processResponseAddEncounter;
+		http.send(null);
+	}
+	
+	function processResponseAddEncounter() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;			
+			document.getElementById('addencounter').innerHTML = response;
+			if ((document.encounterForm.initialdiagnosis) != null)
+				document.encounterForm.initialdiagnosis.focus(); //can kiem tra focusfield truoc
+				
+			//document.getElementById('form').click();
+
+		}
+	}
+	
+	
+	
+	function makeGetRequestIcdByTypeHead() 
+	{
+		if (document.getElementById('divicd') != null)
+		{
+			document.getElementById('divicd').style.display = 'block';
+		}
+		wordId = document.getElementById('texticd').value;
+		http.open('get', 'getIcdByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponseIcdByTypeHead;
+		http.send(null);
+	}
+	
+	function processResponseIcdByTypeHead() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divicd').innerHTML = response;
+		}
+	}
+	
+	function selecticd( id, text)
+	{
+		document.getElementById('icd').value = id;
+		document.getElementById('texticd').value = text;
+		document.getElementById('divicd').style.display = 'none';
+	}
+	
+	
+	
+	
+	function makeGetRequestPrescriptiontemplateByTypeHead() 
+	{
+		if (document.getElementById('divprescriptiontemplate') != null)
+		{
+			document.getElementById('divprescriptiontemplate').style.display = 'block';
+		}
+		wordId = document.getElementById('textprescriptiontemplate').value;
+		http.open('get', 'getPrescriptiontemplateByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponsePrescriptiontemplateByTypeHead;
+		http.send(null);
+	}
+	
+	function processResponsePrescriptiontemplateByTypeHead() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divprescriptiontemplate').innerHTML = response;
+		}
+	}	
+	
+	function selectprescriptiontemplate( id, text)
+	{
+		document.getElementById('prescriptiontemplate').value = id;
+		document.getElementById('textprescriptiontemplate').value = text;
+		document.getElementById('divprescriptiontemplate').style.display = 'none';
+	}
+	
+	
+	
+	function makeGetRequestPrescriptiondetailByEncounter(wordId) 
+	{
+		encounter = wordId;
+		http.open('get', 'getPrescriptiondetailByEncounter.action?id=' + wordId);
+		http.onreadystatechange = processResponsePrescriptiondetailByEncounter;
+		http.send(null);
+	}
+	
+	function processResponsePrescriptiondetailByEncounter() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divPrescriptiondetail').innerHTML = response;
+			//makeGetRequestAddPrescriptiondetail(encounter, 'add');
+			//alert('test');
+			 document.getElementById('textdrug').focus();
+		}
+	}		
+		
+	function makeGetRequestSavePrescriptiondetailByEncounter ( action, f ) 
+	{
+				
+		var url = '';
+		var value = '';
+		for (var i = 0; i<f.elements.length; i++) 
+		{
+			value = f.elements[i].value;
+			if (value.indexOf('/')==2) 
+			{
+			  da = value.split('/'); //ngay thang nam
+			  value = da[1] + '/' + da[0] + '/' + da[2] ;
+			  
+			}
+			
+			url=url+f.elements[i].name + '=' + value + '&';
+		}
+		
+		if (action  == 'add')
+			http.open('get', 'prescriptiondetailAdd.action?'+url);
+		else
+			http.open('get', 'prescriptiondetailUpdate.action?'+url);
+		
+		http.onreadystatechange = processResponseSavePrescriptiondetailByEncounter;
+		http.send(null);
+		document.getElementById('addprescriptiondetail').innerHTML ='';
+	}
+		
+
+	function processResponseSavePrescriptiondetailByEncounter (  ) 
+	{
+		if(http.readyState == 4)
+		{
+			makeGetRequestPrescriptiondetailByEncounter(encounter);
+		}
+	}
+	
+	
+	
+	function makeGetRequestIndicationdetailByEncounter(wordId) 
+	{
+		encounter = wordId;
+		http.open('get', 'getIndicationdetailByEncounter.action?id=' + wordId);
+		http.onreadystatechange = processResponseIndicationdetailByEncounter;
+		http.send(null);
+	}
+	
+	function processResponseIndicationdetailByEncounter() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divIndicationdetail').innerHTML = response;
+			//makeGetRequestAddIndicationdetail(encounter, 'add');
+			
+			if (document.getElementById('textservice') != null)
+			 	document.getElementById('textservice').focus();
+		}
+	}		
+	
+	
+	function makeGetRequestSaveIndicationdetailByEncounter ( action, f ) 
+	{
+				
+		var url = '';
+		var value = '';
+		for (var i = 0; i<f.elements.length; i++) 
+		{
+			value = f.elements[i].value;
+			if (value.indexOf('/')==2) 
+			{
+			  da = value.split('/'); //ngay thang nam
+			  value = da[1] + '/' + da[0] + '/' + da[2] ;
+			  
+			}
+			
+			url=url+f.elements[i].name + '=' + value + '&';
+		}
+		
+		if (action  == 'add')
+			http.open('get', 'indicationdetailAdd.action?'+url);
+		else
+			http.open('get', 'indicationdetailUpdate.action?'+url);
+		
+		http.onreadystatechange = processResponseSaveIndicationdetailByEncounter;
+		http.send(null);
+		//document.getElementById('addindicationdetail').innerHTML ='';
+	}
+		
+
+	function processResponseSaveIndicationdetailByEncounter (  ) 
+	{
+		if(http.readyState == 4)
+		{
+			makeGetRequestIndicationdetailByEncounter(encounter);
+		}
+	}	
+	encounter = 0;
+	
+	
+	
+	
+	function validateEncounter( action, f )
+	{
+		var strmessage = '';
+		
+			if (isNaN(f.client.value)) 
+			{
+				f.client.focus();
+				strmessage += "client must be a number. ";
+			}							
+			
+			
+			if ( (f.joineddate.value!='') && isDate(java2mysql(f.joineddate.value)) == false) 
+			{
+				f.joineddate.focus();
+				strmessage += "joineddate must be a valid date. ";
+			}	
+		
+			if ( (f.expireddate.value!='') && isDate(java2mysql(f.expireddate.value)) == false) 
+			{
+				f.expireddate.focus();
+				strmessage += "expireddate must be a valid date. ";
+			}	
+		
+			if ( (f.date.value!='') && isDate(java2mysql(f.date.value)) == false) 
+			{
+				f.date.focus();
+				strmessage += "date must be a valid date. ";
+			}	
+		
+			if (isNaN(f.room.value)) 
+			{
+				f.room.focus();
+				strmessage += "room must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.hospital.value)) 
+			{
+				f.hospital.focus();
+				strmessage += "hospital must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.icd.value)) 
+			{
+				f.icd.focus();
+				strmessage += "icd must be a number. ";
+			}							
+			
+			
+			if (isNaN(f.solving.value)) 
+			{
+				f.solving.focus();
+				strmessage += "solving must be a number. ";
+			}							
+			
+			
+			if ( (f.revisitdate.value!='') && isDate(java2mysql(f.revisitdate.value)) == false) 
+			{
+				f.revisitdate.focus();
+				strmessage += "revisitdate must be a valid date. ";
+			}	
+		
+			if (isNaN(f.prescriptiontemplate.value)) 
+			{
+				f.prescriptiontemplate.focus();
+				strmessage += "prescriptiontemplate must be a number. ";
+			}							
+			
+			
+		if (strmessage!='') {
+			alert(strmessage); return false;
+		}
+		else
+		{
+			
+			if (client > 0 )
+			{	
+				makeGetRequestSaveEncounterByClient (action, f);				
+			}
+			
+			
+			else 
+					
+				makeGetRequestSaveEncounter ( action, f );
+					
+				
+		}
+	}
+	
+	
+	function makeGetRequestSaveEncounter ( action, f ) {
+				
+			var url = '';
+			var value = '';
+			for (var i = 0; i<f.elements.length; i++) 
+			{
+				value = f.elements[i].value;
+				if ((value.indexOf('/')==2 || value.indexOf('/')==1) && (value.length==10 || value.length == 8 || value.length == 9)) 
+				{
+				  da = value.split('/'); //ngay thang nam
+				  value = da[1] + '/' + da[0] + '/' + da[2] ;				  
+				}
+			/*	
+				if (f.elements[i].name=='history' || f.elements[i].name=='problem' || f.elements[i].name=='observation')
+				{
+				
+					value = tinyMCE.get('history').getContent();
+					alert(value);
+				}
+				
+			*/	
+				url=url+f.elements[i].name + '=' + value + '&';
+			}
+			
+			if (action == 'add')
+			{
+					http.open('get', 'encounterAdd.action?'+url);
+					http.onreadystatechange = processResponseSaveAddEncounter ; // no () here please, not know the reason
+					for (var i = 0; i<f.elements.length; i++) 
+					{
+						if (f.elements[i].name.type == 'text')	f.elements[i].value = '';
+					}
+			}
+			else
+			{
+					http.open('get', 'encounterUpdate.action?'+url);
+					http.onreadystatechange = processResponseSaveUpdateEncounter ; // no () here please, not know the reason
+					
+			}
+			http.send(null);
+			document.getElementById('msg').innerHTML ='Saving...';
+	}
+	
+	
+	function processResponseSaveAddEncounter () {
+			if(http.readyState == 4){
+				
+				/*var response = http.responseText;
+				var viewurl = 'encounterView.action?id='+response;			
+				var viewlink = "<input type='button' id='edit' value='View' onclick=window.open('"+viewurl+"')  >";				
+			
+				var action = 'edit';				
+				var url = "<input type='button' id='edit' value='Edit' onclick='makeGetRequestAddEncounter("+response+","+action+")' >";
+			
+				document.getElementById('msg').innerHTML ='Saved successfully: ' + viewlink + url;		
+			    */
+				
+				//makeGetRequestEncounterByFilter();
+			
+			}
+	}
+	
+	
+	
+	function processResponseSaveUpdateEncounter () {
+			if(http.readyState == 4){
+				//makeGetRequestEncounter();		
+				document.getElementById('msg').innerHTML ='Saved successfully';
+				
+				document.getElementById('addencounter').innerHTML ='';
+				document.getElementById('divPrescriptiondetail').innerHTML ='';				
+				document.getElementById('divIndicationdetail').innerHTML ='';		
+				
+				//makeGetRequestEncounterByFilter();
+			}
+	}
+	
+	
+		
+	function makeGetRequestSaveEncounterByClient ( action, f ) 
+	{
+			var url = '';
+			var value = '';
+			for (var i = 0; i<f.elements.length; i++) 
+			{
+				value = f.elements[i].value;
+				if (value.indexOf('/')==2) 
+				{
+				  da = value.split('/'); //ngay thang nam
+				  value = da[1] + '/' + da[0] + '/' + da[2] ;
+				  
+				}
+				
+				url=url+f.elements[i].name + '=' + value + '&';
+			}
+			
+			if (action  == 'add')
+				http.open('get', 'encounterAdd.action?'+url);
+			else
+				http.open('get', 'encounterUpdate.action?'+url);
+			
+			http.onreadystatechange = processResponseSaveEncounterByClient;
+			http.send(null);
+			document.getElementById('addencounter').innerHTML ='';
+	}
+		
+
+	function processResponseSaveEncounterByClient (  ) {
+			if(http.readyState == 4){
+				makeGetRequestEncounterByClient(client);
+			}
+	}
+	
+	client = 0;
+	
+	function makeGetRequestEncounterByFilter() 
+	{
+		date = document.getElementById('filterdate').value; 
+		solving = document.getElementById('filtersolving').value; 
+		con = document.getElementById('con').value; 
+
+		http.open('get', 'getEncounterBySearch.action?flag=filter&date='+ date+'&solving='+ solving+'&con='+con);
+		http.onreadystatechange = processResponseEncounterByFilter;
+		http.send(null);
+		document.getElementById('search_progress_bar').style.display='block';
+	}
+		
+	function processResponseEncounterByFilter() 
+	{
+			if(http.readyState == 4)
+			{
+				var response = http.responseText;
+				document.getElementById('tableencounter').innerHTML = response;
+				document.getElementById('search_progress_bar').style.display='none';
+			}
+	}	
+	
+		
+	
+	function makeGetRequestEncounterByTypeHead() 
+	{
+		if (document.getElementById('divencounter') != null)
+		{
+			document.getElementById('divencounter').style.display = 'block';
+		}
+		wordId = document.getElementById('textencounter').value;
+		http.open('get', 'getEncounterByTypeHead.action?typehead=' + wordId);
+		http.onreadystatechange = processResponseEncounterByTypeHead;
+		http.send(null);
+	}
+	
+	function processResponseEncounterByTypeHead() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divencounter').innerHTML = response;
+		}
+	}
+	
+	function selectencounter( id, text)
+	{
+		document.getElementById('encounter').value = id;
+		document.getElementById('textencounter').value = '';
+		document.getElementById('encounterinfo').innerHTML = text;
+		document.getElementById('divencounter').style.display = 'none';
+	}
+	
+	function makeGetRequestEncounterByClient(wordId) 
+	{
+		client = wordId;
+		http.open('get', 'getEncounterByClient.action?id=' + wordId);
+		http.onreadystatechange = processResponseEncounterByClient;
+		http.send(null);
+	}
+	
+	function processResponseEncounterByClient() 
+	{
+		if(http.readyState == 4)
+		{
+			var response = http.responseText;
+			document.getElementById('divEncounter').innerHTML = response;
+			//makeGetRequestAddEncounter(client, 'add');
+		}
+	}
+	
+	
+	
+	function makeGetRequestEncounterBySearch() {
+			wordId = document.getElementById('searchencounter').value;
+			con = document.getElementById('comboencounter').value;
+			http.open('get', 'getEncounterBySearch.action?con=' + con + '&typehead=' + wordId);
+
+			http.onreadystatechange = processResponseEncounterBySearch;
+			http.send(null);
+		}
+		
+	function processResponseEncounterBySearch() {
+			if(http.readyState == 4){
+				var response = http.responseText;
+				document.getElementById('tableencounter').innerHTML = response;
+			}
+	}	
+	
+	
+	function makeGetRequestEncounterNotPaidBySearch() {
+			wordId = document.getElementById('searchencounter').value;
+			con = document.getElementById('comboencounter').value;
+			http.open('get', 'getEncounterNotPaidBySearch.action?con=' + con + '&typehead=' + wordId);
+
+			http.onreadystatechange = processResponseEncounterBySearch;
+			http.send(null);
+		}
+		
+		
+		function makeGetRequestReceiptByEncounter(wordId) {
+		encounter = wordId;
+		http.open('get', 'getReceiptByEncounter.action?id=' + wordId);
+		http.onreadystatechange = processResponseReceiptByEncounter;
+		http.send(null);
+	}
+	
+	function processResponseReceiptByEncounter() {
+		if(http.readyState == 4){
+			var response = http.responseText;
+			document.getElementById('divReceipt').innerHTML = response;
+			//makeGetRequestAddReceipt(encounter, 'add');
+		}
+	}		
+	
+	
+	encounter = 0;
+	
+	function makeGetRequestDruginvoiceByEncounter(wordId) {
+		encounter = wordId;
+		http.open('get', 'getDruginvoiceByEncounter.action?id=' + wordId);
+		http.onreadystatechange = processResponseDruginvoiceByEncounter;
+		http.send(null);
+	}
+	
+	function processResponseDruginvoiceByEncounter() {
+		if(http.readyState == 4){
+			var response = http.responseText;
+			document.getElementById('divDruginvoice').innerHTML = response;
+			//makeGetRequestAddDruginvoice(encounter, 'add');
+		}
+	}
+
+worId=0;
+function makeGetRequestAddPrescriptiondetail(wordId, action) {
+
+		if (action == 'add')
+			url = 'prescriptiondetailAddForm.action?id=' + wordId;
+		else
+			url = 'prescriptiondetailEditForm.action?id=' + wordId;	
+		http.open('get', url);
+		http.onreadystatechange = processResponseAddPrescriptiondetail;
+		http.send(null);
+	}
+	
+	function processResponseAddPrescriptiondetail() {
+		if(http.readyState == 4){
+			var response = http.responseText;			
+			document.getElementById('addprescriptiondetail').innerHTML = response;
+			if ((document.prescriptiondetailForm.node) != null)
+				document.prescriptiondetailForm.node.focus(); //can kiem tra focusfield truoc
+		}
+	}	
+		
+		
+					
+</script>

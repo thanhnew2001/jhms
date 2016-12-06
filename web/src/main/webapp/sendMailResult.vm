@@ -1,0 +1,4 @@
+$result <br>
+
+<li><a href="sendMail.action?clientId=$clientId">Click here to resend</a> 
+<li><a href="#" onclick="window.close();">Click here to close</a> 

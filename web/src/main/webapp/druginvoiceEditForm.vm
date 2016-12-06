@@ -1,0 +1,146 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('adddruginvoice').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('druginvoice')
+</div>
+<div id='msg'></div>
+<br>
+<form id='druginvoiceForm'  name='druginvoiceForm' action='druginvoiceUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!druginvoice.id' size='15'>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('code'):</label></td> <td><input type='text' id='code' name='code' value='$!druginvoice.code' size='15' onKeyPress="formname='druginvoiceForm'; nextfield='identity';" disabled="disabled"> </td>
+			
+			<td><label>$i18n.get('identity'):</label></td> <td><input type='text' id='identity' name='identity' value='$!druginvoice.identity' size='15' onKeyPress="formname='druginvoiceForm'; nextfield='warehouse';"> </td>
+			
+			<td><label>$i18n.get('warehouse'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())					
+			#set ($selectedwarehouse = $ses.getAttribute('selectedwarehouse'))
+			
+			<select id='warehouse' name='warehouse' style='width:90px;max-width:90px' onkeypress="formname='druginvoiceForm'; nextfield='date';">
+			<option value='$!selectedwarehouse.id'>$!selectedwarehouse.id - $!selectedwarehouse.node</option>
+			</select>	</td>
+		</tr><tr class='formlabel'>
+				#if($!druginvoice.date)
+					#set($ngay = "$druginvoice.date")
+					#set($ngay = "$ngay.substring(8,10)/$ngay.substring(5,7)/$ngay.substring(0,4)")
+				#end
+			<td><label>$i18n.get('date'):</label></td> 
+			<td>
+			<input type='text'  id='date' name='date' size='15' onblur='getSmartDate(this)' onKeyPress="formname='druginvoiceForm'; nextfield='type';" value='$!dateTool.format('dd/MM/yyyy',$!druginvoice.date)' >
+			<img src='images/calendar_icon.gif' id='triggerdate'>			</td>
+			
+			<td><label>$i18n.get('type'):</label></td> <td><select id='type' name='type' onkeypress="formname='druginvoiceForm'; nextfield='towarehouse';" onChange="if(this.value=='NB'){ document.druginvoiceForm.textencounter.disabled = true; document.druginvoiceForm.towarehouse.disabled = false; } else { document.druginvoiceForm.textencounter.disabled = false; document.druginvoiceForm.towarehouse.disabled = true; }"> 
+			<option value='$!druginvoice.type' selected>$!druginvoice.type</option><option value=HB>HB</option><option value= NB> NB</option> </select></td>
+			
+			<td><label>$i18n.get('towarehouse'):</label> </td>
+			<td>$!druginvoice.towarehouse.node
+			<select id='towarehouse' name='towarehouse' onkeypress="formname='druginvoiceForm'; nextfield='textencounter';" disabled>
+				<option value='$!druginvoice.towarehouse.id' selected>$!druginvoice.towarehouse.id - $!druginvoice.towarehouse.node</option>		
+			</select>			</td>
+		</tr>
+		<tr class='formlabel'>
+		  <td colspan="6"><hr></td>
+	  </tr>
+		<tr class='formlabel'>
+		  <td>$i18n.get('exportagent') </td>
+		  <td>
+		   <input type='hidden' id='provider' name='provider'  size='1' value='$!druginvoice.provider.id' onchange='makeGetRequestProviderByTypeHead()' onKeyPress="formname='importinvoiceForm'; nextfield='textprovider';"> 
+			
+			<input type='text' id='textprovider' name='textprovider' size='15' value='$!druginvoice.provider.node' onKeyPress="formname='importinvoiceForm'; nextfield='cboprovider'; isSelect=true;"  onkeyup='makeGetRequestProviderByTypeHead()' onclick='makeGetRequestProviderByTypeHead()'>	
+			
+			<div id='divprovider' style='display:none;position:absolute'  onkeypress="formname='importinvoiceForm'; nextfield='vat';"></div>		   </td>
+		  <td>&nbsp;</td>
+		  <td>&nbsp;</td>
+		  <td>&nbsp;</td>
+		  <td>&nbsp;</td>
+	  </tr>
+		<tr class='formlabel'>
+			<td><label>$i18n.get('encounter'):</label> </td>
+			<td>		
+			<input type='hidden' id='encounter' name='encounter'  size='1' value='$!druginvoice.encounter.id' onchange='makeGetRequestEncounterByTypeHead()' onKeyPress="formname='druginvoiceForm'; nextfield='textencounter';"> 	$!druginvoice.encounter.node					
+			
+			<div id='divencounter' style='display:none;position:absolute' onKeyPress="formname='druginvoiceForm'; nextfield='node';"></div>				
+			<a href='javascript:void(0)' onClick="window.open('encounterList.action', 'Add encounter', 'width=400, height=300')"></a>			
+			
+			#if(!($druginvoice.encounter.id>0))
+			[khong co]
+			#end			</td>
+		
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text' id='node' name='node' value='$!druginvoice.node' size='15' onKeyPress="formname='druginvoiceForm'; nextfield='address';"> </td>
+			
+			<td><label>$i18n.get('address'):</label></td> <td><input type='text' id='address' name='address' value='$!druginvoice.address' size='15' onKeyPress="formname='druginvoiceForm'; nextfield='paymenttype';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('paymenttype'):</label> </td>
+			<td>
+			<select id='paymenttype' name='paymenttype' onkeypress="formname='druginvoiceForm'; nextfield='insurancenumber';" style="max-width:100">
+				<option value='$!druginvoice.paymenttype.id' selected>$!druginvoice.paymenttype.id - $!druginvoice.paymenttype.node</option>		
+			#foreach($paymenttype in $paymenttypes)
+				<option value='$!paymenttype.id'>$!paymenttype.id - $!paymenttype.node</option>
+			#end
+			</select>			</td>
+		
+			<td><label>$i18n.get('insurancenumber'):</label></td> <td><input type='text' id='insurancenumber' name='insurancenumber' value='$!druginvoice.insurancenumber' size='15' onKeyPress="formname='druginvoiceForm'; nextfield='expireddate';"> </td>
+			
+				#if($!druginvoice.expireddate)
+					#set($ngay3 = "$druginvoice.expireddate")
+					#set($ngay3 = "$ngay3.substring(8,10)/$ngay3.substring(5,7)/$ngay3.substring(0,4)")
+				#end
+			<td><label>$i18n.get('expireddate'):</label></td> 
+			<td>
+			<input type='text'  id='expireddate' name='expireddate' value='$!ngay3' size='15' onblur='getSmartDate(this)' onKeyPress="formname='druginvoiceForm'; nextfield='inpatient';" >
+			<img src='images/calendar_icon.gif' id='triggerexpireddate'>			</td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('inpatient'):</label></td> <td><select id='inpatient' name='inpatient' onkeypress="formname='druginvoiceForm'; nextfield='total';"> <option value='$!druginvoice.inpatient' selected>$!druginvoice.inpatient</option><option value=Y>Y</option><option value= N> N</option> </select></td>
+					
+			
+			<td><label></label></td> <td>&nbsp;</td>
+			<td>$i18n.get('doctor'):</td>
+			<td><input type='text' id='doctor' name='doctor' value='$!druginvoice.doctor' size='15' onKeyPress="formname='druginvoiceForm'; nextfield='user';"></td>
+			</tr>
+			
+			<tr class='formlabel'>				
+			<td><label>$i18n.get('vat'):</label></td> <td><input type='text' id='vat' name='vat' value='$!druginvoice.vat' size='15' onKeyPress="formname='druginvoiceForm'; nextfield='tax';"></td>
+			#set ($ses = $req.getSession())
+			#set($user = $ses.getAttribute('user'))
+			<td>D&#7841;ng H&#272;:</td>
+			<td><select id='tax' name='tax' style='width:90px;max-width:90px' onkeypress="formname='receiptForm'; nextfield='user';">
+              <option value=$!druginvoice.tax>$!druginvoice.tax</option>
+              <option value=N>Ko VAT</option>
+              <option value=Y>Co VAT</option>
+            </select></td>
+			<td>$i18n.get('user'):</td>
+			<td><select id='user' name='user' onkeypress="formname='receiptForm'; nextfield='paymentmethod';">
+                <option value='$user.id'>$user.node</option>
+              </select></td>
+		</tr>
+		
+<tr class='formlabel'>
+			<td><label>$i18n.get('paymentmethod'):</label></td> 
+			<td>			
+			<select id='paymentMethod' name='paymentMethod' style='width:90px;max-width:90px' onkeypress="formname='receiptForm'; nextfield='updatedruginvoice';"> 
+			<option value=$!druginvoice.paymentMethod>$!druginvoice.paymentMethod</option>
+			<option value=TT>TT</option>
+			<option value=TU>TU</option> 
+			</select></td>
+	
+<tr><td colspan='6'>
+<input id='updatedruginvoice' type='button' value="  $i18n.get('save')  " onKeyDown="javascript: validateDruginvoice('edit', document.getElementById('druginvoiceForm') )" onClick="document.getElementById('divDruginvoicedetail').innerHTML='';validateDruginvoice('edit', document.getElementById('druginvoiceForm') )" onKeyPress="formname='druginvoiceForm'; nextfield = '';">
+
+&nbsp;&nbsp;
+<input type='button' onclick='javascript:makeGetRequestDruginvoicedetailByDruginvoice($druginvoice.id)' value="$i18n.get('druginvoicedetail')"> &nbsp;
+	
+		
+</td></tr>
+</table>
+</form>
+</div>
+</body>

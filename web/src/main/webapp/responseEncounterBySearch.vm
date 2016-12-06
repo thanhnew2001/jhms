@@ -1,0 +1,87 @@
+<style type="text/css">
+<!--
+.style1 {color: #FF0000}
+-->
+</style>
+<form id='inlineencounterForm' name='inlineencounterForm' action='encounterAdd.action' class='niceform' method='POST'>
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>STT</th>
+<th>Action</th>
+
+	<th>$i18n.get('client')</th>	
+	
+	<th>$i18n.get('code')</th>	
+	
+	<th>$i18n.get('date')</th>	
+	
+	<th>$i18n.get('icd')</th>	
+	
+	<th>$i18n.get('solving')</th>	
+	
+	<th>$i18n.get('subclinical')</th>	
+	
+	<th>$i18n.get('advise')</th>	
+	
+	<th>$i18n.get('revisitdate')</th>	
+	
+	<th>$i18n.get('prescriptiontemplate')</th>	
+	
+	<th>$i18n.get('user')</th>	
+	</tr>
+</theader>
+<tbody>
+#set($k=0)
+#foreach($encounter in $encounters)
+	#if($encounter.id)
+	#set($k=$k+1)
+	<tr class='tableitem' id='tr$encounter.id' onDblClick="javascript:makeGetRequestAddEncounter($encounter.id, 'edit')">
+	<td>$k</td>
+	<td id='td$encounter.id'>
+	<a href="javascript:makeGetRequestAddEncounter($encounter.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('encounterDelete.action?id=$encounter.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$encounter.id').style.background ='#CCCCCC'; document.getElementById('td$encounter.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onClick="window.open('encounterView.action?id=$encounter.id', 'View encounter', 'width=800, height=500,scrollbars=yes')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>	</td>	
+	<script>
+	</script>
+		
+		<td>$!encounter.client.node ($!encounter.client.age, $!encounter.client.sex)- <span class="style1">$!encounter.promotionCode $!encounter.prepaidCard</span> </td>
+		
+		<td>$!encounter.code</td>
+		
+		<td>$!dateTool.format('dd/MM/yyyy',$!encounter.date)</td>
+		
+		<td>$!encounter.icd.node</td>
+		
+		<td>$!encounter.solving.node</td>
+		
+			<td class='tableitemleft'>
+		#set ($ids = $!encounter.indicationdetails)
+		#set ($i=0)
+		#foreach ($id in $ids)
+			#set($i = $i+1)
+			 
+			#if($id.status == "NEW")
+				<div style="color:red">$i.$id.service.node ($!id.paid) </div> 
+			#else
+				<div style="color:green">$i.$id.service.node ($!id.paid) </div>
+			#end
+		#end</td>
+		
+		<td>$!encounter.advise</td>
+		
+		<td><p>$!dateTool.format('dd/MM/yyyy',$!encounter.revisitdate)</p></td>
+		
+		<td>$!encounter.prescriptiontemplate.node</td>
+		
+		<td>$!encounter.user.fullname</td>
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

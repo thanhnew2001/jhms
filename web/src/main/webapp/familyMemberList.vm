@@ -1,0 +1,138 @@
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+<script>
+function searchClient()
+{
+	document.getElementById('clientForm').action = "familyMemberList.action";
+	document.getElementById('clientForm').submit();
+}
+
+function addMember(clientMemberId)
+{
+	document.getElementById('clientForm').action = "familyMemberList.action?action=addmember&clientMemberId="+clientMemberId;
+	document.getElementById('clientForm').submit();
+}
+
+function deleteMember(familyMemberId)
+{
+	document.getElementById('clientForm').action = "familyMemberList.action?action=deletemember&familyMemberId="+familyMemberId;
+	document.getElementById('clientForm').submit();
+}
+
+</script>
+
+<body id='wrap'>
+<form id='clientForm' name='clientForm' action='familyMemberList.action' class='niceform' method='POST'>
+<br>
+<div id='divDrug'>
+<div id='container'>
+
+<div class='pageheader'>Create family tree</div>
+<h4>Client: $client.node ($client.sex, $client.age) 
+<br>
+Address: $client.address, $client.ward.node, $client.ward.district.node, $client.ward.district.province.node 
+</h4>
+<hr>
+<h3>Search clients</h3>
+<div>
+
+<input name='keyword' id='keyword' value='$!keyword'> <input type="button" value="Search" onClick="searchClient();">
+<input type="hidden" name='clientId' value='$client.id'>
+</div>
+<div id='tabledrug' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('relationship')</th>
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('sex')</th>	
+	
+	<th>$i18n.get('age')</th>	
+	
+	<th>$i18n.get('address')</th>	
+	</tr>
+</theader>
+<tbody>
+#foreach($client in $clients)
+	#if($client.id)
+	<tr class='tableitem' id='tr$drug.id' onDblClick="javascript:makeGetRequestAddDrug($drug.id, 'edit')">
+	<td id='td$drug.id'>
+	<input type="button" onClick="addMember('$client.id')" value="Add">	</td>	
+		
+		<td id='td$drug.id'>
+		<select name="relationship" id="relationship">
+		<option value="Anh">Anh</option>
+		<option value="Chi">Chi</option>
+		<option value="Em">Em</option>
+		<option value="Ba">Ba</option>
+		<option value="Me">Me</option>
+		<option value="OngNoi">OngNoi</option>
+		<option value="OngNgoai">OngNgoai</option>
+		<option value="BaNoi">BaNoi</option>
+		<option value="BaNgoai">BaNgoai</option>
+		<option value="VoChong">VoChong</option>
+		<option value="Con">Con</option>
+		</select>
+		&nbsp;</td>
+		<td>$!client.node</td>
+		
+		<td>$!client.sex</td>
+		
+		<td>$!client.age</td>
+		
+		<td>$!client.address, $!client.ward.node, $!client.ward.district.node</td>
+		</tr>
+	#end
+	#end
+<tr></tbody>
+</table>
+<br>
+
+<h3>Family members already matched</h3>
+
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('relationship')</th>
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('sex')</th>	
+	
+	<th>$i18n.get('age')</th>	
+	
+	<th>$i18n.get('address')</th>	
+	</tr>
+</theader>
+<tbody>
+#foreach($familyMember in $familyMembers)
+	#set($client = $familyMember.clientMember)
+	#if($client.id)
+	<tr class='tableitem' id='tr$drug.id'>
+	<td id='td$drug.id'>
+	<input type="button" value="Delete" onClick="if(confirm('Do you want to delete?')){ deleteMember($familyMember.id) } ">		</td>	
+		
+		<td>$familyMember.relationship</td>
+		<td>$!client.node</td>
+		
+		<td>$!client.sex</td>
+		
+		<td>$!client.age</td>
+		
+		<td>$!client.address, $!client.ward.node, $!client.ward.district.node</td>
+		</tr>
+	#end
+</tbody>
+#end
+</table>
+</div>
+<a href="javascript:makeGetRequestAddDrug(0, 'add')"></a></div>
+</div>
+<br>
+</form>
+</body>

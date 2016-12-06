@@ -1,0 +1,50 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+<div id='container'>
+<h2>$i18n.get('roleform')</h2>
+<br>
+<table>
+
+	<tr>
+	<td>$i18n.get('role'):</td>
+	<td>$roleform.role</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('form'):</td>
+	<td>$roleform.form</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('listable'):</td>
+	<td>$roleform.listable</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('addable'):</td>
+	<td>$roleform.addable</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('updatable'):</td>
+	<td>$roleform.updatable</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('deletable'):</td>
+	<td>$roleform.deletable</td>
+	</tr>
+	
+</table>
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>

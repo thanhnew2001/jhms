@@ -1,0 +1,70 @@
+
+<form name='userroleForm' action='userroleAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('user')</th>	
+	
+	<th>$i18n.get('role')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineadduserrole' style='display:none;'>
+<th><input type='button' id='saveuserrole' value="  $i18n.get('save')  " onclick="javascript:validateUserrole('add')" onkeypress="nextfield='';"></th>
+
+			#set ($ses = $req.getSession())					
+			#set ($user_id = $ses.getAttribute('user_id'))
+			#set ($user_node = $ses.getAttribute('user_node'))
+		<th>
+			<input type='hidden' id='user' name='user'  size='1' value='$!user_id' onchange='makeGetRequestUserByTypeHead()' onkeypress="formname='inlineuserroleForm'; nextfield='textuser';"> 
+			
+			<input type='text' id='textuser' name='textuser' size='18' value='$!user_node' onkeypress="formname='inlineuserroleForm'; nextfield='cbouser';"  onkeyup='makeGetRequestUserByTypeHead()' onclick='makeGetRequestUserByTypeHead()'>	
+			
+			<div id='divuser' style='display:none;position:absolute'  onkeypress="formname='inlineuserroleForm'; nextfield='textrole';"></div>				
+		 </th>		
+		
+			#set ($ses = $req.getSession())					
+			#set ($role_id = $ses.getAttribute('role_id'))
+			#set ($role_node = $ses.getAttribute('role_node'))
+		<th>
+			<input type='hidden' id='role' name='role'  size='1' value='$!role_id' onchange='makeGetRequestRoleByTypeHead()' onkeypress="formname='inlineuserroleForm'; nextfield='textrole';"> 
+			
+			<input type='text' id='textrole' name='textrole' size='18' value='$!role_node' onkeypress="formname='inlineuserroleForm'; nextfield='cborole';"  onkeyup='makeGetRequestRoleByTypeHead()' onclick='makeGetRequestRoleByTypeHead()'>	
+			
+			<div id='divrole' style='display:none;position:absolute'  onkeypress="formname='inlineuserroleForm'; nextfield='saveuserrole';"></div>				
+		 </th>		
+		
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($userrole in $userroles)
+	#if($userrole.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddUserrole($userrole.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddUserrole($userrole.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='userroleDelete.action?id=$userrole.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('userroleView.action?id=$userrole.id', 'View userrole', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuuserrole$userrole.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuuserrole$userrole.id').style.display='none'"  value='>>' >  
+	
+	<div id='menuuserrole$userrole.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!userrole.user.node</td>
+		
+		<td>$!userrole.role.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

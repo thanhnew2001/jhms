@@ -1,0 +1,78 @@
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<form id='inlineindicationdetailForm' name='inlineindicationdetailForm' action='indicationdetailAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>	
+	<th>No</th>
+
+	<th>$i18n.get('client')</th>	
+	
+	<th>$i18n.get('encounter')</th>
+	
+	<th>$i18n.get('inddoctor')</th>
+	<th>$i18n.get('service')</th>	
+	<th>$i18n.get('result')</th>	
+	<th>$i18n.get('exedoctor')</th>	
+	</tr>
+</theader>
+<tbody>
+
+#set ($ses = $req.getSession())					
+#set ($department = $ses.getAttribute('selecteddepartment'))
+#set($i=0)
+#foreach($encounter in $encounters)
+	#if($encounter.id)
+	<tr class='tableitem' id='tr$indicationdetail.id' onDblClick="makeGetRequestAddIndicationdetail($indicationdetail.id, 'edit')">
+	  #set($i=$i+1)	  
+	  <td id='td$indicationdetail.id'>$i</td>	  
+	  <td><div align="left"><strong>$!encounter.client.node</strong> ($!encounter.client.sex, $!encounter.client.age) </div></td>
+	  <td>$!encounter.code ($!dateTool.format('dd/MM/yyyy', $!encounter.date) $!encounter.time )  </td>	  
+	  <td>$!encounter.user.fullname</td>
+	  
+	  <td class="tableitemleft">
+	  #foreach($indicationdetail in $encounter.indicationdetails)
+	
+		  #if($indicationdetail.service.department.id == $department.id)
+		 
+			#if($indicationdetail.service.bodyPart.id > 0 && $indicationdetail.service.servicegroup.id == 31 || $indicationdetail.service.servicegroup.id == 61 || $indicationdetail.service.servicegroup.id == 71)
+			
+			<a href="#" onClick="window.open('ketQuaCLSSave.action?id=$indicationdetail.id', 'Ket qua', 'width=1000,height=700,scrollbars=yes')">$indicationdetail.service.node  </a>
+			 
+			#elseif($indicationdetail.service.servicegroup.id < 20)
+			
+			
+			<a href="#" onClick="window.open('labEditForm.action?id=$indicationdetail.encounter.id', 'Ket qua XN', 'width=1000,height=700,scrollbars=yes')">$indicationdetail.service.node  </a>
+			
+			#else		
+			$indicationdetail.service.node 
+			#end
+			($indicationdetail.status) - 
+				#if ($indicationdetail.shortResult == "A")
+					<blink>$!indicationdetail.shortResult</blink>
+				#else
+					$!indicationdetail.shortResult
+				#end
+			<br>
+		  #end	  
+   	  #end	  </td>
+      #foreach($indicationdetail in $encounter.indicationdetails)
+	
+		  #if($indicationdetail.service.department.id == $department.id)
+			#if($indicationdetail.service.bodyPart.id > 0 && $indicationdetail.service.servicegroup.id == 31 || $indicationdetail.service.servicegroup.id == 61 || $indicationdetail.service.servicegroup.id == 71)
+			<a href="#" onClick="window.open('indicationdetailResultView.action?id=$indicationdetail.id', 'Ket qua', 'width=1000,height=700,scrollbars=yes')">$i18n.get('result')</a> <br>
+			#elseif($indicationdetail.service.servicegroup.id < 20)
+			<a href="#" onClick="window.open('xetNghiemView.action?id=$indicationdetail.encounter.id', 'Ket qua XN', 'width=1000,height=700,scrollbars=yes')">$i18n.get('result')</a> <br>
+			#else		
+			$!indicationdetail.service.node 
+			#end
+
+		  #end	  
+   	  #end	  </td>
+      <td>$!indicationdetail.user.fullname</td>	
+
+	#end
+#end
+
+</tbody>
+</table>
+</form>

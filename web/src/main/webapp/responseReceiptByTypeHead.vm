@@ -1,0 +1,8 @@
+
+<select name='cboreceipt' id='cboreceipt' multiple='multiple' onkeypress="formname='encounterForm'; typehead = 'receipt'; nextfield='savereceipt';">
+#foreach($receipt in $receipts)
+<option value='$receipt.id'>$receipt.node</option>
+#end						
+<option value=''></option>
+</select>
+

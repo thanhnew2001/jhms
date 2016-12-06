@@ -1,0 +1,80 @@
+#parse("top.vm")
+#parse("mycalendar.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+<script language='javascript' type='text/javascript' src='js/jquery.js'></script>
+#parse('common.vm')
+
+<script>
+				
+	function makeGetRequestIndicationdetailByFilter() 
+	{
+		status = document.getElementById('filterstatus').value; 
+		date = document.getElementById('filterdate').value; 
+		con = document.getElementById('searchClient').value; 
+		http.open('get', 'getIndicationdetailBySearch.action?flag=filter&status='+ status +'&date='+date+'&con='+con);
+
+		http.onreadystatechange = processResponseIndicationdetailByFilter;
+		http.send(null);
+		document.getElementById('search_progress_bar').style.display='block';
+		
+	}
+		
+	function processResponseIndicationdetailByFilter() 
+	{
+		if(http.readyState == 4){
+			var response = http.responseText;
+		//	alert(response);
+			document.getElementById('tableindicationdetail').innerHTML = response;
+			document.getElementById('search_progress_bar').style.display='none';
+			
+		}
+	}			
+			
+
+$(window).keypress(function(event) {	
+    if (!(event.which == 115 && event.ctrlKey)) return true;
+	validateIndicationdetail('edit', document.getElementById('indicationdetailForm') );
+	event.preventDefault();
+    return false;
+});
+
+</script>
+
+#set ($ses = $req.getSession())					
+#set ($serpackage_id = $ses.getAttribute('serpackage_id'))
+
+<body id='wrap' onLoad="makeGetRequestIndicationdetailByFilter()">
+<div id='addindicationdetail'></div>
+<br>
+<div id='divIndicationdetail'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divIndicationdetail').innerHTML=''" value=' X '>  
+$i18n.get('indicationdetaillist')  
+</div>
+<br>
+<div> Date 
+<input type='text' id='filterdate' name='filterdate' value='$!today' onClick="GetDate(this);">
+&nbsp; Status
+<select id="filterstatus" name="filterstatus">
+<option value="NEW">NEW
+<option value="DONE">DONE
+</select>
+<a href="javascript:makeGetRequestAddIndicationdetail(0, 'add')"></a>T&igrave;m ki&#7871;m theo t&ecirc;n, m&atilde; s&#7889;, s&#7889; &#272;T b&#7879;nh nh&acirc;n: 
+<input type='text' id='searchClient' name='searchClient' value=''/>
+<input name='button2' type='button' onClick='javascript:makeGetRequestIndicationdetailByFilter()' value=' L&#7885;c '>
+<img src="search_progress_bar.gif" id="search_progress_bar" style="display:none;position:relative ">
+
+</div>
+
+<div id='msg'></div>
+<div id='tableindicationdetail' class='mytable'>
+
+#parse("responseIndicationdetailBySearch.vm")
+
+</div>
+</div>
+</div>
+<br>
+</body>

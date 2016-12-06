@@ -1,0 +1,62 @@
+
+<div id='addcashadvance'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+<script>
+function saveCardType(id)
+{
+	document.getElementById('cardtypeForm').action = "cardtypeAddForm.action?action=savecardtype&id="+id;
+
+	document.getElementById('cardtypeForm').submit();
+}
+
+function deleteCardType(id)
+{
+	document.getElementById('cardtypeForm').action = "cardtypeDeleteForm.action?action=deletecardtype&id="+id;
+	document.getElementById('cardtypeForm').submit();
+}
+function editBodyPart(id)
+{
+	document.getElementById('cardtypeForm').action = "cardtypeEditFormt.action?action=editcardtype&id="+id;
+
+	document.getElementById('cardtypeForm').submit();
+}
+
+
+</script>
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addcashadvance').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('cashadvance')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='cardtypeForm' name='cardtypeForm' action='cardtypeAddForm.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('code'):</label> </td>
+			<td>
+			<input type='hidden'  id='id' name='id' value="$cardtype.id" size='15'>
+			<input type='text' id='code' name='code' size='18' value='$!code' onKeyPress="formname='cardtypeForm'; nextfield='name'; ">	
+			
+									
+		
+			<td><label>$i18n.get('name'):</label></td> 
+		<td>
+			<input type='text'  id='name' name='name' size='15'  onKeyPress="formname='cardtypeForm'; nextfield='';" value= '$!name' ></td>
+	  </tr><tr><td>
+<input name="button2" type="button" onClick="saveCardType('$!cardtype.id')" value="  Save ">
+        <input name="button22" type="button" onClick="editBodyPart(0)" value="Add new ">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

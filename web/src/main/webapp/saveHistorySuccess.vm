@@ -1,0 +1,5 @@
+Save successfully!
+
+<li><a href="historyEditForm.action?id=$id"> Click here if you want to continue to edit history </a> 
+
+<li><a href="#" onclick="window.close();"> Click here to close </a> 

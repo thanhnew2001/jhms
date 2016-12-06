@@ -1,0 +1,8 @@
+
+<select name='cboward' id='cboward' multiple='multiple' onkeypress="formname='encounterForm'; typehead = 'ward'; " onclick = "selectward(this.value, this.options[this.selectedIndex].text)";>
+#foreach($ward in $wards)
+<option value='$ward.id'>$ward.node</option>
+#end						
+<option value=''></option>
+</select>
+

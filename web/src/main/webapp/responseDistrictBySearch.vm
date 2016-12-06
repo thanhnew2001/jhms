@@ -1,0 +1,59 @@
+
+<form name='districtForm' action='districtAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('province')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineadddistrict' style='display:none;'>
+<th><input type='button' id='savedistrict' value="  $i18n.get('save')  " onclick="javascript:validateDistrict('add')" onkeypress="nextfield='';"></th>
+<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlinedistrictForm'; nextfield='textprovince';"> </th>
+			#set ($ses = $req.getSession())					
+			#set ($province_id = $ses.getAttribute('province_id'))
+			#set ($province_node = $ses.getAttribute('province_node'))
+		<th>
+			<input type='hidden' id='province' name='province'  size='1' value='$!province_id' onchange='makeGetRequestProvinceByTypeHead()' onkeypress="formname='inlinedistrictForm'; nextfield='textprovince';"> 
+			
+			<input type='text' id='textprovince' name='textprovince' size='18' value='$!province_node' onkeypress="formname='inlinedistrictForm'; nextfield='cboprovince';"  onkeyup='makeGetRequestProvinceByTypeHead()' onclick='makeGetRequestProvinceByTypeHead()'>	
+			
+			<div id='divprovince' style='display:none;position:absolute'  onkeypress="formname='inlinedistrictForm'; nextfield='savedistrict';"></div>				
+		 </th>		
+		
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($district in $districts)
+	#if($district.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddDistrict($district.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddDistrict($district.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='districtDelete.action?id=$district.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('districtView.action?id=$district.id', 'View district', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menudistrict$district.id').style.display='block'; " ondblclick="javascript:document.getElementById('menudistrict$district.id').style.display='none'"  value='>>' >  
+	
+	<div id='menudistrict$district.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!district.node</td>
+		
+		<td>$!district.province.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

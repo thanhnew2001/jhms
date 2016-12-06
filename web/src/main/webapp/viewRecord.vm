@@ -1,0 +1,353 @@
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+
+<script language="javascript">
+
+	function hideDiv(_div){
+		if(document.getElementById(_div).style.visibility == "hidden")
+			document.getElementById(_div).style.visibility = "visible";
+		else
+			document.getElementById(_div).style.visibility = "hidden";
+	}
+	
+</script>
+<body id="wrap">
+<div id='container' style='border:#FFFFFF thin solid; width:790; position: relative;'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divClient').innerHTML=''" value=' X '>
+<strong> $i18n.get('clientEncounter')</strong></div>
+
+<div style='border:#FFFFFF thin solid; left:25; overflow-y: auto;'>
+<table width="100%" border="0" cellpadding='1' cellspacing='1'>
+
+  <tr>
+    <td width="264" >$i18n.get('maso'): ..................................... </td>
+    <td width="250" >$client.code</td>
+    <td width="220" >$!i18n.get('ward'): .......................</td>
+    <td width="208" >$!client.ward.node</td>
+  </tr>
+  
+  <tr>
+    <td width="264" >$i18n.get('node'): .....................................</td>
+    <td >$client.node</td>
+    <td width="220" >$!i18n.get('address'): ........................</td>
+    <td >$!client.address</td>
+  </tr>
+  
+  <tr>
+    <td width="264" >$i18n.get('sex'): .....................................</td>
+    <td width="250" >$client.sex</td>
+    <td width="220">$!i18n.get('paymenttype'): .......................</td>
+    <td >$!client.paymenttype.node</td>
+  </tr>
+
+  #if($client.birthday)
+  <tr>
+    <td width="264" >$!i18n.get('birthday'): .....................................</td>
+    <td width="250" >$!dateTool.format('dd-MM-yyyy',$!client.birthday)</td>
+    <td width="220" >$!i18n.get('motherfather'): .......................</td>
+    <td >$!client.motherfather</td>
+  </tr>
+  #end
+
+  #if($client.age)
+  <tr>
+    <td width="264" >$!i18n.get('age'): .....................................</td>
+    <td width="250" >$!client.age</td>
+    <td width="220">$!i18n.get('insurancenumber'): .......................</td>
+    <td >$!client.insurancenumber</td>
+  </tr>
+  #end
+  
+  #if($client.age)
+  <tr>
+    <td width="264" >$!i18n.get('maritalstatus'): .....................................</td>
+    <td width="250" >$!client.maritalstatus</td>
+    <td width="220" >$!i18n.get('joineddate'): .......................</td>
+    <td width="208" >$!dateTool.format('dd-MM-yyyy',$!client.joineddate)</td>
+  </tr>
+   #end
+    
+  #if($client.ethnic)
+  <tr>
+    <td width="264" >$!i18n.get('ethnic'): .....................................</td>
+    <td width="250" >$!client.ethnic.node</td>
+    <td width="220" >$!i18n.get('expireddate'): ........................</td>
+    <td width="208">$!dateTool.format('dd-MM-yyyy',$!client.expireddate)</td>
+  </tr>
+   #end
+    
+   #if($client.occupation)
+  <tr>
+    <td >$!i18n.get('occupation'): .....................................</td>
+    <td >$!client.occupation.node</td>
+    <td width="220">$!i18n.get('createddate'): .......................</td>
+    <td width="208" >$!dateTool.format('dd-MM-yyyy',$!client.createddate)</td>
+  </tr>
+   #end
+    
+   #if($client.ward)   #end
+    
+   #if($client.address !=  "")   #end
+    
+   #if($client.paymenttype)   #end
+    
+   #if($client.motherfather != "")   #end
+    
+   #if($client.insurancenumber != "" )   #end
+    
+   #if($client.joineddate)   #end
+    
+   #if($client.expireddate)    #end
+    
+   #if($client.createddate)
+  #end
+</table>
+</div>
+
+
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divClient').innerHTML=''" value=' X '>  
+<strong>$i18n.get('clientEncounterDetails')</strong></div>
+  
+  
+  
+<div style='border:#FFFFFF thin solid;'>
+	
+	<p>#foreach($encounter in $encounters)</p>
+	<div id='div'>
+      <!-- <div id='encounterInfo$encounter.date' style='visibility:hidden'> -->
+      <table border="0" width="100%" cellpadding='1' cellspacing='1'>
+        <tbody>
+        
+        #if($encounter.date)
+        <tr>
+          <td colspan="4" bgcolor="#FFFFFF" ><strong>$!i18n.get('date'): </strong><strong> $!dateTool.format('dd-MM-yyyy',$!encounter.date)  - $!encounter.node</strong></td>
+        </tr>
+        #end
+        #if($encounter.node !="")
+        <tr>
+                              <td width="190">$!i18n.get('syndrome'): </td>
+                              <td width="600">$!encounter.node</td>
+                              <td width="600" >$!i18n.get('room'): </td>
+                              <td width="600" >$!encounter.room.node</td>
+        </tr>
+        #end
+        
+        #if($encounter.initialdiagnosis  !="")
+        <tr>
+                              <td width="190" >$!i18n.get('initialdiagnosis'): </td>
+                              <td width="600" >$!encounter.initialdiagnosis</td>
+                              <td width="600" >$!i18n.get('advise'): </td>
+                              <td width="600" >$!encounter.advise</td>
+        </tr>
+        #end
+        
+        #if($encounter.icd)
+        <tr>
+          <td width="190" >$!i18n.get('icd'): </td>
+          <td width="600" >$!encounter.icd.node</td>
+          <td width="600" >$!i18n.get('revisit'): </td>
+          <td width="600" >$!encounter.revisit</td>
+        </tr>
+        #end
+        
+        #if($encounter.solving)
+        <tr>
+          <td width="190" >$!i18n.get('solving'): </td>
+          <td width="600" >$!encounter.solving.node</td>
+          <td width="600" >$!i18n.get('revisitdate'): </td>
+          <td width="600" >$!encounter.revisitdate</td>
+        </tr>
+        #end
+        
+        #if($encounter.toward !="")
+        <tr>
+                              <td width="190" >$!i18n.get('toward'): </td>
+                              <td width="600" >$!encounter.toward</td>
+                              <td width="600">$!i18n.get('inddoctor'): </td>
+                              <td width="600" >$!encounter.inddoctor.node</td>
+        </tr>
+        #end
+        
+        #if($encounter.tohospital != "")
+        <tr>
+                              <td width="190" >$!i18n.get('tohospital'): </td>
+                              <td width="600" >$!encounter.tohospital</td>
+                              <td width="600" >B&aacute;c s&#297; kh&aacute;m: </td>
+          <td width="600" >$!encounter.user.fullname</td>
+        </tr>
+        #end
+        
+        
+        #if($encounter.room)        #end
+        
+        #if($encounter.advise !="")        #end
+        
+        #if($encounter.revisit)        #end
+        
+        #if($encounter.revisitdate)        #end
+        
+        #if($encounter.inddoctor.node)
+        #end
+        <!-- #if($encounter.prescriptiontemplate)
+			  			#foreach($ptd in $encounter.prescriptiontemplate.prescriptiontemplatedetails)
+				  			#if($ptd.node)
+				  				<tr>
+				    				<td width="92" >$!i18n.get('prescriptiontemplatedetail') </td>
+				    				<td width="267" >$!ptd.node</td>
+				  				</tr>
+				  			#end
+			  			#end
+		  			#end -->
+      </table>
+  </div>
+	<p>#if($!encounter.prescriptiondetails.size()>0) <br>
+	  <br>  					
+  </p>
+	<div id='encounterInfo$encounter.date'>
+	                                    <div id='$encounter.prescriptiondetails'>
+   							$!i18n.get('prescriptiondetail'):
+   							
+   							<table width="100%" cellpadding="1" cellspacing="1" bgcolor='#CCCCCC'>
+   							<tr class='tableitem'>
+   							<td >$!i18n.get('drug') </td>
+   							<td >$!i18n.get('quantity') </td>
+   							<td >$!i18n.get('unit') </td>
+   							<td >$!i18n.get('timeuse') </td>
+				    		<td >$!i18n.get('quantityuse') </td>
+   							<td >$!i18n.get('methoduse') </td>
+   							</tr>
+			  				#foreach($ptd in $encounter.prescriptiondetails)
+			  					
+				  				#if($ptd.drug.node)
+				  				<tbody>
+
+								<tr class='tableitem'>
+				    				<td >$!ptd.drug.node</td>
+				    				<td >$!ptd.quantity</td>				  					
+				    				<td >$!ptd.drug.unit</td>				    				
+				    				<td >$!ptd.timeuse</td>
+				    				<td >$!ptd.quantityuse</td>				    				
+				    				<td >$!ptd.methoduse</td>
+				  				</tr>
+				  				#end
+				  				</tbody>
+			  				#end
+			  				</table>
+		  </div>
+		      <p>#end		  </p>
+		  			    <p> #if($!encounter.indicationdetails.size()>0) <br>
+		  			      <br>  					
+      </p>
+		  			    <div id='$encounter.indicationdetails'>
+   							$i18n.get('indicationdetail'): 
+   							<table width="100%" cellpadding="1" cellspacing="1" bgcolor='#CCCCCC'>
+   							<tr class='tableitem'>
+   							<td width="118" >$i18n.get('service') </td>
+   							<td width="123" >$i18n.get('quantity') </td>
+   							<td width="110" >$i18n.get('status') </td>
+   							<td width="108" >$i18n.get('result') </td>
+				    		<td width="211" >$i18n.get('note') </td>
+   							</tr>
+			  				#foreach($ptd in $encounter.indicationdetails)
+			  					
+				  				#if($!ptd.service)
+				  				<tbody>
+								
+								<tr class='tableitem'>
+				    				<td >$!ptd.service.node</td>
+				    				<td >$!ptd.quantity</td>				  					
+				    				<td >$!ptd.status</td>				    				
+				    				<td><a href='javascript:void(0)' onclick="window.open('indicationdetailResultView.action?ptd.id=$ptd.id', 'View Result', 'width=800, height=600,scrollbars=yes')">KQ</a></td>
+				    				<td >$!ptd.note</td>		
+				  				</tr>
+				  				
+				  				</tbody>
+								#end
+			  				#end
+		  				  </table>
+		  </div>
+		      <p>#end	      </p>
+		  			    <p>#if($encounter.receipts.size()>0) <br>
+		  			      <br>
+      </p>
+		  			    <div id='$encounter.receipts' style='visibility:hidden'>
+   						$!i18n.get('receipt'): 
+   					
+		  			<table width="100%" cellpadding="1" cellspacing="1" bgcolor='#CCCCCC'> 
+						<tr class="tableitem">
+						<td width="122" >$!i18n.get('receipt') </td>
+						<td width="177" >$!i18n.get('paymentmethod') </td>
+						<td width="151" >$!i18n.get('childunder6') </td>
+						<td width="116" >$!i18n.get('payfor')</td>
+						<td width="107" >$!i18n.get('total') </td>
+						<td width="131" >$!i18n.get('discount') </td>
+						<td width="159" >$!i18n.get('insurancepay') </td>
+						<td width="136" >$!i18n.get('actualpay')</td>
+						</tr>
+						
+
+			  			#foreach($receipt in $encounter.receipts)
+			  			 
+					    	<tbody>
+							<tr class='tableitem'>
+					    		<td >$!receipt.node</td>
+					    		<td >$!receipt.paymentmethod</td>
+					  			<td >$!receipt.childunder6</td>
+					  			<td >$!receipt.payfor</td>
+					  			<td >$!receipt.total</td>
+					  			<td >$!receipt.discount</td>
+					  			<td >$!receipt.insurancepay</td>
+					  			<td >$!receipt.actualpay</td>
+					  		</tr>
+							</tbody>
+					  		#end
+			  		  </table>
+  		  </div>
+			  			
+			  		    <p>#end			  		      </p>
+			  		    <p>#if($encounter.cashadvances.size()>0) </p>
+	      <div id='$encounter.cashadvances' style='visibility:hidden'>
+   					<br>
+   					$!i18n.get('cashadvance'): 
+<table width="100%" cellpadding="1" cellspacing="1" bgcolor='#CCCCCC'> 
+						<tr class='tableitem'>
+						<td width="310" >$!i18n.get('node'): </td>
+						<td width="313" >$!i18n.get('amount'): </td>
+						<td width="310" >$!i18n.get('code'): </td>
+						<td width="175" >$!i18n.get('type'): </td>
+						</tr>
+						
+			  			#foreach($cashadvance in $encounter.cashadvances)
+
+					    	<tbody>
+							<tr class='tableitem'>
+					    		<td >$!cashadvance.node< </td>
+			  					<td >$!cashadvance.amount</td>
+			  					<td >$!cashadvance.code< </td>
+			  					<td >$!cashadvance.type</td>
+							</tr>
+							</tbody>
+			  			#end
+			</table>
+		  			<p>#end		  			</p>
+		  			<p><!-- #if($encounter.date)
+  		<p style='background-color:#cccccc'>
+   			<a href="#$encounter.date$encounter.node<" onclick="hideDiv('encounterInfo$encounter.date');"> $!i18n.get('date'): </a>
+   			<a href="#$encounter.date$encounter.node<" onclick="hideDiv('encounterInfo$encounter.date');"> $!encounter.date - $!encounter.node</a>
+   		</p> 
+   			<tr>
+		    	<td width="92" bgcolor='#999999'>$!i18n.get('date'): </td>
+		    	<td width="267" bgcolor='#999999'>$!encounter.date - $!encounter.node</td>
+		  	</tr>
+		#end -->
+</p>
+      </div>
+	      #end
+		
+  </div>
+
+</div>
+</body>

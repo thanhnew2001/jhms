@@ -1,0 +1,120 @@
+	#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('encounter_js.vm')
+#parse('common.vm')
+
+<body id='wrap'>
+<div id='addindicationdetail'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divIndicationdetail').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('indicationdetail') 
+</div>
+<br>
+
+<div id='msg'></div>
+<div id='tableindicationdetail' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineindicationdetailForm' name='inlineindicationdetailForm' action='indicationdetailAdd.action' class='niceform' method='POST'>
+  <table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+    <theader>
+      <tr class='tableheader'>
+	    <th>STT</th>
+        <th>Action</th>
+        <th>$i18n.get('service')</th>
+        <th>$i18n.get('quantity')</th>
+        <th>$i18n.get('price')</th>
+        <th>$i18n.get('status')</th>
+        <th>$i18n.get('note')</th>
+        <th>$i18n.get('paid')</th>
+        <th>$i18n.get('request')</th>
+        <th>$i18n.get('result')</th>
+        <th>$i18n.get('timedone')</th>
+        <th>$i18n.get('file')____</th>
+        <th>$i18n.get('exedoctor')</th>
+      </tr>
+      <tr class='tableitem'>
+	  <th></th>
+        <div id='inlineaddindicationdetail' style='display:none;'>
+          <th><input name="button2" type='button' id='saveindicationdetail'  onClick="this.disabled = 'true'; validateIndicationdetail('add', document.getElementById('inlineindicationdetailForm') )" onKeyPress="nextfield='';" onKeyDown="this.disabled = 'true'; validateIndicationdetail('add', document.getElementById('inlineindicationdetailForm') )" value="  $i18n.get('save')  ">          </th>
+          #set ($ses = $req.getSession())					
+          #set ($encounter_id = $ses.getAttribute('encounter_id'))
+          #set ($encounter_node = $ses.getAttribute('encounter_node'))
+          <input type='hidden' id='encounter' name='encounter'  size='1' value='$!encounter_id' onChange='makeGetRequestEncounterByTypeHead()' onKeyPress="formname='inlineindicationdetailForm'; nextfield='textencounter';">
+          #set ($ses = $req.getSession())					
+          #set ($service_id = $ses.getAttribute('service_id'))
+          #set ($service_node = $ses.getAttribute('service_node'))
+          <th> <input type='hidden' id='service' name='service'  size='1' value='$!service_id' onChange='makeGetRequestServiceByTypeHead()' onKeyPress="formname='inlineindicationdetailForm'; nextfield='textservice';">
+            <input type='text' id='textservice' name='textservice' size='18' value='$!service_node' onKeyPress="formname='inlineindicationdetailForm'; nextfield='cboservice';"  onKeyUp='makeGetRequestServiceByTypeHead()' onClick='makeGetRequestServiceByTypeHead()'>
+            <div id='divservice' style='display:none;position:absolute'  onKeyPress="formname='inlineindicationdetailForm'; nextfield='quantity';"></div></th>
+          <th> <input type='text'  id='quantity' name='quantity' size='8' value='1' onKeyPress="formname='inlineindicationdetailForm'; nextfield='saveindicationdetail';">          </th>
+          <th> <input type='text'  id='price' name='price' size='8' value='$!indicationdetail.price' disabled="disabled" onKeyPress="formname='inlineindicationdetailForm'; nextfield='status';">          </th>
+          <th> <select id='status' name='status' onkeypress=" formname='inlineindicationdetailForm';nextfield='node';" disabled="disabled">
+            <option value="NEW">NEW</option>
+            <option value="DONE">DONE</option>
+          </select>          </th>
+          <th> <input type='text'  id='note' name='note' size='8' onKeyPress="formname='inlineindicationdetailForm'; nextfield='paid';">          </th>
+          <th> <select id='paid' name='paid' onkeypress=" formname='inlineindicationdetailForm';nextfield='saveindicationdetail';" disabled="disabled">
+            <option value="N">N</option>
+            <option value="Y">Y</option>
+          </select>          </th>
+          <th> <input type='text' id='request' name='request' size='18' onKeyPress="formname='indicationdetailForm'; ;" />          </th>
+		  <th></th>
+		   <th></th>
+		    <th></th>
+			 <th></th>
+        </div>
+      </tr>
+    </theader>
+    <tbody>    
+	#set($i=0)
+
+    #foreach($indicationdetail in $ids)
+    #if($indicationdetail.id)
+	#set($i=$i+1)
+  <tr class='tableitem' id='tr$indicationdetail.id' onDblClick="javascript:makeGetRequestAddIndicationdetail($indicationdetail.id, 'edit')">
+  <td>$i</td>
+    <td id='td$indicationdetail.id'><a href="javascript:makeGetRequestAddIndicationdetail($indicationdetail.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> <a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('indicationdetailDelete.action?id=$indicationdetail.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$indicationdetail.id').style.background ='#CCCCCC'; document.getElementById('td$indicationdetail.id').style.visibility='hidden'} "> <img src='images/delete.png' width='15' height='15' alt='Delete' /></a> <a href='javascript:void(0)' onClick="window.open('indicationdetailView.action?id=$indicationdetail.id', 'View indicationdetail', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a> </td>
+    <td>$!indicationdetail.service.node</td>
+    <td>$numberTool.format('integer' ,$!indicationdetail.quantity)</td>
+    <td>$numberTool.format('integer' ,$!indicationdetail.price)</td>
+    <td>$!indicationdetail.status</td>
+    <td>$!indicationdetail.node</td>
+    <td>$!indicationdetail.paid</td>
+    <td>$!indicationdetail.request</td>
+    <td> #if( $indicationdetail.service.servicegroup.id == 31 || $indicationdetail.service.servicegroup.id == 61 )
+	<a href='javascript:void(0)' onClick="window.open('indicationdetailResultView.action?id=$indicationdetail.id', 'View Result', 'width=950, height=700,scrollbars=yes')">$i18n.get('result')</a> 
+		#elseif($indicationdetail.service.servicegroup.id < 20)
+		<a href='javascript:void(0)' onClick="window.open('xetNghiemView.action?id=$indicationdetail.encounter.id', 'View Result', 'width=950, height=700,scrollbars=yes')">$i18n.get('result')</a> 
+		#end	</td>
+    <td>$!indicationdetail.timedone</td>
+    <td><a href='../jhmsdata/$!indicationdetail.file1' target="_blank">H1 </a><a href='../jhmsdata/$!indicationdetail.file2' target="_blank">H2</a><a href='../jhmsdata/$!indicationdetail.file3' target="_blank"> H3 </a><a href='../jhmsdata/$!indicationdetail.file4' target="_blank">H4</a></td>
+    <td>$!indicationdetail.user.fullname</td>
+  </tr>
+
+    #end
+    
+    #end
+	  <tr class='tableitem'>
+  <td></td>
+  <td></td>
+  <td colspan="2"><strong>T&#7893;ng ti&#7873;n</strong></td>
+  <td colspan="2"><strong>$numberTool.format('integer' ,$total)
+	  &nbsp;</strong></td>
+  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  </tr>
+  </table>
+</form>
+</div>
+</div>
+</div>
+
+
+</body>

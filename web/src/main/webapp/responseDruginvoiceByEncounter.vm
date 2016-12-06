@@ -1,0 +1,194 @@
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='adddruginvoice'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divDruginvoice'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divDruginvoice').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('druginvoice')  
+</div>
+<br>
+<div>
+<select id='combodruginvoice' name='combodruginvoice'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='code'>$i18n.get('code')</option>
+	
+	<option value='identity'>$i18n.get('indentity')</option>
+	
+	<option value='warehouse'>$i18n.get('warehouse')</option>
+	
+	<option value='date'>$i18n.get('date')</option>
+	
+	<option value='type'>$i18n.get('type')</option>
+	
+	<option value='towarehouse'>$i18n.get('towarehouse')</option>
+	
+	<option value='encounter'>$i18n.get('encounter')</option>
+	
+	<option value='node'>$i18n.get('node')</option>
+	
+	<option value='address'>$i18n.get('address')</option>
+	
+	<option value='paymenttype'>$i18n.get('paymenttype')</option>
+	
+	<option value='insurancenumber'>$i18n.get('insurancenumber')</option>
+	
+	<option value='expireddate'>$i18n.get('expireddate')</option>
+	
+	<option value='inpatient'>$i18n.get('inpatient')</option>
+	
+	<option value='total'>$i18n.get('total')</option>
+	
+	<option value='vat'>$i18n.get('vat')</option>
+	
+	<option value='totalaftertax'>$i18n.get('totalaftertax')</option>
+	
+	<option value='doctor'>$i18n.get('doctor')</option>
+	
+	<option value='user'>$i18n.get('user')</option>
+	
+</select>
+<input name='searchdruginvoice' id='searchdruginvoice' onkeyup='makeGetRequestDruginvoiceBySearch()' value='' onclick='clearSearchBox(searchdruginvoice)'>
+Search  or Filter
+
+
+		<select id='filterwarehouse' name='filterwarehouse'>
+			#foreach($warehouse in $warehouses)
+				<option value='$warehouse.id'>$warehouse.node</option>
+			#end
+		</select>	
+		
+				<input type='text' id='filterdate' name='filterdate' value='$today'>				
+				
+				<input type='text' id='filtertype' name='filtertype'>
+				
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestDruginvoiceByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddDruginvoice(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tabledruginvoice' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlinedruginvoiceForm' name='inlinedruginvoiceForm' action='druginvoiceAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('code')</th>	
+
+	<th>$i18n.get('warehouse')</th>	
+	
+	<th>$i18n.get('date')</th>	
+	
+	<th>$i18n.get('type')</th>	
+	
+	<th>$i18n.get('towarehouse')</th>	
+	
+	<th>$i18n.get('encounter')</th>	
+	
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('address')</th>	
+	
+	<th>$i18n.get('paymenttype')</th>	
+	
+	<th>$i18n.get('insurancenumber')</th>	
+	
+	<th>$i18n.get('expireddate')</th>	
+	
+	<th>NT</th>	
+	
+	<th>$i18n.get('total')</th>	
+	
+	<th>$i18n.get('vat')</th>	
+	
+	<th>$i18n.get('totalaftertax')</th>	
+	
+	<th>$i18n.get('doctor')</th>	
+	
+	<th>$i18n.get('user')</th>	
+	
+</tr>
+
+
+
+</theader>
+<tbody>
+#foreach($druginvoice in $druginvoices)
+	#if($druginvoice.id)
+	<tr class='tableitem' id='tr$druginvoice.id' onDblClick="document.getElementById('divDruginvoicedetail').innerHTML='';makeGetRequestAddDruginvoice($druginvoice.id, 'edit')">
+	<td id='td$druginvoice.id'>
+	<a href="javascript:makeGetRequestAddDruginvoice($druginvoice.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('druginvoiceDelete.action?id=$druginvoice.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$druginvoice.id').style.background ='#CCCCCC'; document.getElementById('td$druginvoice.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('druginvoiceView.action?id=$druginvoice.id', 'View druginvoice', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menudruginvoice$druginvoice.id').style.display='block'; " ondblclick="javascript:document.getElementById('menudruginvoice$druginvoice.id').style.display='none'"  value='>>' >  	
+
+	<div id='menudruginvoice$druginvoice.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+		 <a href='javascript:makeGetRequestDruginvoicedetailByDruginvoice($druginvoice.id)'> druginvoicedetail </a> &nbsp;
+		 <br>
+		
+	</div>
+	
+	</td>	
+		
+		<td>$!druginvoice.code</td>
+		
+		<td>$!druginvoice.warehouse.node</td>
+		
+		<td>$!druginvoice.date</td>
+		
+		<td>$!druginvoice.type</td>
+		
+		<td>$!druginvoice.towarehouse.node</td>
+		
+		<td>$!druginvoice.encounter.node</td>
+		
+		<td>$!druginvoice.node</td>
+		
+		<td>$!druginvoice.address</td>
+		
+		<td>$!druginvoice.paymenttype.node</td>
+		
+		<td>$!druginvoice.insurancenumber</td>
+		
+		<td>$!druginvoice.expireddate</td>
+		
+		<td>$!druginvoice.inpatient</td>
+		
+		<td>$!druginvoice.total</td>
+		
+		<td>$!druginvoice.vat</td>
+		
+		<td>$!druginvoice.totalaftertax</td>
+		
+		<td>$!druginvoice.doctor</td>
+		
+		<td>$!druginvoice.user.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddDruginvoice(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

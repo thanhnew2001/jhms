@@ -1,0 +1,91 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addhospital'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div>
+<br>
+<div id='divHospital'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divHospital').innerHTML=''" value=' X '>  
+$i18n.get('hospitallist')  
+</div>
+<br>
+<div>
+<select id='combohospital' name='combohospital'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='node'>$i18n.get('node')</option>
+	
+	<option value='address'>$i18n.get('address')</option>
+	
+</select>
+<input name='searchhospital' id='searchhospital' onkeyup='makeGetRequestHospitalBySearch()' value='' onclick='clearSearchBox(searchhospital)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestHospitalByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddHospital(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tablehospital' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlinehospitalForm' name='inlinehospitalForm' action='hospitalAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('address')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddhospital' style='display:none;'>
+<th><input type='button' id='savehospital' value="  $i18n.get('save')  " onkeydown="javascript:validateHospital('add', document.getElementById('inlinehospitalForm') )"  onclick="javascript:validateHospital('add', document.getElementById('inlinehospitalForm') )" onkeypress="nextfield='';">
+</th>
+
+<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlinehospitalForm'; nextfield='address';"> </th><th> <input type='text'  id='address' name='address' size='8' value='' onkeypress="formname='inlinehospitalForm'; nextfield='savehospital';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($hospital in $hospitals)
+	#if($hospital.id)
+	<tr class='tableitem' id='tr$hospital.id' onDblClick="javascript:makeGetRequestAddHospital($hospital.id, 'edit')">
+	<td id='td$hospital.id'>
+	<a href="javascript:makeGetRequestAddHospital($hospital.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('hospitalDelete.action?id=$hospital.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$hospital.id').style.background ='#CCCCCC'; document.getElementById('td$hospital.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('hospitalView.action?id=$hospital.id', 'View hospital', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+		
+	</td>	
+		
+		<td>$!hospital.node</td>
+		
+		<td>$!hospital.address</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddHospital(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

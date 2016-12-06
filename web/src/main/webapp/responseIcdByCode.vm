@@ -1,0 +1,4 @@
+
+#foreach($icd in $icds)
+	$icd.id
+#end

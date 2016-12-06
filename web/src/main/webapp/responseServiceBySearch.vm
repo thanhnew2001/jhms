@@ -1,0 +1,55 @@
+
+<form name='serviceForm' action='serviceAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('servicegroup')</th>	
+	
+	<th>$i18n.get('price')</th>	
+	
+	<th>$i18n.get('insuranceprice')</th>	
+	
+	<th>$i18n.get('department')</th>	
+	
+</tr>
+
+
+</theader>
+<tbody>
+#foreach($service in $services)
+	#if($service.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddService($service.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddService($service.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='serviceDelete.action?id=$service.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('serviceView.action?id=$service.id', 'View service', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuservice$service.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuservice$service.id').style.display='none'"  value='>>' >  
+	
+		
+	<a href='javascript:void(0)' onclick="window.open('serviceParam.action?serviceId=$service.id', 'Service param', 'width=400, height=300')"> Service Param </a>
+	
+	</td>
+	
+		
+		<td>$!service.node</td>
+		
+		<td>$!service.servicegroup.node</td>
+		
+		<td>$!service.price</td>
+		
+		<td>$!service.insuranceprice</td>
+		
+		<td>$!service.department.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

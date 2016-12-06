@@ -1,0 +1,98 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'> 
+  <div class='pageheader'> 
+    <input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addindicationdetail').innerHTML=''" value=' X '>
+    $i18n.get('edit') $i18n.get('indicationdetail') </div>
+  <br>
+  <div id='msg'></div>
+  <br>
+  <form id='indicationdetailForm'  name='indicationdetailForm' action='indicationdetailUpdate.action'  method='POST'>
+    <input type='hidden' name='id' value='$!indicationdetail.id' size='20'>
+    <table>
+      <tr class='formlabel'> 
+        <td>Th&#7901;i gian: </td>
+        <td><input type='text' id='timedone' name='timedone' size='20' value='$!indicationdetail.time'> 
+          <a href="#" onClick="var d = new Date(); var now = d.getHours() + ':' + d.getMinutes(); document.getElementById('timedone').value = now;">+</a> 
+        </td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr class='formlabel'> 
+        <td><label>$i18n.get('encounter'):</label> </td>
+        <td> <input type='hidden' id='encounter' name='encounter'  size='1' value='$!indicationdetail.encounter.id' onchange='makeGetRequestEncounterByTypeHead()' onkeypress="formname='indicationdetailForm'; nextfield='textencounter';"> 
+          <input type='text' id='textencounter' name='textencounter' size='20'  value='$!indicationdetail.encounter.node' onkeypress="formname='indicationdetailForm'; nextfield='cboencounter'; isSelect=true;"  onkeyup='makeGetRequestEncounterByTypeHead()' onclick='makeGetRequestEncounterByTypeHead()'>	
+          <div id='divencounter' style='display:none;position:absolute' onkeypress="formname='indicationdetailForm'; nextfield='textservice';"></div>
+          <a href='javascript:void(0)' onclick="window.open('encounterList.action', 'Add encounter', 'width=400, height=300')"> 
+          + </a> </td>
+        <td><label>$i18n.get('service'):</label> </td>
+        <td> <input type='hidden' id='service' name='service'  size='1' value='$!indicationdetail.service.id' onchange='makeGetRequestServiceByTypeHead()' onkeypress="formname='indicationdetailForm'; nextfield='textservice';"> 
+          <input type='text' id='textservice' name='textservice' size='20'  value='$!indicationdetail.service.node' onkeypress="formname='indicationdetailForm'; nextfield='cboservice'; isSelect=true;"  onkeyup='makeGetRequestServiceByTypeHead()' onclick='makeGetRequestServiceByTypeHead()'>	
+          <div id='divservice' style='display:none;position:absolute' onkeypress="formname='indicationdetailForm'; nextfield='quantity';"></div>
+          <a href='javascript:void(0)' onclick="window.open('serviceList.action', 'Add service', 'width=400, height=300')"> 
+          + </a> </td>
+        <td><label>$i18n.get('quantity'):</label></td>
+        <td><input type='text' id='quantity' name='quantity' value='$!indicationdetail.quantity' size='20' onkeypress="formname='indicationdetailForm'; nextfield='price';"> 
+        </td>
+      </tr>
+      <tr class='formlabel'> 
+        <td><label>$i18n.get('price'):</label></td>
+        <td><input type='text' id='price' name='price' value='$!indicationdetail.price' size='20'  onkeypress="formname='indicationdetailForm'; nextfield='status';"> 
+        </td>
+        <td><label>$i18n.get('status'):</label></td>
+        <td> <select id='status' name='status' style='width:100px; max-width:200px' onkeypress="formname='indicationdetailForm'; nextfield='node';">
+            <option value=NEW>NEW</option>
+            <option value=DONE>DONE</option>
+          </select></td>
+        <td><label>Ch&#7849;n &#273;o&aacute;n:</label></td>
+        <td><input type='text' id='node' name='node' value='$!indicationdetail.node' size='20'  onkeypress="formname='indicationdetailForm'; nextfield='note';"> 
+        </td>
+      </tr>
+      <tr class='formlabel'> 
+        <td>Y&ecirc;u c&#7847;u </td>
+        <td><textarea  id='request' name='request' size='20' onkeypress="formname='indicationdetailForm'; ;">$!indicationdetail.request</textarea></td>
+        <td>K&#7871;t qu&#7843; </td>
+        <td><textarea  id='result' name='result' size='18' onkeypress="formname='indicationdetailForm'; ">$!indicationdetail.result</textarea></td>
+        <td></td>
+        <td></td>
+      <tr class='formlabel'> 
+        <td>File 1 </td>
+        <td><input type='text' id='file1' name='file1' size='20' value='$!indicationdetail.file1'> 
+          <a href='javascript:void(0)' onclick="window.open('upload.action', 'Upload file', 'width=400, height=300')">+ 
+          </a></td>
+        <td>File 2 </td>
+        <td><input type='text' id='file2' name='file2' size='20' value='$!indicationdetail.file2'> 
+          <a href='javascript:void(0)' onclick="window.open('upload.action', 'Upload file', 'width=400, height=300')">+ 
+          </a></td>
+        <td>File 3 </td>
+        <td><input type='text' id='file3' name='file3' size='20' value='$!indicationdetail.file3'> 
+          <a href='javascript:void(0)' onclick="window.open('upload.action', 'Upload file', 'width=400, height=300')">+ 
+          </a></td>
+      <tr class='formlabel'> 
+        <td><label>$i18n.get('note'):</label></td>
+        <td><textarea  id='note' name='note' value='$!indicationdetail.note' size='18' onkeypress="formname='indicationdetailForm'; ">  </textarea></td>
+        <td><label>$i18n.get('paid'):</label></td>
+        <td><select id='paid' name='paid' onkeypress="formname='indicationdetailForm'; nextfield='updateindicationdetail';" disabled>
+            <option value='$!indicationdetail.paid' selected>$!indicationdetail.paid</option>
+            <option value=N>N</option>
+            <option value= Y> Y</option>
+          </select></td>
+        <td></td>
+        <td></td>
+      <tr>
+        <td colspan='6'> <input id='updateindicationdetail' type='button' value="  $i18n.get('save')  " onkeydown="javascript: validateIndicationdetail('edit', document.getElementById('indicationdetailForm') )" onclick="javascript: validateIndicationdetail('edit', document.getElementById('indicationdetailForm') )" onkeypress="formname='indicationdetailForm'; nextfield = '';"> 
+          &nbsp; </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+

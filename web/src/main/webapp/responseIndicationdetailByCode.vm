@@ -1,0 +1,4 @@
+
+#foreach($indicationdetail in $indicationdetails)
+	$indicationdetail.id
+#end

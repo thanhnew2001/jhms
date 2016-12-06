@@ -1,0 +1,165 @@
+
+<form name='historyForm' action='historyAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('client')</th>	
+	
+	<th>$i18n.get('father')</th>	
+	
+	<th>$i18n.get('mother')</th>	
+	
+	<th>$i18n.get('sibling')</th>	
+	
+	<th>$i18n.get('partner')</th>	
+	
+	<th>$i18n.get('offspring')</th>	
+	
+	<th>$i18n.get('cancer')</th>	
+	
+	<th>$i18n.get('tuberculosis')</th>	
+	
+	<th>$i18n.get('diabetes')</th>	
+	
+	<th>$i18n.get('highbloodpressure')</th>	
+	
+	<th>$i18n.get('heartproblem')</th>	
+	
+	<th>$i18n.get('stroke')</th>	
+	
+	<th>$i18n.get('epilepsi')</th>	
+	
+	<th>$i18n.get('mentalillness')</th>	
+	
+	<th>$i18n.get('sucide')</th>	
+	
+	<th>$i18n.get('breastexamdate')</th>	
+	
+	<th>$i18n.get('breastexamresult')</th>	
+	
+	<th>$i18n.get('cadiacechodate')</th>	
+	
+	<th>$i18n.get('cadiacechoresult')</th>	
+	
+	<th>$i18n.get('gynexamdate')</th>	
+	
+	<th>$i18n.get('gynexamresult')</th>	
+	
+	<th>$i18n.get('prostateexamdate')</th>	
+	
+	<th>$i18n.get('prostateexamresult')</th>	
+	
+	<th>$i18n.get('rectalexamdate')</th>	
+	
+	<th>$i18n.get('rectalexamresult')</th>	
+	
+	<th>$i18n.get('sigmoiddate')</th>	
+	
+	<th>$i18n.get('sigmoidresult')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddhistory' style='display:none;'>
+<th><input type='button' id='savehistory' value="  $i18n.get('save')  " onclick="javascript:validateHistory('add')" onkeypress="nextfield='';"></th>
+
+			#set ($ses = $req.getSession())					
+			#set ($client_id = $ses.getAttribute('client_id'))
+			#set ($client_node = $ses.getAttribute('client_node'))
+		<th>
+			<input type='hidden' id='client' name='client'  size='1' value='$!client_id' onchange='makeGetRequestClientByTypeHead()' onkeypress="formname='inlinehistoryForm'; nextfield='textclient';"> 
+			
+			<input type='text' id='textclient' name='textclient' size='18' value='$!client_node' onkeypress="formname='inlinehistoryForm'; nextfield='cboclient';"  onkeyup='makeGetRequestClientByTypeHead()' onclick='makeGetRequestClientByTypeHead()'>	
+			
+			<div id='divclient' style='display:none;position:absolute'  onkeypress="formname='inlinehistoryForm'; nextfield='father';"></div>				
+		 </th>		
+		<th> <input type='text'  id='father' name='father' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='mother';"> </th><th> <input type='text'  id='mother' name='mother' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='sibling';"> </th><th> <input type='text'  id='sibling' name='sibling' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='partner';"> </th><th> <input type='text'  id='partner' name='partner' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='offspring';"> </th><th> <input type='text'  id='offspring' name='offspring' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='cancer';"> </th><th> <input type='text'  id='cancer' name='cancer' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='tuberculosis';"> </th><th> <input type='text'  id='tuberculosis' name='tuberculosis' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='diabetes';"> </th><th> <input type='text'  id='diabetes' name='diabetes' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='highbloodpressure';"> </th><th> <input type='text'  id='highbloodpressure' name='highbloodpressure' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='heartproblem';"> </th><th> <input type='text'  id='heartproblem' name='heartproblem' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='stroke';"> </th><th> <input type='text'  id='stroke' name='stroke' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='epilepsi';"> </th><th> <input type='text'  id='epilepsi' name='epilepsi' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='mentalillness';"> </th><th> <input type='text'  id='mentalillness' name='mentalillness' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='sucide';"> </th><th> <input type='text'  id='sucide' name='sucide' size='8' value='' onkeypress="formname='inlinehistoryForm'; nextfield='breastexamdate';"> </th><th><input type='text'  id='breastexamdate' name='breastexamdate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinehistoryForm'; nextfield='breastexamresult';" value=$!novalue >
+			<th> <input type='text'  id='breastexamresult' name='breastexamresult' size='8' value='N, A' onkeypress="formname='inlinehistoryForm'; nextfield='cadiacechodate';"> </th><th><input type='text'  id='cadiacechodate' name='cadiacechodate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinehistoryForm'; nextfield='cadiacechoresult';" value=$!novalue >
+			<th> <input type='text'  id='cadiacechoresult' name='cadiacechoresult' size='8' value='N, A' onkeypress="formname='inlinehistoryForm'; nextfield='gynexamdate';"> </th><th><input type='text'  id='gynexamdate' name='gynexamdate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinehistoryForm'; nextfield='gynexamresult';" value=$!novalue >
+			<th> <input type='text'  id='gynexamresult' name='gynexamresult' size='8' value='N, A' onkeypress="formname='inlinehistoryForm'; nextfield='prostateexamdate';"> </th><th><input type='text'  id='prostateexamdate' name='prostateexamdate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinehistoryForm'; nextfield='prostateexamresult';" value=$!novalue >
+			<th> <input type='text'  id='prostateexamresult' name='prostateexamresult' size='8' value='N, A' onkeypress="formname='inlinehistoryForm'; nextfield='rectalexamdate';"> </th><th><input type='text'  id='rectalexamdate' name='rectalexamdate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinehistoryForm'; nextfield='rectalexamresult';" value=$!novalue >
+			<th> <input type='text'  id='rectalexamresult' name='rectalexamresult' size='8' value='N, A' onkeypress="formname='inlinehistoryForm'; nextfield='sigmoiddate';"> </th><th><input type='text'  id='sigmoiddate' name='sigmoiddate' size='8' onblur='getSmartDate(this)' onkeypress="formname='inlinehistoryForm'; nextfield='sigmoidresult';" value=$!novalue >
+			<th> <input type='text'  id='sigmoidresult' name='sigmoidresult' size='8' value='N, A' onkeypress="formname='inlinehistoryForm'; nextfield='savehistory';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($history in $historys)
+	#if($history.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddHistory($history.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddHistory($history.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='historyDelete.action?id=$history.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('historyView.action?id=$history.id', 'View history', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuhistory$history.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuhistory$history.id').style.display='none'"  value='>>' >  
+	
+	<div id='menuhistory$history.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!history.client.node</td>
+		
+		<td>$!history.father</td>
+		
+		<td>$!history.mother</td>
+		
+		<td>$!history.sibling</td>
+		
+		<td>$!history.partner</td>
+		
+		<td>$!history.offspring</td>
+		
+		<td>$!history.cancer</td>
+		
+		<td>$!history.tuberculosis</td>
+		
+		<td>$!history.diabetes</td>
+		
+		<td>$!history.highbloodpressure</td>
+		
+		<td>$!history.heartproblem</td>
+		
+		<td>$!history.stroke</td>
+		
+		<td>$!history.epilepsi</td>
+		
+		<td>$!history.mentalillness</td>
+		
+		<td>$!history.sucide</td>
+		
+		<td>$!history.breastexamdate</td>
+		
+		<td>$!history.breastexamresult</td>
+		
+		<td>$!history.cadiacechodate</td>
+		
+		<td>$!history.cadiacechoresult</td>
+		
+		<td>$!history.gynexamdate</td>
+		
+		<td>$!history.gynexamresult</td>
+		
+		<td>$!history.prostateexamdate</td>
+		
+		<td>$!history.prostateexamresult</td>
+		
+		<td>$!history.rectalexamdate</td>
+		
+		<td>$!history.rectalexamresult</td>
+		
+		<td>$!history.sigmoiddate</td>
+		
+		<td>$!history.sigmoidresult</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

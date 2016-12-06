@@ -1,0 +1,114 @@
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+
+<script language='javascript' type='text/javascript' src='common.js'></script>
+<script type="text/javascript">
+
+
+function beforeDelete(sid, spid)
+{
+	document.getElementById('serviceParamForm').action = "serviceParam.action?action=delete&serviceId="+sid+"&serviceParamId="+spid;
+	document.getElementById('serviceParamForm').submit();
+}	
+
+function beforeSave(sid, spid)
+{
+	document.getElementById('serviceParamForm').action = "serviceParam.action?action=save&serviceId="+sid+"&serviceParamId="+spid;
+	document.getElementById('serviceParamForm').submit();
+}	
+
+</script>
+
+<body>
+<form id='serviceParamForm' name='serviceParamForm' action='serviceParam.action' class='niceform' method='POST'>
+<br>
+<input type='hidden'  id='serviceId' name='serviceId' value="$service.id" size='15'>
+
+<div id='container' >
+  <div class='pageheader'>
+    <p>
+      <input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('saveserviceParam').innerHTML=''" value=' X '>
+      C&#7853;p nh&#7853;t th&ocirc;ng s&#7889; </p>
+    </div>
+  <table width="100%" border="0">
+    <tr>
+      <td width="82">&nbsp;</td>
+      <td width="159">D&#7883;ch v&#7909; </td>
+      <td width="549">
+        $service.node</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>T&ecirc;n th&ocirc;ng s&#7889; </td>
+      <td><input type='text'  id='name' name='name' size='50' value='$!serviceParam.name' ></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&#272;&#417;n v&#7883; t&iacute;nh </td>
+      <td><input type='text'  id='unit' name='unit' size='50' value='$!serviceParam.unit'></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>Min</td>
+      <td><input type='text'  id='min' name='min' size='50' value='$!serviceParam.min' ></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>Max</td>
+      <td><input type='text'  id='max' name='max' size='50' value='$!serviceParam.max'></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td><input name="button2" type="button" onclick="beforeSave($service.id, $serviceParam.id)" value="  Save ">
+       <input type="button" value="Add new" onclick="document.location = 'serviceParam.action?serviceId=$service.id&serviceParamId=0'">
+    </tr>
+  </table>
+
+<table width="800" border="0">
+      <tr class='pageheader'>
+        <td colspan="2">C&aacute;c th&ocirc;ng s&#7889; c&#7911;a d&#7883;ch v&#7909; n&agrave;y:
+		<input type="button" value="Refresh" onclick="document.location = 'serviceParam.action?serviceId=$service.id'">
+		 </td>
+        </tr>
+</table>
+
+
+<table border='0' width='100%' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>T&ecirc;n g&#7885;i </th>
+	<th>&#272;&#417;n v&#7883; </th>
+	<th>Min</th>
+    <th>Max</th>
+</tr>
+</theader>
+<tbody>
+	#foreach($sp in $service.serviceParams)
+		
+	#if($sp.id)
+	<tr class='tableitem' id='tr$sp.id'>
+		
+	<td id='td$sp.id'><a href="serviceParam.action?action=edit&serviceId=$service.id&serviceParamId=$sp.id">
+	<img src='images/edit.png' width='15' height='15' alt='Edit' /></a>
+	
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ beforeDelete($service.id, $sp.id) } ">	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>	</td>	
+		
+		<td>$!sp.name</td>
+		<td>$!sp.unit</td>
+		<td>$!sp.min</td>
+		<td>$!sp.max</td>
+		</tr>
+		
+	#end
+</tbody>
+#end
+</table>
+
+</div>
+</div>
+    <br>
+</form>
+</body>

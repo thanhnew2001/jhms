@@ -1,0 +1,4 @@
+
+#foreach($client in $clients)
+	$client.id
+#end

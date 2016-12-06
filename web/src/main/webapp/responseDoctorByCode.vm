@@ -1,0 +1,4 @@
+
+#foreach($doctor in $doctors)
+	$doctor.id
+#end

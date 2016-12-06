@@ -1,0 +1,174 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<style type="text/css">
+<!--
+.style4 {font-size: 24px; font-weight: bold; }
+-->
+</style>
+<p>
+  <input name="button" type="button" onClick=" document.getElementById('header').style.display='block';document.getElementById('container').style.display='block';document.getElementById('hoanthuoc').style.display='none';document.getElementById('footer').style.display='block';" value="H&oacute;a &#272;&#417;n Nh&#7853;p" >
+  <input name="button2" type="button" onClick="document.getElementById('header').style.display='block';document.getElementById('container').style.display='none';document.getElementById('hoanthuoc').style.display='block';document.getElementById('footer').style.display='block';" value="H&oacute;a &#273;&#417;n ho&agrave;n thu&#7889;c">
+  <input name="button2" type="button" onClick="document.getElementById('header').style.display='none';window.print();self.close();" value="In">
+</p>
+<p><img src="../barbecue/barcode?data=$!importinvoice.code" width="150" height="50"/>
+  <br>
+</p>
+<div id='header'>
+	<table width='100%'> 
+	#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+	#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+	<tr> 
+	<td width="200">C&ocirc;ng ty  TNHH M&#7929; T&ugrave;ng </td >
+	<td>&nbsp;</td> 
+	</tr>
+	<tr>
+	  <td>142 L&ecirc; H&#7891;ng Phong </td >
+	  <td>&nbsp;</td>
+	  </tr>
+	</table>
+</div>
+<div id='container'>
+
+<table width='100%'>
+  #set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+  #set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+    <tr>
+      <td colspan="2"><div align="center"><span class="style4">CH&#7912;NG T&#7914; NH&#7852;P H&Agrave;NG</span></div></td >
+    </tr>
+    <tr>
+      <td colspan="2"><div align="center">Ng&agrave;y:$!dateTool.format('dd/MM/yyyy',$importinvoice.date) - S&#7889; H&#272;: $!importinvoice.node </div></td >
+    </tr>
+    <tr>
+      <td width="581" height="21">T&ecirc;n kh&aacute;ch h&agrave;ng :    $!importinvoice.provider.node</td >
+      <td width="702">&#272;&#7883;a ch&#7881; :    $!importinvoice.provider.address</td>
+    </tr>
+    <tr>
+      <td height="21">MS kh&aacute;ch h&agrave;ng :    $!importinvoice.code</td >
+      <td>&nbsp;</td>
+    </tr>
+</table>
+
+<table border=1 cellpadding="0" cellspacing="0" width="100%"> 
+
+	<tr>
+	<td><strong>STT</strong></td>
+	<td><strong>T&ecirc;n thu&#7889;c </strong></td>
+	<td><strong>Th&agrave;nh ph&#7847;n </strong></td>
+	<td><strong>&#272;&#417;n v&#7883; </strong></td>
+	<td><strong>S&#7889; l&ocirc; </strong></td>
+	<td><strong>H&#7841;n d&ugrave;ng </strong></td>
+	<td><strong>VISA No </strong></td>
+	<td><strong>S&#7889; l&#432;&#7907;ng </strong></td>
+	<td><strong>Chi&#7871;t kh&#7845;u </strong></td>
+	<td><strong>&#272;&#417;n gi&aacute; </strong></td>
+	<td width="200"><strong>Th&agrave;nh ti&#7873;n </strong></td>
+	</tr>
+	#set($i=0)
+	#set($total=0)
+	#foreach($importinvoicedetail in $importinvoicedetails)
+	#set($i=$i+1)	
+	<tr>
+	  <td>$i</td>
+	  <td>$!importinvoicedetail.drug.node </td>
+	  <td>$!importinvoicedetail.drug.ingredient</td>
+	  <td>$!importinvoicedetail.drug.unit </td>
+	  <td>$!importinvoicedetail.batchnumber </td>
+	  <td>$!dateTool.format('dd/MM/yyyy',$!importinvoicedetail.expireddate)$!importinvoicedetail.expiredmonth</td>
+	  <td>$!importinvoicedetail.visaNo</td>
+	  <td>$!importinvoicedetail.quantity </td>
+	  <td>$!importinvoice.discount</td>
+	  <td>$numberTool.format('integer', $!importinvoicedetail.price)</td>
+	  <td>$numberTool.format('integer', $!importinvoicedetail.subtotal)</td>
+    </tr>
+	#end
+	<tr>
+	  <td colspan="10"><div align="center"><strong>T&#7893;ng</strong></div></td>
+	  <td><strong>$numberTool.format('integer', $importinvoice.total)</strong></td>
+    </tr>
+	<tr>
+	  <td colspan="10"><div align="center"><strong>VAT</strong> (<strong>$numberTool.format('integer', $!importinvoice.vat) </strong>%) </div></td>
+	  <td><strong>$numberTool.format('integer', $!totalvat) </strong></td>
+    </tr>
+	<tr>
+	  <td colspan="10"><div align="center"><strong>T&#7893;ng</strong><strong> + </strong><strong>VAT</strong> (<strong>$numberTool.format('integer', $!importinvoice.vat) </strong>%)
+	  </div></td>
+	  <td><strong>$numberTool.format('integer', $importinvoice.totalaftertax)  </strong></td>
+    </tr>
+</table>
+</div>
+<div id='hoanthuoc' style="display:none">
+  <table width='100%'>
+    #set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+    #set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+    <tr>
+        <td colspan="2"><div align="center" class="style4"><strong>H&Oacute;A &#272;&#416;N HO&Agrave;N THU&#7888;C </strong></div></td >
+    </tr>
+      <tr>
+        <td colspan="2"><div align="center">Ng&agrave;y:$!dateTool.format('dd/MM/yyyy',$importinvoice.date) - M&atilde; H&#272; ho&agrave;n thu&#7889;c : $!importinvoice.code </div></td >
+      </tr>
+      <tr>
+        <td width="581" height="21">Lo&#7841;i h&oacute;a &#273;&#417;n:    $!importinvoice.provider.node</td >
+        <td width="702">&#272;&#7883;a ch&#7881; :    $!importinvoice.druginvoice.address</td>
+      </tr>
+      <tr>
+        <td height="21">MS kh&aacute;ch h&agrave;ng :    $!importinvoice.druginvoice.code</td >
+        <td>T&ecirc;n kh&aacute;ch h&agrave;ng : $!importinvoice.druginvoice.node</td>
+      </tr>
+  </table>
+  <table border=1 cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td><strong>STT</strong></td>
+      <td><strong>T&ecirc;n thu&#7889;c </strong></td>
+      <td><strong>Th&agrave;nh ph&#7847;n </strong></td>
+      <td><strong>&#272;&#417;n v&#7883; </strong></td>
+      <td><strong>S&#7889; l&ocirc; </strong></td>
+      <td><strong>H&#7841;n d&ugrave;ng </strong></td>
+      <td><strong>VISA No </strong></td>
+      <td><strong>S&#7889; l&#432;&#7907;ng </strong></td>
+      <td><strong>Chi&#7871;t kh&#7845;u </strong></td>
+      <td><strong>&#272;&#417;n gi&aacute; </strong></td>
+      <td width="200"><strong>Th&agrave;nh ti&#7873;n </strong></td>
+    </tr>
+    #set($i=0)
+    #set($total=0)
+    #foreach($importinvoicedetail in $importinvoicedetails)
+    #set($i=$i+1)
+    <tr>
+      <td>$i</td>
+      <td>$!importinvoicedetail.drug.node </td>
+      <td>$!importinvoicedetail.drug.ingredient</td>
+      <td>$!importinvoicedetail.drug.unit </td>
+      <td>$!importinvoicedetail.batchnumber </td>
+      <td>$!dateTool.format('dd/MM/yyyy',$!importinvoicedetail.expireddate)$!importinvoicedetail.expiredmonth</td>
+      <td>$!importinvoicedetail.visaNo</td>
+      <td>$!importinvoicedetail.quantity </td>
+      <td>$!importinvoice.discount</td>
+      <td>$numberTool.format('integer', $!importinvoicedetail.price)</td>
+      <td>$numberTool.format('integer', $!importinvoicedetail.subtotal)</td>
+    </tr>
+    #end
+    <tr>
+      <td colspan="10"><div align="center"><strong>T&#7893;ng</strong></div></td>
+      <td><strong>$numberTool.format('integer', $importinvoice.total)</strong></td>
+    </tr>
+    <tr>
+      <td colspan="10"><div align="center"><strong>VAT</strong> (<strong>$numberTool.format('integer', $!importinvoice.vat) </strong>%) </div></td>
+      <td><strong>$numberTool.format('integer', $!totalvat) </strong></td>
+    </tr>
+    <tr>
+      <td colspan="10"><div align="center"><strong>T&#7893;ng</strong><strong> + </strong><strong>VAT</strong> (<strong>$numberTool.format('integer', $!importinvoice.vat) </strong>%) </div></td>
+      <td><strong>$numberTool.format('integer', $importinvoice.totalaftertax) </strong></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+<div id='footer'>
+	<table width='100%'> 
+	<tr> <td width="400" height="21">K&#7871; to&aacute;n d&#432;&#7907;c </td> 
+	<td width="450">D&#432;&#7907;c s&#297; </td> 
+	<td width="394" >Th&#7911; kho </td>
+	<td width="625" >Ng&#432;&#7901;i nh&#7853;n </td> 
+	</tr>
+  </table>
+</div>

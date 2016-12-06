@@ -1,0 +1,133 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='adduser'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divUser'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divUser').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('user')  
+</div>
+<br>
+<div>
+<select id='combouser' name='combouser'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='node'>$i18n.get('node')</option>
+	
+	<option value='password'>$i18n.get('password')</option>
+	
+	<option value='position'>$i18n.get('position')</option>
+	
+	<option value='fullname'>$i18n.get('fullname')</option>
+	
+	<option value='phone'>$i18n.get('phone')</option>
+	
+	<option value='cellphone'>$i18n.get('cellphone')</option>
+	
+	<option value='email'>$i18n.get('email')</option>
+	
+</select>
+<input name='searchuser' id='searchuser' onkeyup='makeGetRequestUserBySearch()' value='' onclick='clearSearchBox(searchuser)'>
+Search  or Filter
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestUserByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddUser(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tableuser' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineuserForm' name='inlineuserForm' action='userAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('password')</th>	
+	
+	<th>$i18n.get('position')</th>	
+	
+	<th>$i18n.get('fullname')</th>	
+	
+	<th>$i18n.get('phone')</th>	
+	
+	<th>$i18n.get('cellphone')</th>	
+	
+	<th>$i18n.get('email')</th>	
+	
+	<th>$i18n.get('room')</th>	
+	
+	<th>$i18n.get('department')</th>	
+	
+	<th>$i18n.get('warehouse')</th>	
+	
+	
+</tr>
+
+</theader>
+<tbody>
+#foreach($user in $users)
+	#if($user.id)
+	<tr class='tableitem' id='tr$user.id' onDblClick="javascript:makeGetRequestAddUser($user.id, 'edit')">
+	<td id='td$user.id'>
+	<a href="javascript:makeGetRequestAddUser($user.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('userDelete.action?id=$user.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$user.id').style.background ='#CCCCCC'; document.getElementById('td$user.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('userView.action?id=$user.id', 'View user', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuuser$user.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuuser$user.id').style.display='none'"  value='>>' >  	
+
+	<div id='menuuser$user.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+		 <a href='javascript:makeGetRequestUserroleByUser($user.id)'> userrole </a> &nbsp;
+		 <br>
+		
+	</div>
+	
+	</td>	
+		
+		<td>$!user.node</td>
+		
+		<td>$!user.password</td>
+		
+		<td>$!user.position</td>
+		
+		<td>$!user.fullname</td>
+		
+		<td>$!user.phone</td>
+		
+		<td>$!user.cellphone</td>
+		
+		<td>$!user.email</td>
+		
+		<td>$!user.room.node</td>
+		
+		<td>$!user.department.node</td>
+		
+		<td>$!user.warehouse.node</td>
+		
+		
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddUser(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

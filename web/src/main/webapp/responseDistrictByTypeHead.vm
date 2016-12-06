@@ -1,0 +1,8 @@
+
+<select name='cbodistrict' id='cbodistrict' multiple='multiple' onkeypress="formname='encounterForm'; typehead = 'district'; nextfield='savedistrict';">
+#foreach($district in $districts)
+<option value='$district.id'>$district.node</option>
+#end						
+<option value=''></option>
+</select>
+

@@ -1,0 +1,57 @@
+
+<div id='addpackagedetail'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addpackagedetail').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('packagedetail')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='packagedetailForm' name='packagedetailForm' action='packagedetailAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('serpackage'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($serpackage_id = $ses.getAttribute('serpackage_id'))
+			#set ($serpackage_node = $ses.getAttribute('serpackage_node'))
+			
+			<input type='hidden' id='serpackage' name='serpackage'  size='1' value='$!serpackage_id' onchange='makeGetRequestSerpackageByTypeHead()' onkeypress="formname='packagedetailForm'; nextfield='textserpackage';"> 
+			
+			<input type='text' id='textserpackage' name='textserpackage' size='18' value='$!serpackage_node' onkeypress="formname='packagedetailForm'; nextfield='cboserpackage'; isSelect=true;"  onkeyup='makeGetRequestSerpackageByTypeHead()' onclick='makeGetRequestSerpackageByTypeHead()'>	
+			
+			<div id='divserpackage' style='display:none;position:absolute'  onkeypress="formname='packagedetailForm'; nextfield='textservice';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('serpackageList.action', 'Add serpackage', 'width=400, height=300')"> ... </a>
+		
+			<td><label>$i18n.get('service'):</label> </td>
+			<td>
+			#set ($ses = $req.getSession())
+					
+			#set ($service_id = $ses.getAttribute('service_id'))
+			#set ($service_node = $ses.getAttribute('service_node'))
+			
+			<input type='hidden' id='service' name='service'  size='1' value='$!service_id' onchange='makeGetRequestServiceByTypeHead()' onkeypress="formname='packagedetailForm'; nextfield='textservice';"> 
+			
+			<input type='text' id='textservice' name='textservice' size='18' value='$!service_node' onkeypress="formname='packagedetailForm'; nextfield='cboservice'; isSelect=true;"  onkeyup='makeGetRequestServiceByTypeHead()' onclick='makeGetRequestServiceByTypeHead()'>	
+			
+			<div id='divservice' style='display:none;position:absolute'  onkeypress="formname='packagedetailForm'; nextfield='savepackagedetail';"></div>							
+			<a href='javascript:void(0)' onclick="window.open('serviceList.action', 'Add service', 'width=400, height=300')"> ... </a>
+		
+<tr><td>
+<input type='button' id='savepackagedetail' value="  $i18n.get('save')  " onkeydown="javascript:validatePackagedetail('add', document.getElementById('packagedetailForm') )"  onclick="javascript:validatePackagedetail('add', document.getElementById('packagedetailForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

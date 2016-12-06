@@ -1,0 +1,178 @@
+
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addreceipt'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divReceipt'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divReceipt').innerHTML=''" value=' X '>  
+$i18n.get('list') $i18n.get('receipt')  
+</div>
+<br>
+<div>
+<select id='comboreceipt' name='comboreceipt'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='code'>$i18n.get('code')</option>
+	
+	<option value='date'>$i18n.get('date')</option>
+	
+	<option value='encounter'>$i18n.get('encounter')</option>
+	
+	<option value='node'>$i18n.get('node')</option>
+	
+	<option value='birthday'>$i18n.get('birthday')</option>
+	
+	<option value='age'>$i18n.get('age')</option>
+	
+	<option value='address'>$i18n.get('address')</option>
+	
+	<option value='phone'>$i18n.get('Phone')</option>
+	
+	<option value='paymenttype'>$i18n.get('paymenttype')</option>
+	
+	<option value='paymentmethod'>$i18n.get('paymentmethod')</option>
+	
+	<option value='payfor'>$i18n.get('payfor')</option>
+	
+	<option value='total'>$i18n.get('total')</option>
+	
+	<option value='insurancepay'>$i18n.get('insurancepay')</option>
+	
+	<option value='discount'>$i18n.get('Discount')</option>
+	
+	<option value='actualpay'>$i18n.get('actualpay')</option>
+	
+	<option value='user'>$i18n.get('user')</option>
+	
+</select>
+<input name='searchreceipt' id='searchreceipt' onkeyup='makeGetRequestReceiptBySearch()' value='' onclick='clearSearchBox(searchreceipt)'>
+Search  or Filter
+
+
+				<input type='text' id='filterdate' name='filterdate' value='$today'>				
+				
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestReceiptByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddReceipt(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tablereceipt' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlinereceiptForm' name='inlinereceiptForm' action='receiptAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('code')</th>	
+	
+	<th>$i18n.get('date')</th>	
+	
+	<th>$i18n.get('encounter')</th>	
+	
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('birthday')</th>	
+	
+	<th>$i18n.get('age')</th>	
+	
+	<th>$i18n.get('address')</th>	
+	
+	<th>$i18n.get('Phone')</th>	
+	
+	<th>$i18n.get('paymenttype')</th>	
+	
+	<th>$i18n.get('paymentmethod')</th>	
+	
+	<th>$i18n.get('payfor')</th>	
+	
+	<th>$i18n.get('total')</th>	
+	
+	<th>$i18n.get('insurancepay')</th>	
+	
+	<th>$i18n.get('Discount')</th>	
+	
+	<th>$i18n.get('actualpay')</th>	
+	
+	<th>$i18n.get('user')</th>	
+	
+</tr>
+
+
+
+</theader>
+<tbody>
+#foreach($receipt in $receipts)
+	#if($receipt.id)
+	<tr class='tableitem' id='tr$receipt.id' onDblClick="javascript:makeGetRequestAddReceipt($receipt.id, 'edit')">
+	<td id='td$receipt.id'>
+	<a href="javascript:makeGetRequestAddReceipt($receipt.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('receiptDelete.action?id=$receipt.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$receipt.id').style.background ='#CCCCCC'; document.getElementById('td$receipt.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('receiptView.action?id=$receipt.id', 'View receipt', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menureceipt$receipt.id').style.display='block'; " ondblclick="javascript:document.getElementById('menureceipt$receipt.id').style.display='none'"  value='>>' >  	
+
+	<div id='menureceipt$receipt.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+		 <a href='javascript:makeGetRequestReceiptdetailByReceipt($receipt.id)'> receiptdetail </a> &nbsp;
+		 <br>
+		
+	</div>
+	
+	</td>	
+		
+		<td>$!receipt.code</td>
+		
+		<td>$!receipt.date</td>
+		
+		<td>$!receipt.encounter.node</td>
+		
+		<td>$!receipt.node</td>
+		
+		<td>$!receipt.birthday</td>
+		
+		<td>$!receipt.age</td>
+		
+		<td>$!receipt.address</td>
+		
+		<td>$!receipt.phone</td>
+		
+		<td>$!receipt.paymenttype.node</td>
+		
+		<td>$!receipt.paymentmethod</td>
+		
+		<td>$!receipt.payfor</td>
+		
+		<td>$!receipt.total</td>
+		
+		<td>$!receipt.insurancepay</td>
+		
+		<td>$!receipt.discount</td>
+		
+		<td>$!receipt.actualpay</td>
+		
+		<td>$!receipt.user.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddReceipt(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

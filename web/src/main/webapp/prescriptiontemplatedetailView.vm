@@ -1,0 +1,50 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+<div id='container'>
+<h2>$i18n.get('prescriptiontemplatedetail')</h2>
+<br>
+<table>
+
+	<tr>
+	<td>$i18n.get('prescriptiontemplate'):</td>
+	<td>$prescriptiontemplatedetail.prescriptiontemplate</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('drug'):</td>
+	<td>$prescriptiontemplatedetail.drug</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('quantity'):</td>
+	<td>$prescriptiontemplatedetail.quantity</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('timeuse'):</td>
+	<td>$prescriptiontemplatedetail.timeuse</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('quantityuse'):</td>
+	<td>$prescriptiontemplatedetail.quantityuse</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('note'):</td>
+	<td>$prescriptiontemplatedetail.note</td>
+	</tr>
+	
+</table>
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>

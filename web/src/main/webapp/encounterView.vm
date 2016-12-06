@@ -1,0 +1,423 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+   
+  #set ($ses = $req.getSession())
+  #set ($user = $ses.getAttribute('user'))
+  #set ($warehouse = $ses.getAttribute('selectedwarehouse'))
+  
+  
+<script type="text/javascript">
+var http = createRequestObject();
+
+var d = new Date();
+var dstring = d.getMonth()+1 +'/'+ d.getDate()+'/'+d.getFullYear();
+function createRequestObject() {
+    var tmpXmlHttpObject;
+    if (window.XMLHttpRequest) { 
+        tmpXmlHttpObject = new XMLHttpRequest();
+    } else if (window.ActiveXObject) { 
+        tmpXmlHttpObject = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+ 
+    return tmpXmlHttpObject;
+}
+
+var http = createRequestObject();
+
+function makeGetRequestAddDrug()
+{
+	http.open('get', 'druginvoiceAdd.action?encounter=$encounter.id&warehouse=$warehouse.id&type=HB&user=$user.id'); 
+	http.onreadystatechange = processResponseAddDrug;
+	http.send(null);
+}
+
+function processResponseAddDrug()
+{
+
+	if (http.readyState == 4)
+	{
+		var response = http.responseText;
+		if (!isNaN(response))
+		{ 
+			document.getElementById('msg').innerHTML = "<a href='druginvoiceView.action?id="+response+"'>View druginvoice</a>";
+			//window.open("druginvoiceView.action?id="+response, 'View', 'width=500;height=500');
+			window.location.reload();
+		}
+		else
+			document.getElementById('msg').innerHTML = response;
+		
+	}
+}
+
+function makeGetRequestAddReceipt()
+{
+	http.open('get', 'receiptAdd.action?encounter=$encounter.id&payfor=DV&paymentmethod=TT&user=$user.id'); 
+	http.onreadystatechange = processResponseAddReceipt;
+	http.send(null);
+}
+
+function processResponseAddReceipt()
+{
+
+	if (http.readyState == 4)
+	{
+		var response = http.responseText;
+		if (!isNaN(response)) 
+		{
+			document.getElementById('msg').innerHTML = "<a href='receiptView.action?id="+response+"'>View receipt</a>";
+			//window.open("receiptView.action?id="+response, 'View', 'width=500;height=500');
+			window.location.reload();
+		}
+		else
+			document.getElementById('msg').innerHTML = response;
+		
+	}
+}
+
+</script>
+
+
+<body onLoad="document.getElementById('btnthekhachhang').focus();">
+<div id='header'>
+  <p>
+    <input id='btnthekhachhang' name="button" type="button" onClick="window.open('clientView.action?id=$encounter.client.id', 'In the KH', 'width=500;height=300');" value="$i18n.get('customercard')">
+    
+    <input name="button" type="button" onClick="document.getElementById('cost').style.display='none'; document.getElementById('prescription').style.display='none'; document.getElementById('guide').style.display='block';" value="$i18n.get('examinationticket')">
+    
+    <input type="button" value="$i18n.get('treatmentcost')" onClick="document.getElementById('prescription').style.display='none'; document.getElementById('cost').style.display='block'; document.getElementById('guide').style.display='none';">
+    
+    <input type="button" value="$i18n.get('prescription')" onClick="document.getElementById('cost').style.display='none'; document.getElementById('prescription').style.display='block'; document.getElementById('guide').style.display='none';">
+    
+   
+    <input id='button' name="button22" type="button"  value="$i18n.get('sendmail')"onClick="window.open('sendMail.action?clientId=$encounter.client.id', 'Gui email', 'width=500;height=300');">
+    <input id='btnfile' name="button" type="button"  value="$i18n.get('excelprint')"onClick="window.open('C:/wamp/jetty-6.1.10/webapps/jhmsdata/input.xls', 'In the KH', 'width=500;height=300');">
+
+    
+    <input type="button" value="$i18n.get('print')" onClick="document.getElementById('header').style.display='none';window.print();self.close();">
+  </p>
+  <p><img src="../barbecue/barcode?data=$encounter.code" width="150" height="50"/></p>
+  <table width="747">
+	<tr>
+	  <td><strong>C&ocirc;ng ty TNHH M&#7929; T&ugrave;ng </strong><br></td >
+	  <td></td>
+    </tr>
+	<tr>
+	  <td>142 L&ecirc; H&#7891;ng Phong</td >
+	  <td></td>
+    </tr>
+	<tr>
+	  <td>Tel: (+84) 08.39240888 </td >
+	  <td></td>
+
+
+
+    </tr>
+	<tr> <td >www.pkmytung.com
+	  </td >
+	<td width="366"></td> 
+	</tr>
+  </table>
+</div>
+<hr>
+
+<div id='outpatientsheet' style="display:none">
+<h2>PHI&#7870;U KH&Aacute;M CH&#7918;A B&#7878;NH NGO&#7840;I TR&Uacute; BHYT </h2>
+<br>
+<table width="500">
+<tr class='formlabel'>
+			<td><label>H&#7885; t&ecirc;n: $!encounter.client.node </label></td> 
+</tr>		
+	<tr class='formlabel'>
+			<td><label>&#272;&#7883;a ch&#7881;: $!encounter.client.address, $!encounter.client.code  ...........................................</label></td> 
+	</tr>		
+	<tr class='formlabel'>
+			<td><label>M&atilde; s&#7889; phi&#7871;u KCB: $!encounter.client.insurancenumber.....................................</label></td> 
+	</tr>		
+	<tr class='formlabel'>
+			<td><label>Th&#7901;i h&#7841;n s&#7917; d&#7909;ng: T&#7915; ng&agrave;y: $!encounter.client.joineddate.............. &#272;&#7871;n ng&agrave;y: $!encounter.client.expireddate.............</label></td> 
+	</tr>		
+	<tr class='formlabel'>
+			<td><label>N&#417;i &#273;&#259;ng k&yacute; KCB ban &#273;&#7847;u: ........................................Ng&agrave;y kh&aacute;m: $!encounter.date.............................. </label></td> 
+	</tr>		
+	<tr class='formlabel'>
+			<td><label>Ch&#7849;n &#273;o&aacute;n: $!encounter.icd.node.......................................</label></td> 
+	</tr>
+	<tr class='formlabel'>
+	  <td>&nbsp;</td>
+    </tr>
+	<tr class='formlabel'>
+	  <td>&nbsp;</td>
+    </tr>		
+</table>
+
+<p>T&#7893;ng chi ph&iacute; th&#7921;c t&#7871;: $total </p>
+<p>BHXH thanh to&aacute;n: $insurancepay </p>
+<p>C&ograve;n l&#7841;i: $actualpay </p>
+<p>B&#7857;ng ch&#7919;: $actualpay </p>
+<table width="500">
+  <tr class='formlabel'>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  
+  <td><div align="center">Ng&agrave;y: $!dateTool.format('dd/MM/yyyy',$!encounter.date)</div></td>
+    </tr>
+  <tr class='formlabel'>
+    <td>B&#7879;nh nh&acirc;n</td>
+    <td>K&#7871; to&aacute;n vi&#7879;n ph&iacute; </td>
+    <td>Gi&aacute;m &#273;&#7883;nh vi&ecirc;n </td>
+    </tr>
+</table>
+<p>&nbsp;  </p>
+<p>&nbsp;</p>
+</div>
+
+<div id='cost' style="display:block">
+<h2>$i18n.get('outpatientfeelist')</h2>
+
+  
+  
+  #if($encounter.druginvoices.size() == 0 && $encounter.prescriptiondetails.size() > 0)
+		<input name="button2" type='button' onClick= "makeGetRequestAddDrug(); this.disabled = true;" value="$i18n.get('paymentdrug')">
+  #end
+  
+  #if ($encounter.druginvoices.size()>0)
+  	Xem hoa don thuoc:
+  	#foreach($di in $encounter.druginvoices)
+		<a href='#' onClick="window.open('druginvoiceView.action?id='+$di.id, 'Xem HD thuoc', 'width=400;height=400')">$di.code</a>
+	#end
+  #end
+  
+  #foreach($ind in $encounter.indicationdetails)
+  	#if($ind.paid == 'N')
+		#set($paid = 'N')
+	#end
+  #end
+  
+  #if( $paid == 'N')
+		<input type='button' value="$i18n.get('paymentfee')" onclick= "makeGetRequestAddReceipt(); this.disabled = true;">
+  #end
+  
+  #if ($encounter.receipts.size() > 0 )
+  Xem hoa don dich vu:
+  	#foreach($re in $encounter.receipts)
+		<a href='#' onClick="window.open('receiptView.action?id='+$re.id, 'Xem HD thuoc', 'width=400;height=400')">$re.code</a>
+	#end
+  #end
+
+<div id='msg'></div>
+
+<hr>
+<table width="100%">
+<tr class='formlabel'>
+			<td><label><strong>$i18n.get('name'):</strong> $!encounter.client.node. <strong>$i18n.get('DoB'):</strong> $!encounter.client.age. <strong>$i18n.get('sex'):</strong> $encounter.client.sex</label></td> 
+</tr>		
+	<tr class='formlabel'>
+	  <td><label><strong>$i18n.get('address'):</strong> $!encounter.client.address, $!encounter.client.ward.node</label></td> 
+	</tr>		
+	<tr class='formlabel'>
+			<td><label><strong>$i18n.get('insurancecode')</strong>: $!encounter.client.insurancenumber</label></td> 
+	</tr>		
+	<tr class='formlabel'>
+			<td><label><strong>$i18n.get('dateuse'). $i18n.get('fromdate')</strong>: $!dateTool.format('dd-MM-yyyy',$!encounter.client.joineddate)<strong>$i18n.get('todate'):</strong> $!dateTool.format('dd-MM-yyyy',$!encounter.client.expireddate)</label></td> 
+	</tr>		
+	<tr class='formlabel'>
+			<td><label><strong>$i18n.get('initialexaminationplace'):</strong> $i18n.get('DoB'): $!dateTool.format('dd-MM-yyyy',$!encounter.date) </label></td> 
+	</tr>		
+	<tr class='formlabel'>
+			<td><label><strong>$i18n.get('diagnosis'):</strong> $!encounter.icd.node</label></td> 
+	</tr>
+	<tr class='formlabel'>
+	  <td><strong>$i18n.get('doctorname'):</strong> $!encounter.user.fullname</td>
+
+    </tr>
+	<tr class='formlabel'>
+	  <td>&nbsp;</td>
+    </tr>
+</table>
+<table  width="100%" cellpadding="1" cellspacing="1" bgcolor='#999999'>
+  <tr class='tableitemleft'  style=" font-weight:bold">
+    <td>I</td>
+    <td>$i18n.get('drugname') </td>
+    <td>$i18n.get('unit') </td>
+    <td>$i18n.get('quantity')</td>
+    <td>$i18n.get('unitprice')</td>
+    <td>$i18n.get('subamount')</td>
+	<td>$i18n.get('subtotal')</td>
+	
+  </tr>
+  #set($i=0)
+	  #foreach($pd in $encounter.prescriptiondetails)
+	  #set($i=$i+1)
+	  <tr class='tableitemleft'>
+		<td>$i</td>
+		<td>$!pd.drug.node</td>
+		<td>$!pd.drug.unit</td>
+		<td>$!pd.quantity</td>
+		<td>$!pd.price</td>		
+		<td><script>document.write($pd.quantity*$pd.price);</script></td>
+		<td>$!pd.paid</td>
+	  </tr>
+	#end
+    <tr class='tableitemleft'>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr class='tableitemleft'  style=" font-weight:bold">
+    <td>II</td>
+    <td>$i18n.get('servicetestdiagnosisimage')</td>
+    <td>$i18n.get('unit')</td>
+    <td>$i18n.get('quantity')</td>
+    <td>$i18n.get('unitprice')</td>
+    <td>$i18n.get('subamount')</td>
+    <td>&nbsp;</td>
+    </tr>
+  #set($i=0)
+	  #foreach($ind in $encounter.indicationdetails)
+	  #set($i=$i+1)
+		  <tr class='tableitemleft'>
+			<td>$i</td>
+			<td>$!ind.service.node ($!ind.service.paid)</td>
+			<td>$!ind.service.unit</td>
+			<td>$!ind.quantity</td>
+			<td>$!ind.price</td>
+			#set($subtotal = $ind.quantity*$ind.price)
+			<td><script>document.write($ind.quantity*$ind.price);</script></td>
+			<td>$!ind.paid</td>
+		  </tr>
+  	#end
+	#set($total = $receipt.total)
+	#set($insurancepay = $receipt.insurancepay)
+	#set($actualpay = $receipt.actualpay)	
+  <tr class='tableitemleft'>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<p>$i18n.get('realpayment'): $!encounter.totalamount </p>
+<table width="100%">
+  <tr class='formlabel'>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+   
+  <td>$i18n.get('date'): $!dateTool.format('dd/MM/yyyy',$!encounter.date)</td>
+    </tr>
+  <tr class='formlabel'>
+    <td>$i18n.get('customer') </td>
+    <td>$i18n.get('accountantfee')</td>
+    <td>$i18n.get('director') </td>
+    </tr>
+</table>
+</div>
+
+<div id="prescription" style="display:none">
+<h2>TOA THU&#7888;C </h2>
+H&#7885; t&ecirc;n: $!encounter.client.node ($!encounter.client.sex, $!dateTool.format('dd/MM/yyyy',$!encounter.client.birthday))
+<br>
+&#272;&#7883;a ch&#7881;: $!encounter.client.address
+<br>	
+<img src="../barbecue/barcode?data=$!encounter.code" width="150" height="50"/>
+<br>
+<table  width="100%" cellpadding="1" cellspacing="1" bgcolor='#999999'>
+   <tr class='tableitemleft'>
+    <td>I</td>
+    <td>T&ecirc;n thu&#7889;c </td>
+    <td>&#272;&#417;n v&#7883; </td>
+    <td>S&#7889; l&#432;&#7907;ng </td>
+    <td>S&#7889; l&#7847;n/ng&agrave;y </td>
+    <td>S&#7889; vi&ecirc;n/l&#7847;n </td>
+  </tr>
+  #set($i=0)
+  #foreach($pd in $encounter.prescriptiondetails)
+  #if ($!pd)
+  #set($i=$i+1)
+  <tr class='tableitemleft'>
+    <td>$i</td>
+    <td>$!pd.drug.node</td>
+    <td>$!pd.drug.unit</td>
+    <td>$!pd.quantity</td>
+    <td>$!pd.timeuse</td>
+    <td>$!pd.quantityuse</td>
+  </tr>
+  	#end
+	#end  #set($i=0)
+  #foreach($indicationdetail in $encounter.indicationdetails)
+  #if ($!indicationdetail)
+  #set($i=$i+1)
+  	#end
+	#end
+</table>
+<table width="100%">
+<!--
+<tr><td colspan="2">T&#7893;ng ti&#7873;n:</td></tr>
+<tr>
+  <td colspan="2">BHYT tr&#7843;: </td>
+</tr>
+<tr>
+  <td colspan="2">C&ograve;n l&#7841;i: </td>
+</tr>
+-->
+<tr>
+  <td width="294">&nbsp;</td>
+  
+
+  <td width="194">Ng&agrave;y: $!dateTool.format('dd/MM/yyyy',$!encounter.date)</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>B&aacute;c s&#297;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>$!encounter.user.node</td>
+</tr>
+</table>
+</div>
+
+<div id="guide" style="display:none"> 
+<h2>PHI&#7870;U KH&Aacute;M </h2>
+H&#7885; t&ecirc;n: $!encounter.client.node ($!encounter.client.sex,$!dateTool.format('dd/MM/yyyy',$!encounter.client.birthday) )
+<br>
+&#272;&#7883;a ch&#7881;: $!encounter.client.address
+<br>
+Ph&ograve;ng kh&aacute;m: $!encounter.room.node<br>
+Gi&#7901; kh&aacute;m: $!encounter.time ($!dateTool.format('dd-MM-yyyy',$!encounter.date)) <br>
+S&#7889; ng&#432;&#7901;i &#273;&#7907;i kh&aacute;m tr&#432;&#7899;c: $!waitingnumber <br>
+<br>
+<img src="../barbecue/barcode?data=$!encounter.code" width="150" height="50"/>
+<hr>
+<em>H&#432;&#7899;ng d&#7851;n s&#417; &#273;&#7891; ph&ograve;ng kh&aacute;m: </em>
+<li>Ph&ograve;ng kh&aacute;m 1, 2: &#273;i thang m&aacute;y ho&#7863;c b&#7897; l&ecirc;n l&#7847;u 1
+<li>Ph&ograve;ng kh&aacute;m 3, 4: &#273;i thang m&aacute;y ho&#7863;c b&#7897; l&ecirc;n l&#7847;u 2
+
+<li>Ph&ograve;ng kh&aacute;m nha: &#273;i thang m&aacute;y ho&#7863;c b&#7897; l&ecirc;n l&#7847;u 3
+
+<li>Ph&ograve;ng v&#7853;t l&yacute; tr&#7883; li&#7879;u: &#273;i thang m&aacute;y ho&#7863;c b&#7897; l&ecirc;n l&#7847;u 4
+
+<li>Ph&ograve;ng h&#7885;p v&agrave; v&#259;n ph&ograve;ng: &#273;i thang m&aacute;y ho&#7863;c b&#7897; l&ecirc;n l&#7847;u 5
+
+<br>
+<em>H&#432;&#7899;ng d&#7851;n qui tr&igrave;nh kh&aacute;m: </em>  
+<li>1. &#272;&#259;ng k&yacute; kh&aacute;m t&#7841;i qu&#7847;y ti&#7871;p t&acirc;n (t&#7847;ng tr&#7879;t) 
+<li>2. V&agrave;o ph&ograve;ng kh&aacute;m v&agrave; ng&#7891;i &#273;&#7907;i, BS s&#7869; ra ngo&agrave;i v&agrave; m&#7901;i b&#7841;n v&agrave;o ph&ograve;ng 
+<li>3. Kh&aacute;m v&agrave; k&ecirc; toa (ho&#7863;c ch&#7881; &#273;&#7883;nh x&eacute;t nghi&#7879;m) 
+<li>4. &#272;&oacute;ng ti&#7873;n t&#7841;i qu&#7847;y vi&#7879;n ph&iacute; (t&#7847;ng l&#7917;ng) + nh&#7853;n toa thu&#7889;c 
+<li>5. &#272;&oacute;ng ti&#7873;n mua thu&#7889;c v&agrave; nh&#7853;n thu&#7889;c t&#7841;i qu&#7847;y.
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+

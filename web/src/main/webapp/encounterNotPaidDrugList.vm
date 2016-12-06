@@ -1,0 +1,65 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+.style1 {color: #FF0000}
+-->
+</style>
+</head>
+
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+#parse("mycalendar.vm")
+<script>
+function convertDate(d)
+{
+da = d.split('/');
+return da[1]+'/'+da[0]+'/'+da[2];
+}
+</script>
+<h2>$i18n.get('patientlist') </h2>
+<form id="frm" name="frm" action="encounterNotPaidDrugList.action">
+$i18n.get('encountercode'): 
+<input name='encountercode' id='encountercode' >
+<input type="submit" value="T&igrave;m ki&#7871;m" onclick='document.frm.submit();'> 
+Ki&#7871;m theo ng&agrave;y
+ : 
+ <input type='text' id='filterDate' name='filterDate' value='' onClick="GetDate(this);">				
+<input name='button2' type='button' onClick="document.frm.filterDate.value=convertDate(document.frm.filterDate.value);document.frm.submit();" value='L&#7885;c danh s&aacute;ch '>
+
+</form>
+<br>
+<table width="100%" border=0  cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<tr class='tableheader'>
+  <td width="8%" >$i18n.get('STT')</td>
+  <td width="11%" >$i18n.get('node')</td>
+  <td width="12%">$i18n.get('address')</td>
+  <td width="10%" >$i18n.get('age')</td>
+  <td width="20%">B&aacute;c s&#297;&nbsp;</td>
+  <td width="43%">&nbsp;</td>
+  <td width="5%">T&#7893;ng ti&#7873;n thu&#7889;c </td>
+    <td width="5%">&nbsp;</td>
+</tr>
+#set($i=0)
+#foreach($encounter in $encounters)
+#set($i = $i+1)
+<tr class='tableitem'>
+<td>$i</td>
+<td>$!encounter.client.node - <span class="style1">$!encounter.prepaidCard</span></td>
+<td>$!encounter.client.address </td>
+<td>$!encounter.client.age </td>
+<td>$!encounter.user.fullname</td>
+<script>total=0;</script>
+<td>#foreach($pd in $encounter.prescriptiondetails)
+	
+   $pd.drug.node (SL :<strong>$pd.quantity</strong> - DG :<strong>$numberTool.format('integer' ,$pd.price)</strong>) - #if($pd.drug.drugGroup.id == 28) <span class="style1">$!pd.note</span> #end <br>
+	<script>total+=$pd.quantity*$pd.price</script>
+	
+   #end</td>
+<td><strong><script>document.write(total);</script></strong></td>
+<td>
+<input type='button' value='L&#7845;y toa' onClick="opener.document.getElementById('encounter').value = '$encounter.id'; opener.document.getElementById('node').value = '$encounter.client.node'; opener.document.getElementById('address').value = '$encounter.client.address'; self.close();"></td>
+</tr>
+
+#end		
+</table>

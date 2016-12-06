@@ -1,0 +1,4 @@
+
+#foreach($solving in $solvings)
+	$solving.id
+#end

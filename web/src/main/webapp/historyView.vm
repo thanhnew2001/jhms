@@ -1,0 +1,155 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+<div id='container'>
+<h2>$i18n.get('history')</h2>
+<br>
+<table>
+
+	<tr>
+	<td>$i18n.get('client'):</td>
+	<td>$history.client</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('father'):</td>
+	<td>$history.father</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('mother'):</td>
+	<td>$history.mother</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('sibling'):</td>
+	<td>$history.sibling</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('partner'):</td>
+	<td>$history.partner</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('offspring'):</td>
+	<td>$history.offspring</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('cancer'):</td>
+	<td>$history.cancer</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('tuberculosis'):</td>
+	<td>$history.tuberculosis</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('diabetes'):</td>
+	<td>$history.diabetes</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('highbloodpressure'):</td>
+	<td>$history.highbloodpressure</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('heartproblem'):</td>
+	<td>$history.heartproblem</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('stroke'):</td>
+	<td>$history.stroke</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('epilepsi'):</td>
+	<td>$history.epilepsi</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('mentalillness'):</td>
+	<td>$history.mentalillness</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('sucide'):</td>
+	<td>$history.sucide</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('breastexamdate'):</td>
+	<td>$history.breastexamdate</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('breastexamresult'):</td>
+	<td>$history.breastexamresult</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('cadiacechodate'):</td>
+	<td>$history.cadiacechodate</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('cadiacechoresult'):</td>
+	<td>$history.cadiacechoresult</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('gynexamdate'):</td>
+	<td>$history.gynexamdate</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('gynexamresult'):</td>
+	<td>$history.gynexamresult</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('prostateexamdate'):</td>
+	<td>$history.prostateexamdate</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('prostateexamresult'):</td>
+	<td>$history.prostateexamresult</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('rectalexamdate'):</td>
+	<td>$history.rectalexamdate</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('rectalexamresult'):</td>
+	<td>$history.rectalexamresult</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('sigmoiddate'):</td>
+	<td>$history.sigmoiddate</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('sigmoidresult'):</td>
+	<td>$history.sigmoidresult</td>
+	</tr>
+	
+</table>
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>

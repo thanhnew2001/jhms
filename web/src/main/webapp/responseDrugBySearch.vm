@@ -1,0 +1,50 @@
+
+<form name='drugForm' action='drugAdd.action' class='niceform' method='POST'>
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('ingredient')</th>
+	<th>$i18n.get('unit')</th>
+	<th>$i18n.get('indication')</th>
+	<th>$i18n.get('price')</th>
+	<th>$i18n.get('companyprice')</th>
+	<th>$i18n.get('insurancepay')</th>
+	<th>$i18n.get('forprescription')</th>
+	<th>$i18n.get('druggroup')</th>	
+</tr>
+</theader>
+<tbody>
+#foreach($drug in $drugs)
+	#if($drug.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddDrug($drug.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddDrug($drug.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='#' onclick="window.open('drugDelete.action?id=$drug.id', 'Delete', 'height=100;width=100'); document.reload();"><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('drugView.action?id=$drug.id', 'View drug', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menudrug$drug.id').style.display='block'; " ondblclick="javascript:document.getElementById('menudrug$drug.id').style.display='none'"  value='>>' >  
+	
+	<div id='menudrug$drug.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">	</div>	</td>
+	
+		
+		<td>$!drug.node</td>
+		
+		<td>$!drug.ingredient</td>
+		<td>$!drug.unit</td>
+		<td>$!drug.indication</td>
+		<td>$numberTool.format('integer' ,$!drug.price)</td>
+		<td>$numberTool.format('integer' ,$!drug.companyprice)</td>
+		<td>$!drug.insurance</td>
+		<td>$!drug.forprescription</td>
+		<td>$!drug.drugGroup.node</td>
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

@@ -1,0 +1,101 @@
+<style type="text/css">
+<!--
+.style1 {color: #FF0000}
+-->
+</style>
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+
+<form name='receiptForm' action='receiptAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('code')</th>	
+	
+	<th>$i18n.get('date')</th>	
+	
+	<th>$i18n.get('encounter')</th>	
+	
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('birthday')</th>	
+	
+	<th>$i18n.get('age')</th>	
+	
+	<th>$i18n.get('address')</th>	
+	
+	<th>$i18n.get('phone')</th>	
+	
+	<th>$i18n.get('paymenttype')</th>	
+	
+	<th>$i18n.get('paymentmethod')</th>	
+	
+	<th>$i18n.get('payfor')</th>	
+	
+	<th>$i18n.get('total')</th>	
+	
+	<th>$i18n.get('user')</th>	
+	
+</tr>
+
+</theader>
+<tbody>
+#foreach($receipt in $receipts)
+	#if($receipt.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddReceipt($receipt.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddReceipt($receipt.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('receiptDelete.action?id=$receipt.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$receipt.id').style.background ='#CCCCCC'; document.getElementById('td$receipt.id').style.visibility='hidden'} ">
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('receiptDelete.action?id=$receipt.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$receipt.id').style.background ='#CCCCCC'; document.getElementById('td$receipt.id').style.visibility='hidden'} ">
+	
+	<a href='javascript:void(0)' onclick="window.open('receiptView.action?id=$receipt.id', 'View receipt', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menureceipt$receipt.id').style.display='block'; " onDblClick="javascript:document.getElementById('menureceipt$receipt.id').style.display='none'"  value='>>' >  
+	
+	<div id='menureceipt$receipt.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onClick="this.style.display='none'">
+ 		
+		 <a href='javascript:makeGetRequestReceiptdetailByReceipt($receipt.id)'> receiptdetail </a> &nbsp;
+		 <br>
+		
+	</div>
+	</td>
+	
+		
+		<td>$!receipt.code</td>
+		
+		<td>$!dateTool.format('dd-MM-yyyy',$!receipt.date)</td>
+		
+		<td>$!receipt.encounter.node</td>
+		
+	  <td>$!receipt.node <br>
+	    <span class="style1">$!receipt.prepaidCard $!receipt.encounter.promotionCode</span></td>
+		
+		<td>$!dateTool.format('dd-MM-yyyy',$!receipt.birthday)</td>
+		
+		<td>$!receipt.encounter.client.age</td>
+		
+		<td>$!receipt.address</td>
+		
+		<td>$!receipt.encounter.client.phone</td>
+		
+		<td>$!receipt.paymenttype.node</td>
+		
+		<td>$!receipt.paymentmethod - $!receipt.prepaidCard</td>
+		
+		<td>$!receipt.payfor</td>
+		
+		<td>$numberTool.format('integer' ,$!receipt.total)</td>	
+
+		
+		<td>$!receipt.user.fullname</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

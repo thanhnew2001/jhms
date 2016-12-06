@@ -1,0 +1,207 @@
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+	tinyMCE.init({
+		mode : "textareas",
+		theme : "simple"
+	});
+</script>
+
+
+<script type="text/javascript">
+var http = createRequestObject();
+
+var d = new Date();
+var dstring = d.getMonth()+1 +'/'+ d.getDate()+'/'+d.getFullYear();
+function createRequestObject() {
+    var tmpXmlHttpObject;
+    if (window.XMLHttpRequest) { 
+        tmpXmlHttpObject = new XMLHttpRequest();
+    } else if (window.ActiveXObject) { 
+        tmpXmlHttpObject = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+ 
+    return tmpXmlHttpObject;
+}
+
+var g_indicationdetail;
+var indicationdetailId;
+var g_spv;
+	
+function saveValue(id, value)
+{
+
+	g_spv = "spv"+id;
+	
+	url = "serviceParamValueId="+id+"&value="+value;
+
+	http.open('get', 'labSave.action?'+url);
+	http.onreadystatechange = processSaveValue; 
+
+	http.send(null);
+}
+
+function processSaveValue()
+{
+	if (http.readyState == 4)
+	{
+	
+		var response = http.responseText;
+
+		if(response==1)
+			document.getElementById(g_spv).style.background = '#00CCFF';
+		else
+			document.getElementById(g_spv).style.background = '#FF0000';
+			
+	}
+}
+
+var indID = 0;
+
+function makeGetBodyPart(indicationId, ctrl)
+{
+	//alert("Bat dau lay bodypart");
+	
+	g_indicationdetail = ctrl;
+	//iID = indicationId;
+	
+	var url = "id="+indicationId;
+	indID = indicationId;
+	http.open('get', "getBodyPart.action?"+url);
+	http.onreadystatechange = processResponseGetBodyPart;
+	http.send(null);
+}
+
+function processResponseGetBodyPart()
+{
+	if(http.readyState == 4)
+	{
+		//alert("Ready state");
+		var response = http.responseText;
+		//tinyMCE.execInstanceCommand("mceFocus",false,'indicationdetail_$indicationdetail.id'); //-> focus the right editor
+		//tinyMCE.activeEditor.setContent(response); //-> insert the reply
+		var ctrlId = 'indicationdetail_' + indID;
+		tinyMCE.get(ctrlId).setContent(response) ;
+		
+	}
+	
+}
+
+</script>
+<script>
+
+function saveValue2(id, value)
+{
+
+	var url = 'id='+ id +'&result='+ value ;
+	
+	document.forms[0].action = 'xetNghiemSave.action?'+url;
+	document.forms[0].submit();
+	
+}
+
+</script>
+
+
+<form id='form1' action='xetNghiemSave.action' method='POST'>
+<h2 align="center">PHI&#7870;U K&#7870;T QU&#7842; X&Eacute;T NGHI&#7878;M </h2>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divClient').innerHTML=''" value=' X '>
+<strong> $i18n.get('clientEncounter')</strong></div>
+<table width="100%" border="0">
+  <tr>
+    <td width="15%"><strong>$i18n.get('node'): </strong></td>
+    <td width="35%">$encounter.client.node</td>
+    <td width="10%"><strong>$i18n.get('age'):</strong></td>
+    <td width="10%">$dateTool.format('dd/MM/yyyy',$encounter.client.birthday)</td>
+    <td width="10%"><strong>$i18n.get('sex'): </strong></td>
+    <td width="20%">$encounter.client.sex</td>
+  </tr>
+  <tr>
+    <td><strong>$i18n.get('address'): </strong></td>
+    <td>$!encounter.client.address,$!encounter.client.ward.node</td>
+    <td><strong>$i18n.get('subclinical'):</strong></td>
+    <td colspan="3">$encounter.initialdiagnosis</td>
+    </tr>
+  <tr>
+    <td><strong>$i18n.get('doctorindicated')</strong> </td>
+    <td>$encounter.user.fullname</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="42"><strong>M&aacute;y XN:</strong> </td>
+    <td>&nbsp;</td>
+    <td colspan="3">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<br>
+<div class='pageheader'>
+  <input name='button2' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divClient').innerHTML=''" value=' X '>
+  <strong> $i18n.get('result')</strong></div>
+<table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+
+	<tr>
+	<td width="20%"><strong>$i18n.get('servicename')</strong> </td>
+	  
+	  <td><strong>$i18n.get('result')</strong></td>
+	  <td>&nbsp;</td>
+    </tr>
+
+#set ($ses = $req.getSession())					
+#set ($department = $ses.getAttribute('selecteddepartment'))
+
+#foreach($group in $serviceGroups)
+#set($flag = 0)
+#foreach($indicationdetail in $encounter.indicationdetails)
+#if($indicationdetail.service.servicegroup.id == $group.id && $indicationdetail.service.department.id == $department.id)
+	#set($flag = $flag + 1)
+#end
+#end
+
+#if($flag > 0)
+<tr>
+	<td colspan="3"><strong>$group.node</strong></td>
+	</tr>
+
+#foreach($indicationdetail in $encounter.indicationdetails)
+#if($indicationdetail.service.servicegroup.id == $group.id && $indicationdetail.service.department.id == $department.id)
+
+	<tr>
+	<td> - $indicationdetail.service.node </td>
+
+	<td width="52%">
+	#foreach($spv in $indicationdetail.serviceParamValues)
+	<ul>
+	  <input type="text" id="spv$spv.id" name="spv$spv.id" value="$spv.value" onBlur="saveValue($spv.id, this.value)">
+	$spv.serviceParam.unit
+	</ul>	
+	#end	</td>
+	<td width="28%" >($spv.serviceParam.min - $spv.serviceParam.max)
+	  </td>
+	</tr>
+	
+#end
+#end
+#end
+#end
+
+	<tr>
+	<input type='hidden' name='encounterid' value='$!encounter.id'>
+	<input type='hidden' name='action' value='save'>
+	  <td colspan="3"><input name="button" type='button' onClick="window.close();" value='&#272;&oacute;ng '></td>
+	</tr>
+</table>
+<br>
+<br>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+</form>

@@ -1,0 +1,37 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addwarehouse').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('warehouse')
+</div>
+<br>
+<div id='msg'></div>
+<br>
+<form id='warehouseForm'  name='warehouseForm' action='warehouseUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!warehouse.id' size='15'>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text' id='node' name='node' value='$!warehouse.node' size='15' value='' onkeypress="formname='warehouseForm'; nextfield='updatewarehouse';"> </td>
+			
+
+<tr><td colspan='6'>
+<input id='updatewarehouse' type='button' value="  $i18n.get('save')  " onkeydown="javascript: validateWarehouse('edit', document.getElementById('warehouseForm') )" onclick="javascript: validateWarehouse('edit', document.getElementById('warehouseForm') )" onkeypress="formname='warehouseForm'; nextfield = '';">
+
+
+&nbsp;
+
+		 <input type='button' onclick='javascript:makeGetRequestImportinvoiceByWarehouse($warehouse.id)' value="$i18n.get('importinvoice')"> &nbsp;
+	
+		
+</td></tr>
+</table>
+</form>
+</div>
+</body>

@@ -1,0 +1,46 @@
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+<div id='container'>
+<h2>Ch&#7885;n s&#7889; l&ocirc;</h2>
+<br>
+<table border=1 cellpadding="0" cellspacing="0" bordercolor="#000000">
+
+	<tr>
+	  <td><strong>STT</strong></td>
+	<td><strong>S&#7889; l&ocirc; </strong></td>
+	<td><strong>Ng&agrave;y h&#7871;t h&#7841;n </strong></td>
+	<td><strong>Th&aacute;ng HH </strong></td>
+	<td><strong>T&#7891;n</strong></td>
+	<td><strong>Price</strong></td>
+	<td></td>
+	</tr>
+	#set($i = 0)
+	#foreach($bn in $batchnumbers)
+	#set($i = $i+1)
+	<tr>
+	  <td>$i &nbsp;</td>
+	<td>$bn.batchnumber</td>
+	<td>$!dateTool.format('dd-MM-yyyy',$bn.expireddate)</td>
+	<td>$bn.expiredmonth</td>
+	<td>$bn.remain</td>
+	<td>$bn.price</td>
+	<td>
+	#if ($bn.remain >= $requestQuantity)
+	<input name='getbatch' type='button' id="getbatch" onClick="opener.document.frmDrug.batchnumber.value='$bn.batchnumber';opener.document.frmDrug.expiredmonth.value='$bn.expiredmonth';opener.document.frmDrug.price.value='$bn.price'; opener.document.frmDrug.expireddate.value='$!dateTool.format('dd/MM/yyyy',$bn.expireddate)'; self.close();" value="&gt;&gt;">
+	#end	</td>
+	</tr>
+	#end
+</table>
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+

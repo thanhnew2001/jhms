@@ -1,0 +1,85 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+.style1 {color: #FF0000}
+-->
+</style>
+</head>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+#parse("mycalendar.vm")
+<script>
+function convertDate(d)
+{
+da = d.split('/');
+return da[1]+'/'+da[0]+'/'+da[2];
+}
+</script>
+<br>
+<body onload='document.frm.encountercode.focus()'>
+<div class='pageheader'>$i18n.get('patientwaitinglist')</div>
+<div id='msg' style='height:20'></div>
+<form id="frm" name="frm" action="encounterNotPaidServiceList.action?flag=popup">
+$i18n.get('searchby'): $i18n.get('examinationcode') 
+  <input name='encountercode' id='encountercode' onchange="if(this.value.length()==11) document.frm.submit(); " >
+  <input type="submit" value="T&igrave;m ki&#7871;m" onclick='document.frm.submit();'>
+
+<input type='text' id='filterDate' name='filterDate' onClick="GetDate(this);">				
+<input name='button2' type='button' onClick="document.frm.filterDate.value=convertDate(document.frm.filterDate.value);document.frm.submit();" value=' L&#7885;c danh s&aacute;ch '>
+
+
+</form>
+
+<br>
+<table width="100%" border=0  cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<tr class="tableheader">
+  <td width="3%">$i18n.get('ordernumber')</td>
+  <td width="27%" >$i18n.get('name')</td>
+  <td width="13%">$i18n.get('address')</td>
+  <td width="23%">$i18n.get('service')</td>
+  <td width="22%">$i18n.get('drug')</td>
+  <td width="22%">$i18n.get('choose')</td>
+  </tr>
+#set($i=0)
+#foreach($encounter in $encounters)
+#set($i = $i+1)
+<tr class="tableitemleft">
+<td>$i</td>
+<td>$encounter.client.node ($encounter.client.sex, $encounter.client.age) - <span class="style1">$!encounter.prepaidCard</span> </td>
+<td>$encounter.client.address
+<td>
+#set($j=0)
+<script>total=0; totalNotPaid =0;</script>
+#foreach($id in $encounter.indicationdetails)
+			#set($j = $j+1)			 
+			#if($id.paid == "N")
+				<div style="color:black">$j. $id.service.node ($id.service.price, $!id.paid) </div> 
+				<script>totalNotPaid+=$id.service.price</script>
+			#else
+				<div style="color:#CCCCCC">$j. $id.service.node ($id.service.price, $!id.paid) </div>
+				<script>total+=$id.service.price</script>
+			#end
+			
+#end
+<br>
+Đã TT: <script>document.write(total);</script>, <strong> Chưa TT: <script>document.write(totalNotPaid);</script></strong>
+
+</td>
+<td>#foreach($pd in $encounter.prescriptiondetails)
+   	$!pd.drug.node ($!pd.drug.price x $!pd.quantity)
+      #end
+</td>
+<td><input name="button" type='button' id='b$i' onClick="opener.document.getElementById('encounter').value = '$encounter.id';  opener.document.getElementById('node').value = '$encounter.client.node'; opener.document.getElementById('address').value = '$encounter.client.address'; self.close();" value='L&#7845;y h&oacute;a &#273;&#417;n'></td>
+</tr>
+
+#end
+<tr class="tableitem">
+  <td>&nbsp;</td>
+  <td>$i18n.get('totalcount'): $i </td>
+  <td>&nbsp;</td>
+  <td>
+  <td>
+  <td>  </tr>
+</table>
+</body>
+

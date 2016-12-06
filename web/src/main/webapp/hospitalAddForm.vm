@@ -1,0 +1,33 @@
+
+<div id='addhospital'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addhospital').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('hospital')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='hospitalForm' name='hospitalForm' action='hospitalAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text'  id='node' name='node' size='15' value='' onkeypress="formname='hospitalForm'; nextfield='address';"> </td>
+			
+			<td><label>$i18n.get('address'):</label></td> <td><input type='text'  id='address' name='address' size='15' value='' onkeypress="formname='hospitalForm'; nextfield='savehospital';"> </td>
+			
+<tr><td>
+<input type='button' id='savehospital' value="  $i18n.get('save')  " onkeydown="javascript:validateHospital('add', document.getElementById('hospitalForm') )"  onclick="javascript:validateHospital('add', document.getElementById('hospitalForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

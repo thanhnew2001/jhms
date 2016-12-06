@@ -1,0 +1,156 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('common.vm')
+#parse('importinvoice_js.vm')
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+
+<body id='wrap'>
+
+<br>
+<div id='divImportinvoicedetail'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divImportinvoicedetail').innerHTML=''" value=' X '>  
+$i18n.get('importinvoicedetaillist')  
+</div>
+<br>
+<div>
+<select id='comboimportinvoicedetail' name='comboimportinvoicedetail'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='importinvoice'>$i18n.get('importinvoice')</option>
+	
+	<option value='drug'>$i18n.get('drug')</option>
+	
+	<option value='quantity'>$i18n.get('quantity')</option>
+	
+	<option value='expireddate'>$i18n.get('expireddate')</option>
+	
+	<option value='batchnumber'>$i18n.get('batchnumber')</option>
+	
+	<option value='price'>$i18n.get('price')</option>
+	
+	<option value='discount'>$i18n.get('discount')</option>
+	
+	<option value='subtotal'>$i18n.get('subtotal')</option>
+	
+	<option value='node'>$i18n.get('note')</option>
+	
+</select>
+<input name='searchimportinvoicedetail' id='searchimportinvoicedetail' onkeyup='makeGetRequestImportinvoicedetailBySearch()' value='' onclick='clearSearchBox(searchimportinvoicedetail)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestImportinvoicedetailByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddImportinvoicedetail(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tableimportinvoicedetail' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineimportinvoicedetailForm' name='inlineimportinvoicedetailForm' action='importinvoicedetailAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('importinvoice')</th>	
+	
+	<th>$i18n.get('drug')</th>	
+	
+	<th>$i18n.get('quantity')</th>	
+	
+	<th>$i18n.get('expireddate')</th>	
+	
+	<th>$i18n.get('expiredmonth')</th>	
+	<th>$i18n.get('batchnumber')</th>	
+	
+	<th>$i18n.get('visaNo')</th>
+	<th>$i18n.get('price')</th>	
+	
+	<th>$i18n.get('discount')</th>	
+	
+	<th>$i18n.get('subtotal')</th>	
+	
+	<th>$i18n.get('note')</th>	
+</tr>
+
+
+<tr class='tableitem'>
+<div id='inlineaddimportinvoicedetail' style='display:none;'>
+<th><input type='button' id='saveimportinvoicedetail' value="  $i18n.get('save')  " onkeydown="javascript:validateImportinvoicedetail('add', document.getElementById('inlineimportinvoicedetailForm') )"  onclick="javascript:validateImportinvoicedetail('add', document.getElementById('inlineimportinvoicedetailForm') )" onkeypress="nextfield='';"></th>
+
+			#set ($ses = $req.getSession())					
+			#set ($importinvoice_id = $ses.getAttribute('importinvoice_id'))
+			#set ($importinvoice_node = $ses.getAttribute('importinvoice_node'))
+		<th>
+			<input type='hidden' id='importinvoice' name='importinvoice'  size='1' value='$!importinvoice_id' onchange='makeGetRequestImportinvoiceByTypeHead()' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='textimportinvoice';"> 
+			
+			<input type='text' id='textimportinvoice' name='textimportinvoice' size='15' value='$!importinvoice_node' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='cboimportinvoice';"  onkeyup='makeGetRequestImportinvoiceByTypeHead()' onclick='makeGetRequestImportinvoiceByTypeHead()'>	
+			
+			<div id='divimportinvoice' style='display:none;position:absolute'  onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='textdrug';"></div>		 </th>		
+		
+			#set ($ses = $req.getSession())					
+			#set ($drug_id = $ses.getAttribute('drug_id'))
+			#set ($drug_node = $ses.getAttribute('drug_node'))
+		<th>
+			<input type='hidden' id='drug' name='drug'  size='1' value='$!drug_id' onchange='makeGetRequestDrugByTypeHead()' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='textdrug';"> 
+			
+			<input type='text' id='textdrug' name='textdrug' size='15' value='$!drug_node' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='cbodrug';"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+			
+			<div id='divdrug' style='display:none;position:absolute'  onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='quantity';"></div>		 </th>		
+		<th> <input type='text'  id='quantity' name='quantity' size='15' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='expireddate';"> </th><th><input type='text'  id='expireddate' name='expireddate' size='15' onblur='getSmartDate(this)' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='expiredmonth';" value=$!novalue >
+			<th><input type='text'  id='expiredmonth' name='expiredmonth' size='15' onblur='getSmartDate(this)' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='batchnumber';" value=$!novalue ></th>
+			<th> <input type='text'  id='batchnumber' name='batchnumber' size='15' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='visanumber';"> </th>
+			<th><input type='text'  id='visano' name='visano' size='15' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='price';"></th>
+			<th> <input type='text'  id='price' name='price' size='15' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='discount';"> </th><th> <input type='text'  id='discount' name='discount' size='15' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='subtotal';"> </th><th> <input type='text'  id='subtotal' name='subtotal' size='15' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='node';"> </th><th> <input type='text'  id='node' name='node' size='15' value='' onkeypress="formname='inlineimportinvoicedetailForm'; nextfield='saveimportinvoicedetail';"> </th>
+</div>
+</tr>
+</theader>
+<tbody>
+#foreach($importinvoicedetail in $importinvoicedetails)
+	#if($importinvoicedetail.id)
+	<tr class='tableitem' id='tr$importinvoicedetail.id' onDblClick="javascript:makeGetRequestAddImportinvoicedetail($importinvoicedetail.id, 'edit')">
+	<td id='td$importinvoicedetail.id'>
+	<a href="javascript:makeGetRequestAddImportinvoicedetail($importinvoicedetail.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('importinvoicedetailDelete.action?id=$importinvoicedetail.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$importinvoicedetail.id').style.background ='#CCCCCC'; document.getElementById('td$importinvoicedetail.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('importinvoicedetailView.action?id=$importinvoicedetail.id', 'View importinvoicedetail', 'width=400, height=300, scrollbars=yes')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>	</td>	
+		
+		<td>$!importinvoicedetail.importinvoice.node</td>
+		
+		<td>$!importinvoicedetail.drug.node</td>
+		
+		<td>$!importinvoicedetail.quantity</td>
+		
+		<td>$!dateTool.format('dd-MM-yyyy',$!importinvoicedetail.expireddate)</td>
+		
+		<td>$!importinvoicedetail.expiredmonth</td>
+		<td>$!importinvoicedetail.batchnumber</td>
+		
+		<td>$!importinvoicedetail.visanumber</td>
+		<td>$!importinvoicedetail.price</td>
+		
+		<td>$!importinvoicedetail.discount</td>
+		
+		<td>$!importinvoicedetail.subtotal</td>
+		
+		<td>$!importinvoicedetail.node</td>
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddImportinvoicedetail(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

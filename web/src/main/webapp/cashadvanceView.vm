@@ -1,0 +1,45 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+<div id='container'>
+<h2>$i18n.get('cashadvance')</h2>
+<br>
+<table>
+
+	<tr>
+	<td>$i18n.get('encounter'):</td>
+	<td>$cashadvance.encounter</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('node'):</td>
+	<td>$cashadvance.node</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('amount'):</td>
+	<td>$cashadvance.amount</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('code'):</td>
+	<td>$cashadvance.code</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('type'):</td>
+	<td>$cashadvance.type</td>
+	</tr>
+	
+</table>
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>

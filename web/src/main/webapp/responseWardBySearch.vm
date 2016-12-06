@@ -1,0 +1,59 @@
+
+<form name='wardForm' action='wardAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('district')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddward' style='display:none;'>
+<th><input type='button' id='saveward' value="  $i18n.get('save')  " onclick="javascript:validateWard('add')" onkeypress="nextfield='';"></th>
+<th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlinewardForm'; nextfield='textdistrict';"> </th>
+			#set ($ses = $req.getSession())					
+			#set ($district_id = $ses.getAttribute('district_id'))
+			#set ($district_node = $ses.getAttribute('district_node'))
+		<th>
+			<input type='hidden' id='district' name='district'  size='1' value='$!district_id' onchange='makeGetRequestDistrictByTypeHead()' onkeypress="formname='inlinewardForm'; nextfield='textdistrict';"> 
+			
+			<input type='text' id='textdistrict' name='textdistrict' size='18' value='$!district_node' onkeypress="formname='inlinewardForm'; nextfield='cbodistrict';"  onkeyup='makeGetRequestDistrictByTypeHead()' onclick='makeGetRequestDistrictByTypeHead()'>	
+			
+			<div id='divdistrict' style='display:none;position:absolute'  onkeypress="formname='inlinewardForm'; nextfield='saveward';"></div>				
+		 </th>		
+		
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($ward in $wards)
+	#if($ward.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddWard($ward.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddWard($ward.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='wardDelete.action?id=$ward.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('wardView.action?id=$ward.id', 'View ward', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuward$ward.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuward$ward.id').style.display='none'"  value='>>' >  
+	
+	<div id='menuward$ward.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!ward.node</td>
+		
+		<td>$!ward.district.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

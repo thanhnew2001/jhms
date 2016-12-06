@@ -1,0 +1,30 @@
+
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="2leveltab.css" />
+<script type="text/javascript" src="2leveltab.js">
+</script>
+<div style='font-weight:500;background-image:bannerbk.jpg'></div>
+<a href="http://pkmytung.com" target="_blank">
+<img src="banner.jpg" width="452" height="47" align="center">
+</a>
+
+#set ($ses = $req.getSession())					
+#set ($selectedlang = $ses.getAttribute('selectedlang'))
+
+#if ($selectedlang == 'en')
+	#parse('top_EN.vm')
+#else
+	#parse('top_VI.vm')
+#end
+<script type="text/javascript">
+//initialize tab menu, by passing in ID of UL
+initalizetab("maintab")
+</script>
+</div>
+
+	
+	
+		
+		
+		
+		

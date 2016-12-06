@@ -1,0 +1,4 @@
+
+#foreach($cashadvance in $cashadvances)
+	$cashadvance.id
+#end

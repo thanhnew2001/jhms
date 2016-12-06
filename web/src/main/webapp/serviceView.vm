@@ -1,0 +1,45 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+<div id='container'>
+<h2>$i18n.get('service')</h2>
+<br>
+<table>
+
+	<tr>
+	<td>$i18n.get('node'):</td>
+	<td>$service.node</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('servicegroup'):</td>
+	<td>$service.servicegroup</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('price'):</td>
+	<td>$service.price</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('insuranceprice'):</td>
+	<td>$service.insuranceprice</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('department'):</td>
+	<td>$service.department</td>
+	</tr>
+	
+</table>
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>

@@ -1,0 +1,58 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+<div id='container'>
+<h2 align="center">$i18n.get('drug')</h2>
+<div align="center"><br>
+</div>
+<div align="center"></div>
+<div align="center"></div>
+<table align="center">
+
+	<tr>
+	<td><strong>$i18n.get('node'):</strong></td>
+	<td>$drug.node</td>
+	</tr>
+	
+	<tr>
+	<td><strong>$i18n.get('unit'):</strong></td>
+	<td>$drug.unit</td>
+	</tr>
+	
+	<tr>
+	<td><strong>$i18n.get('ingredient'):</strong></td>
+	<td>$drug.ingredient</td>
+	</tr>
+	
+	<tr>
+	<td><strong>$i18n.get('indication'):</strong></td>
+	<td>$drug.indication</td>
+	</tr>
+	
+	<tr>
+	<td><strong>$i18n.get('price'):</strong></td>
+	<td>$drug.price</td>
+	</tr>
+	
+	<tr>
+	  <td><strong>$i18n.get('insurance'):</strong></td>
+	  <td>$drug.insurance</td>
+    </tr>
+	<tr>
+	<td><strong>Nh&oacute;m thu&#7889;c: </strong></td>
+	<td>$!drug.drugGroup.node</td>
+	</tr>
+</table>
+<div align="center"></div>
+<div align="center"></div>
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>

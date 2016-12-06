@@ -1,0 +1,107 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addreceiptdetail').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('receiptdetail')
+</div>
+<br>
+<div id='msg'></div>
+<br>
+<form id='receiptdetailForm'  name='receiptdetailForm' action='receiptdetailUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!receiptdetail.id' size='15'>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('receipt'):</label> </td>
+			<td>		
+			<input type='hidden' id='receipt' name='receipt'  size='1' value='$!receiptdetail.receipt.id' onchange='makeGetRequestReceiptByTypeHead()' onkeypress="formname='receiptdetailForm'; nextfield='textreceipt';"> 			<input type='text' id='textreceipt' name='textreceipt' size='15'  value='$!receiptdetail.receipt.node' onkeypress="formname='receiptdetailForm'; nextfield='cboreceipt'; isSelect=true;"  onkeyup='makeGetRequestReceiptByTypeHead()' onclick='makeGetRequestReceiptByTypeHead()'>	
+			
+			<div id='divreceipt' style='display:none;position:absolute' onkeypress="formname='receiptdetailForm'; nextfield='textservice';"></div>				
+			<a href='javascript:void(0)' onclick="window.open('receiptList.action', 'Add receipt', 'width=400, height=300')">+</a>
+			</td>
+		
+			<td><label>$i18n.get('service'):</label> </td>
+			<td>		
+			<input type='hidden' id='service' name='service'  size='1' value='$!receiptdetail.service.id' onchange='makeGetRequestServiceByTypeHead()' onkeypress="formname='receiptdetailForm'; nextfield='textservice';"> 			<input type='text' id='textservice' name='textservice' size='15'  value='$!receiptdetail.service.node' onkeypress="formname='receiptdetailForm'; nextfield='cboservice'; isSelect=true;"  onkeyup='makeGetRequestServiceByTypeHead()' onclick='makeGetRequestServiceByTypeHead()'>	
+			
+			<div id='divservice' style='display:none;position:absolute' onkeypress="formname='receiptdetailForm'; nextfield='textdrug';"></div>				
+			<a href='javascript:void(0)' onclick="window.open('serviceList.action', 'Add service', 'width=400, height=300')">+</a>
+			</td>
+		
+			<td><label>$i18n.get('drug'):</label> </td>
+			<td>		
+			<input type='hidden' id='drug' name='drug'  size='1' value='$!receiptdetail.drug.id' onchange='makeGetRequestDrugByTypeHead()' onkeypress="formname='receiptdetailForm'; nextfield='textdrug';"> 			<input type='text' id='textdrug' name='textdrug' size='15'  value='$!receiptdetail.drug.node' onkeypress="formname='receiptdetailForm'; nextfield='cbodrug'; isSelect=true;"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+			
+			<div id='divdrug' style='display:none;position:absolute' onkeypress="formname='receiptdetailForm'; nextfield='quantity';"></div>				
+			<a href='javascript:void(0)' onclick="window.open('drugList.action', 'Add drug', 'width=400, height=300')">+</a>
+			</td>
+		</tr><tr class='formlabel'>
+			<td><label>$i18n.get('quantity'):</label></td> <td><input type='text' id='quantity' name='quantity' value='$!receiptdetail.quantity' size='15' onkeypress="formname='receiptdetailForm'; nextfield='price';"> </td>
+			
+			<td><label>$i18n.get('price'):</label></td> <td><input type='text' id='price' name='price' value='$!receiptdetail.price' size='15' onkeypress="formname='receiptdetailForm'; nextfield='subtotal';"> </td>
+			
+			<td><label>$i18n.get('subtotal'):</label></td> <td><input type='text' id='subtotal' name='subtotal' value='$!receiptdetail.subtotal' size='15' onkeypress="formname='receiptdetailForm'; nextfield='insurancepay';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('insurancepay'):</label></td> <td><input type='text' id='insurancepay' name='insurancepay' value='$!receiptdetail.insurancepay' size='15' onkeypress="formname='receiptdetailForm'; nextfield='percentdiscount';"> </td>
+			
+			<td>
+			
+			<label>$i18n.get('percentdiscount'):</label></td> <td><input type='text' id='percentdiscount' name='percentdiscount' value='$!receiptdetail.percentdiscount' size='15' onkeypress="formname='receiptdetailForm'; nextfield='discount';" onChange="document.getElementById('discount').value = $receiptdetail.quantity*($receiptdetail.price * (document.getElementById('percentdiscount').value/100)); document.getElementById('subtotal').value = $receiptdetail.subtotal - document.getElementById('discount').value;"> 
+			
+			</td>
+			
+			<td>
+			
+			
+			<label>$i18n.get('discount'):</label></td> <td><input type='text' id='discount' name='discount' value='$!receiptdetail.discount' size='15' onkeypress="formname='receiptdetailForm'; nextfield='childunder6';" onChange="document.getElementById('subtotal').value = $receiptdetail.subtotal - document.getElementById('discount').value;"> 
+			
+			</td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('childunder6'):</label></td> <td><input type='text' id='childunder6' name='childunder6' value='$!receiptdetail.childunder6' size='15' nkeypress="formname='receiptdetailForm'; nextfield='actualpay';"> </td>
+			
+			<td><label>$i18n.get('actualpay'):</label></td> <td><input type='text' id='actualpay' name='actualpay' value='$!receiptdetail.actualpay' size='15' onkeypress="formname='receiptdetailForm'; nextfield='exedoctor';"> </td>
+			
+			<td><label>$i18n.get('exedoctor'):</label> </td>
+			<td>
+			<select id='exedoctor' name='exedoctor' onkeypress="formname='receiptdetailForm'; nextfield='inddoctor';">
+				<option value='$!receiptdetail.exedoctor.id' selected>$!receiptdetail.exedoctor.id - $!receiptdetail.exedoctor.node</option>		
+			#foreach($exedoctor in $exedoctors)
+				<option value='$!exedoctor.id'>$!exedoctor.id - $!exedoctor.node</option>
+			#end
+			</select>
+			</td>
+		</tr><tr class='formlabel'>
+			<td><label>$i18n.get('inddoctor'):</label> </td>
+			<td>
+			<select id='inddoctor' name='inddoctor' onkeypress="formname='receiptdetailForm'; nextfield='cancel';">
+				<option value='$!receiptdetail.inddoctor.id' selected>$!receiptdetail.inddoctor.id - $!receiptdetail.inddoctor.node</option>		
+			#foreach($inddoctor in $inddoctors)
+				<option value='$!inddoctor.id'>$!inddoctor.id - $!inddoctor.node</option>
+			#end
+			</select>
+			</td>
+		
+			<td><label>$i18n.get('cancel'):</label></td> <td><select id='cancel' name='cancel' onkeypress="formname='receiptdetailForm'; nextfield='note';"> <option value='$!receiptdetail.cancel' selected>$!receiptdetail.cancel</option><option value=N>N</option><option value= Y> Y</option> </select></td>
+			<td>$i18n.get('note')</td>
+			<td><input type='text' id='note' name='note' value='$!receiptdetail.note' size='15' onkeypress="formname='receiptdetailForm'; nextfield='updatereceiptdetail';"></td>
+			
+
+<tr><td colspan='6'>
+<input id='updatereceiptdetail' type='button' value="  $i18n.get('save')  " onkeydown="javascript: validateReceiptdetail('edit', document.getElementById('receiptdetailForm') )" onclick="javascript: validateReceiptdetail('edit', document.getElementById('receiptdetailForm') )" onkeypress="formname='receiptdetailForm'; nextfield = '';">
+
+
+&nbsp;
+
+</td>
+
+</tr>
+</table>
+</form>
+</div>
+</body>

@@ -1,0 +1,6 @@
+
+<select name='cboicd' id='cboicd' multiple='multiple' onkeypress="typehead = 'icd'; nextfield='saveicd';" onclick = "selecticd(this.value, this.options[this.selectedIndex].text)"; style="width:500px">
+#foreach($icd in $icds)
+<option value='$icd.id'>$icd.maso - $icd.node</option>
+#end						
+</select>

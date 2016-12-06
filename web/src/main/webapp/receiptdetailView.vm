@@ -1,0 +1,90 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>
+<div id='container'>
+<h2>$i18n.get('receiptdetail')</h2>
+<br>
+<table>
+
+	<tr>
+	<td>$i18n.get('receipt'):</td>
+	<td>$receiptdetail.receipt</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('service'):</td>
+	<td>$receiptdetail.service</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('drug'):</td>
+	<td>$receiptdetail.drug</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('quantity'):</td>
+	<td>$receiptdetail.quantity</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('price'):</td>
+	<td>$receiptdetail.price</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('subtotal'):</td>
+	<td>$receiptdetail.subtotal</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('insurancepay'):</td>
+	<td>$receiptdetail.insurancepay</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('percentdiscount'):</td>
+	<td>$receiptdetail.percentdiscount</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('discount'):</td>
+	<td>$receiptdetail.discount</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('childunder6'):</td>
+	<td>$receiptdetail.childunder6</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('actualpay'):</td>
+	<td>$receiptdetail.actualpay</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('exedoctor'):</td>
+	<td>$receiptdetail.exedoctor</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('inddoctor'):</td>
+	<td>$receiptdetail.inddoctor</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('cancel'):</td>
+	<td>$receiptdetail.cancel</td>
+	</tr>
+	
+</table>
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>

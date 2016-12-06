@@ -1,0 +1,156 @@
+#parse("top.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<div id='addprescriptiondetail'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divImportinvoice'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divPrescriptiondetail'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divPrescriptiondetail').innerHTML=''" value=' X '>  
+$i18n.get('prescriptiondetaillist')  
+<input name='print' type='button' onClick='window.open(' value="$i18n.get('print')"', 'width=600,height=500,scrollbars=yes');'encounterView.action?id=$encounter.id', 'View>
+</div>
+<br>
+<div>
+<select id='comboprescriptiondetail' name='comboprescriptiondetail'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='encounter'>$i18n.get('encounter')</option>
+	
+	<option value='drug'>$i18n.get('drug')</option>
+	
+	<option value='quantity'>$i18n.get('quantity')</option>
+	
+	<option value='unit'>$i18n.get('unit')</option>
+	
+	<option value='price'>$i18n.get('price')</option>
+	
+	<option value='timeuse'>$i18n.get('timeuse')</option>
+	
+	<option value='quantityuse'>$i18n.get('quantityuse')</option>
+	
+	<option value='note'>$i18n.get('note')</option>
+	
+	<option value='paid'>$i18n.get('paid')</option>
+	
+</select>
+<input name='searchprescriptiondetail' id='searchprescriptiondetail' onkeyup='makeGetRequestPrescriptiondetailBySearch()' value='' onclick='clearSearchBox(searchprescriptiondetail)'>
+Search  or Filter
+
+
+
+<input name='button2' type='button' onClick='javascript:makeGetRequestPrescriptiondetailByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddPrescriptiondetail(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div id='msg'></div>
+<div id='tableprescriptiondetail' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlineprescriptiondetailForm' name='inlineprescriptiondetailForm' action='prescriptiondetailAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('encounter')</th>	
+	
+	<th>$i18n.get('drug')</th>	
+	
+	<th>$i18n.get('quantity')</th>	
+	
+	<th>$i18n.get('unit')</th>	
+	
+	<th>$i18n.get('price')</th>	
+	
+	<th>$i18n.get('timeuse')</th>	
+	
+	<th>$i18n.get('quantityuse')</th>	
+	
+	<th>$i18n.get('note')</th>	
+	
+	<th>$i18n.get('paid')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddprescriptiondetail' style='display:none;'>
+<th><input type='button' id='saveprescriptiondetail' value="  $i18n.get('save')  " onkeydown="javascript:validatePrescriptiondetail('add', document.getElementById('inlineprescriptiondetailForm') )"  onclick="javascript:validatePrescriptiondetail('add', document.getElementById('inlineprescriptiondetailForm') )" onkeypress="nextfield='';">
+</th>
+
+
+			#set ($ses = $req.getSession())					
+			#set ($encounter_id = $ses.getAttribute('encounter_id'))
+			#set ($encounter_node = $ses.getAttribute('encounter_node'))
+		<th>
+			<input type='hidden' id='encounter' name='encounter'  size='1' value='$!encounter_id' onchange='makeGetRequestEncounterByTypeHead()' onkeypress="formname='inlineprescriptiondetailForm'; nextfield='textencounter';"> 
+			
+			<input type='text' id='textencounter' name='textencounter' size='18' value='$!encounter_node' onkeypress="formname='inlineprescriptiondetailForm'; nextfield='cboencounter';"  onkeyup='makeGetRequestEncounterByTypeHead()' onclick='makeGetRequestEncounterByTypeHead()'>	
+			
+			<div id='divencounter' style='display:none;position:absolute'  onkeypress="formname='inlineprescriptiondetailForm'; nextfield='textdrug';"></div>				
+		 </th>		
+		
+			#set ($ses = $req.getSession())					
+			#set ($drug_id = $ses.getAttribute('drug_id'))
+			#set ($drug_node = $ses.getAttribute('drug_node'))
+		<th>
+			<input type='hidden' id='drug' name='drug'  size='1' value='$!drug_id' onchange='makeGetRequestDrugByTypeHead()' onkeypress="formname='inlineprescriptiondetailForm'; nextfield='textdrug';"> 
+			
+			<input type='text' id='textdrug' name='textdrug' size='18' value='$!drug_node' onkeypress="formname='inlineprescriptiondetailForm'; nextfield='cbodrug';"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+			
+			<div id='divdrug' style='display:none;position:absolute'  onkeypress="formname='inlineprescriptiondetailForm'; nextfield='quantity';"></div>				
+		 </th>		
+		<th> <input type='text'  id='quantity' name='quantity' size='8' value='' onkeypress="formname='inlineprescriptiondetailForm'; nextfield='unit';"> </th><th> <input type='text'  id='unit' name='unit' size='8' value='' onkeypress="formname='inlineprescriptiondetailForm'; nextfield='price';"> </th><th> <input type='text'  id='price' name='price' size='8' value='' onkeypress="formname='inlineprescriptiondetailForm'; nextfield='timeuse';"> </th><th> <input type='text'  id='timeuse' name='timeuse' size='8' value='' onkeypress="formname='inlineprescriptiondetailForm'; nextfield='quantityuse';"> </th><th> <input type='text'  id='quantityuse' name='quantityuse' size='8' value='' onkeypress="formname='inlineprescriptiondetailForm'; nextfield='note';"> </th><th> <textarea  id='note' name='note' size='8' onkeypress="formname='inlineprescriptiondetailForm'; nextfield='paid';">  </textarea> </th><th> <select id='paid' name='paid' onkeypress=" formname='inlineprescriptiondetailForm';nextfield='saveprescriptiondetail';"> <option value=N>N</option><option value= Y> Y</option> </select> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($prescriptiondetail in $prescriptiondetails)
+	#if($prescriptiondetail.id)
+	<tr class='tableitem' id='tr$prescriptiondetail.id' onDblClick="javascript:makeGetRequestAddPrescriptiondetail($prescriptiondetail.id, 'edit')">
+	<td id='td$prescriptiondetail.id'>
+	<a href="javascript:makeGetRequestAddPrescriptiondetail($prescriptiondetail.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('prescriptiondetailDelete.action?id=$prescriptiondetail.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$prescriptiondetail.id').style.background ='#CCCCCC'; document.getElementById('td$prescriptiondetail.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onclick="window.open('prescriptiondetailView.action?id=$prescriptiondetail.id', 'View prescriptiondetail', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+		
+	</td>	
+		
+		<td>$!prescriptiondetail.encounter.node</td>
+		
+		<td>$!prescriptiondetail.drug.node $!prescriptiondetail.drug.ingredient</td>
+		
+		<td>$!prescriptiondetail.quantity</td>
+		
+		<td>$!prescriptiondetail.unit</td>
+		
+		<td>$!prescriptiondetail.price</td>
+		
+		<td>$!prescriptiondetail.timeuse</td>
+		
+		<td>$!prescriptiondetail.quantityuse</td>
+		
+		<td>$!prescriptiondetail.note</td>
+		
+		<td>$!prescriptiondetail.paid</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddPrescriptiondetail(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

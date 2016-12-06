@@ -1,0 +1,135 @@
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+
+<script language='javascript' type='text/javascript' src='common.js'></script>
+<script type="text/javascript">
+
+
+function beforeDelete(conceptId)
+{
+	document.getElementById('conceptForm').action = "concept.action?action=delete&id="+conceptId;
+	document.getElementById('conceptForm').submit();
+}	
+
+function beforeSave(conceptId)
+{
+	document.getElementById('conceptForm').action = "concept.action?action=save&id="+conceptId;
+	document.getElementById('conceptForm').submit();
+}	
+
+//for details
+function beforeDeleteDetail(conceptId, conceptNameId)
+{
+	document.getElementById('conceptForm').action = "concept.action?action=deletedetail&id="+conceptId+"&conceptNameId="+conceptNameId;
+	document.getElementById('conceptForm').submit();
+}	
+
+function beforeSaveDetail(conceptId, conceptNameId)
+{
+	document.getElementById('conceptForm').action = "concept.action?action=savedetail&id="+conceptId+"&conceptNameId="+conceptNameId;
+	document.getElementById('conceptForm').submit();
+}	
+
+</script>
+<body>
+<form id='conceptForm' name='conceptForm' action='concept.action' class='niceform' method='POST'>
+<br>
+<input type='hidden'  id='id' name='id' value="$concept.id" size='15'>
+
+<div id='container' >
+  <div class='pageheader'>
+    <p>
+      <input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('saveconcept').innerHTML=''" value=' X '>
+      C&#7853;p nh&#7853;t concept </p>
+    </div>
+	<table width="100%" border="1">
+  <tr>
+    <td width="50%" valign="top">Concept class 
+      <select name="conceptClassId">
+        <option value="$!concept.conceptClass.id" selected="selected">$!concept.conceptClass.name</option>
+        
+	  	#foreach($conceptClass in $conceptClasses)
+		  
+        <option value="$conceptClass.id">$conceptClass.name</option>
+        
+		#end
+
+	  
+      </select>
+	  <br>
+      T&ecirc;n vi&#7871;t t&#7855;t 
+      <input type='text'  id='shortName' name='shortName' size='50' value='$!concept.shortName' >
+	  <br>
+      <input name="button2" type="button" onClick="beforeSave($concept.id)" value="  Save ">
+      <input name="button2" type="button" onClick="document.location = 'concept.action?id=0'" value="Add new"></td>
+    <td width="50%" valign="top">
+	<strong>C&aacute;c t&ecirc;n g&#7885;i kh&aacute;c </strong><br>
+	<table width="100%" border="1">
+	<tr>
+	<td>Action </td>
+	<td>T&ecirc;n concept </td>
+	</tr>
+	<tr>
+	<td>
+	#if($concept.id>0)
+	 <input type="button" value="Save" onClick="beforeSaveDetail($concept.id, $conceptName.id)">
+     <input name="button3" type="button" onClick="document.location = 'concept.action?id=$concept.id&conceptNameId=0'" value="Add new">
+	#end
+	&nbsp;</td>
+	<td><input type="text" id="name" name="name" value="$!conceptName.name"></td>
+	</tr>
+	#foreach($conceptName in $concept.conceptNames)
+	<tr>
+	<td>
+	<a href="concept.action?action=editdetail&id=$concept.id&conceptNameId=$conceptName.id">Edit</a> 
+	<a href="#" onClick="beforeDeleteDetail($concept.id, $conceptName.id)">Del</a></td>
+	<td>$conceptName.name</td>
+	</tr>
+	#end
+	</table>
+	</td>
+  </tr>
+</table>
+ 
+<br>
+<div class="pageheader">Danh s&aacute;ch concept :	   </div>
+<br>
+
+<table border='0' width='100%' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>T&ecirc;n ng&#7855;n </th>
+	<th>T&ecirc;n &#273;&#7847;y &#273;&#7911; </th>
+    </tr>
+</theader>
+<tbody>
+	#foreach($concept in $concepts)
+		
+	#if($concept.id)
+	<tr class='tableitem' id='tr$concept.id'>
+		
+	<td id='td$sp.id'><a href="concept.action?action=edit&id=$concept.id">
+	<img src='images/edit.png' width='15' height='15' alt='Edit' /></a>
+	
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ beforeDelete( $concept.id) } ">	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>	</td>	
+		
+		<td>$!concept.shortName</td>
+		<td>
+		#foreach($cn in $concept.conceptNames)
+			$cn.name 
+		#end
+		</td>
+	  </tr>
+		
+	#end
+</tbody>
+#end
+</table>
+
+</div>
+</div>
+    <br>
+</form>
+</body>

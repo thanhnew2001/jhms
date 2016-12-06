@@ -1,0 +1,4 @@
+
+#foreach($receipt in $receipts)
+	$receipt.id
+#end

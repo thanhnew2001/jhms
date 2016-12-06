@@ -1,0 +1,8 @@
+
+<select name='cbopaymenttype' id='cbopaymenttype' multiple='multiple' onkeypress="formname='encounterForm'; typehead = 'paymenttype'; nextfield='savepaymenttype';">
+#foreach($paymenttype in $paymenttypes)
+<option value='$paymenttype.id'>$paymenttype.node</option>
+#end						
+<option value=''></option>
+</select>
+

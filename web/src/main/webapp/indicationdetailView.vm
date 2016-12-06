@@ -1,0 +1,77 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+	<table width="747">
+	<tr>
+	  <td><strong>C&ocirc;ng ty TNHH M&#7929; T&ugrave;ng </strong><br></td >
+	  <td width="366"></td>
+	  </tr>
+	<tr>
+	  <td>142 L&ecirc; H&#7891;ng Phong</td >
+	  <td></td>
+	  </tr>
+	<tr>
+	  <td>Tel: (+84) 08.39240888 </td >
+	  <td></td>
+	  </tr>
+	<tr>
+	  <td >www.pkmytung.com </td >
+	  <td></td>
+	  </tr>
+	<tr> <td colspan="2" ><hr></td >
+	</tr>
+  </table>
+</div>
+<div id='container'>
+<h2 align="center">$i18n.get('indicationdetail')<br>
+</h2>
+<table border="1" align="center" cellpadding="0" cellspacing="0">
+
+	<tr>
+	<td width="150">$i18n.get('encounter'): </td>
+	<td width="250">$!indicationdetail.encounter.node</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('service'): </td>
+	<td>$!indicationdetail.service.id</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('quantity'): </td>
+	<td>$!indicationdetail.quantity</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('price'): </td>
+	<td>$!indicationdetail.price</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('status'): </td>
+	<td>$!indicationdetail.status</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('node'): </td>
+	<td>$!indicationdetail.service.node</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('note'): </td>
+	<td>$!indicationdetail.note</td>
+	</tr>
+	
+	<tr>
+	<td>$i18n.get('paid'): </td>
+	<td>$!indicationdetail.paid</td>
+	</tr>
+	
+</table>
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td></td ><td></td> <td></td> <td></td> </tr>
+	</table>
+</div>

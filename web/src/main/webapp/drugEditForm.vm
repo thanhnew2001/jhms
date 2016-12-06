@@ -1,0 +1,88 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('adddrug').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('drug')
+</div>
+<br>
+<div id='msg'></div>
+<br>
+<form id='drugForm'  name='drugForm' action='drugUpdate.action'  method='POST'>
+<div align="center">
+  <input type='hidden' name='id' value='$!drug.id' size='15'>
+</div>
+<table align="center">
+<tr class='formlabel'>
+			<td width="129" height="24"><label>$i18n.get('node'):</label></td> <td width="90"><input type='text'  id='node' name='node' size='15' value='$!drug.node' onKeyPress="formname='drugForm'; nextfield='genericName';"></td>
+			
+			<td width="133"><label>$i18n.get('genericname'):</label></td> <td width="136"><input type='text'  id='genericName' name='genericName' size='15' value='' onKeyPress="formname='drugForm'; nextfield='ingredient';"></td>
+			
+			<td width="131"><label></label></td> <td width="167">&nbsp;</td>
+			</tr>
+<tr class='formlabel'>
+  <td>$i18n.get('ingredient'):</td>
+  <td><input type='text'  id='ingredient' name='ingredient' size='15' value='$!drug.ingredient' onKeyPress="formname='drugForm'; nextfield='price';"></td>
+  <td>$i18n.get('unit'):</td>
+  <td><select id='unit' name='unit' onkeypress="formname='drugForm'; nextfield='ingredient';">
+    <option value='$!drug.unit' selected>$!drug.unit</option>
+    <option value="Vi&ecirc;n">Vi&ecirc;n</option>
+    <option value="B&oacute;">B&oacute;</option>
+    <option value="Tu&yacute;p">Tu&yacute;p</option>
+    <option value="C&aacute;i">C&aacute;i</option>
+    <option value="Chai">Chai</option>
+    <option value="H&#7897;p">H&#7897;p</option>
+    <option value="Vi&ecirc;n &#272;&#7863;t">Vi&ecirc;n &#273;&#7863;t</option>
+    <option value="&#7888;ng">&#7888;ng</option>
+    <option value="Ch&iacute;ch">Ch&iacute;ch</option>
+    <option value="B&#7883;ch">B&#7883;ch</option>
+    <option value="L&#7885;">L&#7885;</option>
+	<option value="G&oacute;i">G&oacute;i</option>
+	<option value="Mi&#7871;ng">Mi&#7871;ng</option>
+    <option value="V&#7881;">V&#7881;</option>
+  </select></td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class='formlabel'>
+  <td>$i18n.get('indication')</td>
+  <td><input type='text'  id='indication' name='indication' size='15' value='$!drug.indication' onKeyPress="formname='drugForm'; nextfield='price';"></td>
+  <td>$i18n.get('price'):</td>
+  <td><input type='text'  id='price' name='price' size='15' value='$!drug.price' onKeyPress="formname='drugForm'; nextfield='price';"></td>
+  <td>$i18n.get('insurancepay'):</td>
+  <td><select id='insurance' name='insurance' onkeypress="formname='drugForm'; nextfield='companyprice';">
+    <option value='$!drug.insurance' selected>$!drug.insurance</option>
+    <option value=Y>Y</option>
+    <option value= N> N</option>
+  </select></td>
+</tr>
+<tr class='formlabel'>
+		<td><label>Gi&aacute; Cty : </label></td> 
+		<td><input type='text'  id='companyprice' name='companyprice' size='15' value='$!drug.companyprice' onKeyPress="formname='drugForm'; nextfield='price';"></td>
+			
+		<td><label>Nh&oacute;m thu&#7889;c: </label></td> 
+		<td><select id='drugGroup' name='drugGroup' onkeypress="formname='drugForm'; nextfield='forprescription';">
+		#foreach($drugGroup in $drugGroups)
+			<option value='$drugGroup.id' #if($drugGroup.id==$drug.drugGroup.id) selected #end>$drugGroup.node</option>
+		#end
+        </select></td>
+		<td><label>Thu&#7889;c xu&#7845;t H&#272; :</label></td> <td><select id='forprescription' name='forprescription' onkeypress="formname='drugForm'; nextfield='updatedrug';">
+          <option value='$!drug.forprescription' selected>$!drug.forprescription</option>
+          <option value=Y>Y</option>
+          <option value= N> N</option>
+        </select></td>
+	  </tr>
+
+<tr><td colspan='6'><input name="button2" type='button' id='updatedrug' onClick="javascript: validateDrug('edit', document.getElementById('drugForm') )" value="Save">  &nbsp;
+
+</td></tr>
+</table>
+</form>
+</div>
+</body>

@@ -1,0 +1,33 @@
+
+<div id='addicd'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addicd').innerHTML=''" value=' X '>  
+
+$i18n.get('add') $i18n.get('icd')
+<div id='msg' align='right'></div>
+</div>
+
+<form id='icdForm' name='icdForm' action='icdAdd.action' class='niceform' method='POST'>
+<br>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('maso'):</label></td> <td><input type='text'  id='maso' name='maso' size='15' value='' onkeypress="formname='icdForm'; nextfield='node';"> </td>
+			
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text'  id='node' name='node' size='15' value='' onkeypress="formname='icdForm'; nextfield='saveicd';"> </td>
+			
+<tr><td>
+<input type='button' id='saveicd' value="  $i18n.get('save')  " onkeydown="javascript:validateIcd('add', document.getElementById('icdForm') )"  onclick="javascript:validateIcd('add', document.getElementById('icdForm') )" onkeypress="nextfield='';">
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</div>

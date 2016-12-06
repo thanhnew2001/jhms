@@ -1,0 +1,37 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addserpackage').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('serpackage')
+</div>
+<br>
+<div id='msg'></div>
+<br>
+<form id='serpackageForm'  name='serpackageForm' action='serpackageUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!serpackage.id' size='15'>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text' id='node' name='node' value='$!serpackage.node' size='15' value='' onkeypress="formname='serpackageForm'; nextfield='updateserpackage';"> </td>
+			
+
+<tr><td colspan='6'>
+<input id='updateserpackage' type='button' value="  $i18n.get('save')  " onkeydown="javascript: validateSerpackage('edit', document.getElementById('serpackageForm') )" onclick="javascript: validateSerpackage('edit', document.getElementById('serpackageForm') )" onkeypress="formname='serpackageForm'; nextfield = '';">
+&nbsp;
+
+<input type='button' value="  $i18n.get('packagedetail')  " onclick="makeGetRequestPackagedetailBySerpackage($serpackage.id)">
+&nbsp;
+
+
+
+</td></tr>
+</table>
+</form>
+</div>
+</body>

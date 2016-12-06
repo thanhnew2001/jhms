@@ -1,0 +1,4 @@
+
+#foreach($provider in $providers)
+	$provider.id
+#end

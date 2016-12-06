@@ -1,0 +1,67 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link rel='stylesheet' type='text/css' href='style-table.css' />
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addservice').innerHTML=''" value=' X '>  
+$i18n.get('edit') $i18n.get('service')
+</div>
+<br>
+<div id='msg'></div>
+<br>
+<form id='serviceForm'  name='serviceForm' action='serviceUpdate.action'  method='POST'>
+<input type='hidden' name='id' value='$!service.id' size='15'>
+<table>
+<tr class='formlabel'>
+			<td><label>$i18n.get('node'):</label></td> <td><input type='text' id='node' name='node' value='$!service.node' size='15'  onkeypress="formname='serviceForm'; nextfield='textservicegroup';"> </td>
+			
+			<td><label>$i18n.get('servicegroup'):</label> </td>
+			<td>		
+			<input type='hidden' id='servicegroup' name='servicegroup'  size='1' value='$!service.servicegroup.id' onchange='makeGetRequestServicegroupByTypeHead()' onkeypress="formname='serviceForm'; nextfield='textservicegroup';"> 			<input type='text' id='textservicegroup' name='textservicegroup' size='18'  value='$!service.servicegroup.node' onkeypress="formname='serviceForm'; nextfield='cboservicegroup'; isSelect=true;"  onkeyup='makeGetRequestServicegroupByTypeHead()' onclick='makeGetRequestServicegroupByTypeHead()'>	
+			
+			<div id='divservicegroup' style='display:none;position:absolute' onkeypress="formname='serviceForm'; nextfield='price';"></div>				
+			<a href='javascript:void(0)' onclick="window.open('servicegroupList.action', 'Add servicegroup', 'width=400, height=300')"> + </a>			</td>
+		
+			<td><label>$i18n.get('price'):</label></td> <td><input type='text' id='price' name='price' value='$!service.price' size='15'  onkeypress="formname='serviceForm'; nextfield='insuranceprice';"> </td>
+			</tr><tr class='formlabel'>
+			<td><label>$i18n.get('insuranceprice'):</label></td> <td><input type='text' id='insuranceprice' name='insuranceprice' value='$!service.insuranceprice' size='15'  onkeypress="formname='serviceForm'; nextfield='textdepartment';"> </td>
+			
+			<td><label>$i18n.get('department'):</label> </td>
+			<td>		
+			<input type='hidden' id='department' name='department'  size='1' value='$!service.department.id' onchange='makeGetRequestDepartmentByTypeHead()' onkeypress="formname='serviceForm'; nextfield='textdepartment';"> 			<input type='text' id='textdepartment' name='textdepartment' size='18'  value='$!service.department.node' onkeypress="formname='serviceForm'; nextfield='cbodepartment'; isSelect=true;"  onkeyup='makeGetRequestDepartmentByTypeHead()' onclick='makeGetRequestDepartmentByTypeHead()'>	
+			
+			<div id='divdepartment' style='display:none;position:absolute' onkeypress="formname='serviceForm'; nextfield='updateservice';"></div>				
+			<a href='javascript:void(0)' onclick="window.open('departmentList.action', 'Add department', 'width=400, height=300')"> + </a>			</td>
+		<td>B&#7897; ph&#7853;n </td>
+		<td>
+		<select name='bodyPart'>
+		<option value="">-</option>
+		#foreach($bodyPart in $bodyParts)		
+		<option value="$bodyPart.id" #if($bodyPart.id == $service.bodyPart.id) selected #end>$!bodyPart.node</option>
+		#end
+		</select>		</td>
+
+            <tr>
+              <td>$i18n.get('min'):</td>
+              <td><input type='text' id='min' name='min' value='$!service.min' size='15'  onkeypress="formname='serviceForm'; nextfield='max';"></td>
+              <td>$i18n.get('max'):</td>
+              <td><input type='text' id='max' name='max' value='$!service.max' size='15'  onkeypress="formname='serviceForm'; nextfield='updateservice';"></td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+      <tr><td colspan='6'>
+<input id='updateservice' type='button' value="  $i18n.get('save')  " onkeydown="javascript: validateService('edit', document.getElementById('serviceForm') )" onclick="javascript: validateService('edit', document.getElementById('serviceForm') )" onkeypress="formname='serviceForm'; nextfield = '';">
+
+
+&nbsp;
+
+</td></tr>
+</table>
+</form>
+</div>
+</body>

@@ -1,0 +1,106 @@
+<style type="text/css">
+<!--
+.style1 {color: #FF0000}
+-->
+</style>
+<div id='tabledruginvoice' style='border:#FFFFFF thin solid; width:800; height: auto; left:25; overflow-y: auto; '>
+<form id='inlinedruginvoiceForm' name='inlinedruginvoiceForm' action='druginvoiceAdd.action' class='niceform' method='POST'>
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>STT</th>
+<th>Action</th>
+
+	<th>$i18n.get('code')</th>	
+
+	<th>$i18n.get('warehouse')</th>	
+	
+	<th>$i18n.get('date')</th>	
+	
+	<th>$i18n.get('type')</th>	
+	
+	<th>$i18n.get('towarehouse')</th>	
+	
+	<th>$i18n.get('encounter')</th>	
+	
+	<th>$i18n.get('node')</th>	
+	
+	<th>$i18n.get('address')</th>	
+	
+	<th>$i18n.get('paymenttype')</th>	
+	
+	<th>$i18n.get('expireddate')</th>	
+	
+	<th>$i18n.get('total')</th>	
+	
+	<th>$i18n.get('vat')</th>	
+	
+	<th>$i18n.get('totalaftertax')</th>	
+	
+	<th>$i18n.get('doctor')</th>	
+	
+	<th>$i18n.get('user')</th>	
+</tr>
+</theader>
+<tbody>
+#set($i=0)
+#foreach($druginvoice in $druginvoices)
+	#if($druginvoice.id)
+	#set($i=$i+1)
+	<tr class='tableitem' id='tr$druginvoice.id' onDblClick="document.getElementById('divDruginvoicedetail').innerHTML='';makeGetRequestAddDruginvoice($druginvoice.id, 'edit')">
+	<td>$i</td>
+	
+	<td id='td$druginvoice.id'>
+	<a href="javascript:makeGetRequestAddDruginvoice($druginvoice.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ window.open('druginvoiceDelete.action?id=$druginvoice.id', 'Delete client', 'width=50, height=50'); document.getElementById('tr$druginvoice.id').style.background ='#CCCCCC'; document.getElementById('td$druginvoice.id').style.visibility='hidden'} ">
+	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	
+	<a href='javascript:void(0)' onClick="window.open('druginvoiceView.action?id=$druginvoice.id', 'View druginvoice', 'width=400, height=300, scrollbars=yes')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menudruginvoice$druginvoice.id').style.display='block'; " onDblClick="javascript:document.getElementById('menudruginvoice$druginvoice.id').style.display='none'"  value='>>' >  	
+
+	<div id='menudruginvoice$druginvoice.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onClick="this.style.display='none'">
+ 		
+		 <a href='javascript:makeGetRequestDruginvoicedetailByDruginvoice($druginvoice.id)'> druginvoicedetail </a> &nbsp;
+		 <br>
+	</div>	</td>	
+		
+		<td>$!druginvoice.code</td>
+		
+		<td>$!druginvoice.warehouse.node</td>
+		
+		<td>$!dateTool.format('dd/MM/yyyy',$!druginvoice.date)</td>
+		
+	  <td>$!druginvoice.type</td>
+		
+		<td>$!druginvoice.towarehouse.node </td>
+		
+	  <td>$!druginvoice.encounter.node<br>
+	    <span class="style1">$!druginvoice.prepaidCard</span></td>
+		
+		<td>$!druginvoice.node</td>
+		
+		<td>$!druginvoice.address</td>
+		
+		<td>$!druginvoice.paymenttype.node</td>
+		
+		<td>$!dateTool.format('dd/MM/yyyy',$!druginvoice.expireddate)</td>
+		
+		<td>$numberTool.format('integer' ,$!druginvoice.total)</td>
+		
+		<td>$!druginvoice.vat</td>
+		
+		<td>$numberTool.format('integer' ,$!druginvoice.totalaftertax)</td>
+		
+		<td>$!druginvoice.encounter.user.fullname</td>
+		
+		<td>$!druginvoice.user.fullname</td>
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

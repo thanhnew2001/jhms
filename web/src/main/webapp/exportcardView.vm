@@ -1,0 +1,84 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<div id='header'>
+	<table>
+	<tr> 
+	<td width="241">C&ocirc;ng ty  DP &amp; MP M&#7929; Trung </td >
+	<td width="289">S&#7889; H&#272;: $!exportcard.code</td> 
+	</tr>
+	<tr>
+	  <td>Cao L&#7895;, Q.8 </td >
+	  <td>Ng&agrave;y:$exportcard.date</td>
+	  </tr>
+	<tr>
+	  <td>&nbsp;</td >
+	  <td>&nbsp;</td>
+	  </tr>
+	</table>
+</div>
+<div id='container'>
+<h2>$i18n.get('exportcard')</h2>
+T&#7915; kho: $!exportcard.warehouse.node<br>
+&#272;&#7871;n kho:    $!exportcard.towarehouse.node<br>
+<table border=1>
+
+	<tr>
+	<td>STT</td>
+	<td>T&ecirc;n thu&#7889;c </td>
+	<td>&#272;&#417;n v&#7883; </td>
+	<td>S&#7889; l&ocirc; </td>
+	<td>HSD</td>
+	<td>SL</td>
+	</tr>
+	#set($i=0)
+	#set($total=0)
+	#foreach($exportcarddetail in $exportcard.exportcarddetails)
+	#set($i=$i+1)	
+	<tr>
+	  <td>$i &nbsp;</td>
+	  <td>$!exportcarddetail.drug.node </td>
+	  <td>$!exportcarddetail.drug.unit </td>
+	  <td>$!exportcarddetail.batchnumber </td>
+	  <td>$!exportcarddetail.expireddate </td>
+	  <td>$!exportcarddetail.quantity </td>
+    </tr>
+	
+	#set($total = $total + $exportcarddetail.subtotal)
+	#end
+	#set($totalaftertax = 1000*(100+$exportcarddetail.vat)/100)
+	<tr>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+    </tr>
+	<tr>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+    </tr>
+	<tr>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+    </tr>
+</table>
+</div>
+<div id='footer'>
+	<table>
+	<tr> <td width="247">&nbsp;</td >
+	<td width="382">K&#7871; to&aacute;n d&#432;&#7907;c </td> 
+	<td width="337">D&#432;&#7907;c s&#297; </td> 
+	<td width="596">Th&#7911; kho </td> 
+	</tr>
+  </table>
+</div>

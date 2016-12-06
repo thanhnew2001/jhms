@@ -1,0 +1,42 @@
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<style type="text/css">
+<!--
+.style5 {font-size: 12px; font-weight: bold; }
+-->
+</style>
+<div id='header'>
+	<table width='100%' background="images/card.gif"> 
+	<tr> 
+	<td width="604">&nbsp;</td >
+	<td width="175"></td> 
+	<td width="413"></td> 
+	<td width="9">&nbsp;</td> 
+	</tr>
+	<tr>
+	  <td>&nbsp;</td >
+	  <td><span class="style5">H&#7885; t&ecirc;n/Name: </span></td>
+	  <td><span class="style5">$!client.node</span></td>
+	  <td>&nbsp;</td>
+	  </tr>
+	
+	<tr>
+	  <td>&nbsp;</td >
+	  <td><span class="style5">M&atilde; KH/Code: </span></td>
+	  <td><span class="style5">$!client.code</span></td>
+	  <td>&nbsp;</td>
+	  </tr>
+	<tr>
+	  <td>&nbsp;</td >
+	  <td colspan="2"><img src="../barbecue/barcode?data=$!client.code" width="150" height="50"/></td>
+	  <td>&nbsp;</td>
+	  </tr>
+	<tr>
+	  <td colspan="4"><hr></td >
+	  </tr>
+	<tr>
+	  <td colspan="4"><div align="center">Ph&ograve;ng kh&aacute;m &#273;a khoa M&#7929; T&ugrave;ng - 142 L&ecirc; H&#7891;ng Phong - Tel: 0909 569 011 - Website: www.pkmytung.com </div></td >
+	  </tr>
+	</table>
+</div>

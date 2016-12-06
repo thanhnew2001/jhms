@@ -1,0 +1,62 @@
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+
+<script language='javascript' type='text/javascript' src='common.js'></script>
+<script type="text/javascript">
+
+
+function beforeDelete( genericId)
+{
+	document.getElementById('genericForm').action = "generic.action?action=delete&id="+genericId;
+	document.getElementById('genericForm').submit();
+}	
+
+function beforeSave( genericId)
+{
+	document.getElementById('genericForm').action = "generic.action?action=save&id="+genericId;
+	document.getElementById('genericForm').submit();
+}	
+
+function beforePagination()
+{
+	var page = document.getElementById('page');
+	var pg = page.options[page.selectedIndex].value;
+	document.getElementById('genericForm').action = "generic.action?page="+pg;
+	document.getElementById('genericForm').submit();
+}	
+
+</script>
+<body>
+<form id='genericForm' name='genericForm' action='generic.action' class='niceform' method='POST'>
+<br>
+<input type='hidden'  id='id' name='id' value="$object.id" size='15'>
+<input type='hidden'  id='clazz' name='clazz' value="$clazz" size='15'>
+
+<div id='container' >
+  <div class='pageheader'>
+    <p>
+      <input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('savegeneric').innerHTML=''" value=' X '>
+      C&#7853;p nh&#7853;t generic class </p>
+    </div>
+	<table width="100%" border="1">
+  <tr>
+    <td width="50%" valign="top"><p><br>
+      $form
+	  <br>
+          <input name="button2" type="button" onClick="beforeSave($object.id)" value="  Save ">
+          <input name="button2" type="button" onClick="document.location = 'generic.action?clazz=$clazz&id=0'" value="Add new">
+        </p></td>
+    </tr>
+</table>
+ 
+<br>
+<div class="pageheader">Danh s&aacute;ch generic class:	   </div>
+<br>
+$paginationBar
+$table
+
+
+</div>
+</div>
+    <br>
+</form>
+</body>

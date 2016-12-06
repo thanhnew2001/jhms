@@ -1,0 +1,4 @@
+
+#foreach($department in $departments)
+	$department.id
+#end

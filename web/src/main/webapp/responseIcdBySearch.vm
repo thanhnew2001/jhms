@@ -1,0 +1,48 @@
+
+<form name='icdForm' action='icdAdd.action' class='niceform' method='POST'>
+<table border='0' width='800' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>$i18n.get('maso')</th>	
+	
+	<th>$i18n.get('node')</th>	
+	
+</tr>
+
+<tr class='tableitem'>
+<div id='inlineaddicd' style='display:none;'>
+<th><input type='button' id='saveicd' value="  $i18n.get('save')  " onclick="javascript:validateIcd('add')" onkeypress="nextfield='';"></th>
+<th> <input type='text'  id='maso' name='maso' size='8' value='' onkeypress="formname='inlineicdForm'; nextfield='node';"> </th><th> <input type='text'  id='node' name='node' size='8' value='' onkeypress="formname='inlineicdForm'; nextfield='saveicd';"> </th>
+</div>
+</tr>
+
+</theader>
+<tbody>
+#foreach($icd in $icds)
+	#if($icd.id)
+	<tr class='tableitem' onDblClick="javascript:makeGetRequestAddIcd($icd.id, 'edit')">
+	<td>
+	<a href="javascript:makeGetRequestAddIcd($icd.id, 'edit')"><img src='images/edit.png' width='15' height='15' alt='Edit' /></a> 
+	<a href='icdDelete.action?id=$icd.id'><img src='images/delete.png' width='15' height='15' alt='Delete' /></a>
+	<a href='javascript:void(0)' onclick="window.open('icdView.action?id=$icd.id', 'View icd', 'width=400, height=300')"> <img src='images/view.png' width='15' height='15' alt='View' /> </a>
+	
+	<input name='button' type='button' style='cursor:pointer;'  onclick="javascript:document.getElementById('menuicd$icd.id').style.display='block'; " ondblclick="javascript:document.getElementById('menuicd$icd.id').style.display='none'"  value='>>' >  
+	
+	<div id='menuicd$icd.id' style='border:thin #FF0000 solid;background-color:#b9c9fe;cursor:pointer; width:100; display: none; position:absolute' onclick="this.style.display='none'">
+ 		
+	</div>
+	</td>
+	
+		
+		<td>$!icd.maso</td>
+		
+		<td>$!icd.node</td>
+			
+	</tr>
+	#end
+</tbody>
+#end
+</table>
+</form>

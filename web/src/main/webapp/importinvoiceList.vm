@@ -1,0 +1,158 @@
+#parse("top.vm")
+#parse("mycalendar.vm")
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('common.vm')
+#parse('importinvoice_js.vm')
+
+
+<script language='javascript' type='text/javascript' src='js/jquery.js'></script>
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+<script>
+
+
+var importinvoiceaction = 'add';
+$(window).keypress(function(event) {
+
+	
+    if (!(event.which == 115 && event.ctrlKey)) return true;
+    //alert("Ctrl-S pressed");
+	if (importinvoiceaction=='add')
+		validateImportinvoice('add', document.getElementById('importinvoiceForm') );
+	if (importinvoiceaction=='edit')
+		validateImportinvoice('edit', document.getElementById('importinvoiceForm') );
+    event.preventDefault();
+    return false;
+});
+
+</script>
+
+
+<body id='wrap' onLoad=" makeGetRequestImportinvoiceByFilter(); makeGetRequestAddImportinvoice(0,'add');">
+<div id='addimportinvoice'></div>
+<div id='divPaymenttype'> </div><div id='divClient'> </div><div id='divService'> </div><div id='divEncounter'> </div><div id='divIcd'> </div><div id='divDrug'> </div><div id='divPrescriptiondetail'> </div><div id='divVitalsign'> </div><div id='divUser'> </div><div id='divUserrole'> </div><div id='divRole'> </div><div id='divRoleform'> </div><div id='divServicegroup'> </div><div id='divIndicationdetail'> </div><div id='divReceipt'> </div><div id='divReceiptdetail'> </div><div id='divPrescriptiontemplate'> </div><div id='divPrescriptiontemplatedetail'> </div><div id='divDepartment'> </div><div id='divRoom'> </div><div id='divDoctor'> </div><div id='divSerpackage'> </div><div id='divOccupation'> </div><div id='divPackagedetail'> </div><div id='divCashadvance'> </div><div id='divReport'> </div><div id='divProvince'> </div><div id='divDistrict'> </div><div id='divWard'> </div><div id='divEthnic'> </div><div id='divImportinvoicedetail'> </div><div id='divDruginvoice'> </div><div id='divDruginvoicedetail'> </div><div id='divProvider'> </div><div id='divWarehouse'> </div><div id='divHistory'> </div><div id='divSolving'> </div><div id='divHospital'> </div>
+<br>
+<div id='divImportinvoice'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divImportinvoice').innerHTML=''" value=' X '>
+PHI&#7870;U NH&#7852;P/H&Oacute;A &#272;&#416;N NH&#7852;P </div>
+<br>
+<div>
+<select id='comboimportinvoice' name='comboimportinvoice'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='code'>$i18n.get('code')</option>
+	
+	<option value='date'>$i18n.get('date')</option>
+	
+	<option value='warehouse'>$i18n.get('warehouse')</option>
+	
+	<option value='type'>$i18n.get('type')</option>
+	
+	<option value='provider'>$i18n.get('provider')</option>
+	
+	<option value='fromwarehouse'>$i18n.get('fromwarehouse')</option>
+	
+	<option value='vat'>$i18n.get('vat')</option>
+	
+	<option value='total'>$i18n.get('total')</option>
+	
+	<option value='totalaftertax'>$i18n.get('totalaftertax')</option>
+	
+	<option value='user'>$i18n.get('user')</option>
+	
+	<option value='node'>$i18n.get('note')</option>
+	
+</select>
+<input name='searchimportinvoice' id='searchimportinvoice' onkeyup='makeGetRequestImportinvoiceBySearch()' value='' onclick='clearSearchBox(searchimportinvoice)'>
+Search  or Filter
+
+
+		<select id='filterwarehouse' name='filterwarehouse'>
+		#set($ses = $req.getSession())
+		#set($user = $ses.getAttribute('user'))
+		
+			#foreach($warehouse in $warehouses)
+				#if($warehouse.id == $user.warehouse.id)
+				<option value='$warehouse.id'>$warehouse.node</option>
+				#end
+			#end
+		</select>	
+		
+    	<input type='text' id='filterdate' name='filterdate' value='$today'  onClick="GetDate(this);">	
+		
+		<select id='filtertype' name='filtertype'>
+		<option value=HN>HN
+		<option value=NB>NB
+		</select>
+		
+<input name='button2' type='button' onClick='javascript:makeGetRequestImportinvoiceByFilter()' value=' Filter '>
+
+<a href="javascript:makeGetRequestAddImportinvoice(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+
+</div>
+<div>
+<table border="0">
+  <tr>
+    <td>$i18n.get('month'): </td>
+    <td >
+		<select id='month'>
+		  <option value="1">Th&aacute;ng M&#7897;t</option>
+		  <option value="2">Th&aacute;ng Hai</option>
+		  <option value="3">Th&aacute;ng Ba</option>
+		  <option value="4">Th&aacute;ng B&#7889;n</option>
+		  <option value="5">Th&aacute;ng N&#259;m</option>
+		  <option value="6">Th&aacute;ng S&aacute;u</option>
+		  <option value="7">Th&aacute;ng B&#7843;y </option>
+		  <option value="8">Th&aacute;ng T&aacute;m</option>
+		  <option value="9">Th&aacute;ng Ch&iacute;n</option>
+		  <option value="10">Th&aacute;ng M&#432;&#7901;i</option>
+		  <option value="11">Th&aacute;ng M&#432;&#7901;i M&#7897;t</option>
+		  <option value="12">Th&aacute;ng M&#432;&#7901;i Hai</option>
+		</select>	</td>
+    <td>$i18n.get('year'): </td>
+    <td >
+		<input type="text" id='year' size="15" value="2010" onClick="this.value=''"/>	</td>
+	<td>Kho
+	  <select name="warehouseTax" id="warehouseTax">
+        <option value='0'>All</option>
+	    	
+			#foreach($warehouse in $warehouses)
+				
+	    <option value='$warehouse.id'>$warehouse.node</option>
+	    
+			#end
+		
+	    </select></td>
+
+  </tr>
+  <tr>
+  <td colspan="3"><input name="button3" type="button" onClick="makeGetRequestImportinvoiceFilterByMonthTax(document.getElementById('month').value, document.getElementById('year').value, '', document.getElementById('warehouseTax').options[document.getElementById('warehouseTax').selectedIndex].value)" value="Filter All"/>
+    <input name="button3" type="button" onClick="makeGetRequestImportinvoiceFilterByMonthTax(document.getElementById('month').value, document.getElementById('year').value, 'Y', document.getElementById('warehouseTax').options[document.getElementById('warehouseTax').selectedIndex].value)" value="Filter by tax"/>
+    <input name="button3" type="button" onClick="makeGetRequestImportinvoiceFilterByMonthTax(document.getElementById('month').value, document.getElementById('year').value, 'N', document.getElementById('warehouseTax').options[document.getElementById('warehouseTax').selectedIndex].value)" value="Filter by no tax"/></td>
+  </tr>
+</table>
+
+</div>
+
+<div id='msg'></div>
+<div id='tableimportinvoice' class='mytable'>
+<form id='inlineimportinvoiceForm' name='inlineimportinvoiceForm' action='importinvoiceAdd.action' class='niceform' method='POST'>
+<a href="javascript:makeGetRequestAddImportinvoice(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+#parse('responseImportinvoiceBySearch.vm')
+
+
+
+
+</table>
+</form>
+</div>
+<a href="javascript:makeGetRequestAddImportinvoice(0, 'add')"><img src='images/addin.png' width='15' height='15' alt='Add in the same window' /> $i18n.get('add') </a>
+</div>
+</div>
+<br>
+
+</body>

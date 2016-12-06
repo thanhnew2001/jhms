@@ -1,0 +1,141 @@
+
+#parse('common.vm')
+#parse('druginvoice_js.vm')
+#parse("mycalendar.vm")
+#set ($dateTool = $webwork.bean('org.apache.velocity.tools.generic.DateTool') )
+#set ($numberTool = $webwork.bean('org.apache.velocity.tools.generic.NumberTool') )
+
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+<script language='javascript' type='text/javascript' src='js/jquery.js'></script>
+<script>
+var druginvoiceaction = 'add';
+$(window).keypress(function(event) {
+
+	
+    if (!(event.which == 115 && event.ctrlKey)) return true;
+    //alert("Ctrl-S pressed");
+	if (druginvoiceaction=='add')
+		validateDruginvoice('add', document.getElementById('druginvoiceForm') );
+	if (druginvoiceaction=='edit')
+		validateDruginvoice('edit', document.getElementById('druginvoiceForm') );
+    event.preventDefault();
+    return false;
+});
+
+</script>
+<script>
+function openWindow() {
+popupWin = window.open('http://www.psacake.com', 'remote', 'width=640,height=480')
+}
+</script>
+
+<body id='wrap'>
+<div id='adddruginvoice'></div>
+<div id='divDruginvoicedetail'> </div>
+<br>
+<div id='divDruginvoice'>
+<div id='container'>
+<div class='pageheader'> 
+<input name='button' type='button' style='border:thin #FF0000 solid; background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('divDruginvoice').innerHTML=''" value=' X '>  
+$i18n.get('druginvoicelist')  
+</div>
+<br>
+<div>
+<select id='combodruginvoice' name='combodruginvoice'>
+<option value=''>[more criteria..]</option>
+<option value='All'>All</option>
+
+	<option value='code'>$i18n.get('code')</option>
+	
+	<option value='identity'>$i18n.get('indentity')</option>
+	
+	<option value='warehouse'>$i18n.get('warehouse')</option>
+	
+	<option value='date'>$i18n.get('date')</option>
+	
+	<option value='type'>$i18n.get('type')</option>
+	
+	<option value='towarehouse'>$i18n.get('towarehouse')</option>
+	
+	<option value='encounter'>$i18n.get('encounter')</option>
+	
+	<option value='node'>$i18n.get('node')</option>
+	
+	<option value='address'>$i18n.get('address')</option>
+	
+	<option value='paymenttype'>$i18n.get('paymenttype')</option>
+	
+	<option value='insurancenumber'>$i18n.get('insurancenumber')</option>
+	
+	<option value='expireddate'>$i18n.get('expireddate')</option>
+	
+	<option value='inpatient'>$i18n.get('inpatient')</option>
+	
+	<option value='total'>$i18n.get('total')</option>
+	
+	<option value='vat'>$i18n.get('vat')</option>
+	
+	<option value='totalaftertax'>$i18n.get('totalaftertax')</option>
+	
+	<option value='doctor'>$i18n.get('doctor')</option>
+	
+	<option value='user'>$i18n.get('user')</option>
+	
+</select>
+<input name='searchdruginvoice' id='searchdruginvoice' onkeyup='makeGetRequestDruginvoiceBySearch()' value='' onclick='clearSearchBox(searchdruginvoice)'>
+Search  or Filter
+
+		<input type='text' id='filterdate' name='filterdate' value='$today' onClick="GetDate(this);">				
+				
+		<select id='filtertype' name='filtertype'>
+			<option value=HB>HB
+			<option value=NB>NB
+		</select>	
+		
+<input id='button2' type='button' onClick="javascript:makeGetRequestDruginvoiceByFilterViet()" value=' Filter '>
+
+</div>
+
+<div>
+<table width="200" border="0">
+  <tr>
+    <td>$i18n.get('month'): </td>
+    <td>
+		<select id='month'>
+		  <option value="1">Th&aacute;ng M&#7897;t</option>
+		  <option value="2">Th&aacute;ng Hai</option>
+		  <option value="3">Th&aacute;ng Ba</option>
+		  <option value="4">Th&aacute;ng B&#7889;n</option>
+		  <option value="5">Th&aacute;ng N&#259;m</option>
+		  <option value="6">Th&aacute;ng S&aacute;u</option>
+		  <option value="7">Th&aacute;ng B&#7843;y </option>
+		  <option value="8">Th&aacute;ng T&aacute;m</option>
+		  <option value="9">Th&aacute;ng Ch&iacute;n</option>
+		  <option value="10">Th&aacute;ng M&#432;&#7901;i</option>
+		  <option value="11">Th&aacute;ng M&#432;&#7901;i M&#7897;t</option>
+		  <option value="12">Th&aacute;ng M&#432;&#7901;i Hai</option>
+		</select>
+	</td>
+    <td>$i18n.get('year'): </td>
+    <td>
+		<input type="text" id='year' value="yyyy" onClick="this.value=''"/>
+	</td>
+    <td>
+		<input type="button" value="Filter by Month" onClick="makeGetRequestDruginvoiceFilterByMonth(document.getElementById('month').value, document.getElementById('year').value)"/>
+	</td>
+  </tr>
+</table>
+
+</div>
+
+<div id='msg'></div>
+<div id='tabledruginvoice' class='mytable'>
+
+#parse("responseDruginvoiceList.vm")
+</div>
+</div>
+</div>
+<br>
+
+</body>

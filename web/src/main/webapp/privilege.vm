@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head id="Head1"> 
+  
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+	
+<script language='javascript' type='text/javascript' src='common.js'></script>
+
+<script type="text/javascript">
+
+
+function beforeDelete(cardTypeId, privilegeId)
+{
+	document.getElementById('privilegeForm').action = "privilege.action?action=delete&cardTypeId="+cardTypeId+"&privilegeId="+privilegeId;	
+	document.getElementById('privilegeForm').submit();
+}	
+
+function beforeSave(cardTypeId, privilegeId)
+{
+	document.getElementById('privilegeForm').action = "privilege.action?action=save&cardTypeId="+cardTypeId+"&privilegeId="+privilegeId;
+	//select all
+	if ( ! availableList ) {
+    availableList = document.getElementById('availableList');
+  	}
+
+  	if ( ! selectedList ) {
+    selectedList = document.getElementById('selectedList');
+  	}
+
+   	selectAll(availableList);
+  	selectAll(selectedList);
+  
+	document.getElementById('privilegeForm').submit();
+}	
+
+</script>
+
+<script language="javascript" > 
+var selectedList;
+var availableList;
+
+function move( listId ) {
+
+  var fromList = document.getElementById(listId);
+
+  if ( fromList.selectedIndex == -1 ) { return; }
+
+  if ( ! availableList ) {
+    availableList = document.getElementById('availableList');
+  }
+
+  if ( ! selectedList ) {
+    selectedList = document.getElementById('selectedList');
+  }
+
+  var toList = ( fromList == availableList ? selectedList : availableList );
+
+  while ( fromList.selectedIndex > -1 ) {
+    option = fromList.options.item(fromList.selectedIndex);
+    fromList.remove(fromList.selectedIndex);
+    toList.add(option, null);
+  }
+
+}
+
+function submitForm() {
+
+  if ( ! availableList ) {
+    availableList = document.getElementById('availableList');
+  }
+
+  if ( ! selectedList ) {
+    selectedList = document.getElementById('selectedList');
+  }
+
+   selectAll(availableList);
+  selectAll(selectedList);
+
+  return false;
+
+}
+
+function selectAll(list) {
+
+  for ( var i = 0, option; option = list.options.item(i); i++ ) {
+    option.selected = true;
+  }
+
+}
+
+
+</script>
+</head>
+
+<body>
+<form id='privilegeForm' name='privilegeForm' action='privilege.action' class='niceform' method='POST'>
+<br>
+<input type='hidden'  id='cardTypeId' name='cardTypeId' value="$cardType.id" size='15'>
+
+<div id='container' >
+  <div class='pageheader'>
+    <p>
+      <input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('saveprivilege').innerHTML=''" value=' X '>
+      C&#7853;p nh&#7853;t c&aacute;c quy&#7873;n &#432;u ti&ecirc;n c&#7911;a Th&#7867; </p>
+    </div>
+  <table width="100%" border="0">
+    <tr>
+      <td width="82">&nbsp;</td>
+      <td width="159">Lo&#7841;i th&#7867; </td>
+      <td width="549">
+        $cardType.name</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>T&ecirc;n &#273;&#7863;c quy&#7873;n </td>
+      <td><input type='text'  id='name' name='name' size='50' value='$!privilege.name' ></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>Ph&#7847;n tr&#259;m gi&#7843;m (%) </td>
+      <td><input type='text'  id='percentDiscount' name='percentDiscount' size='50' value='$!privilege.percentDiscount'></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td colspan="2">&nbsp;    
+	  <div> 
+    <table> 
+            <tr> 
+                <td> 
+Filter: <input type="text" id="box1Filter" onkeydown="filterAvailableList()" /><button type="button" id="box1Clear">X</button><br /> 
+<select id="availableList"  name="availableList" multiple="multiple" style="height:300px;width:300px;" ondblclick="move( 'availableList' )"> 
+	#foreach($sg in $serviceGroups)
+	<option value="$sg.id">$sg.node</option> 
+	#end
+	
+</select><br/> 
+<span id="box1Counter" class="countLabel"></span> 
+<select id="box1Storage" style="display:none"></select> 
+                </td> 
+                <td> 
+                    <button id="to2" type="button" onclick="move( 'availableList' )">&nbsp;>&nbsp;</button> 
+                    <button id="allTo2" type="button" onclick="move( 'availableList' )">&nbsp;>>&nbsp;</button> 
+                    <button id="allTo1" type="button" onclick="move( 'selectedList' )">&nbsp;<<&nbsp;</button> 
+                    <button id="to1" type="button" onclick="move( 'selectedList' )">&nbsp;<&nbsp;</button> 
+                </td> 
+                <td> 
+Filter: <input type="text" id="box2Filter" onkeydown="filterSelectedList();" /><button type="button" id="box2Clear">X</button><br /> 
+<select id="selectedList" name="selectedList" multiple="multiple" style="height:300px;width:300px;" ondblclick="move( 'selectedList' )">
+#foreach($pd in $privilege.privilegeDetails)
+	<option value="$pd.serviceGroup.id">$pd.serviceGroup.node</option> 
+#end
+</select><br/> 
+<span id="box2Counter" class="countLabel"></span> 
+<select id="box2Storage" style="display:none"></select> 
+                </td> 
+            </tr> 
+        </table> 
+    </div> 
+	  
+	  
+	  </td>
+      </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td><input name="button2" type="button" onClick="beforeSave($cardType.id, $privilege.id)" value="  Save ">
+      <input type="button" value="Add new" onClick="document.location = 'privilege.action?cardTypeId=$cardType.id&privilegeId=0'">    </tr>
+  </table>
+
+<table width="100%" border="0">
+      <tr class='pageheader'>
+        <td colspan="2">C&aacute;c d&#7883;ch v&#7909; c&#7911;a	&#273;&#7863;c	quy&#7873;n n&agrave;y: </td>
+      </tr>
+</table>
+
+
+<table border='0' width='100%' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+<theader>
+<tr class='tableheader'>
+<th>Action</th>
+
+	<th>T&ecirc;n g&#7885;i </th>
+	<th>Ph&#7847;n tr&#259;m </th>
+	<th>D&#7883;ch v&#7909; </th>
+    <th>Nh&oacute;m d&#7883;ch v&#7909; </th>
+</tr>
+</theader>
+<tbody>
+	#foreach($pri in $cardType.privileges)
+		
+	#if($pri.id)
+	<tr class='tableitem' id='tr$sp.id'>
+		
+	<td id='td$sp.id'><a href="privilege.action?action=edit&cardTypeId=$cardType.id&privilegeId=$pri.id">
+	<img src='images/edit.png' width='15' height='15' alt='Edit' /></a>
+	
+	<a href='javascript:void(0)' onClick="if(confirm('Do you want to delete?')){ beforeDelete($cardType.id, $pri.id) } ">	
+	<img src='images/delete.png' width='15' height='15' alt='Delete' /></a>	</td>	
+		
+		<td>$!pri.name</td>
+		<td>$!pri.percentDiscount</td>
+		<td></td>
+		<td></td>
+	  </tr>
+		
+	#end
+</tbody>
+#end
+</table>
+
+</div>
+</div>
+    <br>
+</form>
+</body>
+
+<script>
+var arrSrv;
+var box1Storage = document.getElementById('box1Storage');
+var box2Storage = document.getElementById('box2Storage');
+
+#foreach($srv in $serviceGroups)
+	box1Storage.add(new Option('$srv.node', $srv.id), null);
+
+#end
+
+#foreach($pd in $privilege.privilegeDetails)
+	box2Storage.add(new Option('$pd.serviceGroup.node', $pd.serviceGroup.id), null);
+#end
+
+function filterAvailableList()
+{
+	avaiList = document.getElementById('availableList');
+	box1Filter = document.getElementById('box1Filter');
+	
+	var len = avaiList.length;
+
+	
+	for(var k=0; k<len;k++)
+	{
+		avaiList.remove(avaiList.options.item(k));
+	}
+	
+	for ( var i = 0, option; option = box1Storage.options.item(i); i++ ) {
+		
+    	if(option.text.indexOf(box1Filter.value)>-1)
+		{
+			avaiList.add(new Option(option.text, option.value), null);
+		}
+  	}
+	
+}
+
+function filterSelectedList()
+{
+	selectedList = document.getElementById('selectedList');
+	box2Filter = document.getElementById('box2Filter');
+	
+	var len = selectedList.length;
+
+	
+	for(var k=0; k<len;k++)
+	{
+		selectedList.remove(selectedList.options.item(k));
+	}
+	
+	for ( var i = 0, option; option = box2Storage.options.item(i); i++ ) {
+		
+    	if(option.text.indexOf(box2Filter.value)>-1)
+		{
+			selectedList.add(new Option(option.text, option.value), null);
+		}
+  	}
+	
+}
+
+</script>
+
+

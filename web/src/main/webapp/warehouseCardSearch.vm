@@ -1,0 +1,127 @@
+
+<div id='thekho'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<link href='style-table.css' rel='stylesheet' type='text/css'>
+<script language='javascript' type='text/javascript' src='common.js'></script>
+#parse('myjs.vm')
+#parse('top.vm')
+
+
+#set ($ses = $req.getSession())
+#set ($selectwarehouse = $ses.getAttribute('selectedwarehouse'))
+#set ($selectroom = $ses.getAttribute('selectedroom'))
+#set ($selectdepartment = $ses.getAttribute('selectedepartment'))
+#set ($selectedlang = $ses.getAttribute('selectedlang'))
+
+<style type="text/css">
+<!--
+.style1 {
+	font-size: 16px;
+	font-weight: bold;
+}
+-->
+</style>
+<body id='wrap'>
+<br>
+<div id='container' style='border:#FFFFFF thin solid; width:750; left:25; position: relative;'>
+<div class='pageheader'>
+<input name='button' type='button' style='border:thin #FF0000 solid;background-color:#FFCC33;cursor:pointer;' onClick="javascript:document.getElementById('addimportinvoice').innerHTML=''" value=' X '>  
+
+<span class="style1">Th&#7867; kho</span>
+<div id='msg' align='right'></div>
+</div>
+
+<br>
+<table align="center" border="0">
+  <tr>
+   <td >T&#7915; ng&agrave;y:</td>
+    <td >
+	<input type='text'  id='startdate' name='startdate' size='10' onblur='getSmartDate(this)'>	</td>
+    <td >&#272;&#7871;n ng&agrave;y: </td>
+    <td ><input type='text'  id='enddate' name='enddate' size='10' onblur='getSmartDate(this)' /></td>
+  </tr>
+  <tr>
+    <td>Ch&#7885;n nh&oacute;m thu&#7889;c: </td>
+    <td><select id="druggroup" name="druggroup">
+	<option value="0">All</option>
+      
+			#foreach($druggroup in $druggroups)
+					
+      		<option value="$druggroup.id">$druggroup.node</option>
+      
+			#end
+				
+    </select></td>
+    <td>Nh&#7853;p t&ecirc;n thu&#7889;c: </td>
+    <td>
+	<input type='hidden' id='drug' name='drug'  size='1' value='$!drug_id' onchange='makeGetRequestDrugByTypeHead()' onKeyPress="formname='inlineimportinvoicedetailForm'; nextfield='textdrug';">
+	<input type='text' id='textdrug' name='textdrug' size='18' value='$!drug_node' onKeyPress="formname='inlineprescriptiondetailForm'; nextfield='cbodrug';"  onkeyup='makeGetRequestDrugByTypeHead()' onclick='makeGetRequestDrugByTypeHead()'>	
+			
+			<div id='divdrug' style='display:none;position:absolute'  onkeypress="formname='inlineprescriptiondetailForm'; nextfield='quantity';"></div>	</td>
+  </tr>
+  <tr>
+    <td>Kho: </td>
+    <td>
+	
+	  <p>#set($user = $ses.getAttribute('user'))  </p>
+	  <p>
+	    <select id='warehouse' name='warehouse'>
+	      <option value=$!user.warehouse.id>$!user.warehouse.node</option>
+          </select>
+            </p></td>
+    <td>Ng&#432;&#7901;i d&ugrave;ng: </td>
+    <td><select id='user' name='user'>
+        <option value=$!user.id>$!user.fullname</option>
+      </select>
+	  <script>
+	 
+	function viewWarehouseCard()
+	{
+		var url = "warehouseCard.action?";
+		url += "drugId=" + document.getElementById('drug').value;
+		url += "&warehouseId=" + document.getElementById('warehouse').value;
+		
+		var date1 = document.getElementById('startdate').value;
+		var date2 = document.getElementById('enddate').value;
+		
+			var da = date1.split('/'); //ngay thang nam
+			startdate = da[1] + '/' + da[0] + '/' + da[2] ;
+		var sel = document.getElementById('tax');
+		tax = sel.options[sel.selectedIndex].value;
+		
+		url += "&tax="+tax;
+		
+			da = date2.split('/'); //ngay thang nam
+			enddate = da[1] + '/' + da[0] + '/' + da[2] ;
+		
+		
+		url += "&startdate=" + startdate;
+		url += "&enddate=" + enddate;
+	
+		window.open(url, "_blank");
+	}
+	</script>
+	
+</td>
+  </tr>
+  <tr>
+    <td>D&#7841;ng thu&#7889;c VAT </td>
+    <td><select id='tax' name='tax'>
+	<option value="">All</option>
+      <option value="Y">Co VAT</option>
+	  <option value="N">Ko VAT</option>
+    </select></td>
+    <td></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input name="button2" type="button" onclick='viewWarehouseCard()' value="Xem th&#7867; kho (VAT)"/></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</form>
+</div>
+</body>
+</div>
